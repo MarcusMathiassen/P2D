@@ -29,6 +29,7 @@ Color pastel_orange		(255,179,71);
 Color pastel_yellow		(253,253,150);
 Color pastel_purple		(100,20,100);
 Color pastel_blue		(119,158,203);
+Color pastel_pink		(255, 209, 220);
 Color black 			(0,0,0);
 Color white				(255,255,255);
 

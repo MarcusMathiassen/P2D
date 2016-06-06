@@ -18,6 +18,7 @@ extern Color pastel_orange;
 extern Color pastel_yellow;	
 extern Color pastel_purple;	
 extern Color pastel_blue;
+extern Color pastel_pink;
 extern Color black;	
 extern Color white;			
 

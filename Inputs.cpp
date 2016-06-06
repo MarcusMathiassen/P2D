@@ -1,5 +1,6 @@
 #include "Inputs.h"
-#include "Ball.h"
+#include "Object.h"
+#include "Circle.h"
 #include "Config.h"
 #include "Color.h"
 
@@ -29,9 +30,9 @@ void Inputs(GLFWwindow* window) {
 
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
-		std::unique_ptr<Ball> ball_ptr( new Ball (Vec2(mousePosX, WINDOW_HEIGHT-mousePosY)));
-		ball_vec.push_back(std::move(ball_ptr));
-		//std::cout << ball_vec.size() << std::endl;
+		object_v.push_back(std::unique_ptr<Object>
+			(new Circle(Vec2(mousePosX,WINDOW_HEIGHT-mousePosY),5,30)));
+		//std::cout << object_v.size() << std::endl;
 	}
 }
 
@@ -45,7 +46,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 
 	/* Delete all */
 	if (key == GLFW_KEY_E && action == GLFW_PRESS) {
-		ball_vec.erase (ball_vec.begin(), ball_vec.end());
+		object_v.clear();
 		std::cout << "Deleted all objects" << std::endl;
 	}
 
@@ -190,6 +191,8 @@ void cursorEnterCallback(GLFWwindow *window, int entered) {
 void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+		object_v.push_back(std::unique_ptr<Object>
+			(new Circle(Vec2(mousePosX,WINDOW_HEIGHT-mousePosY),10,30)));
 		// Left mouse button pressed.
 	}
 
@@ -206,8 +209,4 @@ void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 }
 
 void scrollCallback(GLFWwindow *window, double xoffset, double yoffset) {
-	if (ball_vec.size() > 0) {
-		ball_vec[0]->addVelX(xoffset*10);
-		ball_vec[0]->addVelY(-yoffset*10);
-	}
 }

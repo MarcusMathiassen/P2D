@@ -19,4 +19,4 @@ bool gravity 		= false;
 bool direction		= false;
 bool gravForce 		= false;
 bool gravForceCol 	= false;
-bool drawQuadtrees	= true;
+bool drawQuadtrees	= false;
