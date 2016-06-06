@@ -11,7 +11,7 @@ void assignColor(Color& col)
 		case 2: col = pastel_green;		break;
 		case 3: col = pastel_orange;	break;
 		case 4: col = pastel_yellow;	break;
-		case 5: col = pastel_purple;	break;
+		case 5: col = pastel_pink;		break;
 		case 6: col = pastel_blue;		break;
 	}
 }

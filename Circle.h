@@ -1,6 +1,7 @@
 #ifndef _CIRCLE_H
 #define _CIRCLE_H
 
+#include "Object.h"
 #include "Vec2.h"
 #include "Color.h"
 
@@ -12,7 +13,7 @@ private:
 	Vec2		m_vel;
 	float		m_radi;
 	float		m_mass;
-	color		m_color;
+	Color		m_color;
 	int			m_vertices;
 
 public:
@@ -22,13 +23,19 @@ public:
 
 	void draw() const;
 	void update();
+	
+	bool collisionDetection(const Circle& b) const;
+	void resolveCollision(Circle& b);
 
-	Vec2 	getPos() 		const;
-	Vec2 	getVel() 		const;
-	float 	getMass()	 	const;
-	float 	getRadi() 		const;
-	int 	getVertices() 	const;
-	Color 	getCol() 		const;
+	Vec2 	getPos() 					const;
+	Vec2 	getVel()					const;
+	void	setVel(float x, float y);
+	void	addVelX(float f);
+	void 	addVelY(float f);
+	float 	getMass()	 				const;
+	float 	getRadi() 					const;
+	int 	getVertices() 				const;
+	Color 	getColor() 					const;
 
 };
 

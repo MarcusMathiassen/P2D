@@ -7,10 +7,9 @@ class Object {
 private:
 
 public:
-
-	virtual void draw() const;		// Each object draws itself to screen.
-	virtual void update();			// Each object is responsible of updating 
-									//  its own members.
+	virtual void draw() const;
+	virtual void update();	
+							
 };
 
 extern std::vector<std::unique_ptr<Object>> object_v;

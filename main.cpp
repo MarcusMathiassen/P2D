@@ -34,6 +34,7 @@ int main()
 	glfwSetMouseButtonCallback(window, mouseButtonCallback);
 	glfwSetScrollCallback(window, scrollCallback);
 	glfwSetKeyCallback(window, keyCallback);
+	glEnable(GL_PROGRAM_POINT_SIZE);
 
 	/* Enable multisampling */
 	#ifdef MULTISAMPLING 

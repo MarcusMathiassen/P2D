@@ -1,0 +1,2 @@
+all:
+	g++ main.cpp Object.cpp Quadtree.cpp Process.cpp Rect.cpp Render.cpp Inputs.cpp Circle.cpp Color.cpp Config.cpp Vec2.cpp Utility.cpp -std=c++14 -lpthread -lglew -lglfw3 -framework OpenGL -o3 -o P2D_v0.5
