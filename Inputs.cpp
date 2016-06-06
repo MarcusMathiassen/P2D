@@ -176,10 +176,10 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 	if (key == GLFW_KEY_0 && action == GLFW_PRESS) {
 		if (use_pThread == false) {
 			use_pThread = true;
-			std::cout << "use_pThread ON" << std::endl;
+			std::cout << "using pThreads" << std::endl;
 		} else {
 			use_pThread = false;
-			std::cout << "use_pThread OFF" << std::endl;
+			std::cout << "using OpenMP" << std::endl;
 		}
 	}
 
