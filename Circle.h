@@ -23,11 +23,14 @@ public:
 
 	void draw() const;
 	void update();
+	void debug() const;
 	
 	bool collisionDetection(const Circle& b) const;
 	void resolveCollision(Circle& b);
 
 	Vec2 	getPos() 					const;
+	void 	addPosX(float f);	
+	void 	addPosY(float f);	
 	Vec2 	getVel()					const;
 	void	setVel(float x, float y);
 	void	addVelX(float f);

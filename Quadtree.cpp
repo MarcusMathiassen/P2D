@@ -1,5 +1,6 @@
 #include "Quadtree.h"
 
+#include <memory>
 #include <iostream>
 #include <vector>
 #include <GL/glew.h>
@@ -165,7 +166,7 @@ void Quadtree::update()
 	// Insert objects into the quadtree
 	if (object_v.size() > 0) {
 		for (int i = 0; i < object_v.size(); ++i) {
-			insert(dynamic_cast<Circle&>(*object_v[i]));
+			insert(static_cast<Circle&>(*object_v[i]));
 		}
 	}
 }

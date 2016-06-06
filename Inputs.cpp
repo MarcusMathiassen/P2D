@@ -18,10 +18,11 @@ void Inputs(GLFWwindow* window) {
 	D : Direction on/off
 
 	F : Show FPS on/off
-	L : Lock FPS on/off
-
+	L : Lock FPS on/offx
+	
+	8 : Decrease threads by 1
 	9 : Increase threads by 1
-	0 : Decrease threads by 1
+	0 : Turn on pThreads
 
 	*/
 
@@ -31,8 +32,8 @@ void Inputs(GLFWwindow* window) {
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
 		object_v.push_back(std::unique_ptr<Object>
-			(new Circle(Vec2(mousePosX,WINDOW_HEIGHT-mousePosY),5,30)));
-		//std::cout << object_v.size() << std::endl;
+			(new Circle(Vec2(mousePosX,WINDOW_HEIGHT-mousePosY),1,10)));
+		std::cout << object_v.size() << std::endl;
 	}
 }
 
@@ -105,6 +106,17 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		}
 	}
 
+	/* useQuadtree */
+	if (key == GLFW_KEY_3 && action == GLFW_PRESS) {
+		if (useQuadtree == false) {
+			useQuadtree = true;
+			std::cout << "Quadtrees ON" << std::endl;
+		} else {
+			useQuadtree = false;
+			std::cout << "Quadtrees OFF" << std::endl;
+		}
+	}
+
 	/* Slowmotion */
 	if (key == GLFW_KEY_O && action == GLFW_PRESS) {
 		if (slowmotion == false) {
@@ -160,13 +172,24 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		}
 	}
 
+	/* pThread */
+	if (key == GLFW_KEY_0 && action == GLFW_PRESS) {
+		if (use_pThread == false) {
+			use_pThread = true;
+			std::cout << "use_pThread ON" << std::endl;
+		} else {
+			use_pThread = false;
+			std::cout << "use_pThread OFF" << std::endl;
+		}
+	}
+
 	/* Threads */
-	if (key == GLFW_KEY_9 && action == GLFW_PRESS && numThreads < 32) {
+	if (key == GLFW_KEY_9 && action == GLFW_PRESS) {
 		numThreads++;
 		std::cout << "Number of threads: " << numThreads << std::endl;
 	}
 
-	if (key == GLFW_KEY_8 && action == GLFW_PRESS && numThreads > 1) {
+	if (key == GLFW_KEY_8 && action == GLFW_PRESS && numThreads > 0) {
 		numThreads--;
 		std::cout << "Number of threads: " << numThreads << std::endl;
 	}
@@ -192,7 +215,7 @@ void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
 		object_v.push_back(std::unique_ptr<Object>
-			(new Circle(Vec2(mousePosX,WINDOW_HEIGHT-mousePosY),10,30)));
+			(new Circle(Vec2(mousePosX,WINDOW_HEIGHT-mousePosY),30,30)));
 		// Left mouse button pressed.
 	}
 
@@ -209,4 +232,5 @@ void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 }
 
 void scrollCallback(GLFWwindow *window, double xoffset, double yoffset) {
+
 }

@@ -2,5 +2,6 @@
 #define RENDER_H
 
 void draw();
+void debug();
 
 #endif

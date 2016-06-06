@@ -9,4 +9,16 @@ void draw()
 	}
 
 	quadtree.draw();
+
+	debug();
+}
+
+void debug()
+{
+	// Draws lines showing the direction and velocity.
+	if (direction) {
+		for (int i = 0; i < object_v.size(); ++i) {
+			static_cast<Circle&>(*object_v[i]).debug();
+		}
+	}
 }

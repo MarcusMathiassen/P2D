@@ -26,19 +26,6 @@ Circle::Circle(const Circle& c)
 
 void Circle::draw() const 
 {
-	// Draws lines showing the direction and velocity.
-	if (direction) {
-		float distance 	= sqrt(m_vel.x*m_vel.x+m_vel.y*m_vel.y);
-		float angle 	= atan2(m_vel.y,m_vel.x);	
-		float ny 		= m_pos.y + distance * sin(angle);
-		float nx 		= m_pos.x + distance * cos(angle);
-		glColor3ub(m_color.r,m_color.g,m_color.b);
-		glBegin(GL_LINES);
-		glVertex2d(m_pos.x,m_pos.y);
-		glVertex2d(m_vel.x+nx,m_vel.y+ny);
-		glEnd();
-	}
-
 	// Draw the circle.
 	const float doublePI = 6.283185;
 	glColor3ub(m_color.r,m_color.g,m_color.b);
@@ -53,41 +40,57 @@ void Circle::draw() const
 	glEnd();
 }
 
+void Circle::debug() const
+{
+	// Draws lines showing the direction and velocity.
+	if (direction) {
+		float distance 	= sqrt(m_vel.x*m_vel.x+m_vel.y*m_vel.y);
+		float angle 	= atan2(m_vel.y,m_vel.x);	
+		float ny 		= m_pos.y + distance * sin(angle);
+		float nx 		= m_pos.x + distance * cos(angle);
+		glColor3ub(m_color.r,m_color.g,m_color.b);
+		glBegin(GL_LINES);
+			glVertex2d(m_pos.x,m_pos.y);
+			glVertex2d(m_vel.x+nx,m_vel.y+ny);
+		glEnd();
+	}
+}
+
 void Circle::update()
 {
 	m_mass = m_radi;
 	if(gravity) m_vel.y -= ACCEL * m_mass;
-
-	// Border collision check
-	if (borderCol) {
-		if (m_pos.x <= m_radi && m_vel.x < 0) {		
-			m_pos.x = (m_radi); 
-			m_vel.x = (-m_vel.x);		
-		}
-	
-		if (m_pos.x >= WINDOW_WIDTH-m_radi && m_vel.x > 0) { 
-			m_pos.x = (WINDOW_WIDTH-m_radi); 
-			m_vel.x = (-m_vel.x);
-		}
-	
-		if (m_pos.y <= m_radi && m_vel.y < 0) {
-			m_pos.y = (m_radi); 
-			m_vel.y = (-m_vel.y);
-		}
-	
-		if (m_pos.y >= WINDOW_HEIGHT-m_radi && m_vel.y > 0) {
-			m_pos.y = (WINDOW_HEIGHT-m_radi); 
-			m_vel.y = (-m_vel.y);
-		}
-	}
 
 	int slow = 0;
 	if(slowmotion) slow = 10;
 	else slow = 1;
 
 	// Update ball position
-	m_pos.x += (m_vel.x * 16/(1000*slow));
-	m_pos.y += (m_vel.y * 16/(1000*slow));
+	m_pos.x += (m_vel.x * 16.667/(1000*slow));
+	m_pos.y += (m_vel.y * 16.667/(1000*slow));
+
+	// Border collision check
+	if (borderCol) {
+		if (m_pos.x <= m_radi && m_vel.x < 0) {		
+			m_pos.x = (m_radi); 
+			m_vel.x = (-m_vel.x)*0.9;		
+		}
+	
+		if (m_pos.x >= WINDOW_WIDTH-m_radi && m_vel.x > 0) { 
+			m_pos.x = (WINDOW_WIDTH-m_radi); 
+			m_vel.x = (-m_vel.x)*0.9;
+		}
+	
+		if (m_pos.y <= m_radi && m_vel.y < 0) {
+			m_pos.y = (m_radi); 
+			m_vel.y = (-m_vel.y)*0.9;
+		}
+	
+		if (m_pos.y >= WINDOW_HEIGHT-m_radi && m_vel.y > 0) {
+			m_pos.y = (WINDOW_HEIGHT-m_radi); 
+			m_vel.y = (-m_vel.y)*0.9;
+		}
+	}
 }
 
 bool Circle::collisionDetection(const Circle& b) const
@@ -168,10 +171,10 @@ void Circle::resolveCollision(Circle& b)
  		m_pos.y += (a_move_y);
  	}
  	if (bx + b_move_x >= br && bx + b_move_x <= WINDOW_WIDTH - br) {
- 		b.addVelX(b_move_x);
+ 		b.addPosX(b_move_x);
  	}
  	if (by + b_move_y >= br && by + b_move_y <= WINDOW_HEIGHT - br) {
- 		b.addVelY(b_move_y);
+ 		b.addPosY(b_move_y);
  	}
 
  	//calculate from the new position
@@ -204,6 +207,8 @@ void Circle::resolveCollision(Circle& b)
 }
 
 Vec2 	Circle::getPos() 		const 	{ return m_pos;			}
+void 	Circle::addPosX(float f)		{ m_pos.x += f;}
+void 	Circle::addPosY(float f)		{ m_pos.y += f;}
 Vec2 	Circle::getVel() 		const	{ return m_vel;			}
 void	Circle::setVel(float x, float y){ m_vel.x = x,m_vel.y = y;}
 void 	Circle::addVelX(float f)		{ m_vel.x += f;}

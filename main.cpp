@@ -34,8 +34,7 @@ int main()
 	glfwSetMouseButtonCallback(window, mouseButtonCallback);
 	glfwSetScrollCallback(window, scrollCallback);
 	glfwSetKeyCallback(window, keyCallback);
-	glEnable(GL_PROGRAM_POINT_SIZE);
-
+	
 	/* Enable multisampling */
 	#ifdef MULTISAMPLING 
 		glEnable(GL_MULTISAMPLE);
@@ -56,7 +55,6 @@ int main()
 		 	if (showFPS) {
 		    	printf("%f ms/frame\n", 1000/float(nbFrames));
 		    }
-		 	//dt = 1000/float(nbFrames);
 		    nbFrames = 0;
 		    lastTime++;  
 		}

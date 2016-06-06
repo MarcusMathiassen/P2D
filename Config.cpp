@@ -5,15 +5,17 @@ const char WINDOW_NAME[]	= "P2D_v0.5";		// Window title name
 const int WINDOW_WIDTH 		= 500;				// Window width
 const int WINDOW_HEIGHT		= 500;				// Window height
 
-int numThreads = 8;
+int numThreads = 8;								// Number of threads
 
 const Color BCKGRND = white;					// Background color
 
 // Bools
+bool use_pThread	= false;
 bool showFPS 		= false;
 bool unlockFPS 		= false;
 bool borderCol 		= true;
 bool ballCol 		= true;
+bool useQuadtree	= false;
 bool slowmotion 	= false;
 bool gravity 		= false;
 bool direction		= false;

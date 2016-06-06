@@ -1,6 +1,7 @@
 #ifndef _OBJECT_H
 #define _OBJECT_H
 
+#include <memory>
 #include <vector>
 
 class Object {

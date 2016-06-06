@@ -6,12 +6,23 @@
 
 #include <cmath>
 #include <thread>
+#include <omp.h>
 #include <vector>
 
 void Calc(int begin, int end) {
+	for (int i = begin; i < end; i++) {		
 
-	for (int i = begin; i < end; i++) 
-	{		
+		if (ballCol && !useQuadtree)
+		for (int j = i+1; j < object_v.size(); j++) {
+	
+			// collision check
+			if (static_cast<Circle&>(*object_v[i]).collisionDetection(static_cast<Circle&>(*object_v[j]))) {
+	
+				// resolve collision
+				static_cast<Circle&>(*object_v[i]).resolveCollision(static_cast<Circle&>(*object_v[j]));
+			}
+		}
+
 		// updates its pos and vel.
 		object_v[i]->update();
 	}
@@ -19,25 +30,47 @@ void Calc(int begin, int end) {
 
 void update() {
 
-	// Update the quadtrees
-	quadtree.update();
-
 	// If there are objects..
 	if (object_v.size() > 0) {
+		int numObj = object_v.size();
+		// Update the quadtrees (NOT YET FINISHED)
+		//quadtree.update();
 
-		// Number of balls per thread
-		int parts = object_v.size() / numThreads;
+		if (use_pThread){
 
-		// Our thread container
-		std::vector<std::thread> t(numThreads);
+			if (numThreads == 0) { Calc(0,numObj); return; }
+			// Number of balls per thread
+			int parts = numObj / numThreads;
 		
-		Calc(parts*numThreads, object_v.size());
-		for (int i = 0; i < numThreads; ++i) {
-			t[i] = std::thread(Calc, parts * i, parts * (i+1));
-		}
-		for (int i = 0; i < numThreads; ++i) {
-			t[i].join();
+			// Our thread container
+			std::vector<std::thread> t(numThreads);
+			
+			Calc(parts*numThreads, numObj);
+			for (int i = 0; i < numThreads; ++i) {
+				t[i] = std::thread(Calc, parts * i, parts * (i+1));
+			}
+			for (int i = 0; i < numThreads; ++i) {
+				t[i].join();
+			}
+			return;
 		}
 
-	} else Calc(0,object_v.size());
+		// Use OpenMP if defined in the config
+		#ifdef OPENMP
+			#pragma omp parallel for
+			for (int i = 0; i < numObj; ++i) {		
+				if (ballCol && !useQuadtree)
+				for (int j = i+1; j < numObj; ++j) {
+					// collision check
+					if (static_cast<Circle&>(*object_v[i]).collisionDetection(static_cast<Circle&>(*object_v[j]))) {
+						// resolve collision
+						static_cast<Circle&>(*object_v[i]).resolveCollision(static_cast<Circle&>(*object_v[j]));
+					}
+				}
+				// updates its pos and vel.
+				object_v[i]->update();
+			}
+			return;
+		#endif
+	}
 }

@@ -1,6 +1,7 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H	
 
+#include <memory>
 #include "Rect.h"
 #include "Object.h"
 #include "Circle.h"
