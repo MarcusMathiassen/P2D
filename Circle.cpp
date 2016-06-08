@@ -1,17 +1,32 @@
 #include "Circle.h"
 
 #include <cmath>			// cos, sin
-#include <GL/glew.h>		// gl functions
-
+#include <OpenGL/gl.h>
 #include "Config.h"			// Global variables
 #include "Utility.h"		// assignColor()
 #include "Vec2.h"
 #include "Color.h"
 
+#define PI 3.14159
+#define HALF_PI 1.570796
+#define DOUBLE_PI 6.283185
+
+
 Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(v) {
 	m_vel = Vec2(0,0);
 	m_mass = m_radi;
 	assignColor(m_color);
+	m_isOnScreen = true;
+
+
+	m_cosineTable.reserve(m_vertices+1);
+	m_sineTable.reserve(m_vertices+1);
+	m_cosineTable[0] = m_radi;
+	m_sineTable[0] = 0; 	
+	for (int i = 1; i <= m_vertices; ++i) {
+		m_cosineTable[i] 	= (m_radi * cos(i *  DOUBLE_PI / m_vertices));
+		m_sineTable[i] 		= (m_radi * sin(i *  DOUBLE_PI / m_vertices));
+	}
 }
 
 Circle::Circle(const Circle& c)
@@ -22,22 +37,33 @@ Circle::Circle(const Circle& c)
 	m_radi 		= c.getRadi();
 	m_color 	= c.getColor();
 	m_vertices 	= c.getVertices();
+	m_isOnScreen  = true;
+
+	m_cosineTable.reserve(m_vertices+1);
+	m_sineTable.reserve(m_vertices+1);
+	m_cosineTable[0] = m_radi;
+	m_sineTable[0] = 0; 	
+	for (int i = 1; i <= m_vertices; ++i) {
+		m_cosineTable[i] 	= (m_radi * cos(i *  DOUBLE_PI / m_vertices));
+		m_sineTable[i] 		= (m_radi * sin(i *  DOUBLE_PI / m_vertices));
+	}
 }
 
 void Circle::draw() const 
 {
-	// Draw the circle.
-	const float doublePI = 6.283185;
-	glColor3ub(m_color.r,m_color.g,m_color.b);
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(m_pos.x, m_pos.y);
-	for(int i = 0; i <= m_vertices; ++i) { 
-		glVertex2f(
-	        m_pos.x + (m_radi * cos(i *  doublePI / m_vertices)), 
-		    m_pos.y + (m_radi * sin(i *  doublePI / m_vertices))
-		);
+	// run debug
+	debug();
+	if (m_isOnScreen)
+	{	
+		// Draw the circle.
+		glColor3ub(m_color.r,m_color.g,m_color.b);
+		glBegin(GL_TRIANGLE_FAN);
+		glVertex2f(m_pos.x, m_pos.y);
+		for(int i = 0; i <= m_vertices; ++i) { 
+			glVertex2f(m_pos.x+m_cosineTable[i], m_pos.y+m_sineTable[i]);
+		}
+		glEnd();
 	}
-	glEnd();
 }
 
 void Circle::debug() const
@@ -48,49 +74,65 @@ void Circle::debug() const
 		float angle 	= atan2(m_vel.y,m_vel.x);	
 		float ny 		= m_pos.y + distance * sin(angle);
 		float nx 		= m_pos.x + distance * cos(angle);
+
+		glEnable(GL_BLEND);
+		glEnable(GL_LINE_SMOOTH); 
 		glColor3ub(m_color.r,m_color.g,m_color.b);
 		glBegin(GL_LINES);
 			glVertex2d(m_pos.x,m_pos.y);
 			glVertex2d(m_vel.x+nx,m_vel.y+ny);
 		glEnd();
+		glDisable(GL_BLEND);
+		glDisable(GL_LINE_SMOOTH); 
 	}
 }
 
 void Circle::update()
 {
-	m_mass = m_radi;
-	if(gravity) m_vel.y -= ACCEL * m_mass;
-
-	int slow = 0;
-	if(slowmotion) slow = 10;
-	else slow = 1;
-
-	// Update ball position
-	m_pos.x += (m_vel.x * 16.667/(1000*slow));
-	m_pos.y += (m_vel.y * 16.667/(1000*slow));
-
 	// Border collision check
 	if (borderCol) {
 		if (m_pos.x <= m_radi && m_vel.x < 0) {		
 			m_pos.x = (m_radi); 
-			m_vel.x = (-m_vel.x)*0.9;		
+			m_vel.x = (-m_vel.x)*0.9;
+			m_isOnScreen = false;		
 		}
 	
-		if (m_pos.x >= WINDOW_WIDTH-m_radi && m_vel.x > 0) { 
-			m_pos.x = (WINDOW_WIDTH-m_radi); 
+		if (m_pos.x >= screen_width-m_radi && m_vel.x > 0) { 
+			m_pos.x = (screen_width-m_radi); 
 			m_vel.x = (-m_vel.x)*0.9;
+			m_isOnScreen = false;
 		}
 	
 		if (m_pos.y <= m_radi && m_vel.y < 0) {
 			m_pos.y = (m_radi); 
 			m_vel.y = (-m_vel.y)*0.9;
+			m_isOnScreen = false;	
 		}
 	
-		if (m_pos.y >= WINDOW_HEIGHT-m_radi && m_vel.y > 0) {
-			m_pos.y = (WINDOW_HEIGHT-m_radi); 
+		if (m_pos.y >= screen_height-m_radi && m_vel.y > 0) {
+			m_pos.y = (screen_height-m_radi); 
 			m_vel.y = (-m_vel.y)*0.9;
+			m_isOnScreen = false;	
 		}
 	}
+
+	m_mass = m_radi*0.1;
+	if(gravity) m_vel.y -= ACCEL * m_mass;
+
+	float slow = 1;
+	if(slowmotion) slow = 0.1;
+    
+    if (gravForce) {
+        for (int i = 0; i < object_v.size(); ++i) {
+            gravitationForce(static_cast<Circle&>(*object_v[i]));
+        }
+    }
+
+	// Update ball position
+	m_pos.x += (m_vel.x * 60*(0.0001*slow));
+	m_pos.y += (m_vel.y * 60*(0.0001*slow));
+
+	m_isOnScreen  = true;
 }
 
 bool Circle::collisionDetection(const Circle& b) const
@@ -152,6 +194,8 @@ void Circle::resolveCollision(Circle& b)
 	
 	// contact angle
 	float colAngle = atan2(dy, dx);
+	float cosOfAngle = cos(colAngle);
+	float sinOfAngle = sin(colAngle);
 
 	// dot product
 	float vdx = bvx - m_vel.x;
@@ -159,34 +203,27 @@ void Circle::resolveCollision(Circle& b)
  	float dotProduct = dx*vdx+dy*vdy;
 
  	// move the balls away from eachother so they dont overlap
- 	float a_move_x = -colDepth*0.5*cos(colAngle);
- 	float a_move_y = -colDepth*0.5*sin(colAngle);
- 	float b_move_x = colDepth*0.5*cos(colAngle);
- 	float b_move_y = colDepth*0.5*sin(colAngle);
+ 	float a_move_x = -colDepth*0.5*cosOfAngle;
+ 	float a_move_y = -colDepth*0.5*sinOfAngle;
+ 	float b_move_x = colDepth*0.5*cosOfAngle;
+ 	float b_move_y = colDepth*0.5*sinOfAngle;
 
- 	if (m_pos.x + a_move_x >= m_radi && m_pos.x + a_move_x <= WINDOW_WIDTH - m_radi) {
+ 	if (m_pos.x + a_move_x >= m_radi && m_pos.x + a_move_x <= screen_width - m_radi) {
  		m_pos.x += (a_move_x);
  	}
- 	if (m_pos.y + a_move_y >= m_radi && m_pos.y + a_move_y <= WINDOW_HEIGHT -  m_radi) {
+ 	if (m_pos.y + a_move_y >= m_radi && m_pos.y + a_move_y <= screen_height -  m_radi) {
  		m_pos.y += (a_move_y);
  	}
- 	if (bx + b_move_x >= br && bx + b_move_x <= WINDOW_WIDTH - br) {
+ 	if (bx + b_move_x >= br && bx + b_move_x <= screen_width - br) {
  		b.addPosX(b_move_x);
  	}
- 	if (by + b_move_y >= br && by + b_move_y <= WINDOW_HEIGHT - br) {
+ 	if (by + b_move_y >= br && by + b_move_y <= screen_height - br) {
  		b.addPosY(b_move_y);
  	}
-
- 	//calculate from the new position
- 	dx = bx - m_pos.x;
-	dy = by - m_pos.y;
-	//distance = sqrt(dx*dx+dy*dy);
-	colAngle = atan2(dy, dx);
 
  	// dont calc if they are moving away form eachother
  	if (dotProduct < 0){
 
- 		#define PI 3.14159265359
 		float nv1x = mag1*cos(d1-colAngle);
 		float nv1y = mag1*sin(d1-colAngle);
 		float nv2x = mag2*cos(d2-colAngle);
@@ -197,13 +234,43 @@ void Circle::resolveCollision(Circle& b)
 		float v1yf = nv1y;
 		float v2yf = nv2y;
 
-		m_vel.x = (cos(colAngle)*v1xf+cos(colAngle+PI/2)*v1yf*0.9);
-		m_vel.y = (sin(colAngle)*v1xf+sin(colAngle+PI/2)*v1yf*0.9);
+		m_vel.x = (cosOfAngle*v1xf+cos(colAngle+HALF_PI)*v1yf*0.9);
+		m_vel.y = (sinOfAngle*v1xf+sin(colAngle+HALF_PI)*v1yf*0.9);
 
 		b.setVel(
-			(cos(colAngle)*v2xf+cos(colAngle+PI/2)*v2yf*0.9),
-			(sin(colAngle)*v2xf+sin(colAngle+PI/2)*v2yf*0.9));
+			(cosOfAngle*v2xf+cos(colAngle+HALF_PI)*v2yf*0.9),
+			(sinOfAngle*v2xf+sin(colAngle+HALF_PI)*v2yf*0.9));
 	}
+}
+
+void Circle::gravitationForce(const Circle& b)
+{
+    // Set up variables
+    Vec2 bpos = b.getPos();
+    float x1 = m_pos.x;
+    float x2 = bpos.x;
+    float y1 = m_pos.y;
+    float y2 = bpos.y;
+    
+    // Mass of the balls.
+    float m1 = m_mass;
+    float m2 = b.getMass();
+    
+    // Get distance between balls.
+    float dx = x2-x1;
+    float dy = y2-y1;
+    float d = sqrt(dx*dx+dy*dy);
+    
+    if (d != 0) {
+    	
+        float angle = atan2(dy, dx);
+        const float G = 6.674e-2;
+        float F = G*m1*m2/d*d;
+        
+        m_vel.x += F*cos(angle);
+        m_vel.y += F*sin(angle);
+        
+    }
 }
 
 Vec2 	Circle::getPos() 		const 	{ return m_pos;			}
@@ -211,6 +278,7 @@ void 	Circle::addPosX(float f)		{ m_pos.x += f;}
 void 	Circle::addPosY(float f)		{ m_pos.y += f;}
 Vec2 	Circle::getVel() 		const	{ return m_vel;			}
 void	Circle::setVel(float x, float y){ m_vel.x = x,m_vel.y = y;}
+void 	Circle::addVel(float x, float y){ m_vel.x += x,m_vel.y += y;}
 void 	Circle::addVelX(float f)		{ m_vel.x += f;}
 void 	Circle::addVelY(float f)		{ m_vel.y += f;}
 float 	Circle::getMass()	 	const 	{ return m_mass;		}

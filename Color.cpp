@@ -32,5 +32,6 @@ Color pastel_blue		(119,158,203);
 Color pastel_pink		(255, 209, 220);
 Color black 			(0,0,0);
 Color white				(255,255,255);
+Color BCKGRND			(0,0,0);
 
 int uniCol = 0;		// Our magic color wheel number

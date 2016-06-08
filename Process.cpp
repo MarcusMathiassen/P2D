@@ -6,7 +6,6 @@
 
 #include <cmath>
 #include <thread>
-#include <omp.h>
 #include <vector>
 
 void Calc(int begin, int end) {
@@ -32,11 +31,11 @@ void update() {
 
 	// If there are objects..
 	if (object_v.size() > 0) {
-		int numObj = object_v.size();
+		int numObj = (int)object_v.size();
 		// Update the quadtrees (NOT YET FINISHED)
-		//quadtree.update();
+		quadtree.update();
 
-		if (use_pThread){
+		if (use_pThread && !useQuadtree){
 
 			if (numThreads == 0) { Calc(0,numObj); return; }
 			// Number of balls per thread

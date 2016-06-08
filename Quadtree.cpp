@@ -3,7 +3,6 @@
 #include <memory>
 #include <iostream>
 #include <vector>
-#include <GL/glew.h>
 
 #include "Config.h"
 #include "Rect.h"
@@ -19,7 +18,7 @@ Quadtree quadtree;
 Quadtree::Quadtree()
 {
 	m_level = 0;
-	m_bounds = Rect(Vec2(0,0),Vec2(WINDOW_WIDTH,WINDOW_HEIGHT));
+	m_bounds = Rect(Vec2(0,0),Vec2(screen_width,screen_height));
 }
 
 Quadtree::Quadtree(int level, const Rect& bounds) : m_level(level), m_bounds(bounds) {}
@@ -31,26 +30,26 @@ void Quadtree::split()
 
 	int x	= p1.x;
 	int y 	= p1.y;
-	int w	= p2.x;
-	int h	= p2.y;
+	int w	= p2.x*0.5;
+	int h	= p2.y*0.5;
 
 	// Bottom left
-	Rect zero	(Vec2(w*0.5,	h*0.5),
-				 Vec2(x,		y));
+	Rect bottomleft	(Vec2(x,	y),
+                     Vec2(w,	h));
 	// bottom right
-	Rect one	(Vec2(w*0.5,	h*0.5),
-				 Vec2(w,		y));
+	Rect topleft	(Vec2(x+w,	y),
+                     Vec2(w,	h));
 	// Top left
-	Rect two	(Vec2(w*0.5,	h*0.5),	
-				Vec2(x,			h));
+	Rect topright	(Vec2(x,	y+h),
+                     Vec2(w,	h));
 	// top right
-	Rect three	(Vec2(w*0.5,	h*0.5),
-				 Vec2(w,		h));
+	Rect bottomright(Vec2(x+w,	y+h),
+                     Vec2(w,	h));
 	
-	m_nodes_v.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1, one)));
-	m_nodes_v.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1, zero)));
-	m_nodes_v.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1, two)));
-	m_nodes_v.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1, three)));
+	m_nodes_v.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1, bottomleft)));
+	m_nodes_v.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1, topleft)));
+	m_nodes_v.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1, topright)));
+	m_nodes_v.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1, bottomright)));
 }
 
 void Quadtree::clear()
@@ -99,36 +98,23 @@ int Quadtree::getIndex(const Circle& b)
 	// Object can completely fit within the bottom quadrants
 	bool botQuad = (by > horMid);
 
-	if (m_nodes_v[0]->contains(b)) {
-				std::cout << "0\n";
-	}
-	if (m_nodes_v[1]->contains(b)) {
-				std::cout << "1\n";
-	} 
-	if (m_nodes_v[2]->contains(b)) {
-				std::cout << "2\n";
-	} 
-	if (m_nodes_v[3]->contains(b)) {
-				std::cout << "3\n";
-	} 
-
 	// Object can completely fit within the left quadrants
 	if (bx < vertMid && bx + bw < vertMid) {
 		if(topQuad) {
-			index = 2;
+			index = 1;
 		}
 		else if(botQuad) { 
-			index = 1;
+			index = 0;
 		}
 	}
 
 	// Object can completely fit within the right quadrants
 	if (bx > vertMid) {
 		if(topQuad) {
-			index = 3;
+			index = 2;
 		}
 		else if(botQuad) {
-			index = 0;
+			index = 3;
 		}
 	}
 

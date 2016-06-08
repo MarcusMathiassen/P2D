@@ -10,9 +10,24 @@
 #include <GLFW/glfw3.h>							// GLFW setup.
 
 #include "Config.h"								// Global settings
+#include "Color.h"								// Color
 #include "Inputs.h"								// User input
 #include "Process.h"							// Updates all objects 
 #include "Render.h"								// Renders all objects
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+   /* Tranform into pixel coordinates */
+	glViewport(0, 0, width, height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, width, 0, height, -1, 1);
+
+	screen_width = width;
+	screen_height = height;
+
+	windowResized = true;
+}
 
 int main()
 {
@@ -24,7 +39,7 @@ int main()
 		glfwWindowHint(GLFW_SAMPLES, xMSAA); 
 	#endif
 
-	window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, NULL, NULL);
+	window = glfwCreateWindow(screen_width, screen_height, WINDOW_NAME, NULL, NULL);
 
 	if (!glewInit()) { std::cout << "GLEW INIT FAILED!\n"; }
 
@@ -34,6 +49,8 @@ int main()
 	glfwSetMouseButtonCallback(window, mouseButtonCallback);
 	glfwSetScrollCallback(window, scrollCallback);
 	glfwSetKeyCallback(window, keyCallback);
+
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	
 	/* Enable multisampling */
 	#ifdef MULTISAMPLING 
@@ -46,6 +63,14 @@ int main()
     /* FOR FPS COUNTER */
 	float lastTime = glfwGetTime();
    	int nbFrames = 0;
+
+   	/* Tranform into pixel coordinates */
+   	glViewport(0, 0, screen_width*2, screen_height*2);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, screen_width, 0, screen_height, -1, 1);
+
+	glClearColor(BCKGRND.r,BCKGRND.g,BCKGRND.b,1);
 
     while (!glfwWindowShouldClose(window)) {
 
@@ -63,13 +88,7 @@ int main()
 		Inputs(window);
 
 		/* Background color */
-		glClearColor(BCKGRND.r,BCKGRND.g,BCKGRND.b,1);
 		glClear(GL_COLOR_BUFFER_BIT);
-
-		/* Tranform into pixel coordinates */
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, -1, 1);
 
 		update();		// Updates all objects
 		draw();			// Draws all objects to screen

@@ -20,7 +20,8 @@ extern Color pastel_purple;
 extern Color pastel_blue;
 extern Color pastel_pink;
 extern Color black;	
-extern Color white;			
+extern Color white;
+extern Color BCKGRND;						// Background color
 
 extern int uniCol;
 
