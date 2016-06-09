@@ -17,18 +17,6 @@ void Rect::draw() const {
 		glVertex2i(p2.x,p2.y);
 		glVertex2i(p2.x,p1.y);
 	glEnd();
-
-	glColor3ub(255,0,0);
-	glBegin(GL_LINES);
-		glVertex2i(p1.x,p1.y);
-		glVertex2i(p2.x,p2.y);
-	glEnd();
-
-	glColor3ub(0,255,0);
-	glBegin(GL_LINES);
-		glVertex2i(p1.x,p2.y);
-		glVertex2i(p2.x,p1.y);
-	glEnd();
 }
 
 bool Rect::contains(const Vec2& a) const

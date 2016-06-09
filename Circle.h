@@ -36,9 +36,9 @@ public:
 	void resolveCollision(Circle& b);
 
 	Vec2 	getPos() 					const;
+	Vec2 	getVel()					const;
 	void 	addPosX(float f);	
 	void 	addPosY(float f);	
-	Vec2 	getVel()					const;
 	void	setVel(float x, float y);
 	void 	addVel(float x, float y);
 	void	addVelX(float f);

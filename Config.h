@@ -12,6 +12,7 @@ extern double xpos, ypos;					// Mouse pos
 extern int numThreads;							// Number of CPU threads
 extern int uniBallSize;
 extern int uniBallVert;
+extern int uniGrids;
 
 #define MULTISAMPLING 							// Comment out to turn off
 #define xMSAA 4									// MSAA sampling

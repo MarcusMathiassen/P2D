@@ -32,31 +32,31 @@ void Inputs(GLFWwindow* window) {
 	if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		object_v.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		std::cout << object_v.size() << std::endl;
+		//std::cout << object_v.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
 		object_v.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),3,10)));
-		std::cout << object_v.size() << std::endl;
+		//std::cout << object_v.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
 		object_v.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),6,15)));
-		std::cout << object_v.size() << std::endl;
+		//std::cout << object_v.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
 		object_v.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),10,20)));
-		std::cout << object_v.size() << std::endl;
+		//std::cout << object_v.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS) {
 		object_v.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),20,25)));
-		std::cout << object_v.size() << std::endl;
+		//std::cout << object_v.size() << std::endl;
 	}
 }
 

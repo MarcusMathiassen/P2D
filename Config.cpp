@@ -8,7 +8,7 @@ double xpos, ypos;								// Mouse pos
 int numThreads = 8;								// Number of threads
 int uniBallSize = 10;                           // Universal ball size
 int uniBallVert = 20;                           // Universal ball vertices.
-
+int uniGrids = 4;								// Number of grids(min 4)
 
 // Bools
 bool use_pThread	= true;

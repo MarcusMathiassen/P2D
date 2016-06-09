@@ -11,7 +11,7 @@
 #include "Vec2.h"
 
 const int Quadtree::NODE_CAPACITY 	= 5;
-const int Quadtree::NODE_MAX_DEPTH 	= 10;
+const int Quadtree::NODE_MAX_DEPTH 	= 5;
 
 Quadtree quadtree;
 
@@ -28,23 +28,15 @@ void Quadtree::split()
 	Vec2 p1 	= m_bounds.getP1();
 	Vec2 p2 	= m_bounds.getP2();
 
-	int x	= p1.x;
-	int y 	= p1.y;
-	int w	= p2.x*0.5;
-	int h	= p2.y*0.5;
+	int x			= p1.x;
+	int y 			= p1.y;
+	int subWidth	= p2.x*0.5;
+	int subHeight	= p2.y*0.5;
 
-	// Bottom left
-	Rect bottomleft	(Vec2(x,	y),
-                     Vec2(w,	h));
-	// bottom right
-	Rect topleft	(Vec2(x+w,	y),
-                     Vec2(w,	h));
-	// Top left
-	Rect topright	(Vec2(x,	y+h),
-                     Vec2(w,	h));
-	// top right
-	Rect bottomright(Vec2(x+w,	y+h),
-                     Vec2(w,	h));
+	Rect bottomleft		(Vec2(x,y), 					Vec2(x+subWidth, y+subHeight));
+	Rect topleft		(Vec2(x, y+subHeight), 			Vec2(x+subWidth, y+subHeight));
+	Rect topright		(Vec2(x+subWidth, y+subHeight), Vec2(x+subWidth, y+subHeight));
+	Rect bottomright	(Vec2(x+subWidth, y), 			Vec2(x+subWidth, y+subHeight));
 	
 	m_nodes_v.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1, bottomleft)));
 	m_nodes_v.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1, topleft)));
@@ -60,24 +52,30 @@ void Quadtree::clear()
 
 void Quadtree::insert(const Circle& b)
 {	
-	// if nodes exist..
-	if (m_nodes_v.size() > 0) {
+	//	If NODE_CAPACITY is reached AND max depth is not yet reached
+	if (m_object_v.size() > NODE_CAPACITY && m_level < NODE_MAX_DEPTH)
+	{	
+		// If no nodes exist..
+		if (m_nodes_v.empty())
+		{
+			// Make some
+			split();
+		}
+
+		// Get index of node
 		int index = getIndex(b);
 
-		// And they contain our object
-		if (index != -1) {
+		// If object can fit
+		if (index != -1)
+		{
+			// Insert object into node
 			m_nodes_v[index]->insert(b);
 			return;
 		}
 	}
 
+	// Add object to this node
 	addObject(b);
-
-	if (m_object_v.size() > NODE_CAPACITY && m_level < NODE_MAX_DEPTH) {
-		if (m_nodes_v.size() == 0) {
-			split();
-		}
-	}
 } 
 
 int Quadtree::getIndex(const Circle& b)
@@ -88,15 +86,15 @@ int Quadtree::getIndex(const Circle& b)
 
 	Vec2 bpos = b.getPos();
 	float bx = bpos.x - b.getRadi();
-	float by = bpos.y - b.getRadi();
+	float by = bpos.y + b.getRadi();
 	float bw = bpos.x + b.getRadi();
-	float bh = bpos.y + b.getRadi();
+	float bh = bpos.y - b.getRadi();
 
 	// Objects can completely fit within the top quadrants
-	bool topQuad = (by < horMid && by + bh < horMid); 
+	bool topQuad = (by > horMid && by + bh > horMid); 
 
 	// Object can completely fit within the bottom quadrants
-	bool botQuad = (by > horMid);
+	bool botQuad = (by < horMid);
 
 	// Object can completely fit within the left quadrants
 	if (bx < vertMid && bx + bw < vertMid) {

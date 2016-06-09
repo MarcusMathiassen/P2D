@@ -21,6 +21,7 @@ private:
 	static const int 							NODE_MAX_DEPTH;
 
 public:
+
 	Quadtree();
 	Quadtree(int level, const Rect& bounds);
 
@@ -28,6 +29,7 @@ public:
 	void clear();
 	void retrieve();
 	void insert(const Circle& b);
+	
 	void addObject(const Circle& b);
 	int getIndex(const Circle& b);
 	bool contains(const Circle& b) const;
