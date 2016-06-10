@@ -14,6 +14,8 @@
 #include "Inputs.h"								// User input
 #include "Process.h"							// Updates all objects 
 #include "Render.h"								// Renders all objects
+#include "DynamicGrid.h"						// Grid for collision
+#include "Object.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -27,6 +29,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	screen_height = height;
 
 	windowResized = true;
+	dynamicGrid.init();
 }
 
 int main()
@@ -72,13 +75,17 @@ int main()
 
 	glClearColor(BCKGRND.r,BCKGRND.g,BCKGRND.b,1);
 
+	dynamicGrid.init();
+
     while (!glfwWindowShouldClose(window)) {
 
 		float currentTime = glfwGetTime();
 		nbFrames++;
 		if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1 sec ago
 		 	if (showFPS) {
-		    	printf("%f ms/frame\n", 1000/float(nbFrames));
+		    	printf("\n%f ms/frame\n", 1000/float(nbFrames));
+		    	std::cout << "Nodes: " << numNodes << std::endl;
+				std::cout << "Circles: " << object_vec.size() << std::endl;
 		    }
 		    nbFrames = 0;
 		    lastTime++;  
@@ -107,6 +114,8 @@ int main()
 		/* ESC to quit */
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			break;
+
+		comparisons = 0;
 	}
 
 	/* Terminate window */

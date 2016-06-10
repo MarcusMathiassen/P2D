@@ -1,5 +1,5 @@
 #include "Process.h"
-
+#include "DynamicGrid.h"
 #include "Quadtree.h"
 #include "Config.h"
 #include "Object.h"
@@ -12,28 +12,38 @@ void Calc(int begin, int end) {
 	for (int i = begin; i < end; i++) {		
 
 		if (ballCol && !useQuadtree)
-		for (int j = i+1; j < object_v.size(); j++) {
+		for (int j = i+1; j < object_vec.size(); j++) {
 	
 			// collision check
-			if (static_cast<Circle&>(*object_v[i]).collisionDetection(static_cast<Circle&>(*object_v[j]))) {
+			if (static_cast<Circle&>(*object_vec[i]).collisionDetection(static_cast<Circle&>(*object_vec[j]))) {
 	
 				// resolve collision
-				static_cast<Circle&>(*object_v[i]).resolveCollision(static_cast<Circle&>(*object_v[j]));
+				static_cast<Circle&>(*object_vec[i]).resolveCollision(static_cast<Circle&>(*object_vec[j]));
 			}
 		}
 
 		// updates its pos and vel.
-		object_v[i]->update();
+		object_vec[i]->update();
 	}
 }
 
 void update() {
 
+	int numObj = (int)object_vec.size();
+
 	// If there are objects..
-	if (object_v.size() > 0) {
-		int numObj = (int)object_v.size();
+	if (numObj > 0) {
+
 		// Update the quadtrees (NOT YET FINISHED)
-		quadtree.update();
+		//quadtree.update();
+
+		// Update the dynamic grid (NOT YET FINISHED)
+		if (useDynaGrid)
+		{	
+			dynamicGrid.update();
+			dynamicGrid.process();
+			return;
+		}
 
 		if (use_pThread && !useQuadtree){
 
@@ -61,13 +71,13 @@ void update() {
 				if (ballCol && !useQuadtree)
 				for (int j = i+1; j < numObj; ++j) {
 					// collision check
-					if (static_cast<Circle&>(*object_v[i]).collisionDetection(static_cast<Circle&>(*object_v[j]))) {
+					if (static_cast<Circle&>(*object_vec[i]).collisionDetection(static_cast<Circle&>(*object_vec[j]))) {
 						// resolve collision
-						static_cast<Circle&>(*object_v[i]).resolveCollision(static_cast<Circle&>(*object_v[j]));
+						static_cast<Circle&>(*object_vec[i]).resolveCollision(static_cast<Circle&>(*object_vec[j]));
 					}
 				}
 				// updates its pos and vel.
-				object_v[i]->update();
+				object_vec[i]->update();
 			}
 			return;
 		#endif

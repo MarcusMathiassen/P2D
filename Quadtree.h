@@ -14,8 +14,8 @@ private:
 
 	int 										m_level;
 	Rect 										m_bounds;
-	std::vector<std::unique_ptr<Quadtree>>		m_nodes_v;
-	std::vector<std::unique_ptr<Object>> 		m_object_v;
+	std::vector<std::unique_ptr<Quadtree>>		m_nodes_vec;
+	std::vector<std::unique_ptr<Object>> 		m_object_vec;
 	
 	static const int 							NODE_CAPACITY;
 	static const int 							NODE_MAX_DEPTH;

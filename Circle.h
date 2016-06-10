@@ -15,6 +15,7 @@ private:
 	float					m_radi;
 	float					m_mass;
 	Color					m_color;
+	Color 					m_tempcolor;
 	int						m_vertices;
 
 	std::vector<float> 		m_cosineTable;
@@ -29,6 +30,7 @@ public:
 	void draw() const;
 	void update();
 	void debug() const;
+	void changeColor(const Color& c);
     
     void gravitationForce(const Circle& b);
 	
@@ -47,6 +49,7 @@ public:
 	float 	getRadi() 					const;
 	int 	getVertices() 				const;
 	Color 	getColor() 					const;
+	Color 	getTempColor()				const;
 
 };
 

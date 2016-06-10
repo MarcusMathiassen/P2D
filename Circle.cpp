@@ -16,6 +16,7 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 	m_vel = Vec2(0,0);
 	m_mass = m_radi;
 	assignColor(m_color);
+	m_tempcolor = white;
 	m_isOnScreen = true;
 
 
@@ -36,6 +37,7 @@ Circle::Circle(const Circle& c)
 	m_mass		= c.getMass();
 	m_radi 		= c.getRadi();
 	m_color 	= c.getColor();
+	m_tempcolor = c.getTempColor();
 	m_vertices 	= c.getVertices();
 	m_isOnScreen  = true;
 
@@ -51,12 +53,11 @@ Circle::Circle(const Circle& c)
 
 void Circle::draw() const 
 {
-	// run debug
-	debug();
 	if (m_isOnScreen)
 	{	
 		// Draw the circle.
-		glColor3ub(m_color.r,m_color.g,m_color.b);
+		if (showDynaGrid && useDynaGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
+		else glColor3ub(m_color.r,m_color.g,m_color.b);
 		glBegin(GL_TRIANGLE_FAN);
 		glVertex2f(m_pos.x, m_pos.y);
 		for(int i = 0; i <= m_vertices; ++i) { 
@@ -69,22 +70,21 @@ void Circle::draw() const
 void Circle::debug() const
 {
 	// Draws lines showing the direction and velocity.
-	if (direction) {
-		float distance 	= sqrt(m_vel.x*m_vel.x+m_vel.y*m_vel.y);
-		float angle 	= atan2(m_vel.y,m_vel.x);	
-		float ny 		= m_pos.y + distance * sin(angle);
-		float nx 		= m_pos.x + distance * cos(angle);
-
-		glEnable(GL_BLEND);
-		glEnable(GL_LINE_SMOOTH); 
-		glColor3ub(m_color.r,m_color.g,m_color.b);
-		glBegin(GL_LINES);
-			glVertex2d(m_pos.x,m_pos.y);
-			glVertex2d(m_vel.x+nx,m_vel.y+ny);
-		glEnd();
-		glDisable(GL_BLEND);
-		glDisable(GL_LINE_SMOOTH); 
-	}
+	float distance 	= sqrt(m_vel.x*m_vel.x+m_vel.y*m_vel.y);
+	float angle 	= atan2(m_vel.y,m_vel.x);	
+	float ny 		= m_pos.y + distance * sin(angle);
+	float nx 		= m_pos.x + distance * cos(angle);
+	
+	glEnable(GL_BLEND);
+	glEnable(GL_LINE_SMOOTH); 
+	if (showDynaGrid && useDynaGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
+	else glColor3ub(m_color.r,m_color.g,m_color.b);
+	glBegin(GL_LINES);
+		glVertex2d(m_pos.x,m_pos.y);
+		glVertex2d(m_vel.x+nx,m_vel.y+ny);
+	glEnd();
+	glDisable(GL_BLEND);
+	glDisable(GL_LINE_SMOOTH); 
 }
 
 void Circle::update()
@@ -123,8 +123,8 @@ void Circle::update()
 	if(slowmotion) slow = 0.1;
     
     if (gravForce) {
-        for (int i = 0; i < object_v.size(); ++i) {
-            gravitationForce(static_cast<Circle&>(*object_v[i]));
+        for (int i = 0; i < object_vec.size(); ++i) {
+            gravitationForce(static_cast<Circle&>(*object_vec[i]));
         }
     }
 
@@ -137,6 +137,8 @@ void Circle::update()
 
 bool Circle::collisionDetection(const Circle& b) const
 {	
+	comparisons++;
+
 	// Setup variables
 	Vec2 bpos = b.getPos();
 	float bx = bpos.x;
@@ -163,6 +165,11 @@ bool Circle::collisionDetection(const Circle& b) const
     }
 
     return false;
+}
+
+void Circle::changeColor(const Color& c)
+{
+	m_tempcolor = c;
 }
 
 void Circle::resolveCollision(Circle& b)
@@ -284,4 +291,5 @@ void 	Circle::addVelY(float f)		{ m_vel.y += f;}
 float 	Circle::getMass()	 	const 	{ return m_mass;		}
 float 	Circle::getRadi() 		const	{ return m_radi;		}
 int 	Circle::getVertices() 	const	{ return m_vertices; 	}
-Color 	Circle::getColor() 		const	{ return m_color; 		}
+Color 	Circle::getColor() 		const	{ return m_color;		}
+Color 	Circle::getTempColor() 	const	{ return m_tempcolor;		}

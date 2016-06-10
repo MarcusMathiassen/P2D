@@ -3,6 +3,7 @@
 #include "Circle.h"
 #include "Config.h"
 #include "Color.h"
+#include "DynamicGrid.h"
 
 #include <iostream>
 
@@ -30,33 +31,33 @@ void Inputs(GLFWwindow* window) {
 
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
-		object_v.push_back(std::unique_ptr<Object>
+		object_vec.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		//std::cout << object_v.size() << std::endl;
+		//std::cout << object_vec.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
-		object_v.push_back(std::unique_ptr<Object>
+		object_vec.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),3,10)));
-		//std::cout << object_v.size() << std::endl;
+		//std::cout << object_vec.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
-		object_v.push_back(std::unique_ptr<Object>
+		object_vec.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),6,15)));
-		//std::cout << object_v.size() << std::endl;
+		//std::cout << object_vec.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
-		object_v.push_back(std::unique_ptr<Object>
+		object_vec.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),10,20)));
-		//std::cout << object_v.size() << std::endl;
+		//std::cout << object_vec.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS) {
-		object_v.push_back(std::unique_ptr<Object>
+		object_vec.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),20,25)));
-		//std::cout << object_v.size() << std::endl;
+		//std::cout << object_vec.size() << std::endl;
 	}
 }
 
@@ -70,7 +71,8 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 
 	/* Delete all */
 	if (key == GLFW_KEY_E && action == GLFW_PRESS) {
-		object_v.clear();
+		object_vec.clear();
+		comparisons = 0;
 		std::cout << "Deleted all objects" << std::endl;
 	}
 
@@ -140,6 +142,17 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		}
 	}
 
+	/* useDynaGrid */
+	if (key == GLFW_KEY_W && action == GLFW_PRESS) {
+		if (useDynaGrid == false) {
+			useDynaGrid = true;
+			std::cout << "DynamicGrid ON" << std::endl;
+		} else {
+			useDynaGrid = false;
+			std::cout << "DynamicGrid OFF" << std::endl;
+		}
+	}
+
 	/* Slowmotion */
 	if (key == GLFW_KEY_O && action == GLFW_PRESS) {
 		if (slowmotion == false) {
@@ -184,14 +197,25 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		}
 	}
 
-	/* Quadtrees */
+	/* showQuadtree */
 	if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
-		if (drawQuadtrees == false) {
-			drawQuadtrees = true;
-			std::cout << "drawQuadtrees ON" << std::endl;
+		if (showQuadtree == false) {
+			showQuadtree = true;
+			std::cout << "showQuadtree ON" << std::endl;
 		} else {
-			drawQuadtrees = false;
-			std::cout << "drawQuadtrees OFF" << std::endl;
+			showQuadtree = false;
+			std::cout << "showQuadtree OFF" << std::endl;
+		}
+	}
+
+	/* showDynaGrid */
+	if (key == GLFW_KEY_X && action == GLFW_PRESS) {
+		if (showDynaGrid == false) {
+			showDynaGrid = true;
+			std::cout << "showDynaGrid ON" << std::endl;
+		} else {
+			showDynaGrid = false;
+			std::cout << "showDynaGrid OFF" << std::endl;
 		}
 	}
 
@@ -217,6 +241,19 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		std::cout << "Number of threads: " << numThreads << std::endl;
 	}
 
+	/* uniGrid */
+	if (key == GLFW_KEY_6 && action == GLFW_PRESS && uniGrid > 4) {
+		uniGrid-=5;
+		dynamicGrid.init();
+		std::cout << "Dynamic Grids: " << uniGrid << std::endl;
+	}
+
+	if (key == GLFW_KEY_7 && action == GLFW_PRESS) {
+		uniGrid+=5;
+		dynamicGrid.init();
+		std::cout << "Dynamic Grids: " << uniGrid << std::endl;
+	}
+
 }
 
 void cursorPositionCallback(GLFWwindow *window, double xpos, double ypos) {
@@ -234,7 +271,7 @@ void cursorEnterCallback(GLFWwindow *window, int entered) {
 void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-		object_v.push_back(std::unique_ptr<Object>
+		object_vec.push_back(std::unique_ptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),30,30)));
 		// Left mouse button pressed.
 	}
@@ -252,5 +289,5 @@ void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 }
 
 void scrollCallback(GLFWwindow *window, double xoffset, double yoffset) {
-	static_cast<Circle&>(*object_v[0]).addVel(xoffset*15,-yoffset*15);
+	static_cast<Circle&>(*object_vec[0]).addVel(xoffset*15,-yoffset*15);
 }

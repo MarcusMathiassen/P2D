@@ -13,6 +13,6 @@ public:
 							
 };
 
-extern std::vector<std::unique_ptr<Object>> object_v;
+extern std::vector<std::unique_ptr<Object>> object_vec;
 
 #endif

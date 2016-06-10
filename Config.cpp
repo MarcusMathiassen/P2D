@@ -8,7 +8,9 @@ double xpos, ypos;								// Mouse pos
 int numThreads = 8;								// Number of threads
 int uniBallSize = 10;                           // Universal ball size
 int uniBallVert = 20;                           // Universal ball vertices.
-int uniGrids = 4;								// Number of grids(min 4)
+int uniGrid = 16;								// Number of grids(x4)
+int comparisons = 0;							// Number of comparisons
+int numNodes = 0;								// Number of nodes
 
 // Bools
 bool use_pThread	= true;
@@ -17,6 +19,9 @@ bool unlockFPS 		= false;
 bool borderCol 		= true;
 bool ballCol 		= true;
 bool useQuadtree	= false;
+bool showQuadtree	= false;
+bool useDynaGrid	= true;
+bool showDynaGrid	= true;
 bool slowmotion 	= false;
 bool gravity 		= false;
 bool direction		= false;

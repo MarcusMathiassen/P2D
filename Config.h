@@ -12,7 +12,9 @@ extern double xpos, ypos;					// Mouse pos
 extern int numThreads;							// Number of CPU threads
 extern int uniBallSize;
 extern int uniBallVert;
-extern int uniGrids;
+extern int uniGrid;
+extern int comparisons;							// Number of comparisons
+extern int numNodes;							// Number of nodes
 
 #define MULTISAMPLING 							// Comment out to turn off
 #define xMSAA 4									// MSAA sampling
@@ -25,12 +27,14 @@ extern bool unlockFPS;
 extern bool borderCol;
 extern bool ballCol;
 extern bool useQuadtree;
+extern bool showQuadtree;
+extern bool useDynaGrid;
+extern bool showDynaGrid;
 extern bool slowmotion;
 extern bool gravity;
 extern bool direction;
 extern bool gravForce;
 extern bool gravForceCol;
-extern bool drawQuadtrees;
 extern bool spawn;
 extern bool windowResized;
 
