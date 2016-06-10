@@ -142,6 +142,17 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		}
 	}
 
+	/* showQuadtree */
+	if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
+		if (showQuadtree == false) {
+			showQuadtree = true;
+			std::cout << "showQuadtree ON" << std::endl;
+		} else {
+			showQuadtree = false;
+			std::cout << "showQuadtree OFF" << std::endl;
+		}
+	}
+
 	/* useDynaGrid */
 	if (key == GLFW_KEY_W && action == GLFW_PRESS) {
 		if (useDynaGrid == false) {
@@ -150,6 +161,17 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		} else {
 			useDynaGrid = false;
 			std::cout << "DynamicGrid OFF" << std::endl;
+		}
+	}
+
+	/* showDynaGrid */
+	if (key == GLFW_KEY_X && action == GLFW_PRESS) {
+		if (showDynaGrid == false) {
+			showDynaGrid = true;
+			std::cout << "showDynaGrid ON" << std::endl;
+		} else {
+			showDynaGrid = false;
+			std::cout << "showDynaGrid OFF" << std::endl;
 		}
 	}
 
@@ -197,49 +219,6 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		}
 	}
 
-	/* showQuadtree */
-	if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
-		if (showQuadtree == false) {
-			showQuadtree = true;
-			std::cout << "showQuadtree ON" << std::endl;
-		} else {
-			showQuadtree = false;
-			std::cout << "showQuadtree OFF" << std::endl;
-		}
-	}
-
-	/* showDynaGrid */
-	if (key == GLFW_KEY_X && action == GLFW_PRESS) {
-		if (showDynaGrid == false) {
-			showDynaGrid = true;
-			std::cout << "showDynaGrid ON" << std::endl;
-		} else {
-			showDynaGrid = false;
-			std::cout << "showDynaGrid OFF" << std::endl;
-		}
-	}
-
-	/* pThread */
-	if (key == GLFW_KEY_0 && action == GLFW_PRESS) {
-		if (use_pThread == false) {
-			use_pThread = true;
-			std::cout << "using pThreads" << std::endl;
-		} else {
-			use_pThread = false;
-			std::cout << "using OpenMP" << std::endl;
-		}
-	}
-
-	/* Threads */
-	if (key == GLFW_KEY_9 && action == GLFW_PRESS) {
-		numThreads++;
-		std::cout << "Number of threads: " << numThreads << std::endl;
-	}
-
-	if (key == GLFW_KEY_8 && action == GLFW_PRESS && numThreads > 0) {
-		numThreads--;
-		std::cout << "Number of threads: " << numThreads << std::endl;
-	}
 
 	/* uniGrid */
 	if (key == GLFW_KEY_6 && action == GLFW_PRESS && uniGrid > 4) {
@@ -252,6 +231,28 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		uniGrid+=5;
 		dynamicGrid.init();
 		std::cout << "Dynamic Grids: " << uniGrid << std::endl;
+	}
+
+	/* numThreads */
+	if (key == GLFW_KEY_8 && action == GLFW_PRESS && numThreads > 0) {
+		numThreads--;
+		std::cout << "Number of threads: " << numThreads << std::endl;
+	}
+
+	if (key == GLFW_KEY_9 && action == GLFW_PRESS) {
+		numThreads++;
+		std::cout << "Number of threads: " << numThreads << std::endl;
+	}
+
+	/* pThread */
+	if (key == GLFW_KEY_0 && action == GLFW_PRESS) {
+		if (use_pThread == false) {
+			use_pThread = true;
+			std::cout << "using pThreads" << std::endl;
+		} else {
+			use_pThread = false;
+			std::cout << "using OpenMP" << std::endl;
+		}
 	}
 
 }
