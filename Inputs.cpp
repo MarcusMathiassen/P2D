@@ -4,6 +4,8 @@
 #include "Config.h"
 #include "Color.h"
 #include "DynamicGrid.h"
+#include "Quadtree.h"
+
 
 #include <iostream>
 
@@ -72,7 +74,8 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 	/* Delete all */
 	if (key == GLFW_KEY_E && action == GLFW_PRESS) {
 		object_vec.clear();
-		comparisons = 0;
+		object_vec.shrink_to_fit();
+		dynamicGrid.clear();
 		std::cout << "Deleted all objects" << std::endl;
 	}
 
@@ -221,7 +224,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 
 
 	/* uniGrid */
-	if (key == GLFW_KEY_6 && action == GLFW_PRESS && uniGrid > 4) {
+	if (key == GLFW_KEY_6 && action == GLFW_PRESS && uniGrid-5 > 4) {
 		uniGrid-=5;
 		dynamicGrid.init();
 		std::cout << "Dynamic Grids: " << uniGrid << std::endl;

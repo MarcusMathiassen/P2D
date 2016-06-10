@@ -24,6 +24,7 @@ public:
 	Vec2 getP1() const;
 	Vec2 getP2() const;
 	Color getColor() const;
+	void setColor(const Color& c);
 };
 
 #endif

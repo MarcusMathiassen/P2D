@@ -30,13 +30,15 @@ public:
 	void retrieve();
 	void insert(const Circle& b);
 	
+	void testSplit();
 	void addObject(const Circle& b);
 	int getIndex(const Circle& b);
 	bool contains(const Circle& b) const;
 	bool isFull() const;
+	void setColor(const Color& c);
 
 	void update();
-	void draw() const;
+	void draw();
 };
 
 extern Quadtree quadtree;

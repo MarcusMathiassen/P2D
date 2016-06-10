@@ -32,6 +32,7 @@ void DynamicGrid::init()
 	numNodes = 0;
 	// Clear nodes before use.
 	m_node_vec.clear();
+	m_node_vec.shrink_to_fit();
 
 	int sqrtGrid 	= sqrt(uniGrid);
 	int col 		= screen_width / sqrtGrid;
@@ -96,6 +97,8 @@ void DynamicGrid::process()
 	{	
 		// Clear the main container
 		object_vec.clear();
+		// Free memory used
+		object_vec.shrink_to_fit();
 
 		for (int i = 0; i < m_node_vec.size(); ++i)
 		{
@@ -150,23 +153,28 @@ void Node::clear()
 {	
 	// Clear the objects
 	m_object_vec.clear();
+	m_object_vec.shrink_to_fit();
 }
 
 void Node::updateObjects(int begin, int end)
 {
-	#pragma omp parallel for
-	for (int i = 0; i < m_object_vec.size(); ++i)
-	{	
-		for (int j = i+1; j < m_object_vec.size(); ++j)
-		{
-			// collision check
-			if (static_cast<Circle&>(*m_object_vec[i]).collisionDetection(static_cast<Circle&>(*m_object_vec[j])))
+	// If objects exist..
+	if (m_object_vec.size() > 0)
+	{
+		#pragma omp parallel for
+		for (int i = 0; i < m_object_vec.size(); ++i)
+		{	
+			for (int j = i+1; j < m_object_vec.size(); ++j)
 			{
-				// resolve collision
-				static_cast<Circle&>(*m_object_vec[i]).resolveCollision(static_cast<Circle&>(*m_object_vec[j]));
+				// collision check
+				if (static_cast<Circle&>(*m_object_vec[i]).collisionDetection(static_cast<Circle&>(*m_object_vec[j])))
+				{
+					// resolve collision
+					static_cast<Circle&>(*m_object_vec[i]).resolveCollision(static_cast<Circle&>(*m_object_vec[j]));
+				}
 			}
+			m_object_vec[i]->update();
 		}
-		m_object_vec[i]->update();
 	}
 
 	if (showDynaGrid && useDynaGrid) debug();

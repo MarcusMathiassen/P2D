@@ -35,7 +35,7 @@ void update() {
 	if (numObj > 0) {
 
 		// Update the quadtrees (NOT YET FINISHED)
-		//quadtree.update();
+		quadtree.update();
 
 		// Update the dynamic grid (NOT YET FINISHED)
 		if (useDynaGrid)

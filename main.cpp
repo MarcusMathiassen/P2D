@@ -113,8 +113,11 @@ int main()
 
 		/* ESC to quit */
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		{
 			break;
+		}
 
+		//std::cout << "Comparisons: " << comparisons << std::endl;
 		comparisons = 0;
 	}
 

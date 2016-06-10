@@ -17,11 +17,19 @@ void Rect::draw() const {
 
 	glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_LINE_LOOP);
-		glVertex2i(p1.x,p1.y);
-		glVertex2i(p1.x,p2.y);
-		glVertex2i(p2.x,p2.y);
-		glVertex2i(p2.x,p1.y);
+		glVertex2f(p1.x,p1.y);
+		glVertex2f(p1.x,p2.y);
+		glVertex2f(p2.x,p2.y);
+		glVertex2f(p2.x,p1.y);
 	glEnd();
+
+	// Line from min to max
+	//
+	//glColor3ub(m_color.r,m_color.g,m_color.b);
+	//glBegin(GL_LINES);
+	//	glVertex2f(p1.x,p1.y);
+	//	glVertex2f(p2.x,p2.y);
+	//glEnd();
 }
 
 bool Rect::contains(const Circle& a) const
@@ -38,3 +46,4 @@ bool Rect::contains(const Circle& a) const
 Vec2 Rect::getP1() const { return p1; }
 Vec2 Rect::getP2() const { return p2; }
 Color Rect::getColor() const {return m_color; }
+void Rect::setColor(const Color& c)  {m_color = c; }

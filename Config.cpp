@@ -1,6 +1,6 @@
 #include "Config.h"
 
-const char WINDOW_NAME[]	= "P2D_v0.5";		// Window title name
+const char WINDOW_NAME[]	= "P2D_v0.6";		// Window title name
 int screen_width			= 512;				// Window width
 int screen_height			= 512;				// Window height
 double xpos, ypos;								// Mouse pos

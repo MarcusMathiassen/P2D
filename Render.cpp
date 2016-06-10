@@ -16,6 +16,8 @@ void draw()
 	{
 		dynamicGrid.draw();
 	}
+
+	quadtree.draw();
 }
 
 void debug()
