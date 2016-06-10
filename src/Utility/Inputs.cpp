@@ -1,31 +1,6 @@
 #include "Inputs.h"
-#include "Object.h"
-#include "Circle.h"
-#include "Config.h"
-#include "Color.h"
-#include "DynamicGrid.h"
-#include "Quadtree.h"
-
-
-#include <iostream>
 
 void Inputs(GLFWwindow* window) {
-
-	/* 
-	
-	While 4 is pressed. Spawn balls at mouse position.
-
-	G : Gravity on/off
-	D : Direction on/off
-
-	F : Show FPS on/off
-	L : Lock FPS on/offx
-	
-	8 : Decrease threads by 1
-	9 : Increase threads by 1
-	0 : Turn on pThreads
-
-	*/
 
 	// Update cursor position
 	glfwGetCursorPos(window, &xpos, &ypos);
@@ -33,31 +8,31 @@ void Inputs(GLFWwindow* window) {
 
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
-		object_vec.push_back(std::unique_ptr<Object>
+		object_vec.push_back(uptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
 		//std::cout << object_vec.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
-		object_vec.push_back(std::unique_ptr<Object>
+		object_vec.push_back(uptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),3,10)));
 		//std::cout << object_vec.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
-		object_vec.push_back(std::unique_ptr<Object>
+		object_vec.push_back(uptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),6,15)));
 		//std::cout << object_vec.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
-		object_vec.push_back(std::unique_ptr<Object>
+		object_vec.push_back(uptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),10,20)));
 		//std::cout << object_vec.size() << std::endl;
 	}
 	// Spawn balls
 	if(glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS) {
-		object_vec.push_back(std::unique_ptr<Object>
+		object_vec.push_back(uptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),20,25)));
 		//std::cout << object_vec.size() << std::endl;
 	}
@@ -275,7 +250,7 @@ void cursorEnterCallback(GLFWwindow *window, int entered) {
 void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-		object_vec.push_back(std::unique_ptr<Object>
+		object_vec.push_back(uptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),30,30)));
 		// Left mouse button pressed.
 	}

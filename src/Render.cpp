@@ -1,9 +1,4 @@
 #include "Render.h"
-#include "Object.h"
-#include "Quadtree.h"
-#include "Config.h"
-#include "DynamicGrid.h"
-#include <iostream>
 
 void draw()
 {	

@@ -1,5 +1,4 @@
 #include "Utility.h"
-#include "Color.h"
 
 void assignColor(Color& col)
 {

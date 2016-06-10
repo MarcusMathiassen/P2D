@@ -1,10 +1,5 @@
 #include "Rect.h"
 
-#include <OpenGL/gl.h>
-#include "Config.h"
-#include "Vec2.h"
-#include "Utility.h"
-
 Rect::Rect() : p1(Vec2(0,0)), p2(Vec2(0,0)) {}
 
 Rect::Rect(const Vec2& a, const Vec2& b) : p1(a), p2(b)
@@ -13,8 +8,8 @@ Rect::Rect(const Vec2& a, const Vec2& b) : p1(a), p2(b)
 	uniCol++;
 }
 
-void Rect::draw() const {
-
+void Rect::draw() const
+{
 	glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_LINE_LOOP);
 		glVertex2f(p1.x,p1.y);
@@ -22,14 +17,6 @@ void Rect::draw() const {
 		glVertex2f(p2.x,p2.y);
 		glVertex2f(p2.x,p1.y);
 	glEnd();
-
-	// Line from min to max
-	//
-	//glColor3ub(m_color.r,m_color.g,m_color.b);
-	//glBegin(GL_LINES);
-	//	glVertex2f(p1.x,p1.y);
-	//	glVertex2f(p2.x,p2.y);
-	//glEnd();
 }
 
 bool Rect::contains(const Circle& a) const
@@ -43,7 +30,7 @@ bool Rect::contains(const Circle& a) const
 	return true;
 }
 
-Vec2 Rect::getP1() const { return p1; }
-Vec2 Rect::getP2() const { return p2; }
-Color Rect::getColor() const {return m_color; }
-void Rect::setColor(const Color& c)  {m_color = c; }
+Vec2 Rect::getP1() const 			{return p1;}
+Vec2 Rect::getP2() const 			{return p2;}
+Color Rect::getColor() const 		{return m_color;}
+void Rect::setColor(const Color& c) {m_color = c;}

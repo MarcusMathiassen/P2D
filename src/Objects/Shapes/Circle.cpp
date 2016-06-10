@@ -1,17 +1,5 @@
 #include "Circle.h"
 
-#include <cmath>			// cos, sin
-#include <OpenGL/gl.h>
-#include "Config.h"			// Global variables
-#include "Utility.h"		// assignColor()
-#include "Vec2.h"
-#include "Color.h"
-
-#define PI 3.14159
-#define HALF_PI 1.570796
-#define DOUBLE_PI 6.283185
-
-
 Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(v) {
 	m_vel = Vec2(0,0);
 	m_mass = m_radi;
@@ -280,16 +268,16 @@ void Circle::gravitationForce(const Circle& b)
     }
 }
 
-Vec2 	Circle::getPos() 		const 	{ return m_pos;			}
-void 	Circle::addPosX(float f)		{ m_pos.x += f;}
-void 	Circle::addPosY(float f)		{ m_pos.y += f;}
-Vec2 	Circle::getVel() 		const	{ return m_vel;			}
-void	Circle::setVel(float x, float y){ m_vel.x = x,m_vel.y = y;}
-void 	Circle::addVel(float x, float y){ m_vel.x += x,m_vel.y += y;}
-void 	Circle::addVelX(float f)		{ m_vel.x += f;}
-void 	Circle::addVelY(float f)		{ m_vel.y += f;}
-float 	Circle::getMass()	 	const 	{ return m_mass;		}
-float 	Circle::getRadi() 		const	{ return m_radi;		}
-int 	Circle::getVertices() 	const	{ return m_vertices; 	}
-Color 	Circle::getColor() 		const	{ return m_color;		}
-Color 	Circle::getTempColor() 	const	{ return m_tempcolor;		}
+Vec2 	Circle::getPos() const 				{return m_pos;}
+void 	Circle::addPosX(float f)			{m_pos.x += f;}
+void 	Circle::addPosY(float f)			{m_pos.y += f;}
+Vec2 	Circle::getVel() const				{return m_vel;}
+void	Circle::setVel(float x, float y)	{m_vel.x = x,m_vel.y = y;}
+void 	Circle::addVel(float x, float y)	{m_vel.x += x,m_vel.y += y;}
+void 	Circle::addVelX(float f)			{m_vel.x += f;}
+void 	Circle::addVelY(float f)			{m_vel.y += f;}
+float 	Circle::getMass() const 			{return m_mass;}
+float 	Circle::getRadi() const				{return m_radi;}
+int 	Circle::getVertices() const			{return m_vertices;}
+Color 	Circle::getColor() const			{return m_color;}
+Color 	Circle::getTempColor() const		{return m_tempcolor;}

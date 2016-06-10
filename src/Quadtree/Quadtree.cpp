@@ -1,16 +1,5 @@
 #include "Quadtree.h"
 
-#include <memory>
-#include <iostream>
-#include <vector>
-
-#include "Config.h"
-#include "Rect.h"
-#include "Object.h"
-#include "Circle.h"
-#include "Color.h"
-#include "Vec2.h"
-
 const int Quadtree::NODE_CAPACITY 	= 5;
 const int Quadtree::NODE_MAX_DEPTH 	= 5;
 
@@ -42,7 +31,7 @@ void Quadtree::split()
 	{
 		for (int j = x; j < width; j+=subWidth)
 		{
-			m_nodes_vec.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(j,i),Vec2(j+subWidth,i+subHeight)))));
+			m_nodes_vec.push_back(uptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(j,i),Vec2(j+subWidth,i+subHeight)))));
 		}
 	}
 
@@ -109,7 +98,7 @@ void Quadtree::retrieve()
 
 void Quadtree::addObject(const Circle& b)
 {	
-	m_object_vec.push_back(std::unique_ptr<Object> (new Circle(b)));
+	m_object_vec.push_back(uptr<Object> (new Circle(b)));
 }
 
 bool Quadtree::contains(const Circle& b) const

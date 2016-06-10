@@ -1,9 +1,13 @@
 #ifndef RECT_H
 #define RECT_H
 
-#include "Vec2.h"
-#include "Color.h"
-#include "Circle.h"
+#include <OpenGL/gl.h>
+
+#include "Circle.h"								// Circle class	
+#include "../../Utility/Vec2.h"					// Vec2 class
+#include "../../Utility/Color.h"				// Color class
+#include "../../Utility/Utility.h"				// assignColor()
+#include "../../Config.h"						// Global vars, screen size
 
 class Rect {
 

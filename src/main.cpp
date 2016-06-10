@@ -10,12 +10,14 @@
 #include <GLFW/glfw3.h>							// GLFW setup.
 
 #include "Config.h"								// Global settings
-#include "Color.h"								// Color
-#include "Inputs.h"								// User input
 #include "Process.h"							// Updates all objects 
 #include "Render.h"								// Renders all objects
-#include "DynamicGrid.h"						// Grid for collision
-#include "Object.h"
+#include "./Utility/Color.h"					// Color
+#include "./Utility/Inputs.h"					// User input
+#include "./Objects/Object.h"					// Object class
+#include "./DynamicGrid/DynamicGrid.h"			// dynamicGrid
+
+// ----------------------------------------------------------------------------
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {

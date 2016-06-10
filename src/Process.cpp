@@ -1,12 +1,5 @@
 #include "Process.h"
-#include "DynamicGrid.h"
-#include "Quadtree.h"
-#include "Config.h"
-#include "Object.h"
 
-#include <cmath>
-#include <thread>
-#include <vector>
 
 void Calc(int begin, int end) {
 	for (int i = begin; i < end; i++) {		
@@ -52,7 +45,7 @@ void update() {
 			int parts = numObj / numThreads;
 		
 			// Our thread container
-			std::vector<std::thread> t(numThreads);
+			vec<std::thread> t(numThreads);
 			
 			Calc(parts*numThreads, numObj);
 			for (int i = 0; i < numThreads; ++i) {
