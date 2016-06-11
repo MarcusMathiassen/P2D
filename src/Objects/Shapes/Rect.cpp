@@ -18,10 +18,10 @@ void Rect::draw() const
 {
 	glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_LINE_LOOP);
-		glVertex2f(p1.x,p1.y);
-		glVertex2f(p1.x,p2.y);
-		glVertex2f(p2.x,p2.y);
-		glVertex2f(p2.x,p1.y);
+		glVertex2f(p1.x+1,p1.y+1);
+		glVertex2f(p1.x+1,p2.y-1);
+		glVertex2f(p2.x-1,p2.y-1);
+		glVertex2f(p2.x-1,p1.y+1);
 	glEnd();
 }
 
@@ -30,8 +30,23 @@ bool Rect::contains(const Circle& a) const
 	Vec2 b = a.getPos();
 	float ar = a.getRadi();
 
+	//  basic square collision check
+	if (b.x - ar < p2.x && 
+		b.x + ar > p1.x &&
+		b.y - ar < p2.y &&
+		b.y + ar > p1.y)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Rect::containsPos(const Circle &a) const
+{
+	Vec2 b = a.getPos();
 	if(b.x < p1.x || b.x > p2.x) return false;
-    if(b.y < p1.y || b.y > p2.y) return false;
+	if(b.y < p1.y || b.y > p2.y) return false;
 
 	return true;
 }

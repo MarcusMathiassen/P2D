@@ -3,22 +3,13 @@
 //	AUTHOR: MARCUS MATHIASSEN	   		   |
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
-
+#include <iostream>
 #include "Node.h"
 
 Node::Node(const Rect& r) : m_rect(r)
 {
 	numNodes++;
 	assignColor(m_color);
-}
-
-void Node::addObjectsBack()
-{
-	for (int i = 0; i < m_object_vec.size(); ++i)
-	{
-		object_vec.push_back(uptr<Object>
-			(new Circle(static_cast<Circle&>(*m_object_vec[i]))));
-	}
 }
 
 bool Node::contains(const Circle& b) const
@@ -32,10 +23,10 @@ bool Node::contains(const Circle& b) const
 }
 
 
-void Node::insert(const Circle& b)
+void Node::insert(int i)
 {	
 	// Add object to the node.
-	m_object_vec.push_back(uptr<Object>(new Circle(b)));
+	m_index_vec.push_back((i));
 }
 
 void Node::draw()
@@ -49,33 +40,34 @@ void Node::clear()
 	//---------------------------------------------------------------------
 	// Clears the object vector and frees any memory used by it.
 	//---------------------------------------------------------------------
-
-	m_object_vec.clear();						// Clear the object vector.
-	m_object_vec.shrink_to_fit();				// Free any memory used.
+	m_index_vec.clear();
+	m_index_vec.shrink_to_fit();
 }
 
-void Node::updateObjects(int begin, int end)
+void Node::update()
 {
 	//---------------------------------------------------------------------
 	// Change the color of the nodes objects to the nodes rect color.
 	//---------------------------------------------------------------------
-	
-	// If objects exist..
-	if (m_object_vec.size() > 0)
+
+	for (int i = 0; i < m_index_vec.size(); ++i)
 	{	
-		#pragma omp parallel for
-		for (int i = 0; i < m_object_vec.size(); ++i)
-		{	
-			for (int j = i+1; j < m_object_vec.size(); ++j)
+		int idex = m_index_vec[i];
+
+		for (int j = i+1; j < m_index_vec.size(); ++j)
+		{
+			int jdex = m_index_vec[j];
+
+			// collision check
+			if (static_cast<Circle&>(*object_vec[idex]).collisionDetection(static_cast<Circle&>(*object_vec[jdex])))
 			{
-				// collision check
-				if (static_cast<Circle&>(*m_object_vec[i]).collisionDetection(static_cast<Circle&>(*m_object_vec[j])))
-				{
-					// resolve collision
-					static_cast<Circle&>(*m_object_vec[i]).resolveCollision(static_cast<Circle&>(*m_object_vec[j]));
-				}
+				// resolve collision
+				static_cast<Circle&>(*object_vec[idex]).resolveCollision(static_cast<Circle&>(*object_vec[jdex]));
 			}
-			m_object_vec[i]->update();
+		}
+		if (static_cast<Circle&>(*object_vec[idex]).getisUpdated() == false)
+		{
+			object_vec[idex]->update();
 		}
 	}
 
@@ -88,12 +80,15 @@ void Node::debug()
 	// Change the color of the nodes objects to the nodes rect color.
 	//---------------------------------------------------------------------
 
-	if (m_object_vec.size() > 0)						// If objects exist..
+	if (object_vec.size() > 0)						// If objects exist..
 	{
-		for (int i = 0; i < m_object_vec.size(); ++i) 	// For every object..
+		for (int i = 0; i < m_index_vec.size(); ++i) 	// For every object..
 		{
-			static_cast<Circle&>
-			(*m_object_vec[i]).changeColor(m_rect.getColor()); // Change color.
+			if (m_rect.containsPos(static_cast<Circle&>(*object_vec[m_index_vec[i]])))
+			{
+				static_cast<Circle&>
+				(*object_vec[m_index_vec[i]]).changeColor(m_rect.getColor()); // Change color.
+			}
 		}
 	}
 }

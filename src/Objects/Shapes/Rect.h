@@ -30,7 +30,8 @@ public:
 	void draw() const;
 
 	bool contains(const Circle& a) const;
-
+	bool containsPos(const Circle& a) const;
+ 
 	Vec2 getP1() const;
 	Vec2 getP2() const;
 	Color getColor() const;

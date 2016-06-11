@@ -4,11 +4,11 @@
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
 
-#include "DynamicGrid.h"			// Declaration
+#include "SpatialHash.h"			// Declaration
 
-DynamicGrid dynamicGrid;
+SpatialHash spatialHash;
 
-void DynamicGrid::init()
+void SpatialHash::init()
 {	
 	// ---------------------------------------------------------------------
 	// The nodes are cleared and given an element in the grid.
@@ -20,7 +20,7 @@ void DynamicGrid::init()
 	m_node_vec.shrink_to_fit();					// Free any memory used.
 
 												// Split screen into grid..
-	int sqrtGrid 	= sqrt(uniGrid);			
+	float sqrtGrid 	= sqrt(uniGrid);			
 	int col 		= screen_width/sqrtGrid;
 	int row 		= screen_height/sqrtGrid;
 
@@ -34,7 +34,7 @@ void DynamicGrid::init()
 	}
 }
 
-void DynamicGrid::clear()
+void SpatialHash::clear()
 {
 	//---------------------------------------------------------------------
 	//	Clears all nodes and their objects. (If we didn´t do this, 
@@ -61,7 +61,7 @@ void DynamicGrid::clear()
 	}
 }
 
-void DynamicGrid::update()
+void SpatialHash::update()
 {
 	//---------------------------------------------------------------------
 	// Goes through every node and fills it with objects from the 
@@ -81,7 +81,7 @@ void DynamicGrid::update()
 		{
 			if (m_node_vec[j]->contains(static_cast<Circle&>(*object_vec[i])))
 			{
-				m_node_vec[j]->insert(static_cast<Circle&>(*object_vec[i]));
+				m_node_vec[j]->insert(static_cast<Circle&>(*object_vec[i]).getIndex());
 			}
 		}
 	}
@@ -94,7 +94,7 @@ void DynamicGrid::update()
 
 }
 
-void DynamicGrid::process()
+void SpatialHash::process()
 {
 	//---------------------------------------------------------------------
 	// Checks if any objects in the node collide with eachother, and if so, 
@@ -108,15 +108,12 @@ void DynamicGrid::process()
 		int b =  GetTimeMs64();
 		#endif
 
-		object_vec.clear();						// Clear the main container.
-		object_vec.shrink_to_fit();				// Free any memory used.
-
+		#pragma omp parallel for
 		for (int i = 0; i < m_node_vec.size(); ++i)	// Go through all nodes..
 		{
-			m_node_vec[i]->updateObjects(0,1);		// Check collisons
-			m_node_vec[i]->addObjectsBack();		// Put back into main cont.
+			m_node_vec[i]->update();		// Check collisons
 		}
-
+		
 		#ifdef BENCHMARK
 		int a =  GetTimeMs64()-b;
 		std::cout << " - Process nodes:   " << a << " ms" << std::endl;
@@ -124,7 +121,7 @@ void DynamicGrid::process()
 	}
 }
 
-void DynamicGrid::draw()
+void SpatialHash::draw()
 {	
 	//---------------------------------------------------------------------
 	// Draws the nodes boundaries to screen and colors the objects within 

@@ -10,6 +10,26 @@ void Inputs(GLFWwindow* window) {
 	if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		object_vec.push_back(uptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+		object_vec.push_back(uptr<Object>
+			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+		object_vec.push_back(uptr<Object>
+			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+		object_vec.push_back(uptr<Object>
+			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+		object_vec.push_back(uptr<Object>
+			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+		object_vec.push_back(uptr<Object>
+			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+		object_vec.push_back(uptr<Object>
+			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+		object_vec.push_back(uptr<Object>
+			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+		object_vec.push_back(uptr<Object>
+			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+		object_vec.push_back(uptr<Object>
+			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+		object_vec.push_back(uptr<Object>
+			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
 		//std::cout << object_vec.size() << std::endl;
 	}
 	// Spawn balls
@@ -50,7 +70,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 	if (key == GLFW_KEY_E && action == GLFW_PRESS) {
 		object_vec.clear();
 		object_vec.shrink_to_fit();
-		dynamicGrid.clear();
+		spatialHash.init();
 		std::cout << "Deleted all objects" << std::endl;
 	}
 
@@ -190,15 +210,17 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 
 
 	/* uniGrid */
-	if (key == GLFW_KEY_6 && action == GLFW_PRESS && uniGrid-5 > 4) {
-		uniGrid-=5;
-		dynamicGrid.init();
+	if (key == GLFW_KEY_6 && action == GLFW_PRESS && griduni > 0) {
+		griduni--;
+		assignGrid();
+		spatialHash.init();
 		std::cout << "Dynamic Grids: " << uniGrid << std::endl;
 	}
 
-	if (key == GLFW_KEY_7 && action == GLFW_PRESS) {
-		uniGrid+=5;
-		dynamicGrid.init();
+	if (key == GLFW_KEY_7 && action == GLFW_PRESS && griduni < 4) {
+		griduni++;
+		assignGrid();
+		spatialHash.init();
 		std::cout << "Dynamic Grids: " << uniGrid << std::endl;
 	}
 

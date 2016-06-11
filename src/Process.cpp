@@ -39,12 +39,12 @@ void update() {
 
 		if (use_DynamicGrid)			// If DynamicGrid is active.
 		{	
-			dynamicGrid.update();
-			dynamicGrid.process();
+			spatialHash.update();
+			spatialHash.process();
 			return;
 		}
 
-		if (use_pThread && !use_Quadtree){
+		if (use_pThread){
 
 			if (numThreads == 0) { Calc(0,object_vec.size()); return; }
 			// Number of balls per thread
@@ -60,6 +60,24 @@ void update() {
 			for (int i = 0; i < numThreads; ++i) {
 				t[i].join();
 			}
+			return;
 		}
+
+		// Use OpenMP if defined in the config
+		#ifdef OPENMP
+			#pragma omp parallel for
+			for (int i = 0; i < object_vec.size(); ++i) {		
+				if (ballCol)
+				for (int j = i+1; j < object_vec.size(); ++j) {
+					// collision check
+					if (static_cast<Circle&>(*object_vec[i]).collisionDetection(static_cast<Circle&>(*object_vec[j]))) {
+						// resolve collision
+						static_cast<Circle&>(*object_vec[i]).resolveCollision(static_cast<Circle&>(*object_vec[j]));
+					}
+				}
+				// updates its pos and vel.
+				object_vec[i]->update();
+			}
+		#endif
 	}
 }

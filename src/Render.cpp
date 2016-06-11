@@ -3,7 +3,12 @@
 void draw()
 {	
 	debug();
-	
+
+	if (show_DynamicGrid)
+	{
+		//spatialHash.debug();
+	}
+
 	for (int i = 0; i < object_vec.size(); ++i)
 	{
 		object_vec[i]->draw();
@@ -11,7 +16,7 @@ void draw()
 
 	if (show_DynamicGrid)
 	{
-		dynamicGrid.draw();
+		spatialHash.draw();
 	}
 
 	if (show_Quadtree)
@@ -29,4 +34,5 @@ void debug()
 			static_cast<Circle&>(*object_vec[i]).debug();
 		}
 	}
+
 }

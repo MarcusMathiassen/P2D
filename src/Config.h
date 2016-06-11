@@ -19,6 +19,7 @@ extern double xpos, ypos;					// Current mouse position.
 
 extern int numThreads;						// Number of CPU threads
 extern int uniGrid;							// Number of grids.
+extern int griduni;	
 extern int comparisons;						// Number of comparisons
 extern int numNodes;						// Number of nodes
 

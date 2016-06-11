@@ -15,7 +15,7 @@
 #include "./Utility/Color.h"					// Color
 #include "./Utility/Inputs.h"					// User input
 #include "./Objects/Object.h"					// Object class
-#include "./DynamicGrid/DynamicGrid.h"			// dynamicGrid
+#include "./SpatialHash/SpatialHash.h"			// SpatialHash
 #include "./Utility/getTime64.h"				// BENCHMARK
 
 // ----------------------------------------------------------------------------
@@ -36,7 +36,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	screen_height = height;
 
 	windowResized = true;
-	dynamicGrid.init();
+	spatialHash.init();
 }
 
 int main()
@@ -82,7 +82,7 @@ int main()
 
 	glClearColor(BCKGRND.r,BCKGRND.g,BCKGRND.b,1);
 
-	dynamicGrid.init();
+	spatialHash.init();
 
 // --------------------------------- LOOP -------------------------------------
 
@@ -143,8 +143,6 @@ int main()
 
 
 
-		comparisons = 0;
-
 		/* Swap interval */
 		if (lock_FPS) {
 			glfwSwapInterval(1);
@@ -157,6 +155,7 @@ int main()
 		std::cout << "Compari.:  " << comparisons << std::endl;
 		#endif
 
+		comparisons = 0;
 
 		#ifdef BENCHMARK
 		int aLoop =  GetTimeMs64()-bLoop;

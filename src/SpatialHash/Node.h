@@ -17,17 +17,17 @@ class Node
 	
 private:
 
-	Rect 				m_rect;
-	Color 				m_color;
-	vec<uptr<Object>>	m_object_vec;
+	Rect 					m_rect;
+	Color 					m_color;
+
+	vec<int>				m_index_vec;			// Index of objects
 
 public:
 
 	Node(const Rect& r);
 	bool contains(const Circle& b) const;
-	void insert(const Circle& b);
-	void updateObjects(int begin, int end);
-	void addObjectsBack();
+	void insert(int i);
+	void update();
 	void draw();
 	void debug();
 	void clear();

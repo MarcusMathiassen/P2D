@@ -25,7 +25,7 @@ class Circle : public Object
 {
 
 private:
-	
+
 	Vec2					m_pos;
 	Vec2					m_vel;
 	float					m_radi;
@@ -36,14 +36,14 @@ private:
 
 	vec<float> 				m_cosineTable;
 	vec<float> 	 			m_sineTable;
-	bool					m_isOnScreen;
+
+	bool 					m_isUpdated;			// Used in dynamicgrid and quadtree.
 
 public:
 
 	Circle(const Vec2& p, float r, int v);
-	Circle(const Circle& c);
 
-	void draw() const;
+	void draw();
 	void update();
 	void debug() const;
 	void changeColor(const Color& c);
@@ -54,6 +54,7 @@ public:
 	void resolveCollision(Circle& b);
 
 	// ------- GET/SET ---------
+	int 	getIndex() const;
 	Vec2 	getPos() const;
 	Vec2 	getVel() const;
 	void 	addPosX(float f);	
@@ -67,6 +68,8 @@ public:
 	int 	getVertices() const;
 	Color 	getColor() const;
 	Color 	getTempColor() const;
+	void 	setisUpdated(bool b);
+	bool 	getisUpdated() const;
 
 };
 

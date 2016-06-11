@@ -14,3 +14,15 @@ void assignColor(Color& col)
 		case 6: col = pastel_blue;		break;
 	}
 }
+
+void assignGrid()
+{
+	switch(griduni)
+	{
+		case 0: uniGrid = 4;break;
+		case 1: uniGrid = 16;break;
+		case 2: uniGrid = 64;break;
+		case 3: uniGrid = 256;break;
+		case 4: uniGrid = 1024;break;
+	}
+}

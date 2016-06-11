@@ -5,8 +5,8 @@
 //-----------------------------------------|
 
 #include "Object.h"
-
-void Object::draw() const {}
+Object::~Object() {}
+void Object::draw() {}
 void Object::update() {}	
 
 vec<uptr<Object>> object_vec; // Our main container

@@ -12,7 +12,8 @@ int screen_height = 512;				// Window height.
 double xpos, ypos;						// Current mouse position.
 
 int numThreads = 8;						// Number of CPU threads		   
-int uniGrid = 16;						// Number of grids.		
+int uniGrid = 4;						// Number of grids.		
+int griduni = 0;
 int comparisons = 0;					// Number of comparisons		
 int numNodes = 0;						// Number of nodes
 

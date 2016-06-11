@@ -10,7 +10,7 @@
 #include "./Objects/Object.h"					// Object class
 #include "./Quadtree/Quadtree.h"				// Quadtree class
 #include "Config.h"								// Global vars, screen size
-#include "./DynamicGrid/DynamicGrid.h"			// DynamicGrid class
+#include "./SpatialHash/SpatialHash.h"			// SpatialHash class
 
 void draw();
 void debug();

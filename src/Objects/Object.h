@@ -9,9 +9,15 @@
 
 #include "../Utility/Templates.h"	// vec, uptr
 
-struct Object
+class Object
 {
-	virtual void draw() const;
+
+protected:
+	int				m_index;
+
+public:
+	virtual ~Object();
+	virtual void draw();
 	virtual void update();	
 };
 

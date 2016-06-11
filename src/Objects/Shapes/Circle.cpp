@@ -11,7 +11,9 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 	m_mass = m_radi;
 	assignColor(m_color);
 	m_tempcolor = white;
-	m_isOnScreen = true;
+	m_isUpdated = false;
+
+	m_index = object_vec.size();		// Object index is it´s number in the vector.
 
 
 	m_cosineTable.reserve(m_vertices+1);
@@ -24,50 +26,27 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 	}
 }
 
-Circle::Circle(const Circle& c)
+void Circle::draw()
 {
-	m_pos 		= c.getPos();
-	m_vel		= c.getVel();
-	m_mass		= c.getMass();
-	m_radi 		= c.getRadi();
-	m_color 	= c.getColor();
-	m_tempcolor = c.getTempColor();
-	m_vertices 	= c.getVertices();
-	m_isOnScreen  = true;
-
-	m_cosineTable.reserve(m_vertices+1);
-	m_sineTable.reserve(m_vertices+1);
-	m_cosineTable[0] = m_radi;
-	m_sineTable[0] = 0; 	
-	for (int i = 1; i <= m_vertices; ++i) {
-		m_cosineTable[i] 	= (m_radi * cos(i *  DOUBLE_PI / m_vertices));
-		m_sineTable[i] 		= (m_radi * sin(i *  DOUBLE_PI / m_vertices));
+	// Draw the circle.
+	if (show_DynamicGrid && use_DynamicGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
+	else glColor3ub(m_color.r,m_color.g,m_color.b);
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(m_pos.x, m_pos.y);
+	for(int i = 0; i <= m_vertices; ++i) { 
+		glVertex2f(m_pos.x+m_cosineTable[i], m_pos.y+m_sineTable[i]);
 	}
-}
+	glEnd();
 
-void Circle::draw() const 
-{
-	if (m_isOnScreen)
-	{	
-		// Draw the circle.
-		if (show_DynamicGrid && use_DynamicGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
-		else glColor3ub(m_color.r,m_color.g,m_color.b);
-		glBegin(GL_TRIANGLE_FAN);
-		glVertex2f(m_pos.x, m_pos.y);
-		for(int i = 0; i <= m_vertices; ++i) { 
-			glVertex2f(m_pos.x+m_cosineTable[i], m_pos.y+m_sineTable[i]);
-		}
-		glEnd();
-	}
+	m_isUpdated = false;
 }
 
 void Circle::debug() const
 {
-	// Draws lines showing the direction and velocity.
-	float distance 	= sqrt(m_vel.x*m_vel.x+m_vel.y*m_vel.y);
+	// Draws lines showing the direction
 	float angle 	= atan2(m_vel.y,m_vel.x);	
-	float ny 		= m_pos.y + distance * sin(angle);
-	float nx 		= m_pos.x + distance * cos(angle);
+	float ny 		= m_pos.y + m_radi*2 * sin(angle);
+	float nx 		= m_pos.x + m_radi*2 * cos(angle);
 	
 	glEnable(GL_BLEND);
 	glEnable(GL_LINE_SMOOTH); 
@@ -75,7 +54,7 @@ void Circle::debug() const
 	else glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_LINES);
 		glVertex2d(m_pos.x,m_pos.y);
-		glVertex2d(m_vel.x+nx,m_vel.y+ny);
+		glVertex2d(nx,ny);
 	glEnd();
 	glDisable(GL_BLEND);
 	glDisable(GL_LINE_SMOOTH); 
@@ -87,46 +66,42 @@ void Circle::update()
 	if (borderCol) {
 		if (m_pos.x <= m_radi && m_vel.x < 0) {		
 			m_pos.x = (m_radi); 
-			m_vel.x = (-m_vel.x)*0.9;
-			m_isOnScreen = false;		
+			m_vel.x = (-m_vel.x);	
 		}
 	
 		if (m_pos.x >= screen_width-m_radi && m_vel.x > 0) { 
 			m_pos.x = (screen_width-m_radi); 
-			m_vel.x = (-m_vel.x)*0.9;
-			m_isOnScreen = false;
+			m_vel.x = (-m_vel.x);
 		}
 	
 		if (m_pos.y <= m_radi && m_vel.y < 0) {
 			m_pos.y = (m_radi); 
-			m_vel.y = (-m_vel.y)*0.9;
-			m_isOnScreen = false;	
+			m_vel.y = (-m_vel.y);
 		}
 	
 		if (m_pos.y >= screen_height-m_radi && m_vel.y > 0) {
 			m_pos.y = (screen_height-m_radi); 
-			m_vel.y = (-m_vel.y)*0.9;
-			m_isOnScreen = false;	
+			m_vel.y = (-m_vel.y);
 		}
 	}
 
-	m_mass = m_radi*0.1;
-	if(gravity) m_vel.y -= ACCEL * m_mass;
-
 	float slow = 1;
 	if(slowmotion) slow = 0.1;
-    
-    if (gravForce) {
-        for (int i = 0; i < object_vec.size(); ++i) {
-            gravitationForce(static_cast<Circle&>(*object_vec[i]));
-        }
-    }
+	
+	m_mass = m_radi*0.1;
+	if(gravity) m_vel.y -= ACCEL * m_mass*slow;
+	
+	if (gravForce) {
+	    for (int i = 0; i < object_vec.size(); ++i) {
+	        gravitationForce(static_cast<Circle&>(*object_vec[i]));
+	    }
+	}
 
 	// Update ball position
 	m_pos.x += (m_vel.x * 60*(0.0001*slow));
 	m_pos.y += (m_vel.y * 60*(0.0001*slow));
 
-	m_isOnScreen  = true;
+	m_isUpdated = true;
 }
 
 bool Circle::collisionDetection(const Circle& b) const
@@ -235,12 +210,15 @@ void Circle::resolveCollision(Circle& b)
 		float v1yf = nv1y;
 		float v2yf = nv2y;
 
-		m_vel.x = (cosOfAngle*v1xf+cos(colAngle+HALF_PI)*v1yf*0.9);
-		m_vel.y = (sinOfAngle*v1xf+sin(colAngle+HALF_PI)*v1yf*0.9);
+		float cos_angle_halfpi = cos(colAngle+HALF_PI);
+		float sin_angle_halfpi = sin(colAngle+HALF_PI);
+
+		m_vel.x = (cosOfAngle*v1xf+cos_angle_halfpi*v1yf);
+		m_vel.y = (sinOfAngle*v1xf+sin_angle_halfpi*v1yf);
 
 		b.setVel(
-			(cosOfAngle*v2xf+cos(colAngle+HALF_PI)*v2yf*0.9),
-			(sinOfAngle*v2xf+sin(colAngle+HALF_PI)*v2yf*0.9));
+			(cosOfAngle*v2xf+cos_angle_halfpi*v2yf),
+			(sinOfAngle*v2xf+sin_angle_halfpi*v2yf));
 	}
 }
 
@@ -274,6 +252,7 @@ void Circle::gravitationForce(const Circle& b)
     }
 }
 
+int 	Circle::getIndex() const 			{return m_index;}
 Vec2 	Circle::getPos() const 				{return m_pos;}
 void 	Circle::addPosX(float f)			{m_pos.x += f;}
 void 	Circle::addPosY(float f)			{m_pos.y += f;}
@@ -287,3 +266,5 @@ float 	Circle::getRadi() const				{return m_radi;}
 int 	Circle::getVertices() const			{return m_vertices;}
 Color 	Circle::getColor() const			{return m_color;}
 Color 	Circle::getTempColor() const		{return m_tempcolor;}
+void 	Circle::setisUpdated(bool b)		{m_isUpdated = b;}
+bool 	Circle::getisUpdated() const 		{return m_isUpdated;}

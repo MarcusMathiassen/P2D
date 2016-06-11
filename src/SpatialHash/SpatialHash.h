@@ -4,8 +4,8 @@
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
 
-#ifndef DYNAMICGRID_H
-#define DYNAMICGRID_H
+#ifndef SPATIALHASH_H
+#define SPATIALHASH_H
 
 // --------------------------- INCLUDES ---------------------------------
 
@@ -16,6 +16,7 @@
 #include "../Utility/Templates.h"		// vec, uptr
 #include "../Utility/Utility.h"			// assignColor()
 #include "../Utility/getTime64.h"		// BENCHMARK
+#include "../Utility/Color.h"			// Color class
 #include "../Objects/Object.h"			// Object class
 #include "../Objects/Shapes/Circle.h"	// Circle class
 #include "../Objects/Shapes/Rect.h"		// Rect class	
@@ -23,7 +24,7 @@
 // ----------------------------------------------------------------------
 
 
-class DynamicGrid
+class SpatialHash
 {
 
 private:
@@ -40,6 +41,6 @@ public:
 
 };
 
-extern DynamicGrid dynamicGrid;
+extern SpatialHash spatialHash;
 
 #endif
