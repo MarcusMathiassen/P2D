@@ -1,3 +1,9 @@
+
+//-----------------------------------------|
+//	AUTHOR: MARCUS MATHIASSEN	   		   |
+//	DATE:	03.05.2016	   				   |
+//-----------------------------------------|
+
 #ifndef NODE_H
 #define NODE_H
 
@@ -10,6 +16,7 @@ class Node
 {
 	
 private:
+
 	Rect 				m_rect;
 	Color 				m_color;
 	vec<uptr<Object>>	m_object_vec;
@@ -20,7 +27,7 @@ public:
 	bool contains(const Circle& b) const;
 	void insert(const Circle& b);
 	void updateObjects(int begin, int end);
-	void addObjectsBack() const;
+	void addObjectsBack();
 	void draw();
 	void debug();
 	void clear();

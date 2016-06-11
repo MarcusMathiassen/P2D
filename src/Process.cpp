@@ -1,10 +1,16 @@
+
+//-----------------------------------------|
+//	AUTHOR: MARCUS MATHIASSEN	   		   |
+//	DATE:	03.05.2016	   				   |
+//-----------------------------------------|
+
 #include "Process.h"
 
 
 void Calc(int begin, int end) {
 	for (int i = begin; i < end; i++) {		
 
-		if (ballCol && !useQuadtree)
+		if (ballCol)
 		for (int j = i+1; j < object_vec.size(); j++) {
 	
 			// collision check
@@ -22,57 +28,38 @@ void Calc(int begin, int end) {
 
 void update() {
 
-	int numObj = (int)object_vec.size();
+	if (object_vec.size() > 0) {		// If there are objects..
 
-	// If there are objects..
-	if (numObj > 0) {
+		if (use_Quadtree)				// If Quadtrees are active.
+		{
+			quadtree.update();
+			quadtree.process();
+			return;
+		}
 
-		// Update the quadtrees (NOT YET FINISHED)
-		quadtree.update();
-
-		// Update the dynamic grid (NOT YET FINISHED)
-		if (useDynaGrid)
+		if (use_DynamicGrid)			// If DynamicGrid is active.
 		{	
 			dynamicGrid.update();
 			dynamicGrid.process();
 			return;
 		}
 
-		if (use_pThread && !useQuadtree){
+		if (use_pThread && !use_Quadtree){
 
-			if (numThreads == 0) { Calc(0,numObj); return; }
+			if (numThreads == 0) { Calc(0,object_vec.size()); return; }
 			// Number of balls per thread
-			int parts = numObj / numThreads;
+			int parts = object_vec.size() / numThreads;
 		
 			// Our thread container
 			vec<std::thread> t(numThreads);
 			
-			Calc(parts*numThreads, numObj);
+			Calc(parts*numThreads, object_vec.size());
 			for (int i = 0; i < numThreads; ++i) {
 				t[i] = std::thread(Calc, parts * i, parts * (i+1));
 			}
 			for (int i = 0; i < numThreads; ++i) {
 				t[i].join();
 			}
-			return;
 		}
-
-		// Use OpenMP if defined in the config
-		#ifdef OPENMP
-			#pragma omp parallel for
-			for (int i = 0; i < numObj; ++i) {		
-				if (ballCol && !useQuadtree)
-				for (int j = i+1; j < numObj; ++j) {
-					// collision check
-					if (static_cast<Circle&>(*object_vec[i]).collisionDetection(static_cast<Circle&>(*object_vec[j]))) {
-						// resolve collision
-						static_cast<Circle&>(*object_vec[i]).resolveCollision(static_cast<Circle&>(*object_vec[j]));
-					}
-				}
-				// updates its pos and vel.
-				object_vec[i]->update();
-			}
-			return;
-		#endif
 	}
 }

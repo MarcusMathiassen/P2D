@@ -76,17 +76,6 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		}
 	}
 
-	/* gravForce COLORS  */
-	if (key == GLFW_KEY_Y && action == GLFW_PRESS) {
-		if (gravForceCol == false) {
-			std::cout << "Gravitasion force COLORS ON" << std::endl;
-			gravForceCol = true;
-		} else {
-			gravForceCol = false;
-			std::cout << "Gravitasion force COLORS OFF" << std::endl;
-		}
-	}
-
 	/* borderCol */
 	if (key == GLFW_KEY_N && action == GLFW_PRESS) {
 		if (borderCol == false) {
@@ -111,45 +100,45 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 
 	/* useQuadtree */
 	if (key == GLFW_KEY_Q && action == GLFW_PRESS) {
-		if (useQuadtree == false) {
-			useQuadtree = true;
-			std::cout << "Quadtrees ON" << std::endl;
+		if (use_Quadtree == false) {
+			use_Quadtree = true;
+			std::cout << "Quadtree ON" << std::endl;
 		} else {
-			useQuadtree = false;
-			std::cout << "Quadtrees OFF" << std::endl;
+			use_Quadtree = false;
+			std::cout << "Quadtree OFF" << std::endl;
 		}
 	}
 
-	/* showQuadtree */
+	/* showQuadtrees */
 	if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
-		if (showQuadtree == false) {
-			showQuadtree = true;
+		if (show_Quadtree == false) {
+			show_Quadtree = true;
 			std::cout << "showQuadtree ON" << std::endl;
 		} else {
-			showQuadtree = false;
+			show_Quadtree = false;
 			std::cout << "showQuadtree OFF" << std::endl;
 		}
 	}
 
-	/* useDynaGrid */
+	/* use_DynamicGrid */
 	if (key == GLFW_KEY_W && action == GLFW_PRESS) {
-		if (useDynaGrid == false) {
-			useDynaGrid = true;
-			std::cout << "DynamicGrid ON" << std::endl;
+		if (use_DynamicGrid == false) {
+			use_DynamicGrid = true;
+			std::cout << "DynamicGrids ON" << std::endl;
 		} else {
-			useDynaGrid = false;
-			std::cout << "DynamicGrid OFF" << std::endl;
+			use_DynamicGrid = false;
+			std::cout << "DynamicGrids OFF" << std::endl;
 		}
 	}
 
-	/* showDynaGrid */
+	/* show_DynamicGrid */
 	if (key == GLFW_KEY_X && action == GLFW_PRESS) {
-		if (showDynaGrid == false) {
-			showDynaGrid = true;
-			std::cout << "showDynaGrid ON" << std::endl;
+		if (show_DynamicGrid == false) {
+			show_DynamicGrid = true;
+			std::cout << "show_DynamicGrid ON" << std::endl;
 		} else {
-			showDynaGrid = false;
-			std::cout << "showDynaGrid OFF" << std::endl;
+			show_DynamicGrid = false;
+			std::cout << "show_DynamicGrid OFF" << std::endl;
 		}
 	}
 
@@ -166,23 +155,23 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 
 	/* Show FPS */
 	if (key == GLFW_KEY_F && action == GLFW_PRESS) {
-		if (showFPS == false) {
-			showFPS = true;
+		if (show_FPS == false) {
+			show_FPS = true;
 			std::cout << "Show FPS ON" << std::endl;
 		} else {
-			showFPS = false;
+			show_FPS = false;
 			std::cout << "Show FPS OFF" << std::endl;
 		}
 	}
 
-	/* Unlock FPS */
+	/* lock FPS */
 	if (key == GLFW_KEY_L && action == GLFW_PRESS) {
-		if (unlockFPS == false) {
-			unlockFPS = true;
-			std::cout << "FPS LOCK OFF" << std::endl;
-		} else {
-			unlockFPS = false;
+		if (lock_FPS == false) {
+			lock_FPS = true;
 			std::cout << "FPS LOCK ON" << std::endl;
+		} else {
+			lock_FPS = false;
+			std::cout << "FPS LOCK OFF" << std::endl;
 		}
 	}
 

@@ -1,3 +1,9 @@
+
+//-----------------------------------------|
+//	AUTHOR: MARCUS MATHIASSEN	   		   |
+//	DATE:	03.05.2016	   				   |
+//-----------------------------------------|
+
 #include "Object.h"
 
 void Object::draw() const {}

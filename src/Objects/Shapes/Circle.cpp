@@ -1,3 +1,9 @@
+
+//-----------------------------------------|
+//	AUTHOR: MARCUS MATHIASSEN	   		   |
+//	DATE:	03.05.2016	   				   |
+//-----------------------------------------|
+
 #include "Circle.h"
 
 Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(v) {
@@ -44,7 +50,7 @@ void Circle::draw() const
 	if (m_isOnScreen)
 	{	
 		// Draw the circle.
-		if (showDynaGrid && useDynaGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
+		if (show_DynamicGrid && use_DynamicGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
 		else glColor3ub(m_color.r,m_color.g,m_color.b);
 		glBegin(GL_TRIANGLE_FAN);
 		glVertex2f(m_pos.x, m_pos.y);
@@ -65,7 +71,7 @@ void Circle::debug() const
 	
 	glEnable(GL_BLEND);
 	glEnable(GL_LINE_SMOOTH); 
-	if (showDynaGrid && useDynaGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
+	if (show_DynamicGrid && use_DynamicGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
 	else glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_LINES);
 		glVertex2d(m_pos.x,m_pos.y);

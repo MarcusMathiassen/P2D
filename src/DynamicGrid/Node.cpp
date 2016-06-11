@@ -1,3 +1,9 @@
+
+//-----------------------------------------|
+//	AUTHOR: MARCUS MATHIASSEN	   		   |
+//	DATE:	03.05.2016	   				   |
+//-----------------------------------------|
+
 #include "Node.h"
 
 Node::Node(const Rect& r) : m_rect(r)
@@ -6,11 +12,12 @@ Node::Node(const Rect& r) : m_rect(r)
 	assignColor(m_color);
 }
 
-void Node::addObjectsBack() const
+void Node::addObjectsBack()
 {
 	for (int i = 0; i < m_object_vec.size(); ++i)
 	{
-		object_vec.push_back(uptr<Object>(new Circle(static_cast<Circle&>(*m_object_vec[i]))));
+		object_vec.push_back(uptr<Object>
+			(new Circle(static_cast<Circle&>(*m_object_vec[i]))));
 	}
 }
 
@@ -39,13 +46,20 @@ void Node::draw()
 
 void Node::clear()
 {	
-	// Clear the objects
-	m_object_vec.clear();
-	m_object_vec.shrink_to_fit();
+	//---------------------------------------------------------------------
+	// Clears the object vector and frees any memory used by it.
+	//---------------------------------------------------------------------
+
+	m_object_vec.clear();						// Clear the object vector.
+	m_object_vec.shrink_to_fit();				// Free any memory used.
 }
 
 void Node::updateObjects(int begin, int end)
 {
+	//---------------------------------------------------------------------
+	// Change the color of the nodes objects to the nodes rect color.
+	//---------------------------------------------------------------------
+	
 	// If objects exist..
 	if (m_object_vec.size() > 0)
 	{
@@ -65,19 +79,21 @@ void Node::updateObjects(int begin, int end)
 		}
 	}
 
-	if (showDynaGrid && useDynaGrid) debug();
+	if (show_DynamicGrid) debug();
 }
 
 void Node::debug()
 {	
-	// If objects exist..
-	if (m_object_vec.size() > 0)
+	//---------------------------------------------------------------------
+	// Change the color of the nodes objects to the nodes rect color.
+	//---------------------------------------------------------------------
+
+	if (m_object_vec.size() > 0)						// If objects exist..
 	{
-		// For every object..
-		for (int i = 0; i < m_object_vec.size(); ++i)
+		for (int i = 0; i < m_object_vec.size(); ++i) 	// For every object..
 		{
-			// Change its color.
-			static_cast<Circle&>(*m_object_vec[i]).changeColor(m_rect.getColor());
+			static_cast<Circle&>
+			(*m_object_vec[i]).changeColor(m_rect.getColor()); // Change color.
 		}
 	}
 }

@@ -1,3 +1,9 @@
+
+//-----------------------------------------|
+//	AUTHOR: MARCUS MATHIASSEN	   		   |
+//	DATE:	03.05.2016	   				   |
+//-----------------------------------------|
+
 #include "Quadtree.h"
 
 const int Quadtree::NODE_CAPACITY 	= 5;
@@ -34,18 +40,6 @@ void Quadtree::split()
 			m_nodes_vec.push_back(uptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(j,i),Vec2(j+subWidth,i+subHeight)))));
 		}
 	}
-
-	////Bottom left
-	//m_nodes_vec.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(x, y + subHeight),Vec2(subWidth, subHeight)))));
-//
-	////Bottom right
-	//m_nodes_vec.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(x + subWidth, y+subHeight),Vec2(subWidth,subHeight)))));
-//
-	//// Top left
-	//m_nodes_vec.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(x, y),Vec2(subWidth,subHeight)))));
-//
-	//// Top right
-	//m_nodes_vec.push_back(std::unique_ptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(x + subWidth, y),Vec2(subWidth,subHeight)))));
 }
 
 void Quadtree::clear()
@@ -131,9 +125,14 @@ void Quadtree::setColor(const Color& c)
 	m_bounds.setColor(c);
 }
 
+void Quadtree::process()
+{
+
+}
+
 void Quadtree::draw()
 {
-	if (showQuadtree) {
+	if (show_Quadtree) {
 
 		m_bounds.draw();
 

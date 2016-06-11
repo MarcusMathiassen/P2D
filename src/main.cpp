@@ -21,6 +21,10 @@
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
+	// ---------------------------------------------------------------------
+	// Is called whenever the window is resized.
+	// ---------------------------------------------------------------------
+
    /* Tranform into pixel coordinates */
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
@@ -79,12 +83,16 @@ int main()
 
 	dynamicGrid.init();
 
+// --------------------------------- LOOP -------------------------------------
+
     while (!glfwWindowShouldClose(window)) {
 
 		float currentTime = glfwGetTime();
 		nbFrames++;
-		if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1 sec ago
-		 	if (showFPS) {
+
+		if ( currentTime - lastTime >= 1.0 )
+		{
+		 	if (show_FPS) {
 		    	printf("\n%f ms/frame\n", 1000/float(nbFrames));
 		    	std::cout << "Nodes: " << numNodes << std::endl;
 				std::cout << "Circles: " << object_vec.size() << std::endl;
@@ -103,9 +111,9 @@ int main()
 		draw();			// Draws all objects to screen
 
 		/* Swap interval */
-		if (unlockFPS) {
-			glfwSwapInterval(0);
-		} else glfwSwapInterval(1);
+		if (lock_FPS) {
+			glfwSwapInterval(1);
+		} else glfwSwapInterval(0);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
@@ -118,10 +126,12 @@ int main()
 		{
 			break;
 		}
-
-		//std::cout << "Comparisons: " << comparisons << std::endl;
+		
 		comparisons = 0;
 	}
+
+// ----------------------------------------------------------------------------
+
 
 	/* Terminate window */
 	glfwTerminate();

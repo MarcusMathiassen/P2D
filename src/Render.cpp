@@ -7,12 +7,15 @@ void draw()
 		object_vec[i]->draw();
 	}
 
-	if (showDynaGrid && useDynaGrid)
+	if (show_DynamicGrid)
 	{
 		dynamicGrid.draw();
 	}
 
-	quadtree.draw();
+	if (show_Quadtree)
+	{
+		quadtree.draw();
+	}
 }
 
 void debug()

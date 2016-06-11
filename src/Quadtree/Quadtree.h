@@ -1,3 +1,9 @@
+
+//-----------------------------------------|
+//	AUTHOR: MARCUS MATHIASSEN	   		   |
+//	DATE:	03.05.2016	   				   |
+//-----------------------------------------|
+
 #ifndef QUADTREE_H
 #define QUADTREE_H	
 
@@ -30,6 +36,7 @@ public:
 	void clear();
 	void retrieve();
 	void insert(const Circle& b);
+	void process();
 	
 	void testSplit();
 	void addObject(const Circle& b);
