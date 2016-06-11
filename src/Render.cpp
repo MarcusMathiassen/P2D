@@ -2,6 +2,8 @@
 
 void draw()
 {	
+	debug();
+	
 	for (int i = 0; i < object_vec.size(); ++i)
 	{
 		object_vec[i]->draw();

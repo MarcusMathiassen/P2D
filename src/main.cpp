@@ -16,6 +16,7 @@
 #include "./Utility/Inputs.h"					// User input
 #include "./Objects/Object.h"					// Object class
 #include "./DynamicGrid/DynamicGrid.h"			// dynamicGrid
+#include "./Utility/getTime64.h"				// BENCHMARK
 
 // ----------------------------------------------------------------------------
 
@@ -87,6 +88,11 @@ int main()
 
     while (!glfwWindowShouldClose(window)) {
 
+    	#ifdef BENCHMARK
+		int bLoop =  GetTimeMs64();
+		#endif
+
+
 		float currentTime = glfwGetTime();
 		nbFrames++;
 
@@ -107,13 +113,55 @@ int main()
 		/* Background color */
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		#ifdef BENCHMARK
+		int bUpdate =  GetTimeMs64();
+		#endif
+
 		update();		// Updates all objects
+
+		#ifdef BENCHMARK
+		int aUpdate =  GetTimeMs64()-bUpdate;
+		std::cout << "\n\n\n\nupdate():  " << aUpdate << " ms" << std::endl;
+		#endif
+
+
+
+		#ifdef BENCHMARK
+		int bDraw =  GetTimeMs64();
+		#endif
+
 		draw();			// Draws all objects to screen
+
+
+
+
+		#ifdef BENCHMARK
+		int aDraw =  GetTimeMs64()-bDraw;
+		std::cout << "draw():    " << aDraw << " ms" << std::endl;
+		#endif
+
+
+
+
+		comparisons = 0;
 
 		/* Swap interval */
 		if (lock_FPS) {
 			glfwSwapInterval(1);
 		} else glfwSwapInterval(0);
+
+
+		#ifdef BENCHMARK
+		std::cout << "Nodes:     " << numNodes << std::endl;
+		std::cout << "Circles:   " << object_vec.size() << std::endl;
+		std::cout << "Compari.:  " << comparisons << std::endl;
+		#endif
+
+
+		#ifdef BENCHMARK
+		int aLoop =  GetTimeMs64()-bLoop;
+		std::cout << "Total:     " << aLoop << " ms" << std::endl;
+		#endif
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
@@ -126,8 +174,6 @@ int main()
 		{
 			break;
 		}
-		
-		comparisons = 0;
 	}
 
 // ----------------------------------------------------------------------------

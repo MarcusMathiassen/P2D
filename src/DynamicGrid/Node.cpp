@@ -62,7 +62,7 @@ void Node::updateObjects(int begin, int end)
 	
 	// If objects exist..
 	if (m_object_vec.size() > 0)
-	{
+	{	
 		#pragma omp parallel for
 		for (int i = 0; i < m_object_vec.size(); ++i)
 		{	

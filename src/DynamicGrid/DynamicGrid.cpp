@@ -44,10 +44,20 @@ void DynamicGrid::clear()
 
 	if (m_node_vec.size() > 0)						// If nodes exist..
 	{
+		#ifdef BENCHMARK
+		int b =  GetTimeMs64();
+		#endif
+
 		for (int i = 0; i < m_node_vec.size(); ++i)	// Go through all nodes..
 		{
 			m_node_vec[i]->clear();					// Clear their objects.
 		}
+
+		#ifdef BENCHMARK
+		int a =  GetTimeMs64()-b;
+		std::cout << " - Clear nodes:     " << a << " ms" << std::endl;
+		#endif
+
 	}
 }
 
@@ -61,6 +71,10 @@ void DynamicGrid::update()
 
 	clear();									// Clear all objects in nodes.
 
+	#ifdef BENCHMARK
+	int b =  GetTimeMs64();
+	#endif
+
 	for (int i = 0; i < object_vec.size(); ++i)
 	{
 		for (int j = 0; j < m_node_vec.size(); ++j)
@@ -71,6 +85,11 @@ void DynamicGrid::update()
 			}
 		}
 	}
+
+	#ifdef BENCHMARK
+	int a =  GetTimeMs64()-b;
+	std::cout << " - Update nodes:    " << a << " ms" << std::endl;
+	#endif
 	
 
 }
@@ -84,6 +103,11 @@ void DynamicGrid::process()
 
 	if (m_node_vec.size() > 0)					// If nodes exists..
 	{	
+
+		#ifdef BENCHMARK
+		int b =  GetTimeMs64();
+		#endif
+
 		object_vec.clear();						// Clear the main container.
 		object_vec.shrink_to_fit();				// Free any memory used.
 
@@ -92,6 +116,11 @@ void DynamicGrid::process()
 			m_node_vec[i]->updateObjects(0,1);		// Check collisons
 			m_node_vec[i]->addObjectsBack();		// Put back into main cont.
 		}
+
+		#ifdef BENCHMARK
+		int a =  GetTimeMs64()-b;
+		std::cout << " - Process nodes:   " << a << " ms" << std::endl;
+		#endif
 	}
 }
 
