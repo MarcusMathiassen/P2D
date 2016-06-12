@@ -11,10 +11,8 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 	m_mass = m_radi;
 	assignColor(m_color);
 	m_tempcolor = white;
-	m_isUpdated = false;
 
 	m_index = object_vec.size();		// Object index is it´s number in the vector.
-
 
 	m_cosineTable.reserve(m_vertices+1);
 	m_sineTable.reserve(m_vertices+1);
@@ -37,8 +35,6 @@ void Circle::draw()
 		glVertex2f(m_pos.x+m_cosineTable[i], m_pos.y+m_sineTable[i]);
 	}
 	glEnd();
-
-	m_isUpdated = false;
 }
 
 void Circle::debug() const
@@ -100,13 +96,11 @@ void Circle::update()
 	// Update ball position
 	m_pos.x += (m_vel.x * 60*(0.0001*slow));
 	m_pos.y += (m_vel.y * 60*(0.0001*slow));
-
-	m_isUpdated = true;
 }
 
 bool Circle::collisionDetection(const Circle& b) const
 {	
-	comparisons++;
+	if (show_FPS) comparisons++;
 
 	// Setup variables
 	Vec2 bpos = b.getPos();
@@ -266,5 +260,3 @@ float 	Circle::getRadi() const				{return m_radi;}
 int 	Circle::getVertices() const			{return m_vertices;}
 Color 	Circle::getColor() const			{return m_color;}
 Color 	Circle::getTempColor() const		{return m_tempcolor;}
-void 	Circle::setisUpdated(bool b)		{m_isUpdated = b;}
-bool 	Circle::getisUpdated() const 		{return m_isUpdated;}

@@ -37,8 +37,6 @@ private:
 	vec<float> 				m_cosineTable;
 	vec<float> 	 			m_sineTable;
 
-	bool 					m_isUpdated;			// Used in dynamicgrid and quadtree.
-
 public:
 
 	Circle(const Vec2& p, float r, int v);
@@ -68,9 +66,6 @@ public:
 	int 	getVertices() const;
 	Color 	getColor() const;
 	Color 	getTempColor() const;
-	void 	setisUpdated(bool b);
-	bool 	getisUpdated() const;
-
 };
 
 #endif

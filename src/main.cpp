@@ -101,7 +101,10 @@ int main()
 		    	printf("\n%f ms/frame\n", 1000/float(nbFrames));
 		    	std::cout << "Nodes: " << numNodes << std::endl;
 				std::cout << "Circles: " << object_vec.size() << std::endl;
+				std::cout << "Comparisons:   " << comparisons <<std::endl;
+				comparisons = 0;
 		    }
+		    
 		    nbFrames = 0;
 		    lastTime++;  
 		}
@@ -151,9 +154,8 @@ int main()
 		#ifdef BENCHMARK
 		std::cout << "Nodes:     " << numNodes << std::endl;
 		std::cout << "Circles:   " << object_vec.size() << std::endl;
+		std::cout << "Comparisons:   " << comparisons << std::endl;
 		#endif
-
-		comparisons = 0;
 
 		#ifdef BENCHMARK
 		int aLoop =  GetTimeMs64()-bLoop;
