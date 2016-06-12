@@ -41,6 +41,13 @@ void update() {
 		{	
 			spatialHash.update();
 			spatialHash.process();
+
+			#pragma omp parallel for
+			for (int i = 0; i < object_vec.size(); ++i)
+			{
+				object_vec[i]->update();
+			}
+			
 			return;
 		}
 

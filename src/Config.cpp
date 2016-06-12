@@ -28,7 +28,7 @@ bool ballCol 			= true;			// Circle collisions.
 bool use_Quadtree		= false;		// Quadtrees.
 bool show_Quadtree		= false;		// Show quadtrees.
 			
-bool use_DynamicGrid	= false;		// Dynamic grid.
+bool use_DynamicGrid	= true;			// Dynamic grid.
 bool show_DynamicGrid	= false;		// Show dynamic grid.
 			
 bool slowmotion 		= false;		// Slows everything down.

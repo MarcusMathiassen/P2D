@@ -16,7 +16,6 @@
 #include "./Utility/Inputs.h"					// User input
 #include "./Objects/Object.h"					// Object class
 #include "./SpatialHash/SpatialHash.h"			// SpatialHash
-#include "./Utility/getTime64.h"				// BENCHMARK
 
 // ----------------------------------------------------------------------------
 
@@ -152,7 +151,6 @@ int main()
 		#ifdef BENCHMARK
 		std::cout << "Nodes:     " << numNodes << std::endl;
 		std::cout << "Circles:   " << object_vec.size() << std::endl;
-		std::cout << "Compari.:  " << comparisons << std::endl;
 		#endif
 
 		comparisons = 0;

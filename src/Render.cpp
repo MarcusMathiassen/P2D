@@ -1,14 +1,11 @@
 #include "Render.h"
+#include <iostream>
 
 void draw()
 {	
+
 	debug();
-
-	if (show_DynamicGrid)
-	{
-		//spatialHash.debug();
-	}
-
+	
 	for (int i = 0; i < object_vec.size(); ++i)
 	{
 		object_vec[i]->draw();

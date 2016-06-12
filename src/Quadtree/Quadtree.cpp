@@ -29,17 +29,29 @@ void Quadtree::split()
 	int width	= p2.x;
 	int height	= p2.y;
 
-	int subWidth 	= width * 0.5;
-	int subHeight 	= height * 0.5;
+	int subWidth 	= (width -p1.x) * 0.5;
+	int subHeight 	= (height-p1.y) * 0.5;
 
-	// Split into grid
-	for (int i = y; i < height; i+=subHeight)
-	{
-		for (int j = x; j < width; j+=subWidth)
-		{
-			m_nodes_vec.push_back(uptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(j,i),Vec2(j+subWidth,i+subHeight)))));
-		}
-	}
+	//// Split into grid
+	//for (int i = y; i < height; i+=subHeight)
+	//{
+	//	for (int j = x; j < width; j+=subWidth)
+	//	{
+	//		m_nodes_vec.push_back(uptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(j,i),Vec2(j+subWidth,i+subHeight)))));
+	//	}
+	//}
+
+	m_nodes_vec.push_back(uptr<Quadtree>(
+		new Quadtree(m_level+1,Rect(Vec2(x,y),Vec2(subWidth,subHeight)))));
+
+	m_nodes_vec.push_back(uptr<Quadtree>(
+		new Quadtree(m_level+1,Rect(Vec2(x,y+subHeight),Vec2(subWidth,subHeight)))));
+
+	m_nodes_vec.push_back(uptr<Quadtree>(
+		new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y+subHeight),Vec2(subWidth,subHeight)))));
+
+	m_nodes_vec.push_back(uptr<Quadtree>(
+		new Quadtree(m_level+1,Rect(Vec2(subWidth,y),Vec2(x+subWidth,subHeight)))));
 }
 
 void Quadtree::clear()

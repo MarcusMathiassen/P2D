@@ -65,10 +65,6 @@ void Node::update()
 				static_cast<Circle&>(*object_vec[idex]).resolveCollision(static_cast<Circle&>(*object_vec[jdex]));
 			}
 		}
-		if (static_cast<Circle&>(*object_vec[idex]).getisUpdated() == false)
-		{
-			object_vec[idex]->update();
-		}
 	}
 
 	if (show_DynamicGrid) debug();
