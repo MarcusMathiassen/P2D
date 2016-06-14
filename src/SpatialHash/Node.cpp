@@ -50,11 +50,11 @@ void Node::update()
 	// Change the color of the nodes objects to the nodes rect color.
 	//---------------------------------------------------------------------
 
-	for (int i = 0; i < m_index_vec.size(); ++i)
+	for (size_t i = 0; i < m_index_vec.size(); ++i)
 	{	
 		int idex = m_index_vec[i];
 
-		for (int j = i+1; j < m_index_vec.size(); ++j)
+		for (size_t j = i+1; j < m_index_vec.size(); ++j)
 		{
 			int jdex = m_index_vec[j];
 
@@ -78,7 +78,7 @@ void Node::debug()
 
 	if (object_vec.size() > 0)						// If objects exist..
 	{
-		for (int i = 0; i < m_index_vec.size(); ++i) 	// For every object..
+		for (size_t i = 0; i < m_index_vec.size(); ++i) 	// For every object..
 		{
 			if (m_rect.containsPos(static_cast<Circle&>(*object_vec[m_index_vec[i]])))
 			{

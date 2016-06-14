@@ -23,6 +23,14 @@
 
 // ----------------------------------------------------------------------
 
+// How to run:
+/*
+	
+	init() every time the grid is changed or the window is resized.
+	update() every frame
+	draw() every frame	
+*/
+
 
 class SpatialHash
 {
@@ -34,7 +42,6 @@ private:
 public:
 
 	void init();
-	void clear();
 	void update();
 	void process();
 	void draw();

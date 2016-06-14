@@ -11,7 +11,7 @@ void Calc(int begin, int end) {
 	for (int i = begin; i < end; i++) {		
 
 		if (ballCol)
-		for (int j = i+1; j < object_vec.size(); j++) {
+		for (size_t j = i+1; j < object_vec.size(); j++) {
 	
 			// collision check
 			if (static_cast<Circle&>(*object_vec[i]).collisionDetection(static_cast<Circle&>(*object_vec[j]))) {
@@ -43,7 +43,7 @@ void update() {
 			spatialHash.process();
 
 			#pragma omp parallel for
-			for (int i = 0; i < object_vec.size(); ++i)
+			for (size_t i = 0; i < object_vec.size(); ++i)
 			{
 				object_vec[i]->update();
 			}
@@ -73,9 +73,9 @@ void update() {
 		// Use OpenMP if defined in the config
 		#ifdef OPENMP
 			#pragma omp parallel for
-			for (int i = 0; i < object_vec.size(); ++i) {		
+			for (size_t i = 0; i < object_vec.size(); ++i) {		
 				if (ballCol)
-				for (int j = i+1; j < object_vec.size(); ++j) {
+				for (size_t j = i+1; j < object_vec.size(); ++j) {
 					// collision check
 					if (static_cast<Circle&>(*object_vec[i]).collisionDetection(static_cast<Circle&>(*object_vec[j]))) {
 						// resolve collision

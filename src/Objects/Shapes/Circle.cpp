@@ -88,7 +88,7 @@ void Circle::update()
 	if(gravity) m_vel.y -= ACCEL * m_mass*slow;
 	
 	if (gravForce) {
-	    for (int i = 0; i < object_vec.size(); ++i) {
+	    for (size_t i = 0; i < object_vec.size(); ++i) {
 	        gravitationForce(static_cast<Circle&>(*object_vec[i]));
 	    }
 	}

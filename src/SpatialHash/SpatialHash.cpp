@@ -34,7 +34,7 @@ void SpatialHash::init()
 	}
 }
 
-void SpatialHash::clear()
+void SpatialHash::update()
 {
 	//---------------------------------------------------------------------
 	//	Clears all nodes and their objects. (If we didn´t do this, 
@@ -48,7 +48,7 @@ void SpatialHash::clear()
 		int b =  GetTimeMs64();
 		#endif
 
-		for (int i = 0; i < m_node_vec.size(); ++i)	// Go through all nodes..
+		for (size_t i = 0; i < m_node_vec.size(); ++i)	// Go through all nodes..
 		{
 			m_node_vec[i]->clear();					// Clear their objects.
 		}
@@ -57,27 +57,22 @@ void SpatialHash::clear()
 		int a =  GetTimeMs64()-b;
 		std::cout << " - Clear nodes:     " << a << " ms" << std::endl;
 		#endif
-
 	}
-}
 
-void SpatialHash::update()
-{
+
 	//---------------------------------------------------------------------
 	// Goes through every node and fills it with objects from the 
 	// main-container, any object that fits within the nodes boundaries will
 	// be added to the nodes object-container.
 	//---------------------------------------------------------------------
 
-	clear();									// Clear all objects in nodes.
-
 	#ifdef BENCHMARK
 	int b =  GetTimeMs64();
 	#endif
 
-	for (int i = 0; i < object_vec.size(); ++i)
+	for (size_t i = 0; i < object_vec.size(); ++i)
 	{
-		for (int j = 0; j < m_node_vec.size(); ++j)
+		for (size_t j = 0; j < m_node_vec.size(); ++j)
 		{
 			if (m_node_vec[j]->contains(static_cast<Circle&>(*object_vec[i])))
 			{
@@ -88,7 +83,7 @@ void SpatialHash::update()
 
 	#ifdef BENCHMARK
 	int a =  GetTimeMs64()-b;
-	std::cout << " - Update nodes:    " << a << " ms" << std::endl;
+	std::cout << " - SpatialHash: update():    " << a << " ms" << std::endl;
 	#endif
 	
 
@@ -109,14 +104,14 @@ void SpatialHash::process()
 		#endif
 
 		#pragma omp parallel for
-		for (int i = 0; i < m_node_vec.size(); ++i)	// Go through all nodes..
+		for (size_t i = 0; i < m_node_vec.size(); ++i)	// Go through all nodes..
 		{
 			m_node_vec[i]->update();		// Check collisons
 		}
 		
 		#ifdef BENCHMARK
 		int a =  GetTimeMs64()-b;
-		std::cout << " - Process nodes:   " << a << " ms" << std::endl;
+		std::cout << " - SpatialHash process():   " << a << " ms" << std::endl;
 		#endif
 	}
 }
@@ -130,7 +125,7 @@ void SpatialHash::draw()
 
 	if (m_node_vec.size() > 0)						// If nodes exists..
 	{
-		for (int i = 0; i < m_node_vec.size(); ++i) // Go through all nodes..
+		for (size_t i = 0; i < m_node_vec.size(); ++i) // Go through all nodes..
 		{
 			m_node_vec[i]->draw();					// Draw their boundaries.
 		}

@@ -48,7 +48,7 @@ int main()
 		glfwWindowHint(GLFW_SAMPLES, xMSAA); 
 	#endif
 
-	window = glfwCreateWindow(screen_width, screen_height, WINDOW_NAME, NULL, NULL);
+	window = glfwCreateWindow(screen_width, screen_height, APP_NAME, NULL, NULL);
 
 	if (!glewInit()) { std::cout << "GLEW INIT FAILED!\n"; }
 
@@ -97,12 +97,20 @@ int main()
 
 		if ( currentTime - lastTime >= 1.0 )
 		{
+			char title [256];
+   			title [255] = '\0';
+		
+    		snprintf ( title, 255,
+       	          "%s %s - [FPS: %d] [OBJ: %d]",
+       	            APP_NAME, APP_VERSION, nbFrames, (int)object_vec.size());
+		
+    		glfwSetWindowTitle(window, title);
+    		
 		 	if (show_FPS) {
-		    	printf("\n%f ms/frame\n", 1000/float(nbFrames));
-		    	std::cout << "Nodes: " << numNodes << std::endl;
-				std::cout << "Circles: " << object_vec.size() << std::endl;
-				std::cout << "Comparisons:   " << comparisons <<std::endl;
-				comparisons = 0;
+		    	//printf("\n%f ms/frame\n", 1000/float(nbFrames));
+		    	//std::cout << "Nodes: " << numNodes << std::endl;
+				//std::cout << "Circles: " << object_vec.size() << std::endl;
+				//std::cout << "Comparisons:   " << comparisons <<std::endl;
 		    }
 		    
 		    nbFrames = 0;
@@ -173,6 +181,8 @@ int main()
 		{
 			break;
 		}
+
+		comparisons = 0;
 	}
 
 // ----------------------------------------------------------------------------

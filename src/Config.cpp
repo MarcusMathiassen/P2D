@@ -6,7 +6,8 @@
 
 #include "Config.h"
 
-const char WINDOW_NAME[] = "P2D_v0.6";	// Window name.
+extern const char APP_NAME[]     = "P2D";
+extern const char APP_VERSION[]  = "0.6";
 int screen_width = 512;					// Window width.
 int screen_height = 512;				// Window height.
 double xpos, ypos;						// Current mouse position.

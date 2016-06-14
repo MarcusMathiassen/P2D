@@ -7,7 +7,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-extern const char WINDOW_NAME[];			// Window name.
+extern const char APP_NAME[];
+extern const char APP_VERSION[];
 extern int screen_width;					// Window width.
 extern int screen_height;					// Window height.
 extern double xpos, ypos;					// Current mouse position.
@@ -15,7 +16,7 @@ extern double xpos, ypos;					// Current mouse position.
 #define OPENMP								// Comment out to turn off.
 											// (Slower than pThreads.)
 
-//#define BENCHMARK							// uncomment to get ms readings.
+#define BENCHMARK							// uncomment to get ms readings.
 
 extern int numThreads;						// Number of CPU threads
 extern int uniGrid;							// Number of grids.
