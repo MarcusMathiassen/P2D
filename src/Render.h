@@ -13,6 +13,5 @@
 #include "./SpatialHash/SpatialHash.h"			// SpatialHash class
 
 void draw();
-void debug();
 
 #endif

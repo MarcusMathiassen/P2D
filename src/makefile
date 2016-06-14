@@ -1,8 +1,7 @@
 
 CC := g++-5
 
-CFLAGS := -std=c++14 -lpthread -lglew -lglfw3 -fopenmp -framework OpenGL -Ofast -Wall
-
+CFLAGS := -std=c++14 -lpthread -lglew -lglfw3 -fopenmp -framework OpenGL -Ofast -ffast-math -Wall -Wold-style-cast
 COMPILE_COMMAND := $(CC)
 
 OUTPUT := P2D_v0.6

@@ -125,13 +125,12 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 			std::cout << "Quadtree ON" << std::endl;
 		} else {
 			use_Quadtree = false;
-			show_Quadtree = false;
 			std::cout << "Quadtree OFF" << std::endl;
 		}
 	}
 
 	/* showQuadtrees */
-	if (key == GLFW_KEY_Z && action == GLFW_PRESS && use_Quadtree) {
+	if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
 		if (show_Quadtree == false) {
 			show_Quadtree = true;
 			std::cout << "showQuadtree ON" << std::endl;
@@ -148,13 +147,12 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 			std::cout << "DynamicGrids ON" << std::endl;
 		} else {
 			use_DynamicGrid = false;
-			show_DynamicGrid = false;
 			std::cout << "DynamicGrids OFF" << std::endl;
 		}
 	}
 
 	/* show_DynamicGrid */
-	if (key == GLFW_KEY_X && action == GLFW_PRESS && use_DynamicGrid) {
+	if (key == GLFW_KEY_X && action == GLFW_PRESS) {
 		if (show_DynamicGrid == false) {
 			show_DynamicGrid = true;
 			std::cout << "show_DynamicGrid ON" << std::endl;

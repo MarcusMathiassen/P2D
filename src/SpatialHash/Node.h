@@ -20,17 +20,16 @@ private:
 	Rect 					m_rect;
 	Color 					m_color;
 
-	vec<int>				m_index_vec;			// Index of objects
+	vec<int> 				m_index_vec;
 
 public:
 
 	Node(const Rect& r);
 	bool contains(const Circle& b) const;
 	void insert(int i);
+	void clear();
 	void update();
 	void draw();
-	void debug();
-	void clear();
 };
 
 

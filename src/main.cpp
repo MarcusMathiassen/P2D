@@ -99,10 +99,10 @@ int main()
 		{
 			char title [256];
    			title [255] = '\0';
-
+   			int numObj = static_cast<int>(object_vec.size());
     		snprintf ( title, 255,
        	          "%s %s - [FPS: %d] [OBJ: %d]",
-       	            APP_NAME, APP_VERSION, nbFrames, (int)object_vec.size());
+       	            APP_NAME, APP_VERSION, nbFrames, numObj);
 
     		glfwSetWindowTitle(window, title);
 

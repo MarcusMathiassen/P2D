@@ -17,10 +17,6 @@
 #include "../../Utility/Utility.h"				// assignColor()
 #include "../../Config.h"						// Global vars, screen size
 
-#define PI 3.14159
-#define HALF_PI 1.570796
-#define DOUBLE_PI 6.283185
-
 class Circle : public Object
 {
 
@@ -45,6 +41,7 @@ public:
 	void update();
 	void debug() const;
 	void changeColor(const Color& c);
+	void trail();
 
     void gravitationForce(const Circle& b);
 

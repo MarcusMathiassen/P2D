@@ -17,6 +17,7 @@ void assignColor(Color& col)
 
 void assignGrid()
 {
+	griduni = (griduni > 4) ? 4 : (griduni < 0) ? 0 : griduni;
 	switch(griduni)
 	{
 		case 0: uniGrid = 4;break;

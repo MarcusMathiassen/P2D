@@ -8,8 +8,8 @@
 
 
 void Calc(int begin, int end) {
-	for (int i = begin; i < end; i++) {
 
+	for (int i = begin; i < end; i++) {
 		if (ballCol)
 		for (size_t j = i+1; j < object_vec.size(); j++) {
 
@@ -30,14 +30,14 @@ void update() {
 
 	if (object_vec.size() > 0) {		// If there are objects..
 
-		if (use_Quadtree)				// If Quadtrees are active.
+		if (use_Quadtree && ballCol)			// If Quadtrees are active.
 		{
 			quadtree.update();
 			quadtree.process();
 			return;
 		}
 
-		if (use_DynamicGrid)			// If DynamicGrid is active.
+		if (use_DynamicGrid && ballCol)			// If DynamicGrid is active.
 		{
 			spatialHash.update();
 			spatialHash.process();

@@ -4,6 +4,10 @@
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
 
+#define PI 3.14159
+#define HALF_PI 1.570796
+#define DOUBLE_PI 6.283185
+
 #include "Circle.h"
 
 Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(v) {
@@ -18,7 +22,8 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 	m_sineTable.reserve(m_vertices+1);
 	m_cosineTable[0] = m_radi;
 	m_sineTable[0] = 0;
-	for (int i = 1; i <= m_vertices; ++i) {
+	for (int i = 1; i <= m_vertices; ++i)
+	{
 		m_cosineTable[i] 	= (m_radi * cos(i *  DOUBLE_PI / m_vertices));
 		m_sineTable[i] 		= (m_radi * sin(i *  DOUBLE_PI / m_vertices));
 	}
@@ -27,14 +32,25 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 void Circle::draw()
 {
 	// Draw the circle.
-	if (show_DynamicGrid && use_DynamicGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
-	else glColor3ub(m_color.r,m_color.g,m_color.b);
+	if (use_DynamicGrid && show_DynamicGrid)
+	{
+		glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
+	}
+	else
+	{
+		glColor3ub(m_color.r,m_color.g,m_color.b);
+	}
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(m_pos.x, m_pos.y);
 	for(int i = 0; i <= m_vertices; ++i) {
 		glVertex2f(m_pos.x+m_cosineTable[i], m_pos.y+m_sineTable[i]);
 	}
 	glEnd();
+
+	if (direction)
+	{
+		debug();
+	}
 }
 
 void Circle::debug() const
@@ -46,8 +62,14 @@ void Circle::debug() const
 
 	glEnable(GL_BLEND);
 	glEnable(GL_LINE_SMOOTH);
-	if (show_DynamicGrid && use_DynamicGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
-	else glColor3ub(m_color.r,m_color.g,m_color.b);
+	if (use_DynamicGrid && show_DynamicGrid)
+	{
+		glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
+	}
+	else
+	{
+		glColor3ub(m_color.r,m_color.g,m_color.b);
+	}
 	glBegin(GL_LINES);
 		glVertex2d(m_pos.x,m_pos.y);
 		glVertex2d(nx,ny);
@@ -145,19 +167,13 @@ void Circle::resolveCollision(Circle& b)
 	float bvx = bvel.x;
 	float bvy = bvel.y;
 	float br = b.getRadi();
-
-	float d1 = atan2(m_vel.y, m_vel.x);
-	float d2 = atan2(bvy, bvx);
-	float mag1 = sqrt(m_vel.x*m_vel.x+m_vel.y*m_vel.y);
-	float mag2 = sqrt(bvx*bvx+bvy*bvy);
 	float m1 = m_mass;
 	float m2 = b.getMass();
-
 
 	// distance from the center of each ball
 	float dx = bx - m_pos.x;
 	float dy = by - m_pos.y;
-	float distance = sqrt(dx*dx+dy*dy);
+ 	float distance = sqrt(dx*dx+dy*dy);
 
 	// collision depth
 	float colDepth = (m_radi+br) - distance;
@@ -167,32 +183,46 @@ void Circle::resolveCollision(Circle& b)
 	float cosOfAngle = cos(colAngle);
 	float sinOfAngle = sin(colAngle);
 
-	// dot product
-	float vdx = bvx - m_vel.x;
-	float vdy = bvy - m_vel.y;
- 	float dotProduct = dx*vdx+dy*vdy;
-
  	// move the balls away from eachother so they dont overlap
  	float a_move_x = -colDepth*0.5*cosOfAngle;
  	float a_move_y = -colDepth*0.5*sinOfAngle;
  	float b_move_x = colDepth*0.5*cosOfAngle;
  	float b_move_y = colDepth*0.5*sinOfAngle;
 
- 	if (m_pos.x + a_move_x >= m_radi && m_pos.x + a_move_x <= screen_width - m_radi) {
+ 	if (m_pos.x + a_move_x >= m_radi
+ 		&& m_pos.x + a_move_x <= screen_width - m_radi)
+ 	{
  		m_pos.x += (a_move_x);
  	}
- 	if (m_pos.y + a_move_y >= m_radi && m_pos.y + a_move_y <= screen_height -  m_radi) {
+ 	if (m_pos.y + a_move_y >= m_radi
+ 		&& m_pos.y + a_move_y <= screen_height -  m_radi)
+ 	{
  		m_pos.y += (a_move_y);
  	}
- 	if (bx + b_move_x >= br && bx + b_move_x <= screen_width - br) {
+ 	if (bx + b_move_x >= br
+ 		&& bx + b_move_x <= screen_width - br)
+ 	{
  		b.addPosX(b_move_x);
  	}
- 	if (by + b_move_y >= br && by + b_move_y <= screen_height - br) {
+ 	if (by + b_move_y >= br
+ 		&& by + b_move_y <= screen_height - br)
+ 	{
  		b.addPosY(b_move_y);
  	}
 
+	// dot product
+	float vdx = bvx - m_vel.x;
+	float vdy = bvy - m_vel.y;
+ 	float dotProduct = dx*vdx+dy*vdy;
+
  	// dont calc if they are moving away form eachother
- 	if (dotProduct < 0){
+ 	if (dotProduct < 0)
+ 	{
+
+ 		float d1 = atan2(m_vel.y, m_vel.x);
+		float d2 = atan2(bvy, bvx);
+		float mag1 = sqrt(m_vel.x*m_vel.x+m_vel.y*m_vel.y);
+		float mag2 = sqrt(bvx*bvx+bvy*bvy);
 
 		float nv1x = mag1*cos(d1-colAngle);
 		float nv1y = mag1*sin(d1-colAngle);
