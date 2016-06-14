@@ -2,10 +2,10 @@
 #include <iostream>
 
 void draw()
-{	
+{
 
 	debug();
-	
+
 	for (size_t i = 0; i < object_vec.size(); ++i)
 	{
 		object_vec[i]->draw();

@@ -20,7 +20,7 @@ Quadtree::Quadtree()
 Quadtree::Quadtree(int level, const Rect& bounds) : m_level(level), m_bounds(bounds) {}
 
 void Quadtree::split()
-{	
+{
 	Vec2 p1 	= m_bounds.getP1();
 	Vec2 p2 	= m_bounds.getP2();
 
@@ -61,10 +61,10 @@ void Quadtree::clear()
 }
 
 void Quadtree::insert(const Circle& b)
-{	
+{
 	//	If NODE_CAPACITY is reached AND max depth is not yet reached
 	if (m_object_vec.size() > NODE_CAPACITY && m_level < NODE_MAX_DEPTH)
-	{	
+	{
 		// If no nodes exist..
 		if (m_nodes_vec.empty())
 		{
@@ -86,10 +86,10 @@ void Quadtree::insert(const Circle& b)
 
 	// Add object to this node
 	addObject(b);
-} 
+}
 
 int Quadtree::getIndex(const Circle& b)
-{	
+{
 	if (m_nodes_vec[0]->contains(b)) return 0;
 	if (m_nodes_vec[1]->contains(b)) return 1;
 	if (m_nodes_vec[2]->contains(b)) return 2;
@@ -103,12 +103,12 @@ void Quadtree::retrieve()
 }
 
 void Quadtree::addObject(const Circle& b)
-{	
+{
 	m_object_vec.push_back(uptr<Object> (new Circle(b)));
 }
 
 bool Quadtree::contains(const Circle& b) const
-{	
+{
 	if (m_bounds.contains(b)) return true;
 	return false;
 }
@@ -120,7 +120,7 @@ bool Quadtree::isFull() const
 }
 
 void Quadtree::update()
-{	
+{
 	// Clear the quadstrees
 	clear();
 

@@ -45,9 +45,9 @@ public:
 	void update();
 	void debug() const;
 	void changeColor(const Color& c);
-    
+
     void gravitationForce(const Circle& b);
-	
+
 	bool collisionDetection(const Circle& b) const;
 	void resolveCollision(Circle& b);
 
@@ -55,8 +55,8 @@ public:
 	int 	getIndex() const;
 	Vec2 	getPos() const;
 	Vec2 	getVel() const;
-	void 	addPosX(float f);	
-	void 	addPosY(float f);	
+	void 	addPosX(float f);
+	void 	addPosY(float f);
 	void	setVel(float x, float y);
 	void 	addVel(float x, float y);
 	void	addVelX(float f);

@@ -17,7 +17,7 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 	m_cosineTable.reserve(m_vertices+1);
 	m_sineTable.reserve(m_vertices+1);
 	m_cosineTable[0] = m_radi;
-	m_sineTable[0] = 0; 	
+	m_sineTable[0] = 0;
 	for (int i = 1; i <= m_vertices; ++i) {
 		m_cosineTable[i] 	= (m_radi * cos(i *  DOUBLE_PI / m_vertices));
 		m_sineTable[i] 		= (m_radi * sin(i *  DOUBLE_PI / m_vertices));
@@ -31,7 +31,7 @@ void Circle::draw()
 	else glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(m_pos.x, m_pos.y);
-	for(int i = 0; i <= m_vertices; ++i) { 
+	for(int i = 0; i <= m_vertices; ++i) {
 		glVertex2f(m_pos.x+m_cosineTable[i], m_pos.y+m_sineTable[i]);
 	}
 	glEnd();
@@ -40,12 +40,12 @@ void Circle::draw()
 void Circle::debug() const
 {
 	// Draws lines showing the direction
-	float angle 	= atan2(m_vel.y,m_vel.x);	
+	float angle 	= atan2(m_vel.y,m_vel.x);
 	float ny 		= m_pos.y + m_radi*2 * sin(angle);
 	float nx 		= m_pos.x + m_radi*2 * cos(angle);
-	
+
 	glEnable(GL_BLEND);
-	glEnable(GL_LINE_SMOOTH); 
+	glEnable(GL_LINE_SMOOTH);
 	if (show_DynamicGrid && use_DynamicGrid) glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
 	else glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_LINES);
@@ -53,40 +53,40 @@ void Circle::debug() const
 		glVertex2d(nx,ny);
 	glEnd();
 	glDisable(GL_BLEND);
-	glDisable(GL_LINE_SMOOTH); 
+	glDisable(GL_LINE_SMOOTH);
 }
 
 void Circle::update()
 {
 	// Border collision check
 	if (borderCol) {
-		if (m_pos.x <= m_radi && m_vel.x < 0) {		
-			m_pos.x = (m_radi); 
-			m_vel.x = (-m_vel.x);	
-		}
-	
-		if (m_pos.x >= screen_width-m_radi && m_vel.x > 0) { 
-			m_pos.x = (screen_width-m_radi); 
+		if (m_pos.x <= m_radi && m_vel.x < 0) {
+			m_pos.x = (m_radi);
 			m_vel.x = (-m_vel.x);
 		}
-	
+
+		if (m_pos.x >= screen_width-m_radi && m_vel.x > 0) {
+			m_pos.x = (screen_width-m_radi);
+			m_vel.x = (-m_vel.x);
+		}
+
 		if (m_pos.y <= m_radi && m_vel.y < 0) {
-			m_pos.y = (m_radi); 
+			m_pos.y = (m_radi);
 			m_vel.y = (-m_vel.y);
 		}
-	
+
 		if (m_pos.y >= screen_height-m_radi && m_vel.y > 0) {
-			m_pos.y = (screen_height-m_radi); 
+			m_pos.y = (screen_height-m_radi);
 			m_vel.y = (-m_vel.y);
 		}
 	}
 
 	float slow = 1;
 	if(slowmotion) slow = 0.1;
-	
+
 	m_mass = m_radi*0.1;
 	if(gravity) m_vel.y -= ACCEL * m_mass*slow;
-	
+
 	if (gravForce) {
 	    for (size_t i = 0; i < object_vec.size(); ++i) {
 	        gravitationForce(static_cast<Circle&>(*object_vec[i]));
@@ -99,7 +99,7 @@ void Circle::update()
 }
 
 bool Circle::collisionDetection(const Circle& b) const
-{	
+{
 	if (show_FPS) comparisons++;
 
 	// Setup variables
@@ -109,7 +109,7 @@ bool Circle::collisionDetection(const Circle& b) const
 	float br = b.getRadi();
 
 	//  basic square collision check
-	if (m_pos.x - m_radi < bx + br && 
+	if (m_pos.x - m_radi < bx + br &&
 		m_pos.x + m_radi > bx - br &&
 		m_pos.y - m_radi < by + br &&
 		m_pos.y + m_radi > by - br) {
@@ -119,12 +119,12 @@ bool Circle::collisionDetection(const Circle& b) const
     	float dy = by - m_pos.y;
     	float sumRadius = m_radi + br;
     	float sqrRadius = sumRadius * sumRadius;
-	
+
     	float distSqr = (dx * dx) + (dy * dy);
-	
+
     	if (distSqr <= sqrRadius) {
     	    return true;
-    	} 
+    	}
     }
 
     return false;
@@ -136,7 +136,7 @@ void Circle::changeColor(const Color& c)
 }
 
 void Circle::resolveCollision(Circle& b)
-{	
+{
 	// Setup variables
 	Vec2 bpos = b.getPos();
 	Vec2 bvel = b.getVel();
@@ -158,10 +158,10 @@ void Circle::resolveCollision(Circle& b)
 	float dx = bx - m_pos.x;
 	float dy = by - m_pos.y;
 	float distance = sqrt(dx*dx+dy*dy);
-	
+
 	// collision depth
 	float colDepth = (m_radi+br) - distance;
-	
+
 	// contact angle
 	float colAngle = atan2(dy, dx);
 	float cosOfAngle = cos(colAngle);
@@ -224,25 +224,25 @@ void Circle::gravitationForce(const Circle& b)
     float x2 = bpos.x;
     float y1 = m_pos.y;
     float y2 = bpos.y;
-    
+
     // Mass of the balls.
     float m1 = m_mass;
     float m2 = b.getMass();
-    
+
     // Get distance between balls.
     float dx = x2-x1;
     float dy = y2-y1;
     float d = sqrt(dx*dx+dy*dy);
-    
+
     if (d != 0) {
-    	
+
         float angle = atan2(dy, dx);
         const float G = 6.674e-2;
         float F = G*m1*m2/d*d;
-        
+
         m_vel.x += F*cos(angle);
         m_vel.y += F*sin(angle);
-        
+
     }
 }
 

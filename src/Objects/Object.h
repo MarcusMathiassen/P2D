@@ -18,7 +18,7 @@ protected:
 public:
 	virtual ~Object();
 	virtual void draw();
-	virtual void update();	
+	virtual void update();
 };
 
 extern vec<uptr<Object>> object_vec;	// Our main container

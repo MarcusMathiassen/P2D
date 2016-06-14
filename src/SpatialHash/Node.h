@@ -14,7 +14,7 @@
 
 class Node
 {
-	
+
 private:
 
 	Rect 					m_rect;

@@ -3,7 +3,7 @@
 void assignColor(Color& col)
 {
 	if (uniCol > 6) uniCol = 0;
-	switch(uniCol) 
+	switch(uniCol)
 	{
 		case 0: col = pastel_red;		break;
 		case 1: col = pastel_gray;		break;

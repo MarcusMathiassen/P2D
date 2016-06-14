@@ -24,19 +24,19 @@ bool Node::contains(const Circle& b) const
 
 
 void Node::insert(int i)
-{	
+{
 	// Add object to the node.
 	m_index_vec.push_back((i));
 }
 
 void Node::draw()
-{	
+{
 	// Draw the rect
 	m_rect.draw();
 }
 
 void Node::clear()
-{	
+{
 	//---------------------------------------------------------------------
 	// Clears the object vector and frees any memory used by it.
 	//---------------------------------------------------------------------
@@ -51,7 +51,7 @@ void Node::update()
 	//---------------------------------------------------------------------
 
 	for (size_t i = 0; i < m_index_vec.size(); ++i)
-	{	
+	{
 		int idex = m_index_vec[i];
 
 		for (size_t j = i+1; j < m_index_vec.size(); ++j)
@@ -71,7 +71,7 @@ void Node::update()
 }
 
 void Node::debug()
-{	
+{
 	//---------------------------------------------------------------------
 	// Change the color of the nodes objects to the nodes rect color.
 	//---------------------------------------------------------------------

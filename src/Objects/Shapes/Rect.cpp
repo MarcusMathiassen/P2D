@@ -31,7 +31,7 @@ bool Rect::contains(const Circle& a) const
 	float ar = a.getRadi();
 
 	//  basic square collision check
-	if (b.x - ar < p2.x && 
+	if (b.x - ar < p2.x &&
 		b.x + ar > p1.x &&
 		b.y - ar < p2.y &&
 		b.y + ar > p1.y)

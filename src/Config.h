@@ -20,7 +20,7 @@ extern double xpos, ypos;					// Current mouse position.
 
 extern int numThreads;						// Number of CPU threads
 extern int uniGrid;							// Number of grids.
-extern int griduni;	
+extern int griduni;
 extern int comparisons;						// Number of comparisons
 extern int numNodes;						// Number of nodes
 
@@ -46,7 +46,7 @@ extern bool show_DynamicGrid;				// Show dynamic grid.
 extern bool slowmotion;						// Slows everything down.
 extern bool gravity;						// Turn on/off gravity.
 extern bool direction;						// Turn on/off direciton.
-extern bool gravForce;						// Turn on/off gravForce.		
+extern bool gravForce;						// Turn on/off gravForce.
 
 extern bool windowResized;					// Check if window has been
 											//  resized.

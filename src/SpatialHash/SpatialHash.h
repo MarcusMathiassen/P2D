@@ -19,16 +19,16 @@
 #include "../Utility/Color.h"			// Color class
 #include "../Objects/Object.h"			// Object class
 #include "../Objects/Shapes/Circle.h"	// Circle class
-#include "../Objects/Shapes/Rect.h"		// Rect class	
+#include "../Objects/Shapes/Rect.h"		// Rect class
 
 // ----------------------------------------------------------------------
 
 // How to run:
 /*
-	
+
 	init() every time the grid is changed or the window is resized.
 	update() every frame
-	draw() every frame	
+	draw() every frame
 */
 
 

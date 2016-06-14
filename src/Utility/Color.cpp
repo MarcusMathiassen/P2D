@@ -9,11 +9,11 @@ void Color::operator *(float f)
 }
 
 Color Color::operator +(const Color& c) const
-{ 
-	return Color((r+c.r)*0.5, (g+c.g)*0.5, (b+c.b)*0.5); 
+{
+	return Color((r+c.r)*0.5, (g+c.g)*0.5, (b+c.b)*0.5);
 }
 
-void Color::clamp() 
+void Color::clamp()
 {
 		r = (r < 0) ? 0 : (r > 255) ? 255 : r;
 		g = (g < 0) ? 0 : (g > 255) ? 255 : g;
@@ -23,9 +23,9 @@ void Color::clamp()
 
 // COLOR PRESETS
 Color pastel_red		(255,105,97);
-Color pastel_gray		(85,85,85);	
+Color pastel_gray		(85,85,85);
 Color pastel_green		(119,190,119);
-Color pastel_orange		(255,179,71);	
+Color pastel_orange		(255,179,71);
 Color pastel_yellow		(253,253,150);
 Color pastel_purple		(100,20,100);
 Color pastel_blue		(119,158,203);

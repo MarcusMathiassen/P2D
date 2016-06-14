@@ -5,7 +5,7 @@
 //-----------------------------------------|
 
 #ifndef QUADTREE_H
-#define QUADTREE_H	
+#define QUADTREE_H
 
 #include "../Utility/Templates.h"				// vec, uptr
 #include "../Utility/Color.h"					// Color class
@@ -23,7 +23,7 @@ private:
 	Rect 								m_bounds;
 	vec<uptr<Quadtree>>					m_nodes_vec;
 	vec<uptr<Object>> 					m_object_vec;
-	
+
 	static const int 					NODE_CAPACITY;
 	static const int 					NODE_MAX_DEPTH;
 
@@ -37,7 +37,7 @@ public:
 	void retrieve();
 	void insert(const Circle& b);
 	void process();
-	
+
 	void testSplit();
 	void addObject(const Circle& b);
 	int getIndex(const Circle& b);

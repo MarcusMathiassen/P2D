@@ -9,7 +9,7 @@
 SpatialHash spatialHash;
 
 void SpatialHash::init()
-{	
+{
 	// ---------------------------------------------------------------------
 	// The nodes are cleared and given an element in the grid.
 	// ---------------------------------------------------------------------
@@ -20,7 +20,7 @@ void SpatialHash::init()
 	m_node_vec.shrink_to_fit();					// Free any memory used.
 
 												// Split screen into grid..
-	float sqrtGrid 	= sqrt(uniGrid);			
+	float sqrtGrid 	= sqrt(uniGrid);
 	int col 		= screen_width/sqrtGrid;
 	int row 		= screen_height/sqrtGrid;
 
@@ -37,8 +37,8 @@ void SpatialHash::init()
 void SpatialHash::update()
 {
 	//---------------------------------------------------------------------
-	//	Clears all nodes and their objects. (If we didn´t do this, 
-	//	each nodes object-container would increase in size each frame, 
+	//	Clears all nodes and their objects. (If we didn´t do this,
+	//	each nodes object-container would increase in size each frame,
 	//	basically leaking memory.)
 	//---------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ void SpatialHash::update()
 
 
 	//---------------------------------------------------------------------
-	// Goes through every node and fills it with objects from the 
+	// Goes through every node and fills it with objects from the
 	// main-container, any object that fits within the nodes boundaries will
 	// be added to the nodes object-container.
 	//---------------------------------------------------------------------
@@ -85,19 +85,19 @@ void SpatialHash::update()
 	int a =  GetTimeMs64()-b;
 	std::cout << " - SpatialHash: update():    " << a << " ms" << std::endl;
 	#endif
-	
+
 
 }
 
 void SpatialHash::process()
 {
 	//---------------------------------------------------------------------
-	// Checks if any objects in the node collide with eachother, and if so, 
+	// Checks if any objects in the node collide with eachother, and if so,
 	// resolves those collision.
 	//---------------------------------------------------------------------
 
 	if (m_node_vec.size() > 0)					// If nodes exists..
-	{	
+	{
 
 		#ifdef BENCHMARK
 		int b =  GetTimeMs64();
@@ -108,7 +108,7 @@ void SpatialHash::process()
 		{
 			m_node_vec[i]->update();		// Check collisons
 		}
-		
+
 		#ifdef BENCHMARK
 		int a =  GetTimeMs64()-b;
 		std::cout << " - SpatialHash process():   " << a << " ms" << std::endl;
@@ -117,9 +117,9 @@ void SpatialHash::process()
 }
 
 void SpatialHash::draw()
-{	
+{
 	//---------------------------------------------------------------------
-	// Draws the nodes boundaries to screen and colors the objects within 
+	// Draws the nodes boundaries to screen and colors the objects within
 	// each node with the nodes color.
 	//---------------------------------------------------------------------
 

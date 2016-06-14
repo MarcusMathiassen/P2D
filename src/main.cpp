@@ -10,7 +10,7 @@
 #include <GLFW/glfw3.h>							// GLFW setup.
 
 #include "Config.h"								// Global settings
-#include "Process.h"							// Updates all objects 
+#include "Process.h"							// Updates all objects
 #include "Render.h"								// Renders all objects
 #include "./Utility/Color.h"					// Color
 #include "./Utility/Inputs.h"					// User input
@@ -44,8 +44,8 @@ int main()
 
 	if (!glfwInit()) { std::cout << "GLFW INIT FAILED!\n"; }
 
-	#ifdef MULTISAMPLING 
-		glfwWindowHint(GLFW_SAMPLES, xMSAA); 
+	#ifdef MULTISAMPLING
+		glfwWindowHint(GLFW_SAMPLES, xMSAA);
 	#endif
 
 	window = glfwCreateWindow(screen_width, screen_height, APP_NAME, NULL, NULL);
@@ -60,9 +60,9 @@ int main()
 	glfwSetKeyCallback(window, keyCallback);
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	
+
 	/* Enable multisampling */
-	#ifdef MULTISAMPLING 
+	#ifdef MULTISAMPLING
 		glEnable(GL_MULTISAMPLE);
 	#endif
 
@@ -99,22 +99,22 @@ int main()
 		{
 			char title [256];
    			title [255] = '\0';
-		
+
     		snprintf ( title, 255,
        	          "%s %s - [FPS: %d] [OBJ: %d]",
        	            APP_NAME, APP_VERSION, nbFrames, (int)object_vec.size());
-		
+
     		glfwSetWindowTitle(window, title);
-    		
+
 		 	if (show_FPS) {
 		    	//printf("\n%f ms/frame\n", 1000/float(nbFrames));
 		    	//std::cout << "Nodes: " << numNodes << std::endl;
 				//std::cout << "Circles: " << object_vec.size() << std::endl;
 				//std::cout << "Comparisons:   " << comparisons <<std::endl;
 		    }
-		    
+
 		    nbFrames = 0;
-		    lastTime++;  
+		    lastTime++;
 		}
 
     	/* Keyboard, Mouse, Joystick */

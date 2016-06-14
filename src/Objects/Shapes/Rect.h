@@ -9,7 +9,7 @@
 
 #include <OpenGL/gl.h>
 
-#include "Circle.h"								// Circle class	
+#include "Circle.h"								// Circle class
 #include "../../Utility/Vec2.h"					// Vec2 class
 #include "../../Utility/Color.h"				// Color class
 #include "../../Utility/Utility.h"				// assignColor()
@@ -31,7 +31,7 @@ public:
 
 	bool contains(const Circle& a) const;
 	bool containsPos(const Circle& a) const;
- 
+
 	Vec2 getP1() const;
 	Vec2 getP2() const;
 	Color getColor() const;
