@@ -52,10 +52,10 @@ void Quadtree::split()
 	m_nodes_vec.push_back(uptr<Quadtree>
 	(new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y+subHeight),Vec2(x+width,y+height)))));
 
-	m_nodes_vec[0]->setColor(white);
-	m_nodes_vec[1]->setColor(white);
-	m_nodes_vec[2]->setColor(white);
-	m_nodes_vec[3]->setColor(white);
+	m_nodes_vec[0]->setColor(pastel_red);
+	m_nodes_vec[1]->setColor(pastel_gray);
+	m_nodes_vec[2]->setColor(pastel_orange);
+	m_nodes_vec[3]->setColor(pastel_pink);
 }
 
 void Quadtree::insert(const Circle& b)
@@ -190,6 +190,12 @@ void Quadtree::process()
 					static_cast<Circle&>(*object_vec[idex]).resolveCollision(static_cast<Circle&>(*object_vec[jdex]));
 				}
 			}
+
+			//---------------------------------------------------------------------
+			// Change the color of the nodes objects to the nodes rect color.
+			//---------------------------------------------------------------------
+
+			static_cast<Circle&>(*object_vec[idex]).changeColor(m_bounds.getColor());
 		}
 	}
 

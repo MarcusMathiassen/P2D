@@ -33,7 +33,8 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 void Circle::draw()
 {
 	// Draw the circle.
-	if (use_DynamicGrid && show_DynamicGrid)
+	if ((use_DynamicGrid && show_DynamicGrid) ||
+		(use_Quadtree && show_Quadtree))
 	{
 		glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
 	}
@@ -63,7 +64,8 @@ void Circle::debug() const
 
 	glEnable(GL_BLEND);
 	glEnable(GL_LINE_SMOOTH);
-	if (use_DynamicGrid && show_DynamicGrid)
+	if ((use_DynamicGrid && show_DynamicGrid) ||
+		(use_Quadtree && show_Quadtree))
 	{
 		glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
 	}
@@ -123,7 +125,7 @@ void Circle::update()
 
 bool Circle::collisionDetection(const Circle& b) const
 {
-	if (show_FPS) comparisons++;
+	comparisons++;
 
 	// Setup variables
 	Vec2 bpos = b.getPos();

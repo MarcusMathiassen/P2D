@@ -72,10 +72,10 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 
 	/* Delete all */
 	if (key == GLFW_KEY_E && action == GLFW_PRESS) {
-		quadtree.init();
-		spatialHash.init();
 		object_vec.clear();
 		object_vec.shrink_to_fit();
+		quadtree.init();
+		spatialHash.init();
 		std::cout << "Deleted all objects" << std::endl;
 	}
 
@@ -150,6 +150,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 	if (key == GLFW_KEY_W && action == GLFW_PRESS) {
 		if (use_DynamicGrid == false) {
 			use_DynamicGrid = true;
+			spatialHash.init();
 			use_Quadtree = false;
 			std::cout << "DynamicGrids ON" << std::endl;
 		} else {

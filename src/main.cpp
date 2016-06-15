@@ -82,8 +82,6 @@ int main()
 
 	glClearColor(BCKGRND.r,BCKGRND.g,BCKGRND.b,1);
 
-	spatialHash.init();
-
 // --------------------------------- LOOP -------------------------------------
 
     while (!glfwWindowShouldClose(window)) {
@@ -166,6 +164,9 @@ int main()
 		std::cout << "Comparisons:   " << comparisons << std::endl;
 		#endif
 
+		comparisons = 0;
+
+
 		#ifdef BENCHMARK
 		int aLoop =  GetTimeMs64()-bLoop;
 		std::cout << "Total:     " << aLoop << " ms" << std::endl;
@@ -182,8 +183,6 @@ int main()
 		{
 			break;
 		}
-
-		comparisons = 0;
 	}
 
 // ----------------------------------------------------------------------------

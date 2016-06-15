@@ -11,7 +11,9 @@ Rect::Rect() : p1(Vec2(0,0)), p2(Vec2(0,0)) {}
 Rect::Rect(const Vec2& a, const Vec2& b) : p1(a), p2(b)
 {
 	assignColor(m_color);
-	uniCol++;
+	if (use_DynamicGrid){
+		uniCol++;
+	}
 }
 
 void Rect::draw() const
