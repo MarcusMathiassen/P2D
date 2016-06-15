@@ -4,7 +4,7 @@ void Inputs(GLFWwindow* window) {
 
 	// Update cursor position
 	glfwGetCursorPos(window, &xpos, &ypos);
-	if (windowResized) { xpos*=2, ypos*=2;}
+	xpos*=2, ypos*=2;
 
 	// Make sure the mousepointer is inside the window
 	if (isInWindow)

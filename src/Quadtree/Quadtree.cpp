@@ -197,7 +197,6 @@ void Quadtree::process()
 			//---------------------------------------------------------------------
 			// Change the color of the nodes objects to the nodes rect color.
 			//---------------------------------------------------------------------
-
 			static_cast<Circle&>(*object_vec[idex]).changeColor(m_bounds.getColor());
 		}
 	}

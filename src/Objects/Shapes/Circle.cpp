@@ -19,6 +19,8 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 
 	m_index = object_vec.size();		// Object index is it´s number in the vector.
 
+
+	/* We setup a cos/sin table for the circles draw function for use later.*/
 	m_cosineTable.reserve(m_vertices+1);
 	m_sineTable.reserve(m_vertices+1);
 	m_cosineTable[0] = m_radi;
@@ -109,7 +111,7 @@ void Circle::update()
 	float slow = 1;
 	if(slowmotion) slow = 0.1;
 
-	m_mass = m_radi*0.1;
+	m_mass = m_radi;
 	if(gravity) m_vel.y -= ACCEL * m_mass*slow;
 
 	if (gravForce) {

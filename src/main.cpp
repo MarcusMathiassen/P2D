@@ -74,13 +74,21 @@ int main()
 	float lastTime = glfwGetTime();
    	int nbFrames = 0;
 
+
    	/* Tranform into pixel coordinates */
-   	glViewport(0, 0, screen_width*2, screen_height*2);
+   	int w,h;
+   	glfwGetFramebufferSize(window,&w,&h);
+   	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, screen_width, 0, screen_height, -1, 1);
+	glOrtho(0, w, 0, h, -1, 1);
+	screen_width = w;
+   	screen_height = h;
 
 	glClearColor(BCKGRND.r,BCKGRND.g,BCKGRND.b,1);
+
+	quadtree.init();
+	spatialHash.init();
 
 // --------------------------------- LOOP -------------------------------------
 

@@ -5,7 +5,7 @@ struct Color {
 	float r,g,b;
 	Color();
 	Color(float i, float j, float k);
-	void operator * (float f);
+	Color operator * (float f);
 	Color operator +(const Color& c) const;
 	void clamp();
 };

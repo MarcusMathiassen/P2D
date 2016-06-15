@@ -16,7 +16,7 @@ extern double xpos, ypos;					// Current mouse position.
 #define OPENMP								// Comment out to turn off.
 											// (Slower than pThreads.)
 
-#define BENCHMARK							// uncomment to get ms readings.
+//#define BENCHMARK							// uncomment to get ms readings.
 
 extern int numThreads;						// Number of CPU threads
 extern int uniGrid;							// Number of grids.

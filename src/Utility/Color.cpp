@@ -3,9 +3,9 @@
 Color::Color() : r(0), g(0), b(0) {}
 Color::Color(float i, float j, float k) : r(i), g(j), b(k) {}
 
-void Color::operator *(float f)
+Color Color::operator *(float f)
 {
-	r *= f, g *= f, b *= f;
+	return Color(r*f, g*f, b*f);
 }
 
 Color Color::operator +(const Color& c) const
