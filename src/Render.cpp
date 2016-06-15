@@ -7,7 +7,7 @@ void draw()
 	{
 		object_vec[i]->draw();
 	}
-	
+
 	if (use_DynamicGrid && show_DynamicGrid)
 	{
 		spatialHash.draw();
