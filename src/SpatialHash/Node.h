@@ -27,7 +27,7 @@ public:
 	Node(const Rect& r);
 	bool contains(const Circle& b) const;
 	void insert(int i);
-	void clear();
+
 	void update();
 	void draw();
 };

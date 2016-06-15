@@ -3,7 +3,7 @@
 //	AUTHOR: MARCUS MATHIASSEN	   		   |
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
-#include <iostream>
+
 #include "Node.h"
 
 Node::Node(const Rect& r) : m_rect(r)
@@ -24,12 +24,6 @@ void Node::insert(int i)
 	m_index_vec.push_back(i);
 }
 
-void Node::clear()
-{
-	m_index_vec.clear();
-	m_index_vec.shrink_to_fit();
-}
-
 void Node::draw()
 {
 	// Draw the nodes boundaries
@@ -38,10 +32,6 @@ void Node::draw()
 
 void Node::update()
 {
-	//---------------------------------------------------------------------
-	// Change the color of the nodes objects to the nodes rect color.
-	//---------------------------------------------------------------------
-
 	for (size_t i = 0; i < m_index_vec.size(); ++i)
 	{
 		int idex = m_index_vec[i];
@@ -57,25 +47,22 @@ void Node::update()
 				static_cast<Circle&>(*object_vec[idex]).resolveCollision(static_cast<Circle&>(*object_vec[jdex]));
 			}
 		}
-	}
 
-	if (show_DynamicGrid)
-	{
-
-	//---------------------------------------------------------------------
-	// Change the color of the nodes objects to the nodes rect color.
-	//---------------------------------------------------------------------
-
-		for (size_t i = 0; i < m_index_vec.size(); ++i)
+		if (show_DynamicGrid)
 		{
-			if (m_rect.containsPos(static_cast<Circle&>(*object_vec[m_index_vec[i]])))
+
+			//---------------------------------------------------------------------
+			// Change the color of the nodes objects to the nodes rect color.
+			//---------------------------------------------------------------------
+
+			if (m_rect.containsPos(static_cast<Circle&>(*object_vec[idex])))
 			{
-				static_cast<Circle&>
-				(*object_vec[m_index_vec[i]]).changeColor(m_rect.getColor());
+				static_cast<Circle&>(*object_vec[idex]).changeColor(m_rect.getColor());
 			}
 		}
 	}
 
-	// Clear the vector and get ready for next frame
-	clear();
+	// Clear the vector for next frame
+	m_index_vec.clear();
+	m_index_vec.shrink_to_fit();
 }

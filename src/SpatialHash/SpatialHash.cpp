@@ -57,7 +57,7 @@ void SpatialHash::update()
 
 	#ifdef BENCHMARK
 	int a =  GetTimeMs64()-b;
-	std::cout << " - SpatialHash: update():    " << a << " ms" << std::endl;
+	std::cout << " - SpatialPartition update():    " << a << " ms" << std::endl;
 	#endif
 
 
@@ -73,7 +73,7 @@ void SpatialHash::process()
 	#ifdef BENCHMARK
 	int b =  GetTimeMs64();
 	#endif
-	
+
 	#pragma omp parallel for
 	for (size_t i = 0; i < m_node_vec.size(); ++i)
 	{
@@ -82,7 +82,7 @@ void SpatialHash::process()
 
 	#ifdef BENCHMARK
 	int a =  GetTimeMs64()-b;
-	std::cout << " - SpatialHash process():   " << a << " ms" << std::endl;
+	std::cout << " - SpatialPartition process():   " << a << " ms" << std::endl;
 	#endif
 
 }

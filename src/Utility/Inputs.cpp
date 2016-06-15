@@ -6,55 +6,59 @@ void Inputs(GLFWwindow* window) {
 	glfwGetCursorPos(window, &xpos, &ypos);
 	if (windowResized) { xpos*=2, ypos*=2;}
 
-	// Spawn balls
-	if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
-		//std::cout << object_vec.size() << std::endl;
-	}
-	// Spawn balls
-	if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),3,10)));
-		//std::cout << object_vec.size() << std::endl;
-	}
-	// Spawn balls
-	if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),6,15)));
-		//std::cout << object_vec.size() << std::endl;
-	}
-	// Spawn balls
-	if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),10,20)));
-		//std::cout << object_vec.size() << std::endl;
-	}
-	// Spawn balls
-	if(glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS) {
-		object_vec.push_back(uptr<Object>
-			(new Circle(Vec2(xpos,screen_height-ypos),20,25)));
-		//std::cout << object_vec.size() << std::endl;
+	// Make sure the mousepointer is inside the window
+	if (isInWindow)
+	{
+		// Spawn balls
+		if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),1,6)));
+			//std::cout << object_vec.size() << std::endl;
+		}
+		// Spawn balls
+		if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),3,10)));
+			//std::cout << object_vec.size() << std::endl;
+		}
+		// Spawn balls
+		if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),6,15)));
+			//std::cout << object_vec.size() << std::endl;
+		}
+		// Spawn balls
+		if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),10,20)));
+			//std::cout << object_vec.size() << std::endl;
+		}
+		// Spawn balls
+		if(glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS) {
+			object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(xpos,screen_height-ypos),20,25)));
+			//std::cout << object_vec.size() << std::endl;
+		}
 	}
 }
 
@@ -71,6 +75,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		object_vec.clear();
 		object_vec.shrink_to_fit();
 		spatialHash.init();
+		quadtree.init();
 		std::cout << "Deleted all objects" << std::endl;
 	}
 
@@ -122,6 +127,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 	if (key == GLFW_KEY_Q && action == GLFW_PRESS) {
 		if (use_Quadtree == false) {
 			use_Quadtree = true;
+			use_DynamicGrid = false;
 			std::cout << "Quadtree ON" << std::endl;
 		} else {
 			use_Quadtree = false;
@@ -144,6 +150,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 	if (key == GLFW_KEY_W && action == GLFW_PRESS) {
 		if (use_DynamicGrid == false) {
 			use_DynamicGrid = true;
+			use_Quadtree = false;
 			std::cout << "DynamicGrids ON" << std::endl;
 		} else {
 			use_DynamicGrid = false;
@@ -252,15 +259,17 @@ void cursorPositionCallback(GLFWwindow *window, double xpos, double ypos) {
 void cursorEnterCallback(GLFWwindow *window, int entered) {
 	if (entered) {
 		//std::cout << "Entered window" << std::endl;
+		isInWindow = true;
 	}
 	else {
 		//std::cout << "Leaves window" << std::endl;
+		isInWindow = false;
 	}
 }
 
 void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && isInWindow) {
 		object_vec.push_back(uptr<Object>
 			(new Circle(Vec2(xpos,screen_height-ypos),30,30)));
 		// Left mouse button pressed.

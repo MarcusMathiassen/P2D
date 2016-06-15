@@ -48,7 +48,7 @@ extern bool gravity;						// Turn on/off gravity.
 extern bool direction;						// Turn on/off direciton.
 extern bool gravForce;						// Turn on/off gravForce.
 
-extern bool windowResized;					// Check if window has been
-											//  resized.
+extern bool windowResized;					// Check if window has been resized.
+extern bool isInWindow;
 
 #endif
