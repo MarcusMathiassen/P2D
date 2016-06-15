@@ -134,6 +134,8 @@ void Quadtree::update()
 	// Clear the quadstrees
 	m_nodes_vec.clear();
 	m_nodes_vec.shrink_to_fit();
+	m_index_vec.clear();
+	m_index_vec.shrink_to_fit();
 
 	// Insert objects into the quadtree
 	for (size_t i = 0; i < object_vec.size(); ++i)
@@ -198,10 +200,6 @@ void Quadtree::process()
 			static_cast<Circle&>(*object_vec[idex]).changeColor(m_bounds.getColor());
 		}
 	}
-
-	// Clear the vector for next frame
-	m_index_vec.clear();
-	m_index_vec.shrink_to_fit();
 }
 
 void Quadtree::draw()

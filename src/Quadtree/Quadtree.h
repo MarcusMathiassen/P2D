@@ -18,7 +18,7 @@
 #include "../Config.h"							// Global vars, screen size
 
 
-const int NODE_CAPACITY     = 10;
+const int NODE_CAPACITY     = 20;
 const int NODE_MAX_DEPTH  	= 6;
 
 class Quadtree {
@@ -29,7 +29,6 @@ private:
 	Rect 								m_bounds;
 
 	vec<uptr<Quadtree>>					m_nodes_vec;
-
 	vec<int>							m_index_vec;
 
 public:
