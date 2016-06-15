@@ -14,7 +14,7 @@ double xpos, ypos;						// Current mouse position.
 
 int numThreads = 8;						// Number of CPU threads
 int uniGrid = 64;						// Number of grids.
-int griduni = 0;
+int griduni = 2;
 int comparisons = 0;					// Number of comparisons
 int numNodes = 0;						// Number of nodes
 
