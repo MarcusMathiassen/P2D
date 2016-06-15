@@ -7,6 +7,7 @@
 #define PI 3.14159
 #define HALF_PI 1.570796
 #define DOUBLE_PI 6.283185
+#define LOSSENERGY 1.0
 
 #include "Circle.h"
 
@@ -237,12 +238,12 @@ void Circle::resolveCollision(Circle& b)
 		float cos_angle_halfpi = cos(colAngle+HALF_PI);
 		float sin_angle_halfpi = sin(colAngle+HALF_PI);
 
-		m_vel.x = (cosOfAngle*v1xf+cos_angle_halfpi*v1yf);
-		m_vel.y = (sinOfAngle*v1xf+sin_angle_halfpi*v1yf);
+		m_vel.x = (cosOfAngle*v1xf+cos_angle_halfpi*v1yf)*LOSSENERGY;
+		m_vel.y = (sinOfAngle*v1xf+sin_angle_halfpi*v1yf)*LOSSENERGY;
 
 		b.setVel(
-			(cosOfAngle*v2xf+cos_angle_halfpi*v2yf),
-			(sinOfAngle*v2xf+sin_angle_halfpi*v2yf));
+			(cosOfAngle*v2xf+cos_angle_halfpi*v2yf)*LOSSENERGY,
+			(sinOfAngle*v2xf+sin_angle_halfpi*v2yf)*LOSSENERGY);
 	}
 }
 

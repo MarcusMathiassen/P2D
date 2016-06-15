@@ -155,6 +155,8 @@ void Quadtree::process()
 	// resolves those collision.
 	//---------------------------------------------------------------------
 
+	// FIND THE DEEPEST NODE->
+
 	// Are there subnodes?
 	if (m_nodes_vec.size() > 0)
 	{
@@ -166,6 +168,9 @@ void Quadtree::process()
 
 		return;
 	}
+
+
+	// THEN DO THIS STUFF UNDERNEATH->
 
 	// Are there objects?
 	if (m_index_vec.size() > 0)
@@ -185,17 +190,9 @@ void Quadtree::process()
 					static_cast<Circle&>(*object_vec[idex]).resolveCollision(static_cast<Circle&>(*object_vec[jdex]));
 				}
 			}
-
-			if (show_Quadtree)
-			{
-				//---------------------------------------------------------------------
-				// Change the color of the nodes objects to the nodes rect color.
-				//---------------------------------------------------------------------
-
-				static_cast<Circle&>(*object_vec[idex]).changeColor(m_bounds.getColor());
-			}
 		}
 	}
+
 	// Clear the vector for next frame
 	m_index_vec.clear();
 	m_index_vec.shrink_to_fit();
