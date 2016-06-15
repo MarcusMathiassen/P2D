@@ -16,7 +16,6 @@
 #include "./Quadtree/Quadtree.h"
 #include "./Objects/Object.h"
 
-
 void update();
 void Calc(int begin, int end);
 

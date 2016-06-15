@@ -37,7 +37,7 @@ public:
 
 	Circle(const Vec2& p, float r, int v);
 
-	void draw();
+	void draw() const;
 	void update();
 	void debug() const;
 	void changeColor(const Color& c);

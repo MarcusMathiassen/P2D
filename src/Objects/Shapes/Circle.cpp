@@ -32,7 +32,7 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 	}
 }
 
-void Circle::draw()
+void Circle::draw() const
 {
 	// Draw the circle.
 	if ((use_DynamicGrid && show_DynamicGrid) ||
