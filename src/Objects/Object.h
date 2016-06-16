@@ -17,7 +17,7 @@ protected:
 
 public:
 	virtual ~Object();
-	virtual void draw();
+	virtual void draw() const;
 	virtual void update();
 };
 

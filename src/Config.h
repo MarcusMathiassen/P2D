@@ -12,6 +12,7 @@ extern const char APP_VERSION[];
 extern int screen_width;					// Window width.
 extern int screen_height;					// Window height.
 extern double xpos, ypos;					// Current mouse position.
+extern double dt;
 
 #define OPENMP								// Comment out to turn off.
 											// (Slower than pThreads.)

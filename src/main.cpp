@@ -67,13 +67,11 @@ int main()
 		glEnable(GL_MULTISAMPLE);
 	#endif
 
+	glEnable(GL_BLEND);
+	glEnable(GL_LINE_SMOOTH);
+
 	/* Make the window´s context current */
 	glfwMakeContextCurrent(window);
-
-    /* FOR FPS COUNTER */
-	float lastTime = glfwGetTime();
-   	int nbFrames = 0;
-
 
    	/* Tranform into pixel coordinates */
    	int w,h;
@@ -90,6 +88,10 @@ int main()
 	quadtree.init();
 	spatialHash.init();
 
+	    /* FOR FPS COUNTER */
+	float lastTime = glfwGetTime();
+   	int nbFrames = 0;
+
 // --------------------------------- LOOP -------------------------------------
 
     while (!glfwWindowShouldClose(window)) {
@@ -97,7 +99,6 @@ int main()
     	#ifdef BENCHMARK
 		int bLoop =  GetTimeMs64();
 		#endif
-
 
 		float currentTime = glfwGetTime();
 		nbFrames++;
@@ -119,7 +120,6 @@ int main()
 				//std::cout << "Circles: " << object_vec.size() << std::endl;
 				//std::cout << "Comparisons:   " << comparisons <<std::endl;
 		    }
-
 		    nbFrames = 0;
 		    lastTime++;
 		}
@@ -156,8 +156,6 @@ int main()
 		int aDraw =  GetTimeMs64()-bDraw;
 		std::cout << "draw():    " << aDraw << " ms" << std::endl;
 		#endif
-
-
 
 
 		/* Swap interval */

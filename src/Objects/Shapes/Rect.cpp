@@ -19,6 +19,7 @@ Rect::Rect(const Vec2& a, const Vec2& b) : p1(a), p2(b)
 void Rect::draw() const
 {
 	glColor3ub(m_color.r,m_color.g,m_color.b);
+	glLineWidth(0.1);
 	glBegin(GL_LINE_LOOP);
 		glVertex2f(p1.x+1,p1.y+1);
 		glVertex2f(p1.x+1,p2.y-1);

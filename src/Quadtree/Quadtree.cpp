@@ -163,7 +163,6 @@ void Quadtree::process()
 	if (m_nodes_vec.size() > 0)
 	{
 		// Does any of them contain objects?
-		#pragma omp parallel for
 		for (size_t i = 0; i < m_nodes_vec.size(); ++i)
 		{
 			m_nodes_vec[i]->process();

@@ -252,6 +252,17 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		}
 	}
 
+	/* 40k */
+	if (key == GLFW_KEY_B && action == GLFW_PRESS) {
+		for (int y = 0; y < screen_height; y+=screen_height/200)
+		{
+			for (int x = 0; x < screen_width; x+=screen_width/200)
+			{
+				object_vec.push_back(uptr<Object>
+				(new Circle(Vec2(x,y),1,6)));
+			}
+		}
+	}
 }
 
 void cursorPositionCallback(GLFWwindow *window, double xpos, double ypos) {
@@ -289,5 +300,8 @@ void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 }
 
 void scrollCallback(GLFWwindow *window, double xoffset, double yoffset) {
-	static_cast<Circle&>(*object_vec[0]).addVel(xoffset*15,-yoffset*15);
+	if (object_vec.size() > 0)
+	{
+		static_cast<Circle&>(*object_vec[0]).addVel(xoffset*15,-yoffset*15);
+	}
 }

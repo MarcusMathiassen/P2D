@@ -6,7 +6,7 @@
 
 #include "Object.h"
 Object::~Object() {}
-void Object::draw() {}
+void Object::draw() const {}
 void Object::update() {}
 
 vec<uptr<Object>> object_vec; // Our main container

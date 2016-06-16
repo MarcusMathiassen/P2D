@@ -11,6 +11,7 @@ extern const char APP_VERSION[]  = "0.6";
 int screen_width = 512;					// Window width.
 int screen_height = 512;				// Window height.
 double xpos, ypos;						// Current mouse position.
+double dt = 0.016667;					// Delta time
 
 int numThreads = 8;						// Number of CPU threads
 int uniGrid = 64;						// Number of grids.

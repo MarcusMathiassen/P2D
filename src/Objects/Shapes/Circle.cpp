@@ -64,8 +64,6 @@ void Circle::debug() const
 	float ny 		= m_pos.y + m_radi*2 * sin(angle);
 	float nx 		= m_pos.x + m_radi*2 * cos(angle);
 
-	glEnable(GL_BLEND);
-	glEnable(GL_LINE_SMOOTH);
 	if ((use_DynamicGrid && show_DynamicGrid) ||
 		(use_Quadtree && show_Quadtree))
 	{
@@ -79,8 +77,6 @@ void Circle::debug() const
 		glVertex2d(m_pos.x,m_pos.y);
 		glVertex2d(nx,ny);
 	glEnd();
-	glDisable(GL_BLEND);
-	glDisable(GL_LINE_SMOOTH);
 }
 
 void Circle::update()
@@ -112,7 +108,7 @@ void Circle::update()
 	if(slowmotion) slow = 0.1;
 
 	m_mass = m_radi;
-	if(gravity) m_vel.y -= ACCEL * m_mass*slow;
+	if(gravity) m_vel.y -= ACCEL * m_mass * slow * dt;
 
 	if (gravForce) {
 	    for (size_t i = 0; i < object_vec.size(); ++i) {
@@ -121,8 +117,8 @@ void Circle::update()
 	}
 
 	// Update ball position
-	m_pos.x += (m_vel.x * 60*(0.0001*slow));
-	m_pos.y += (m_vel.y * 60*(0.0001*slow));
+	m_pos.x += (m_vel.x * slow * dt);
+	m_pos.y += (m_vel.y * slow * dt);
 }
 
 bool Circle::collisionDetection(const Circle& b) const
