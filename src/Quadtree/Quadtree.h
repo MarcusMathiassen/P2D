@@ -17,36 +17,35 @@
 #include "../Objects/Shapes/Circle.h"			// Circle class
 #include "../Config.h"							// Global vars, screen size
 
-
 const int NODE_CAPACITY     = 30;
 const int NODE_MAX_DEPTH  	= 6;
 
-class Quadtree {
+class Quadtree
+{
 
 private:
 
 	int 								m_level;
 	Rect 								m_bounds;
 
-	vec<uptr<Quadtree>>					m_nodes_vec;
-	vec<int>							m_index_vec;
+	uptr<Quadtree>						m_subnode[4];
+	vec<int>							m_index;
 
 public:
 
 	Quadtree();
 	Quadtree(int level, const Rect& bounds);
 
-	void init();
+	void reset();
 	void split();
 	void insert(const Circle& b);
 
 	void update();
 	void process();
-	void draw();
+	void draw() const;
 
 	bool contains(const Circle& b) const;
 	void setColor(const Color& c);
-	void setRect(const Rect& r);
 };
 
 extern Quadtree quadtree;
