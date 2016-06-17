@@ -30,7 +30,7 @@ void Node::draw()
 	m_rect.draw();
 }
 
-void Node::update()
+void Node::process()
 {
 	for (size_t i = 0; i < m_index_vec.size(); ++i)
 	{

@@ -28,7 +28,7 @@ public:
 	bool contains(const Circle& b) const;
 	void insert(int i);
 
-	void update();
+	void process();
 	void draw();
 };
 

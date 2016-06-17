@@ -77,7 +77,7 @@ void SpatialHash::process()
 	#pragma omp parallel for
 	for (size_t i = 0; i < m_node_vec.size(); ++i)
 	{
-		m_node_vec[i]->update();		// Check collisons
+		m_node_vec[i]->process();		// Check collisons
 	}
 
 	#ifdef BENCHMARK
