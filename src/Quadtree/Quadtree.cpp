@@ -8,17 +8,33 @@
 
 Quadtree quadtree;
 
-Quadtree::Quadtree() :
-m_level(0), m_bounds(Rect(Vec2(0,0),
-Vec2(screen_width,screen_height))), m_subnode{nullptr,nullptr,nullptr,nullptr}{}
+Quadtree::Quadtree() : m_level(0), m_bounds(Rect(Vec2(0,0),Vec2(screen_width,screen_height))),
+m_subnode{nullptr,nullptr,nullptr,nullptr}
+{
+	m_index.reserve(10000);
+}
 
-Quadtree::Quadtree(int level, const Rect& bounds) :
-m_level(level), m_bounds(bounds), m_subnode{nullptr,nullptr,nullptr,nullptr}{}
+Quadtree::Quadtree(int level, const Rect& bounds) : m_level(level), m_bounds(bounds),
+m_subnode{nullptr,nullptr,nullptr,nullptr}
+{
+	m_index.reserve(10000);
+}
 
+Quadtree::~Quadtree()
+{
+	delete m_subnode[0];
+	delete m_subnode[1];
+	delete m_subnode[2];
+	delete m_subnode[3];
+}
 void Quadtree::reset()
 {
 	m_index.clear();
 	m_index.shrink_to_fit();
+	delete m_subnode[0];
+	delete m_subnode[1];
+	delete m_subnode[2];
+	delete m_subnode[3];
 	m_bounds = Rect(Vec2(0,0),Vec2(screen_width,screen_height));
 }
 
@@ -35,10 +51,15 @@ void Quadtree::split()
 	int subWidth 	= width * 0.5;
 	int subHeight 	= height * 0.5;
 
-	m_subnode[0] = uptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(x,y),Vec2(x+subWidth,y+subHeight))));
-	m_subnode[1] = uptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y),Vec2(x+width,y+subHeight))));
-	m_subnode[2] = uptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(x,y+subHeight),Vec2(x+subWidth,y+height))));
-	m_subnode[3] = uptr<Quadtree>(new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y+subHeight),Vec2(x+width,y+height))));
+	m_subnode[0] = new Quadtree(m_level+1,Rect(Vec2(x,y),Vec2(x+subWidth,y+subHeight)));
+	m_subnode[1] = new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y),Vec2(x+width,y+subHeight)));
+	m_subnode[2] = new Quadtree(m_level+1,Rect(Vec2(x,y+subHeight),Vec2(x+subWidth,y+height)));
+	m_subnode[3] = new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y+subHeight),Vec2(x+width,y+height)));
+
+	m_subnode[0]->setColor(pastel_red);
+	m_subnode[1]->setColor(pastel_gray);
+	m_subnode[2]->setColor(pastel_orange);
+	m_subnode[3]->setColor(pastel_pink);
 }
 
 void Quadtree::insert(const Circle& b)
@@ -113,6 +134,10 @@ void Quadtree::update()
 
 	m_index.clear();
 	m_index.shrink_to_fit();
+	delete m_subnode[0];
+	delete m_subnode[1];
+	delete m_subnode[2];
+	delete m_subnode[3];
 	m_subnode[0] = nullptr;
 	m_subnode[1] = nullptr;
 	m_subnode[2] = nullptr;
@@ -194,10 +219,6 @@ void Quadtree::draw() const
 
 		// Tell every node to draw
 		if (m_subnode[0] != nullptr) {
-			m_subnode[0]->setColor(pastel_red);
-			m_subnode[1]->setColor(pastel_gray);
-			m_subnode[2]->setColor(pastel_orange);
-			m_subnode[3]->setColor(pastel_pink);
 			m_subnode[0]->draw();
 			m_subnode[1]->draw();
 			m_subnode[2]->draw();
