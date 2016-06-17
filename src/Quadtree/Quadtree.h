@@ -18,7 +18,7 @@
 #include "../Config.h"							// Global vars, screen size
 
 
-const int NODE_CAPACITY     = 30;
+const int NODE_CAPACITY     = 100;
 const int NODE_MAX_DEPTH  	= 6;
 
 class Quadtree {
