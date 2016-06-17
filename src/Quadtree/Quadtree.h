@@ -46,7 +46,7 @@ public:
 	void draw() const;
 
 	bool contains(const Circle& b) const;
-	void setColor(const Color& c);
+	void set_bound_color(const Color& c);
 };
 
 extern Quadtree* quadtree;

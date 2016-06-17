@@ -40,29 +40,29 @@ public:
 	void draw() const;
 	void update();
 	void debug() const;
-	void changeColor(const Color& c);
+	void change_color(const Color& c);
 	void trail();
 
-    void gravitationForce(const Circle& b);
+    void gravitationforce(const Circle& b);
 
-	bool collisionDetection(const Circle& b) const;
-	void resolveCollision(Circle& b);
+	bool collision_detection(const Circle& b) const;
+	void collision_resolve(Circle& b);
 
 	// ------- GET/SET ---------
-	int 	getIndex() const;
-	Vec2 	getPos() const;
-	Vec2 	getVel() const;
-	void 	addPosX(float f);
-	void 	addPosY(float f);
-	void	setVel(float x, float y);
-	void 	addVel(float x, float y);
-	void	addVelX(float f);
-	void 	addVelY(float f);
-	float 	getMass() const;
-	float 	getRadi() const;
-	int 	getVertices() const;
-	Color 	getColor() const;
-	Color 	getTempColor() const;
+	int 	get_index() const;
+	Vec2 	get_pos() const;
+	Vec2 	get_vel() const;
+	void 	add_pos_x(float f);
+	void 	add_pos_y(float f);
+	void	set_vel(float x, float y);
+	void 	add_vel(float x, float y);
+	void	add_vel_x(float f);
+	void 	add_vel_y(float f);
+	float 	get_mass() const;
+	float 	get_radi() const;
+	int 	get_vertices() const;
+	Color 	get_color() const;
+	Color 	get_temp_color() const;
 };
 
 #endif

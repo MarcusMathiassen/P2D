@@ -303,6 +303,6 @@ void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
 void scrollCallback(GLFWwindow *window, double xoffset, double yoffset) {
 	if (object_vec.size() > 0)
 	{
-		static_cast<Circle&>(*object_vec[0]).addVel(xoffset*15,-yoffset*15);
+		static_cast<Circle&>(*object_vec[0]).add_vel(xoffset*15,-yoffset*15);
 	}
 }

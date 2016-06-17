@@ -19,7 +19,7 @@ class Rect {
 
 private:
 
-	Vec2		p1,p2;
+	Vec2		min,max;
 	Color		m_color;
 
 public:
@@ -32,10 +32,10 @@ public:
 	bool contains(const Circle& a) const;
 	bool containsPos(const Circle& a) const;
 
-	Vec2 getP1() const;
-	Vec2 getP2() const;
-	Color getColor() const;
-	void setColor(const Color& c);
+	Vec2 get_min() const;
+	Vec2 get_max() const;
+	Color get_color() const;
+	void set_color(const Color& c);
 };
 
 #endif

@@ -41,10 +41,10 @@ void Node::process()
 			int jdex = m_index_vec[j];
 
 			// collision check
-			if (static_cast<Circle&>(*object_vec[idex]).collisionDetection(static_cast<Circle&>(*object_vec[jdex])))
+			if (static_cast<Circle&>(*object_vec[idex]).collision_detection(static_cast<Circle&>(*object_vec[jdex])))
 			{
 				// resolve collision
-				static_cast<Circle&>(*object_vec[idex]).resolveCollision(static_cast<Circle&>(*object_vec[jdex]));
+				static_cast<Circle&>(*object_vec[idex]).collision_resolve(static_cast<Circle&>(*object_vec[jdex]));
 			}
 		}
 
@@ -57,7 +57,7 @@ void Node::process()
 
 			if (m_rect.containsPos(static_cast<Circle&>(*object_vec[idex])))
 			{
-				static_cast<Circle&>(*object_vec[idex]).changeColor(m_rect.getColor());
+				static_cast<Circle&>(*object_vec[idex]).change_color(m_rect.get_color());
 			}
 		}
 	}

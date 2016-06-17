@@ -24,26 +24,33 @@ Quadtree::~Quadtree()
 
 void Quadtree::split()
 {
-	Vec2 p1 	= m_bounds.getP1();
-	Vec2 p2 	= m_bounds.getP2();
+	Vec2 min 	= m_bounds.get_min();	// Lower left corner
+	Vec2 max 	= m_bounds.get_max();	// Upper right corner
 
-	int x		= p1.x;
-	int y 		= p1.y;
-	int width	= p2.x-p1.x;
-	int height	= p2.y-p1.y;
+	int x		= min.x;
+	int y 		= min.y;
+	int width	= max.x-min.x;
+	int height	= max.y-min.y;
 
 	int subWidth 	= width * 0.5;
 	int subHeight 	= height * 0.5;
 
+	// Lower left
 	m_subnode[0] = new Quadtree(m_level+1,Rect(Vec2(x,y),Vec2(x+subWidth,y+subHeight)));
+
+	// Lower right
 	m_subnode[1] = new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y),Vec2(x+width,y+subHeight)));
+
+	// Upper left
 	m_subnode[2] = new Quadtree(m_level+1,Rect(Vec2(x,y+subHeight),Vec2(x+subWidth,y+height)));
+
+	// Upper right
 	m_subnode[3] = new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y+subHeight),Vec2(x+width,y+height)));
 
-	m_subnode[0]->setColor(pastel_red);
-	m_subnode[1]->setColor(pastel_gray);
-	m_subnode[2]->setColor(pastel_orange);
-	m_subnode[3]->setColor(pastel_pink);
+	m_subnode[0]->set_bound_color(pastel_red);
+	m_subnode[1]->set_bound_color(pastel_gray);
+	m_subnode[2]->set_bound_color(pastel_orange);
+	m_subnode[3]->set_bound_color(pastel_pink);
 }
 
 void Quadtree::insert(const Circle& b)
@@ -106,7 +113,7 @@ void Quadtree::insert(const Circle& b)
 	}
 
 	// Add objects index to this node
-	m_index.emplace_back(b.getIndex());
+	m_index.emplace_back(b.get_index());
 }
 
 void Quadtree::update()
@@ -176,10 +183,10 @@ void Quadtree::process()
 			for (size_t j = i+1; j < m_index.size(); ++j)
 			{
 				// collision check
-				if (static_cast<Circle&>(*object_vec[m_index[i]]).collisionDetection(static_cast<Circle&>(*object_vec[m_index[j]])))
+				if (static_cast<Circle&>(*object_vec[m_index[i]]).collision_detection(static_cast<Circle&>(*object_vec[m_index[j]])))
 				{
 					// resolve collision
-					static_cast<Circle&>(*object_vec[m_index[i]]).resolveCollision(static_cast<Circle&>(*object_vec[m_index[j]]));
+					static_cast<Circle&>(*object_vec[m_index[i]]).collision_resolve(static_cast<Circle&>(*object_vec[m_index[j]]));
 				}
 			}
 
@@ -188,7 +195,7 @@ void Quadtree::process()
 				//---------------------------------------------------------------------	
 				// Change the color of the nodes objects to the nodes rect color.
 				//---------------------------------------------------------------------
-				static_cast<Circle&>(*object_vec[m_index[i]]).changeColor(m_bounds.getColor());
+				static_cast<Circle&>(*object_vec[m_index[i]]).change_color(m_bounds.get_color());
 			}
 		}
 	}
@@ -218,7 +225,7 @@ bool Quadtree::contains(const Circle& b) const
 	return false;
 }
 
-void Quadtree::setColor(const Color& c)
+void Quadtree::set_bound_color(const Color& c)
 {
-	m_bounds.setColor(c);
+	m_bounds.set_color(c);
 }

@@ -112,7 +112,7 @@ void Circle::update()
 
 	if (gravForce) {
 	    for (size_t i = 0; i < object_vec.size(); ++i) {
-	        gravitationForce(static_cast<Circle&>(*object_vec[i]));
+	        gravitationforce(static_cast<Circle&>(*object_vec[i]));
 	    }
 	}
 
@@ -121,15 +121,15 @@ void Circle::update()
 	m_pos.y += (m_vel.y * slow * dt);
 }
 
-bool Circle::collisionDetection(const Circle& b) const
+bool Circle::collision_detection(const Circle& b) const
 {
 	comparisons++;
 
 	// Setup variables
-	Vec2 bpos = b.getPos();
+	Vec2 bpos = b.get_pos();
 	float bx = bpos.x;
 	float by = bpos.y;
-	float br = b.getRadi();
+	float br = b.get_radi();
 
 	//  basic square collision check
 	if (m_pos.x - m_radi < bx + br &&
@@ -153,23 +153,23 @@ bool Circle::collisionDetection(const Circle& b) const
     return false;
 }
 
-void Circle::changeColor(const Color& c)
+void Circle::change_color(const Color& c)
 {
 	m_tempcolor = c;
 }
 
-void Circle::resolveCollision(Circle& b)
+void Circle::collision_resolve(Circle& b)
 {
 	// Setup variables
-	Vec2 bpos = b.getPos();
-	Vec2 bvel = b.getVel();
+	Vec2 bpos = b.get_pos();
+	Vec2 bvel = b.get_vel();
 	float bx = bpos.x;
 	float by = bpos.y;
 	float bvx = bvel.x;
 	float bvy = bvel.y;
-	float br = b.getRadi();
+	float br = b.get_radi();
 	float m1 = m_mass;
-	float m2 = b.getMass();
+	float m2 = b.get_mass();
 
 	// distance from the center of each ball
 	float dx = bx - m_pos.x;
@@ -203,12 +203,12 @@ void Circle::resolveCollision(Circle& b)
  	if (bx + b_move_x >= br
  		&& bx + b_move_x <= screen_width - br)
  	{
- 		b.addPosX(b_move_x);
+ 		b.add_pos_x(b_move_x);
  	}
  	if (by + b_move_y >= br
  		&& by + b_move_y <= screen_height - br)
  	{
- 		b.addPosY(b_move_y);
+ 		b.add_pos_y(b_move_y);
  	}
 
 	// dot product
@@ -219,7 +219,6 @@ void Circle::resolveCollision(Circle& b)
  	// dont calc if they are moving away form eachother
  	if (dotProduct < 0)
  	{
-
  		float d1 = atan2(m_vel.y, m_vel.x);
 		float d2 = atan2(bvy, bvx);
 		float mag1 = sqrt(m_vel.x*m_vel.x+m_vel.y*m_vel.y);
@@ -241,16 +240,16 @@ void Circle::resolveCollision(Circle& b)
 		m_vel.x = (cosOfAngle*v1xf+cos_angle_halfpi*v1yf)*LOSSENERGY;
 		m_vel.y = (sinOfAngle*v1xf+sin_angle_halfpi*v1yf)*LOSSENERGY;
 
-		b.setVel(
+		b.set_vel(
 			(cosOfAngle*v2xf+cos_angle_halfpi*v2yf)*LOSSENERGY,
 			(sinOfAngle*v2xf+sin_angle_halfpi*v2yf)*LOSSENERGY);
 	}
 }
 
-void Circle::gravitationForce(const Circle& b)
+void Circle::gravitationforce(const Circle& b)
 {
     // Set up variables
-    Vec2 bpos = b.getPos();
+    Vec2 bpos = b.get_pos();
     float x1 = m_pos.x;
     float x2 = bpos.x;
     float y1 = m_pos.y;
@@ -258,7 +257,7 @@ void Circle::gravitationForce(const Circle& b)
 
     // Mass of the balls.
     float m1 = m_mass;
-    float m2 = b.getMass();
+    float m2 = b.get_mass();
 
     // Get distance between balls.
     float dx = x2-x1;
@@ -277,17 +276,17 @@ void Circle::gravitationForce(const Circle& b)
     }
 }
 
-int 	Circle::getIndex() const 			{return m_index;}
-Vec2 	Circle::getPos() const 				{return m_pos;}
-void 	Circle::addPosX(float f)			{m_pos.x += f;}
-void 	Circle::addPosY(float f)			{m_pos.y += f;}
-Vec2 	Circle::getVel() const				{return m_vel;}
-void	Circle::setVel(float x, float y)	{m_vel.x = x,m_vel.y = y;}
-void 	Circle::addVel(float x, float y)	{m_vel.x += x,m_vel.y += y;}
-void 	Circle::addVelX(float f)			{m_vel.x += f;}
-void 	Circle::addVelY(float f)			{m_vel.y += f;}
-float 	Circle::getMass() const 			{return m_mass;}
-float 	Circle::getRadi() const				{return m_radi;}
-int 	Circle::getVertices() const			{return m_vertices;}
-Color 	Circle::getColor() const			{return m_color;}
-Color 	Circle::getTempColor() const		{return m_tempcolor;}
+int 	Circle::get_index() const 				{return m_index;}
+Vec2 	Circle::get_pos() const 				{return m_pos;}
+void 	Circle::add_pos_x(float f)				{m_pos.x += f;}
+void 	Circle::add_pos_y(float f)				{m_pos.y += f;}
+Vec2 	Circle::get_vel() const					{return m_vel;}
+void	Circle::set_vel(float x, float y)		{m_vel.x = x,m_vel.y = y;}
+void 	Circle::add_vel(float x, float y)		{m_vel.x += x,m_vel.y += y;}
+void 	Circle::add_vel_x(float f)				{m_vel.x += f;}
+void 	Circle::add_vel_y(float f)				{m_vel.y += f;}
+float 	Circle::get_mass() const 				{return m_mass;}
+float 	Circle::get_radi() const				{return m_radi;}
+int 	Circle::get_vertices() const			{return m_vertices;}
+Color 	Circle::get_color() const				{return m_color;}
+Color 	Circle::get_temp_color() const			{return m_tempcolor;}

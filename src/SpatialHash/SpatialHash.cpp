@@ -50,7 +50,7 @@ void SpatialHash::update()
 		{
 			if (m_node_vec[j]->contains(static_cast<Circle&>(*object_vec[i])))
 			{
-				m_node_vec[j]->insert(static_cast<Circle&>(*object_vec[i]).getIndex());
+				m_node_vec[j]->insert(static_cast<Circle&>(*object_vec[i]).get_index());
 			}
 		}
 	}

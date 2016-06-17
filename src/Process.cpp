@@ -14,10 +14,10 @@ void Calc(int begin, int end) {
 		for (size_t j = i+1; j < object_vec.size(); j++) {
 
 			// collision check
-			if (static_cast<Circle&>(*object_vec[i]).collisionDetection(static_cast<Circle&>(*object_vec[j]))) {
+			if (static_cast<Circle&>(*object_vec[i]).collision_detection(static_cast<Circle&>(*object_vec[j]))) {
 
 				// resolve collision
-				static_cast<Circle&>(*object_vec[i]).resolveCollision(static_cast<Circle&>(*object_vec[j]));
+				static_cast<Circle&>(*object_vec[i]).collision_resolve(static_cast<Circle&>(*object_vec[j]));
 			}
 		}
 
@@ -92,9 +92,9 @@ void update() {
 				if (ballCol)
 				for (size_t j = i+1; j < object_vec.size(); ++j) {
 					// collision check
-					if (static_cast<Circle&>(*object_vec[i]).collisionDetection(static_cast<Circle&>(*object_vec[j]))) {
+					if (static_cast<Circle&>(*object_vec[i]).collision_detection(static_cast<Circle&>(*object_vec[j]))) {
 						// resolve collision
-						static_cast<Circle&>(*object_vec[i]).resolveCollision(static_cast<Circle&>(*object_vec[j]));
+						static_cast<Circle&>(*object_vec[i]).collision_resolve(static_cast<Circle&>(*object_vec[j]));
 					}
 				}
 				// updates its pos and vel.
