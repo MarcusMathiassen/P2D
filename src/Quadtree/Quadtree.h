@@ -38,7 +38,6 @@ public:
 	Quadtree(int level, const Rect& bounds);
 	~Quadtree();
 
-	void reset();
 	void split();
 	void insert(const Circle& b);
 
@@ -50,6 +49,6 @@ public:
 	void setColor(const Color& c);
 };
 
-extern Quadtree quadtree;
+extern Quadtree* quadtree;
 
 #endif

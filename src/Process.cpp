@@ -32,13 +32,13 @@ void update() {
 
 		if (use_Quadtree && ballCol)			// If Quadtrees are active.
 		{
-			quadtree.update();
+			quadtree->update();
 
 			#ifdef BENCHMARK
 			int b =  GetTimeMs64();
 			#endif
 
-			quadtree.process();
+			quadtree->process();
 
 			#ifdef BENCHMARK
 			int a =  GetTimeMs64()-b;

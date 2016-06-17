@@ -75,7 +75,8 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		object_vec.clear();
 		object_vec.shrink_to_fit();
 		spatialHash.init();
-		quadtree.reset();
+		delete quadtree;
+		quadtree = new Quadtree();
 		std::cout << "Deleted all objects" << std::endl;
 	}
 

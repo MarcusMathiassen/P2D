@@ -15,6 +15,6 @@ void draw()
 
 	if (use_Quadtree && show_Quadtree)
 	{
-		quadtree.draw();
+		quadtree->draw();
 	}
 }

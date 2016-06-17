@@ -16,6 +16,7 @@
 #include "./Utility/Inputs.h"					// User input
 #include "./Objects/Object.h"					// Object class
 #include "./SpatialHash/SpatialHash.h"			// SpatialHash
+#include "./Quadtree/Quadtree.h"				// Quadtree
 
 // ----------------------------------------------------------------------------
 
@@ -35,8 +36,18 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	screen_height = height;
 
 	windowResized = true;
-	spatialHash.init();
-	quadtree.reset();
+
+	if (use_DynamicGrid)
+	{
+		spatialHash.init();
+	}
+
+	if (use_Quadtree)
+	{
+		// Reset the quadtree
+		delete quadtree;
+		quadtree = new Quadtree();
+	}
 }
 
 int main()
@@ -86,7 +97,7 @@ int main()
 	glClearColor(BCKGRND.r,BCKGRND.g,BCKGRND.b,1);
 
 	spatialHash.init();
-	quadtree.reset();
+	quadtree = new Quadtree();
 
 	/* FOR FPS COUNTER */
 	float lastTime = glfwGetTime();
@@ -192,7 +203,6 @@ int main()
 	}
 
 // ----------------------------------------------------------------------------
-
 
 	/* Terminate window */
 	glfwTerminate();
