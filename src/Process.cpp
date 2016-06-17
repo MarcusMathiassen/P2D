@@ -37,7 +37,9 @@ void update() {
 			#ifdef BENCHMARK
 			int b =  GetTimeMs64();
 			#endif
+
 			quadtree.process();
+
 			#ifdef BENCHMARK
 			int a =  GetTimeMs64()-b;
 			std::cout << " - Quadtree process():   " << a << " ms" << std::endl;

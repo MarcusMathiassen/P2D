@@ -36,7 +36,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 	windowResized = true;
 	spatialHash.init();
-	quadtree.init();
+	quadtree.reset();
 }
 
 int main()
@@ -85,10 +85,10 @@ int main()
 
 	glClearColor(BCKGRND.r,BCKGRND.g,BCKGRND.b,1);
 
-	quadtree.init();
 	spatialHash.init();
+	quadtree.reset();
 
-	    /* FOR FPS COUNTER */
+	/* FOR FPS COUNTER */
 	float lastTime = glfwGetTime();
    	int nbFrames = 0;
 

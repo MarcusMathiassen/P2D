@@ -8,19 +8,32 @@
 
 Quadtree quadtree;
 
-Quadtree::Quadtree()
+Quadtree::Quadtree() : m_level(0), m_bounds(Rect(Vec2(0,0),Vec2(screen_width,screen_height))),
+m_subnode{nullptr,nullptr,nullptr,nullptr} {}
+
+Quadtree::Quadtree(int level, const Rect& bounds) : m_level(level), m_bounds(bounds),
+m_subnode{nullptr,nullptr,nullptr,nullptr} {}
+
+Quadtree::~Quadtree()
 {
-	m_level = 0;
-	m_bounds = Rect(Vec2(0,0),Vec2(screen_width,screen_height));
+	delete m_subnode[0];
+	delete m_subnode[1];
+	delete m_subnode[2];
+	delete m_subnode[3];
 }
-
-Quadtree::Quadtree(int level, const Rect& bounds) : m_level(level), m_bounds(bounds) {}
-
-void Quadtree::init()
+void Quadtree::reset()
 {
+	m_index.clear();
+	m_index.shrink_to_fit();
+	delete m_subnode[0];
+	delete m_subnode[1];
+	delete m_subnode[2];
+	delete m_subnode[3];
+	m_subnode[0] = nullptr;
+	m_subnode[1] = nullptr;
+	m_subnode[2] = nullptr;
+	m_subnode[3] = nullptr;
 	m_bounds = Rect(Vec2(0,0),Vec2(screen_width,screen_height));
-	m_nodes_vec.clear();
-	m_nodes_vec.shrink_to_fit();
 }
 
 void Quadtree::split()
@@ -36,26 +49,15 @@ void Quadtree::split()
 	int subWidth 	= width * 0.5;
 	int subHeight 	= height * 0.5;
 
-	// BL
-	m_nodes_vec.push_back(uptr<Quadtree>
-	(new Quadtree(m_level+1,Rect(Vec2(x,y),Vec2(x+subWidth,y+subHeight)))));
+	m_subnode[0] = new Quadtree(m_level+1,Rect(Vec2(x,y),Vec2(x+subWidth,y+subHeight)));
+	m_subnode[1] = new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y),Vec2(x+width,y+subHeight)));
+	m_subnode[2] = new Quadtree(m_level+1,Rect(Vec2(x,y+subHeight),Vec2(x+subWidth,y+height)));
+	m_subnode[3] = new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y+subHeight),Vec2(x+width,y+height)));
 
-	// BR
-	m_nodes_vec.push_back(uptr<Quadtree>
-	(new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y),Vec2(x+width,y+subHeight)))));
-
-	// TL
-	m_nodes_vec.push_back(uptr<Quadtree>
-	(new Quadtree(m_level+1,Rect(Vec2(x,y+subHeight),Vec2(x+subWidth,y+height)))));
-
-	// TR
-	m_nodes_vec.push_back(uptr<Quadtree>
-	(new Quadtree(m_level+1,Rect(Vec2(x+subWidth,y+subHeight),Vec2(x+width,y+height)))));
-
-	m_nodes_vec[0]->setColor(pastel_red);
-	m_nodes_vec[1]->setColor(pastel_gray);
-	m_nodes_vec[2]->setColor(pastel_orange);
-	m_nodes_vec[3]->setColor(pastel_pink);
+	m_subnode[0]->setColor(pastel_red);
+	m_subnode[1]->setColor(pastel_gray);
+	m_subnode[2]->setColor(pastel_orange);
+	m_subnode[3]->setColor(pastel_pink);
 }
 
 void Quadtree::insert(const Circle& b)
@@ -65,18 +67,18 @@ void Quadtree::insert(const Circle& b)
 	//---------------------------------------------------------------------
 
 	// If there are subnodes..
-	if (m_nodes_vec.size() > 0)
+	if (m_subnode[0] != nullptr)
 	{
 		// Will be true if subnodes are inserted
 		bool inNodes = false;
 
 		// Go through all subnodes
-		for (size_t i = 0; i < m_nodes_vec.size(); ++i)
+		for (int i = 0; i < 4; ++i)
 		{
 			// Insert the object into all subnodes that contain it
-			if (m_nodes_vec[i]->contains(b))
+			if (m_subnode[i]->contains(b))
 			{
-				m_nodes_vec[i]->insert(b);
+				m_subnode[i]->insert(b);
 				inNodes = true;
 			}
 		}
@@ -84,40 +86,41 @@ void Quadtree::insert(const Circle& b)
 		if (inNodes) return;
 	}
 
-	// Add objects index to this node
-	m_index_vec.push_back((b.getIndex()));
-
-
 	//	If NODE_CAPACITY is reached AND max depth is not yet reached
-	if (m_index_vec.size() > NODE_CAPACITY && m_level < NODE_MAX_DEPTH)
+	if (m_index.size() > NODE_CAPACITY && m_level < NODE_MAX_DEPTH)
 	{
 		// If no subnodes exist..
-		if (m_nodes_vec.empty())
+		if (m_subnode[0] == nullptr)
 		{
 			// Make some
 			split();
 
 			// Move all indexes of THIS node to the new subnodes.
-			for (size_t i = 0; i < m_index_vec.size(); ++i)
+			for (size_t i = 0; i < m_index.size(); ++i)
 			{
-				int idex = m_index_vec[i];
+				int idex = m_index[i];
 
-				for (size_t j = 0; j < m_nodes_vec.size(); ++j)
+				for (int j = 0; j < 4; ++j)
 				{
 					// If the object fits in the subnode..
-					if (m_nodes_vec[j]->contains(static_cast<Circle&>(*object_vec[idex])))
+					if (m_subnode[j]->contains(static_cast<Circle&>(*object_vec[idex])))
 					{
 						// Insert it into the subnode.
-						m_nodes_vec[j]->insert(static_cast<Circle&>(*object_vec[idex]));
+						m_subnode[j]->insert(static_cast<Circle&>(*object_vec[idex]));
 					}
 				}
 			}
 
 			// Remove all indexes from THIS node
-			m_index_vec.clear();
-			m_index_vec.shrink_to_fit();
+			m_index.clear();
+			m_index.shrink_to_fit();
 		}
+
+		return;
 	}
+
+	// Add objects index to this node
+	m_index.emplace_back(b.getIndex());
 }
 
 void Quadtree::update()
@@ -127,15 +130,20 @@ void Quadtree::update()
 	// Clear the quadtree and insert it with objects.
 	//---------------------------------------------------------------------
 
+	m_index.clear();
+	m_index.shrink_to_fit();
+	delete m_subnode[0];
+	delete m_subnode[1];
+	delete m_subnode[2];
+	delete m_subnode[3];
+	m_subnode[0] = nullptr;
+	m_subnode[1] = nullptr;
+	m_subnode[2] = nullptr;
+	m_subnode[3] = nullptr;
+
 	#ifdef BENCHMARK
 	int b =  GetTimeMs64();
 	#endif
-
-	// Clear the quadstrees
-	m_nodes_vec.clear();
-	m_nodes_vec.shrink_to_fit();
-	m_index_vec.clear();
-	m_index_vec.shrink_to_fit();
 
 	// Insert objects into the quadtree
 	for (size_t i = 0; i < object_vec.size(); ++i)
@@ -155,53 +163,48 @@ void Quadtree::process()
 	//---------------------------------------------------------------------
 	// Checks if any objects in the node collide with eachother, and if so,
 	// resolves those collision.
+	//
+	// This function should return a vector of all indexes that could be colliding.
 	//---------------------------------------------------------------------
 
 	// FIND THE DEEPEST NODE->
 
 	// Are there subnodes?
-	if (m_nodes_vec.size() > 0)
+	if (m_subnode[0] != nullptr)
 	{
-		// Does any of them contain objects?
-		for (size_t i = 0; i < m_nodes_vec.size(); ++i)
-		{
-			m_nodes_vec[i]->process();
-		}
+		m_subnode[0]->process();
+		m_subnode[1]->process();
+		m_subnode[2]->process();
+		m_subnode[3]->process();
 
 		return;
 	}
 
-
 	// THEN DO THIS STUFF UNDERNEATH->
 
 	// Are there objects?
-	if (m_index_vec.size() > 0)
+	if (m_index.size() > 0)
 	{
-		for (size_t i = 0; i < m_index_vec.size(); ++i)
+		for (size_t i = 0; i < m_index.size(); ++i)
 		{
-			int idex = m_index_vec[i];
-
-			for (size_t j = i+1; j < m_index_vec.size(); ++j)
+			for (size_t j = i+1; j < m_index.size(); ++j)
 			{
-				int jdex = m_index_vec[j];
-
 				// collision check
-				if (static_cast<Circle&>(*object_vec[idex]).collisionDetection(static_cast<Circle&>(*object_vec[jdex])))
+				if (static_cast<Circle&>(*object_vec[m_index[i]]).collisionDetection(static_cast<Circle&>(*object_vec[m_index[j]])))
 				{
 					// resolve collision
-					static_cast<Circle&>(*object_vec[idex]).resolveCollision(static_cast<Circle&>(*object_vec[jdex]));
+					static_cast<Circle&>(*object_vec[m_index[i]]).resolveCollision(static_cast<Circle&>(*object_vec[m_index[j]]));
 				}
 			}
-
 			//---------------------------------------------------------------------
 			// Change the color of the nodes objects to the nodes rect color.
 			//---------------------------------------------------------------------
-			static_cast<Circle&>(*object_vec[idex]).changeColor(m_bounds.getColor());
+			static_cast<Circle&>(*object_vec[m_index[i]]).changeColor(m_bounds.getColor());
 		}
 	}
 }
 
-void Quadtree::draw()
+void Quadtree::draw() const
 {
 	if (show_Quadtree) {
 
@@ -209,11 +212,11 @@ void Quadtree::draw()
 		m_bounds.draw();
 
 		// Tell every node to draw
-		if (m_nodes_vec.size() > 0) {
-			m_nodes_vec[0]->draw();
-			m_nodes_vec[1]->draw();
-			m_nodes_vec[2]->draw();
-			m_nodes_vec[3]->draw();
+		if (m_subnode[0] != nullptr) {
+			m_subnode[0]->draw();
+			m_subnode[1]->draw();
+			m_subnode[2]->draw();
+			m_subnode[3]->draw();
 		}
 	}
 }
@@ -227,9 +230,4 @@ bool Quadtree::contains(const Circle& b) const
 void Quadtree::setColor(const Color& c)
 {
 	m_bounds.setColor(c);
-}
-
-void Quadtree::setRect(const Rect& r)
-{
-	m_bounds = r;
 }

@@ -74,8 +74,8 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 	if (key == GLFW_KEY_E && action == GLFW_PRESS) {
 		object_vec.clear();
 		object_vec.shrink_to_fit();
-		quadtree.init();
 		spatialHash.init();
+		quadtree.reset();
 		std::cout << "Deleted all objects" << std::endl;
 	}
 
