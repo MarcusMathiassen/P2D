@@ -17,8 +17,8 @@
 #include "../Objects/Shapes/Circle.h"			// Circle class
 #include "../Config.h"							// Global vars, screen size
 
-const int NODE_CAPACITY     = 100;
-const int NODE_MAX_DEPTH  	= 6;
+#define NODE_CAPACITY   100
+#define NODE_MAX_DEPTH  6
 
 class Quadtree
 {

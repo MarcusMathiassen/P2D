@@ -9,16 +9,10 @@
 Quadtree quadtree;
 
 Quadtree::Quadtree() : m_level(0), m_bounds(Rect(Vec2(0,0),Vec2(screen_width,screen_height))),
-m_subnode{nullptr,nullptr,nullptr,nullptr}
-{
-	m_index.reserve(10000);
-}
+m_subnode{nullptr,nullptr,nullptr,nullptr} {}
 
 Quadtree::Quadtree(int level, const Rect& bounds) : m_level(level), m_bounds(bounds),
-m_subnode{nullptr,nullptr,nullptr,nullptr}
-{
-	m_index.reserve(10000);
-}
+m_subnode{nullptr,nullptr,nullptr,nullptr} {}
 
 Quadtree::~Quadtree()
 {
@@ -35,6 +29,10 @@ void Quadtree::reset()
 	delete m_subnode[1];
 	delete m_subnode[2];
 	delete m_subnode[3];
+	m_subnode[0] = nullptr;
+	m_subnode[1] = nullptr;
+	m_subnode[2] = nullptr;
+	m_subnode[3] = nullptr;
 	m_bounds = Rect(Vec2(0,0),Vec2(screen_width,screen_height));
 }
 
@@ -165,6 +163,8 @@ void Quadtree::process()
 	//---------------------------------------------------------------------
 	// Checks if any objects in the node collide with eachother, and if so,
 	// resolves those collision.
+	//
+	// This function should return a vector of all indexes that could be colliding.
 	//---------------------------------------------------------------------
 
 	// FIND THE DEEPEST NODE->
@@ -180,7 +180,6 @@ void Quadtree::process()
 		return;
 	}
 
-
 	// THEN DO THIS STUFF UNDERNEATH->
 
 	// Are there objects?
@@ -188,24 +187,19 @@ void Quadtree::process()
 	{
 		for (size_t i = 0; i < m_index.size(); ++i)
 		{
-			int idex = m_index[i];
-
 			for (size_t j = i+1; j < m_index.size(); ++j)
 			{
-				int jdex = m_index[j];
-
 				// collision check
-				if (static_cast<Circle&>(*object_vec[idex]).collisionDetection(static_cast<Circle&>(*object_vec[jdex])))
+				if (static_cast<Circle&>(*object_vec[m_index[i]]).collisionDetection(static_cast<Circle&>(*object_vec[m_index[j]])))
 				{
 					// resolve collision
-					static_cast<Circle&>(*object_vec[idex]).resolveCollision(static_cast<Circle&>(*object_vec[jdex]));
+					static_cast<Circle&>(*object_vec[m_index[i]]).resolveCollision(static_cast<Circle&>(*object_vec[m_index[j]]));
 				}
 			}
-
 			//---------------------------------------------------------------------
 			// Change the color of the nodes objects to the nodes rect color.
 			//---------------------------------------------------------------------
-			static_cast<Circle&>(*object_vec[idex]).changeColor(m_bounds.getColor());
+			static_cast<Circle&>(*object_vec[m_index[i]]).changeColor(m_bounds.getColor());
 		}
 	}
 }
