@@ -9,7 +9,7 @@
 
 #include <OpenGL/gl.h>
 
-#include "Circle.h"								// Circle class
+#include "../Circle/Circle.h"					// Circle class
 #include "../../Utility/Vec2.h"					// Vec2 class
 #include "../../Utility/Color.h"				// Color class
 #include "../../Utility/Utility.h"				// assignColor()

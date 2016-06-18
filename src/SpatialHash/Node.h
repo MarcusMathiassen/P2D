@@ -9,8 +9,8 @@
 
 #include "../Utility/Templates.h"
 #include "../Objects/Object.h"
-#include "../Objects/Shapes/Rect.h"
-#include "../Objects/Shapes/Circle.h"
+#include "../Objects/Rectangle/Rect.h"
+#include "../Objects/Circle/Circle.h"
 
 class Node
 {

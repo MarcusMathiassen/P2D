@@ -13,8 +13,8 @@
 #include "../Utility/Vec2.h"					// Vec2 class
 #include "../Utility/getTime64.h"				// BENCHMARK
 #include "../Objects/Object.h"					// Object class
-#include "../Objects/Shapes/Rect.h"				// Rect class
-#include "../Objects/Shapes/Circle.h"			// Circle class
+#include "../Objects/Rectangle/Rect.h"			// Rectangle class
+#include "../Objects/Circle/Circle.h"			// Circle class
 #include "../Config.h"							// Global vars, screen size
 
 #define NODE_CAPACITY   100

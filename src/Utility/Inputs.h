@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>						// glfw
 
 #include "../Objects/Object.h"				// Object class
-#include "../Objects/Shapes/Circle.h"		// Circle class
+#include "../Objects/Circle/Circle.h"		// Circle class
 #include "../Quadtree/Quadtree.h"			// Quadtree class
 #include "../SpatialHash/SpatialHash.h"		// SpatialHash class
 #include "../Config.h"						// Global var, screen size, isInWindow
