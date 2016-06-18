@@ -11,8 +11,8 @@
 
 #include <iostream>						// cout
 #include <cmath>						// sqrt
-#include "Node.h"						// Node class
-#include "../Config.h"					// Global variables, screen size
+#include "./Node/Node.h"				// Node class
+#include "../Config/Config.h"			// Global variables, screen size
 #include "../Utility/Templates.h"		// vec, uptr
 #include "../Utility/Utility.h"			// assignColor()
 #include "../Utility/getTime64.h"		// BENCHMARK

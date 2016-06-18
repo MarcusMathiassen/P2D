@@ -15,7 +15,7 @@
 #include "../Objects/Object.h"					// Object class
 #include "../Objects/Rectangle/Rect.h"			// Rectangle class
 #include "../Objects/Circle/Circle.h"			// Circle class
-#include "../Config.h"							// Global vars, screen size
+#include "../Config/Config.h"					// Global vars, screen size
 
 #define NODE_CAPACITY   100
 #define NODE_MAX_DEPTH  6

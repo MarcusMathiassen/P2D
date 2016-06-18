@@ -7,10 +7,10 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "../Utility/Templates.h"
-#include "../Objects/Object.h"
-#include "../Objects/Rectangle/Rect.h"
-#include "../Objects/Circle/Circle.h"
+#include "../../Utility/Templates.h"
+#include "../../Objects/Object.h"
+#include "../../Objects/Rectangle/Rect.h"
+#include "../../Objects/Circle/Circle.h"
 
 class Node
 {

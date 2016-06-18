@@ -9,9 +9,9 @@
 #include <GL/glew.h>							// GLEW setup.
 #include <GLFW/glfw3.h>							// GLFW setup.
 
-#include "Config.h"								// Global settings
-#include "Process.h"							// Updates all objects
-#include "Render.h"								// Renders all objects
+#include "./Config/Config.h"					// Global settings
+#include "./Process/Process.h"					// Updates all objects
+#include "./Render/Render.h"					// Renders all objects
 #include "./Utility/Color.h"					// Color
 #include "./Utility/Inputs.h"					// User input
 #include "./Objects/Object.h"					// Object class

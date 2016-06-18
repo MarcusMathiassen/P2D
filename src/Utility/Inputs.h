@@ -8,7 +8,7 @@
 #include "../Objects/Circle/Circle.h"		// Circle class
 #include "../Quadtree/Quadtree.h"			// Quadtree class
 #include "../SpatialHash/SpatialHash.h"		// SpatialHash class
-#include "../Config.h"						// Global var, screen size, isInWindow
+#include "../Config/Config.h"				// Global var, screen size, isInWindow
 #include "Color.h"							// Color class
 #include "Templates.h"						// vec, uptr
 
