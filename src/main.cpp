@@ -37,16 +37,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 	windowResized = true;
 
-	if (use_DynamicGrid)
-	{
-		spatialHash.init();
-	}
-
-	if (use_Quadtree)
-	{
-		// Reset the quadtree
-		quadtree.clear();
-	}
+	if (use_DynamicGrid) 	spatialHash.init();
+	if (use_Quadtree) 		quadtree.reset();
 }
 
 int main()
@@ -95,12 +87,13 @@ int main()
 
 	glClearColor(BCKGRND.r,BCKGRND.g,BCKGRND.b,1);
 
-	spatialHash.init();
-	quadtree.clear();
-
 	/* FOR FPS COUNTER */
 	float lastTime = glfwGetTime();
    	int nbFrames = 0;
+
+
+   	if (use_DynamicGrid) 	spatialHash.init();
+	if (use_Quadtree) 		quadtree.reset();
 
 // --------------------------------- LOOP -------------------------------------
 

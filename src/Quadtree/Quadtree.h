@@ -38,7 +38,7 @@ public:
 
 	void update();
 	void process() const;
-	void clear();
+	void reset();
 	void draw() const;
 };
 

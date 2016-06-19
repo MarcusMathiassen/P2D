@@ -53,7 +53,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		object_vec.clear();
 		object_vec.shrink_to_fit();
 		spatialHash.init();
-		quadtree.clear();
+		quadtree.reset();
 		std::cout << "Deleted all objects" << std::endl;
 	}
 
@@ -121,7 +121,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		if (use_Quadtree == false)
 		{
 			use_Quadtree = true;
-			quadtree.clear();
+			quadtree.reset();
 			use_DynamicGrid = false;
 			std::cout << "Quadtree ON" << std::endl;
 		} 

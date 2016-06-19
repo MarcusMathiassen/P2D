@@ -8,17 +8,24 @@
 
 Quadtree quadtree;
 
-Quadtree::Quadtree() : m_level(0), m_bounds(Rect(Vec2(0,0),Vec2(screen_width,screen_height))),
+Quadtree::Quadtree() :
+m_level(0),
+m_bounds(Rect(Vec2(0,0),
+Vec2(screen_width,screen_height))),
 m_subnode{nullptr,nullptr,nullptr,nullptr} {}
 
-Quadtree::Quadtree(int level, const Rect& bounds) : m_level(level), m_bounds(bounds),
+
+Quadtree::Quadtree(int level, const Rect& bounds) :
+m_level(level),
+m_bounds(bounds),
 m_subnode{nullptr,nullptr,nullptr,nullptr} {}
+
 
 void Quadtree::update()
 {
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 	// Clear the quadtree and insert it with objects.
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 
 	m_index.clear();
 	m_index.shrink_to_fit();
@@ -35,12 +42,13 @@ void Quadtree::update()
 	}
 }
 
+
 void Quadtree::process() const
 {
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 	// [1] Find the deepest level node.
 	// [2] Run collision/resolve on the nodes objects.
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 
 	if (m_subnode[0] != nullptr)									//	[1]
 	{
@@ -51,7 +59,6 @@ void Quadtree::process() const
 
 		return;
 	}
-
 
 	if (m_index.size() > 0)											//	[2]
 	{
@@ -68,40 +75,43 @@ void Quadtree::process() const
 	}
 }
 
+
 void Quadtree::split()
 {
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 	// Creates subnodes and gives each its own quadrant.
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 
 	Vec2 min 	= m_bounds.get_min();
 	Vec2 max 	= m_bounds.get_max();
 
 	int x		= min.x;
 	int y 		= min.y;
-	int width	= max.x-min.x;
-	int height	= max.y-min.y;
+	int w 		= max.x-min.x;
+	int h 		= max.y-min.y;
 
-	int subWidth 	= width * 0.5;
-	int subHeight 	= height * 0.5;
+	int h_w 	= w * 0.5;
+	int h_h 	= h * 0.5;
 
-	// SW
-	m_subnode[0] = std::make_unique<Quadtree>(m_level+1,Rect(Vec2(x,y),Vec2(x+subWidth,y+subHeight)));
-	// SE
-	m_subnode[1] = std::make_unique<Quadtree>(m_level+1,Rect(Vec2(x+subWidth,y),Vec2(x+width,y+subHeight)));
-	// NW
-	m_subnode[2] = std::make_unique<Quadtree>(m_level+1,Rect(Vec2(x,y+subHeight),Vec2(x+subWidth,y+height)));
-	// NE
-	m_subnode[3] = std::make_unique<Quadtree>(m_level+1,Rect(Vec2(x+subWidth,y+subHeight),Vec2(x+width,y+height)));
+	Rect SW 	(Vec2(x,y),			Vec2(x+h_w,y+h_h));
+	Rect SE 	(Vec2(x+h_w,y),		Vec2(x+w,y+h_h));
+	Rect NW 	(Vec2(x,y+h_h),		Vec2(x+h_w,y+h));
+	Rect NE 	(Vec2(x+h_w,y+h_h),	Vec2(x+w,y+h));
+
+	m_subnode[0] = std::make_unique<Quadtree>(m_level+1,SW);
+	m_subnode[1] = std::make_unique<Quadtree>(m_level+1,SE);
+	m_subnode[2] = std::make_unique<Quadtree>(m_level+1,NW);
+	m_subnode[3] = std::make_unique<Quadtree>(m_level+1,NE);
 }
+
 
 void Quadtree::insert(const Circle& object)
 {
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 	// [1] Insert object into subnodes.
 	// [2] If split, insert THIS nodes objects into the subnodes.
 	// [3] Add object to this node.
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 
 	if (m_subnode[0] != nullptr)
 	{
@@ -145,11 +155,12 @@ void Quadtree::insert(const Circle& object)
 	m_index.emplace_back(object.get_index());						// [3]
 }
 
-void Quadtree::clear()
+
+void Quadtree::reset()
 {
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 	// Sets bounds to the screens bounds and clears the quadtrees.
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 
 	m_bounds = Rect(Vec2(0,0),Vec2(screen_width,screen_height));
 
@@ -162,12 +173,13 @@ void Quadtree::clear()
 	m_subnode[3] = nullptr;
 }
 
+
 void Quadtree::draw() const
 {
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 	// [1] Draw this nodes boundaries.
 	// [2] Draw subnodes boundaries.
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 
 	m_bounds.draw();												// [1]
 

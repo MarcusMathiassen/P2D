@@ -9,9 +9,9 @@ SpatialHash spatialHash;
 
 void SpatialHash::init()
 {
-	// ---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 	// The nodes are cleared and given an element in the grid.
-	// ---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 
 	m_node_vec.clear();
 	m_node_vec.shrink_to_fit();
@@ -24,18 +24,19 @@ void SpatialHash::init()
 	{
 		for (int x = 0; x < screen_width; x+=col)
 		{
-			m_node_vec.emplace_back(std::make_unique<Node>(Rect(Vec2(x,y),Vec2(x+col,y+row))));
+			Rect bounds(Vec2(x,y),Vec2(x+col,y+row));
+			m_node_vec.emplace_back(std::make_unique<Node>(bounds));
 		}
 	}
 }
 
 void SpatialHash::update()
 {
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 	// Goes through every node and fills it with objects from the
 	// main-container, any object that fits within the nodes boundaries will
 	// be added to the nodes object-container.
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 
 	for (const auto& object: object_vec)
 	{
@@ -51,10 +52,10 @@ void SpatialHash::update()
 
 void SpatialHash::process()
 {
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 	// Checks if any objects in the node collide with eachother, and if so,
 	// resolves those collision.
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 
 	for (const auto& node: m_node_vec)
 	{
@@ -64,10 +65,10 @@ void SpatialHash::process()
 
 void SpatialHash::draw()
 {
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 	// Draws the nodes boundaries to screen and colors the objects within
 	// each node with the nodes color.
-	//---------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
 
 	for (const auto& node: m_node_vec)
 	{
