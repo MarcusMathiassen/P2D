@@ -7,11 +7,12 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#include "../Objects/Object.h"					// Object class
+#include "../Objects/Circle/Circle.h"
 #include "../Quadtree/Quadtree.h"				// Quadtree class
 #include "../Config/Config.h"					// Global vars, screen size
 #include "../SpatialHash/SpatialHash.h"			// SpatialHash class
 
 void draw();
+void debug();
 
 #endif

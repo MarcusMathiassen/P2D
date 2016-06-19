@@ -14,10 +14,10 @@ void Calc(int begin, int end) {
 		for (size_t j = i+1; j < object_vec.size(); j++) {
 
 			// collision check
-			if (static_cast<Circle&>(*object_vec[i]).collision_detection(static_cast<Circle&>(*object_vec[j]))) {
+			if (object_vec[i]->collision_detection(*object_vec[j])) {
 
 				// resolve collision
-				static_cast<Circle&>(*object_vec[i]).collision_resolve(static_cast<Circle&>(*object_vec[j]));
+				object_vec[i]->collision_resolve(*object_vec[j]);
 			}
 		}
 
@@ -32,23 +32,12 @@ void update() {
 
 		if (use_Quadtree && ballCol)			// If Quadtrees are active.
 		{
-			quadtree->update();
+			quadtree.update();
+			quadtree.process();
 
-			#ifdef BENCHMARK
-			int b =  GetTimeMs64();
-			#endif
-
-			quadtree->process();
-
-			#ifdef BENCHMARK
-			int a =  GetTimeMs64()-b;
-			std::cout << " - Quadtree process():   " << a << " ms" << std::endl;
-			#endif
-
-			#pragma omp parallel for
-			for (size_t i = 0; i < object_vec.size(); ++i)
+			for (const auto& object: object_vec)
 			{
-				object_vec[i]->update();
+				object->update();
 			}
 			return;
 		}
@@ -58,10 +47,9 @@ void update() {
 			spatialHash.update();
 			spatialHash.process();
 
-			#pragma omp parallel for
-			for (size_t i = 0; i < object_vec.size(); ++i)
+			for (const auto& object: object_vec)
 			{
-				object_vec[i]->update();
+				object->update();
 			}
 			return;
 		}
@@ -92,9 +80,9 @@ void update() {
 				if (ballCol)
 				for (size_t j = i+1; j < object_vec.size(); ++j) {
 					// collision check
-					if (static_cast<Circle&>(*object_vec[i]).collision_detection(static_cast<Circle&>(*object_vec[j]))) {
+					if (object_vec[i]->collision_detection(*object_vec[j])) {
 						// resolve collision
-						static_cast<Circle&>(*object_vec[i]).collision_resolve(static_cast<Circle&>(*object_vec[j]));
+						object_vec[i]->collision_resolve(*object_vec[j]);
 					}
 				}
 				// updates its pos and vel.

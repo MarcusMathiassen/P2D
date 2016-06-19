@@ -1,4 +1,3 @@
-
 //-----------------------------------------|
 //	AUTHOR: MARCUS MATHIASSEN	   		   |
 //	DATE:	03.05.2016	   				   |
@@ -14,8 +13,6 @@ void SpatialHash::init()
 	// The nodes are cleared and given an element in the grid.
 	// ---------------------------------------------------------------------
 
-	numNodes = 0;								// Set number of nodes to 0.
-
 	m_node_vec.clear();
 	m_node_vec.shrink_to_fit();
 
@@ -27,7 +24,7 @@ void SpatialHash::init()
 	{
 		for (int x = 0; x < screen_width; x+=col)
 		{
-			m_node_vec.push_back(uptr<Node>(new Node(Rect(Vec2(x,y),Vec2(x+col,y+row)))));
+			m_node_vec.emplace_back(std::make_unique<Node>(Rect(Vec2(x,y),Vec2(x+col,y+row))));
 		}
 	}
 }
@@ -40,27 +37,16 @@ void SpatialHash::update()
 	// be added to the nodes object-container.
 	//---------------------------------------------------------------------
 
-	#ifdef BENCHMARK
-	int b =  GetTimeMs64();
-	#endif
-
-	for (size_t i = 0; i < object_vec.size(); ++i)
+	for (const auto& object: object_vec)
 	{
-		for (size_t j = 0; j < m_node_vec.size(); ++j)
+		for (const auto& node: m_node_vec)
 		{
-			if (m_node_vec[j]->contains(static_cast<Circle&>(*object_vec[i])))
+			if (node->contains(*object))
 			{
-				m_node_vec[j]->insert(static_cast<Circle&>(*object_vec[i]).get_index());
+				node->insert(*object);
 			}
 		}
 	}
-
-	#ifdef BENCHMARK
-	int a =  GetTimeMs64()-b;
-	std::cout << " - SpatialPartition update():    " << a << " ms" << std::endl;
-	#endif
-
-
 }
 
 void SpatialHash::process()
@@ -70,21 +56,10 @@ void SpatialHash::process()
 	// resolves those collision.
 	//---------------------------------------------------------------------
 
-	#ifdef BENCHMARK
-	int b =  GetTimeMs64();
-	#endif
-
-	#pragma omp parallel for
-	for (size_t i = 0; i < m_node_vec.size(); ++i)
+	for (const auto& node: m_node_vec)
 	{
-		m_node_vec[i]->process();		// Check collisons
+		node->process();
 	}
-
-	#ifdef BENCHMARK
-	int a =  GetTimeMs64()-b;
-	std::cout << " - SpatialPartition process():   " << a << " ms" << std::endl;
-	#endif
-
 }
 
 void SpatialHash::draw()
@@ -93,8 +68,9 @@ void SpatialHash::draw()
 	// Draws the nodes boundaries to screen and colors the objects within
 	// each node with the nodes color.
 	//---------------------------------------------------------------------
-	for (size_t i = 0; i < m_node_vec.size(); ++i)
+
+	for (const auto& node: m_node_vec)
 	{
-		m_node_vec[i]->draw();	// Draw boundaries.
+		node->draw();
 	}
 }

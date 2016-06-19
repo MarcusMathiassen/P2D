@@ -17,7 +17,6 @@ int numThreads = 8;						// Number of CPU threads
 int uniGrid = 64;						// Number of grids.
 int griduni = 2;
 int comparisons = 0;					// Number of comparisons
-int numNodes = 0;						// Number of nodes
 
 bool use_pThread		= true;			// Use pThreads.
 
@@ -28,10 +27,10 @@ bool borderCol 			= true;			// Border collisions.
 bool ballCol 			= true;			// Circle collisions.
 
 bool use_Quadtree		= true;			// Quadtrees.
-bool show_Quadtree		= true;			// Show quadtrees.
+bool show_Quadtree		= false;			// Show quadtrees.
 
 bool use_DynamicGrid	= false;		// Dynamic grid.
-bool show_DynamicGrid	= true;			// Show dynamic grid.
+bool show_DynamicGrid	= false;			// Show dynamic grid.
 
 bool slowmotion 		= false;		// Slows everything down.
 bool gravity 			= false;		// Turn on/off gravity.

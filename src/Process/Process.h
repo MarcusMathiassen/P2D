@@ -14,11 +14,9 @@
 #include "../Utility/Templates.h"
 #include "../SpatialHash/SpatialHash.h"
 #include "../Quadtree/Quadtree.h"
-#include "../Objects/Object.h"
+#include "../Objects/Circle/Circle.h"
 
 void update();
 void Calc(int begin, int end);
-
-
 
 #endif

@@ -6,25 +6,21 @@
 
 #include "Node.h"
 
-Node::Node(const Rect& r) : m_rect(r)
-{
-	numNodes++;
-	assignColor(m_color);
-}
+Node::Node(const Rect& r) : m_rect{r} {}
 
-bool Node::contains(const Circle& b) const
+bool Node::contains(const Circle& object) const
 {
-	// Check if rect contains the object
-	if (m_rect.contains(b)) return true;
+	// Check if rect contains the Object
+	if (m_rect.contains(object)) return true;
 	return false;
 }
 
-void Node::insert(int i)
+void Node::insert(const Circle& object)
 {
-	m_index_vec.push_back(i);
+	m_index_vec.emplace_back(object.get_index());
 }
 
-void Node::draw()
+void Node::draw() const
 {
 	// Draw the nodes boundaries
 	m_rect.draw();
@@ -41,23 +37,10 @@ void Node::process()
 			int jdex = m_index_vec[j];
 
 			// collision check
-			if (static_cast<Circle&>(*object_vec[idex]).collision_detection(static_cast<Circle&>(*object_vec[jdex])))
+			if (object_vec[idex]->collision_detection(*object_vec[jdex]))
 			{
 				// resolve collision
-				static_cast<Circle&>(*object_vec[idex]).collision_resolve(static_cast<Circle&>(*object_vec[jdex]));
-			}
-		}
-
-		if (show_DynamicGrid)
-		{
-
-			//---------------------------------------------------------------------
-			// Change the color of the nodes objects to the nodes rect color.
-			//---------------------------------------------------------------------
-
-			if (m_rect.containsPos(static_cast<Circle&>(*object_vec[idex])))
-			{
-				static_cast<Circle&>(*object_vec[idex]).change_color(m_rect.get_color());
+				object_vec[idex]->collision_resolve(*object_vec[jdex]);
 			}
 		}
 	}

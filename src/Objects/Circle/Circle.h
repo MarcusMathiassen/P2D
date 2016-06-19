@@ -10,14 +10,13 @@
 #include <cmath>								// cos, sin, sqrt, atan2
 #include <OpenGL/gl.h>							// for drawing to screen
 
-#include "../Object.h"
 #include "../../Utility/Templates.h"			// vec
 #include "../../Utility/Vec2.h"					// Vec2 class
 #include "../../Utility/Color.h"				// Color class
 #include "../../Utility/Utility.h"				// assignColor()
 #include "../../Config/Config.h"				// Global vars, screen size
 
-class Circle : public Object
+class Circle
 {
 
 private:
@@ -27,11 +26,12 @@ private:
 	float					m_radi;
 	float					m_mass;
 	Color					m_color;
-	Color 					m_tempcolor;
 	int						m_vertices;
 
 	vec<float> 				m_cosineTable;
 	vec<float> 	 			m_sineTable;
+
+	int 					m_index;
 
 public:
 
@@ -40,8 +40,6 @@ public:
 	void draw() const;
 	void update();
 	void debug() const;
-	void change_color(const Color& c);
-	void trail();
 
     void gravitationforce(const Circle& b);
 
@@ -62,7 +60,8 @@ public:
 	float 	get_radi() const;
 	int 	get_vertices() const;
 	Color 	get_color() const;
-	Color 	get_temp_color() const;
 };
+
+extern vec<uptr<Circle>> object_vec;
 
 #endif

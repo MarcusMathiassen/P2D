@@ -15,7 +15,8 @@
 #include "../../Utility/Utility.h"				// assignColor()
 #include "../../Config/Config.h"				// Global vars, screen size
 
-class Rect {
+class Rect
+{
 
 private:
 

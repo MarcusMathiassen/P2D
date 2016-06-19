@@ -8,6 +8,11 @@ void draw()
 		object_vec[i]->draw();
 	}
 
+	debug();
+}
+
+void debug()
+{
 	if (use_DynamicGrid && show_DynamicGrid)
 	{
 		spatialHash.draw();
@@ -15,6 +20,6 @@ void draw()
 
 	if (use_Quadtree && show_Quadtree)
 	{
-		quadtree->draw();
+		quadtree.draw();
 	}
 }

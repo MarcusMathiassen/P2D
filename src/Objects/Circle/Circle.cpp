@@ -11,12 +11,12 @@
 
 #include "Circle.h"
 
+vec<uptr<Circle>> object_vec;
+
 Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(v) {
 	m_vel = Vec2(0,0);
 	m_mass = m_radi;
 	assignColor(m_color);
-	m_tempcolor = white;
-
 	m_index = object_vec.size();		// Object index is it´s number in the vector.
 
 
@@ -27,26 +27,19 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 	m_sineTable[0] = 0;
 	for (int i = 1; i <= m_vertices; ++i)
 	{
-		m_cosineTable[i] 	= (m_radi * cos(i *  DOUBLE_PI / m_vertices));
-		m_sineTable[i] 		= (m_radi * sin(i *  DOUBLE_PI / m_vertices));
+		m_cosineTable[i] = (m_radi * cos(i *  DOUBLE_PI / m_vertices));
+		m_sineTable[i] 	 = (m_radi * sin(i *  DOUBLE_PI / m_vertices));
 	}
 }
 
 void Circle::draw() const
 {
 	// Draw the circle.
-	if ((use_DynamicGrid && show_DynamicGrid) ||
-		(use_Quadtree && show_Quadtree))
-	{
-		glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
-	}
-	else
-	{
-		glColor3ub(m_color.r,m_color.g,m_color.b);
-	}
+	glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(m_pos.x, m_pos.y);
-	for(int i = 0; i <= m_vertices; ++i) {
+	for(int i = 0; i <= m_vertices; ++i)
+	{
 		glVertex2f(m_pos.x+m_cosineTable[i], m_pos.y+m_sineTable[i]);
 	}
 	glEnd();
@@ -64,15 +57,7 @@ void Circle::debug() const
 	float ny 		= m_pos.y + m_radi*2 * sin(angle);
 	float nx 		= m_pos.x + m_radi*2 * cos(angle);
 
-	if ((use_DynamicGrid && show_DynamicGrid) ||
-		(use_Quadtree && show_Quadtree))
-	{
-		glColor3ub(m_tempcolor.r,m_tempcolor.g,m_tempcolor.b);
-	}
-	else
-	{
-		glColor3ub(m_color.r,m_color.g,m_color.b);
-	}
+	glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_LINES);
 		glVertex2d(m_pos.x,m_pos.y);
 		glVertex2d(nx,ny);
@@ -151,11 +136,6 @@ bool Circle::collision_detection(const Circle& b) const
     }
 
     return false;
-}
-
-void Circle::change_color(const Color& c)
-{
-	m_tempcolor = c;
 }
 
 void Circle::collision_resolve(Circle& b)
@@ -289,4 +269,3 @@ float 	Circle::get_mass() const 				{return m_mass;}
 float 	Circle::get_radi() const				{return m_radi;}
 int 	Circle::get_vertices() const			{return m_vertices;}
 Color 	Circle::get_color() const				{return m_color;}
-Color 	Circle::get_temp_color() const			{return m_tempcolor;}

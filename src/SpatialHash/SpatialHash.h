@@ -15,9 +15,7 @@
 #include "../Config/Config.h"			// Global variables, screen size
 #include "../Utility/Templates.h"		// vec, uptr
 #include "../Utility/Utility.h"			// assignColor()
-#include "../Utility/getTime64.h"		// BENCHMARK
 #include "../Utility/Color.h"			// Color class
-#include "../Objects/Object.h"			// Object class
 #include "../Objects/Circle/Circle.h"	// Circle class
 #include "../Objects/Rectangle/Rect.h"	// Rect class
 

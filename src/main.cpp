@@ -14,9 +14,9 @@
 #include "./Render/Render.h"					// Renders all objects
 #include "./Utility/Color.h"					// Color
 #include "./Utility/Inputs.h"					// User input
-#include "./Objects/Object.h"					// Object class
 #include "./SpatialHash/SpatialHash.h"			// SpatialHash
 #include "./Quadtree/Quadtree.h"				// Quadtree
+#include "./Objects/Circle/Circle.h"				// Circle class
 
 // ----------------------------------------------------------------------------
 
@@ -45,8 +45,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	if (use_Quadtree)
 	{
 		// Reset the quadtree
-		delete quadtree;
-		quadtree = new Quadtree();
+		quadtree.clear();
 	}
 }
 
@@ -97,7 +96,7 @@ int main()
 	glClearColor(BCKGRND.r,BCKGRND.g,BCKGRND.b,1);
 
 	spatialHash.init();
-	quadtree = new Quadtree();
+	quadtree.clear();
 
 	/* FOR FPS COUNTER */
 	float lastTime = glfwGetTime();
@@ -105,8 +104,8 @@ int main()
 
 // --------------------------------- LOOP -------------------------------------
 
-    while (!glfwWindowShouldClose(window)) {
-
+    while (!glfwWindowShouldClose(window))
+    {
     	#ifdef BENCHMARK
 		int bLoop =  GetTimeMs64();
 		#endif
@@ -127,9 +126,6 @@ int main()
 
 		 	if (show_FPS) {
 		    	//printf("\n%f ms/frame\n", 1000/float(nbFrames));
-		    	//std::cout << "Nodes: " << numNodes << std::endl;
-				//std::cout << "Circles: " << object_vec.size() << std::endl;
-				//std::cout << "Comparisons:   " << comparisons <<std::endl;
 		    }
 		    nbFrames = 0;
 		    lastTime++;
@@ -176,7 +172,6 @@ int main()
 
 
 		#ifdef BENCHMARK
-		std::cout << "Nodes:     " << numNodes << std::endl;
 		std::cout << "Circles:   " << object_vec.size() << std::endl;
 		std::cout << "Comparisons:   " << comparisons << std::endl;
 		#endif
