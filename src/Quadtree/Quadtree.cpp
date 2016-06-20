@@ -32,6 +32,7 @@ void Quadtree::update()
 	}
 }
 
+
 void Quadtree::get(vec<vec<int>>& cont) const
 {
 	//-----------------------------------------------------------------------------------
@@ -52,39 +53,6 @@ void Quadtree::get(vec<vec<int>>& cont) const
 		cont.emplace_back(m_index);
 	}
 }
-
-void Quadtree::process() const
-{
-	//-----------------------------------------------------------------------------------
-	// [1] Find the deepest level node.
-	// [2] Run collision/resolve on the nodes objects.
-	//----------------------------x-------------------------------------------------------
-
-	if (m_subnode[0] != nullptr)									//	[1]
-	{
-		m_subnode[0]->process();
-		m_subnode[1]->process();
-		m_subnode[2]->process();
-		m_subnode[3]->process();
-
-		return;
-	}
-
-	if (m_index.size() > 0)											//	[2]
-	{
-		for (size_t i = 0; i < m_index.size(); ++i)
-		{
-			for (size_t j = i+1; j < m_index.size(); ++j)
-			{
-				if (object_vec[m_index[i]]->collision_detection(*object_vec[m_index[j]]))
-				{
-					object_vec[m_index[i]]->collision_resolve(*object_vec[m_index[j]]);
-				}
-			}
-		}
-	}
-}
-
 
 
 void Quadtree::split()

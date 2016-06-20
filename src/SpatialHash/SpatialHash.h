@@ -32,8 +32,8 @@ public:
 
 	void init();
 	void update();
-	void process();
-	void draw();
+	void draw() const;
+	void get(vec<vec<int>>& cont) const;
 
 };
 

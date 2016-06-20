@@ -26,26 +26,9 @@ void Node::draw() const
 	m_rect.draw();
 }
 
-void Node::process()
+void Node::get(vec<vec<int>>& cont)
 {
-	for (size_t i = 0; i < m_index_vec.size(); ++i)
-	{
-		int idex = m_index_vec[i];
-
-		for (size_t j = i+1; j < m_index_vec.size(); ++j)
-		{
-			int jdex = m_index_vec[j];
-
-			// collision check
-			if (object_vec[idex]->collision_detection(*object_vec[jdex]))
-			{
-				// resolve collision
-				object_vec[idex]->collision_resolve(*object_vec[jdex]);
-			}
-		}
-	}
-
-	// Clear the vector for next frame
+	cont.emplace_back(m_index_vec);
 	m_index_vec.clear();
 	m_index_vec.shrink_to_fit();
 }

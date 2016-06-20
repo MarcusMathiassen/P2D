@@ -24,7 +24,7 @@ public:
 	Node(const Rect& r);
 
 	void insert(const Circle& object);
-	void process();
+	void get(vec<vec<int>>& cont);
 	void draw() const;
 
 	bool contains(const Circle& object) const;

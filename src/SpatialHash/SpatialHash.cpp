@@ -50,20 +50,15 @@ void SpatialHash::update()
 	}
 }
 
-void SpatialHash::process()
+void SpatialHash::get(vec<vec<int>>& cont) const
 {
-	//-----------------------------------------------------------------------------------
-	// Checks if any objects in the node collide with eachother, and if so,
-	// resolves those collision.
-	//-----------------------------------------------------------------------------------
-
 	for (const auto& node: m_node_vec)
 	{
-		node->process();
+		node->get(cont);
 	}
 }
 
-void SpatialHash::draw()
+void SpatialHash::draw() const
 {
 	//-----------------------------------------------------------------------------------
 	// Draws the nodes boundaries to screen and colors the objects within

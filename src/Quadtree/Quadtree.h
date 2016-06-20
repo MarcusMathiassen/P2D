@@ -8,7 +8,7 @@
 #include "../Objects/Circle/Circle.h"			// Circle class
 #include "../Config/Config.h"					// Global vars, screen size
 
-#define NODE_CAPACITY   50
+#define NODE_CAPACITY   25
 #define NODE_MAX_DEPTH  6
 
 class Quadtree
@@ -30,10 +30,9 @@ public:
 	Quadtree(int level, const Rect& bounds);
 
 	void update();
-	void process() const;
-	void get(vec<vec<int>>& cont) const;
 	void reset();
 	void draw() const;
+	void get(vec<vec<int>>& cont) const;
 };
 
 extern Quadtree quadtree;
