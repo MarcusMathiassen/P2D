@@ -14,6 +14,19 @@ void Inputs(GLFWwindow* window)
 		if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 		{
 			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
+			object_vec.emplace_back(std::make_unique<Circle>(Vec2(xpos,screen_height-ypos),1,6));
 		}
 		// Spawn balls
 		if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)

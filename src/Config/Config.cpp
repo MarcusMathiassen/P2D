@@ -16,7 +16,6 @@ double dt = 0.016667;					// Delta time
 int numThreads = 8;						// Number of CPU threads
 int uniGrid = 64;						// Number of grids.
 int griduni = 2;
-int comparisons = 0;					// Number of comparisons
 
 bool use_pThread		= true;			// Use pThreads.
 

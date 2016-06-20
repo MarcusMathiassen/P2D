@@ -17,10 +17,11 @@ extern double dt;
 #define OPENMP								// Comment out to turn off.
 											// (Slower than pThreads.)
 
+//#define BENCHMARK
+
 extern int numThreads;						// Number of CPU threads
 extern int uniGrid;							// Number of grids.
 extern int griduni;
-extern int comparisons;						// Number of comparisons
 extern int numNodes;						// Number of nodes
 
 #define MULTISAMPLING 						// Comment out to turn off.

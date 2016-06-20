@@ -1,24 +1,14 @@
-
-//-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	   		   |
-//	DATE:	03.05.2016	   				   |
-//-----------------------------------------|
-
 #include "Quadtree.h"
 
-Quadtree quadtree;
-
-Quadtree::Quadtree() :
-m_level(0),
-m_bounds(Rect(Vec2(0,0),
-Vec2(screen_width,screen_height))),
-m_subnode{nullptr,nullptr,nullptr,nullptr} {}
-
+Quadtree quadtree(0,Rect(Vec2(0,0),Vec2(screen_width,screen_height)));
 
 Quadtree::Quadtree(int level, const Rect& bounds) :
 m_level(level),
 m_bounds(bounds),
-m_subnode{nullptr,nullptr,nullptr,nullptr} {}
+m_subnode{nullptr,nullptr,nullptr,nullptr}
+{
+	m_index.reserve(NODE_CAPACITY);
+}
 
 
 void Quadtree::update()
@@ -35,20 +25,40 @@ void Quadtree::update()
 	m_subnode[2] = nullptr;
 	m_subnode[3] = nullptr;
 
-	// Insert objects into the quadtree
+
 	for (const auto& object: object_vec)
 	{
 		insert(*object);
 	}
 }
 
+void Quadtree::get(vec<vec<int>>& cont) const
+{
+	//-----------------------------------------------------------------------------------
+	// [1] Find the deepest level node.
+	// [2] Add the indexes to the container.
+	//-----------------------------------------------------------------------------------
+
+	if (m_subnode[0] != nullptr)													// [1]
+	{
+		m_subnode[0]->get(cont);
+		m_subnode[1]->get(cont);
+		m_subnode[2]->get(cont);
+		m_subnode[3]->get(cont);
+	}
+
+	if (m_index.size() > 0)															// [2]
+	{
+		cont.emplace_back(m_index);
+	}
+}
 
 void Quadtree::process() const
 {
 	//-----------------------------------------------------------------------------------
 	// [1] Find the deepest level node.
 	// [2] Run collision/resolve on the nodes objects.
-	//-----------------------------------------------------------------------------------
+	//----------------------------x-------------------------------------------------------
 
 	if (m_subnode[0] != nullptr)									//	[1]
 	{
@@ -76,6 +86,7 @@ void Quadtree::process() const
 }
 
 
+
 void Quadtree::split()
 {
 	//-----------------------------------------------------------------------------------
@@ -93,10 +104,10 @@ void Quadtree::split()
 	int h_w 	= w * 0.5;
 	int h_h 	= h * 0.5;
 
-	Rect SW 	(Vec2(x,y),			Vec2(x+h_w,y+h_h));
-	Rect SE 	(Vec2(x+h_w,y),		Vec2(x+w,y+h_h));
-	Rect NW 	(Vec2(x,y+h_h),		Vec2(x+h_w,y+h));
-	Rect NE 	(Vec2(x+h_w,y+h_h),	Vec2(x+w,y+h));
+	Rect SW 	(Vec2(x,y), 		Vec2(x+h_w,y+h_h));
+	Rect SE 	(Vec2(x+h_w,y), 	Vec2(x+w,y+h_h));
+	Rect NW 	(Vec2(x,y+h_h), 	Vec2(x+h_w,y+h));
+	Rect NE 	(Vec2(x+h_w,y+h_h), Vec2(x+w,y+h));
 
 	m_subnode[0] = std::make_unique<Quadtree>(m_level+1,SW);
 	m_subnode[1] = std::make_unique<Quadtree>(m_level+1,SE);

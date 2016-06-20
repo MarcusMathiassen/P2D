@@ -53,6 +53,7 @@ public:
 	void 	add_pos_x(float f);
 	void 	add_pos_y(float f);
 	void	set_vel(float x, float y);
+	void	set_vel(const Vec2& v);
 	void 	add_vel(float x, float y);
 	void	add_vel_x(float f);
 	void 	add_vel_y(float f);

@@ -9,14 +9,16 @@
 
 
 #include <thread>
-
+#include <iostream>
+#include <mutex>
 #include "../Config/Config.h"
 #include "../Utility/Templates.h"
+#include "../Utility/getTime64.h"
 #include "../SpatialHash/SpatialHash.h"
 #include "../Quadtree/Quadtree.h"
 #include "../Objects/Circle/Circle.h"
 
 void update();
-void Calc(int begin, int end);
+void Calc(size_t begin, size_t end);
 
 #endif

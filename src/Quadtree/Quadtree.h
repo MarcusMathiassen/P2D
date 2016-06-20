@@ -1,9 +1,3 @@
-
-//-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	   		   |
-//	DATE:	03.05.2016	   				   |
-//-----------------------------------------|
-
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
@@ -33,11 +27,11 @@ private:
 
 public:
 
-	Quadtree();
 	Quadtree(int level, const Rect& bounds);
 
 	void update();
 	void process() const;
+	void get(vec<vec<int>>& cont) const;
 	void reset();
 	void draw() const;
 };

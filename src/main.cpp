@@ -166,11 +166,7 @@ int main()
 
 		#ifdef BENCHMARK
 		std::cout << "Circles:   " << object_vec.size() << std::endl;
-		std::cout << "Comparisons:   " << comparisons << std::endl;
 		#endif
-
-		comparisons = 0;
-
 
 		#ifdef BENCHMARK
 		int aLoop =  GetTimeMs64()-bLoop;

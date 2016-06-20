@@ -6,23 +6,23 @@
 
 #include "Process.h"
 
+vec<vec<int>> cont;
 
-void Calc(int begin, int end) {
+void Calc(size_t begin, size_t end) {
 
-	for (int i = begin; i < end; i++) {
-		if (ballCol)
-		for (size_t j = i+1; j < object_vec.size(); j++) {
+	for (size_t k = begin; k < end; ++k) {
 
-			// collision check
-			if (object_vec[i]->collision_detection(*object_vec[j])) {
-
-				// resolve collision
-				object_vec[i]->collision_resolve(*object_vec[j]);
+		for (size_t i = 0; i < cont[k].size(); ++i)
+		{
+			for (size_t j = i+1; j < cont[k].size(); ++j)
+			{
+				if (object_vec[cont[k][i]]->collision_detection(*object_vec[cont[k][j]]))
+				{
+					// Save K,I,J for resolve later
+					//object_vec[cont[k][i]]->collision_resolve(*object_vec[cont[k][j]]);
+				}
 			}
 		}
-
-		// updates its pos and vel.
-		object_vec[i]->update();
 	}
 }
 
@@ -30,64 +30,52 @@ void update() {
 
 	if (object_vec.size() > 0) {		// If there are objects..
 
+		cont.clear();
+
 		if (use_Quadtree && ballCol)			// If Quadtrees are active.
 		{
-			quadtree.update();
-			quadtree.process();
 
-			for (const auto& object: object_vec)
-			{
-				object->update();
-			}
-			return;
+			quadtree.update();
+			//quadtree.get(cont);
+			quadtree.process();
 		}
 
 		if (use_DynamicGrid && ballCol)			// If DynamicGrid is active.
 		{
 			spatialHash.update();
 			spatialHash.process();
-
-			for (const auto& object: object_vec)
-			{
-				object->update();
-			}
-			return;
 		}
 
-		if (use_pThread){
 
-			if (numThreads == 0) { Calc(0,object_vec.size()); return; }
-			// Number of balls per thread
-			int parts = object_vec.size() / numThreads;
+		//int parts = cont.size() / numThreads;
+		//vec<std::thread> t(numThreads);
+//
+		//Calc(parts*numThreads, cont.size());
+		//for (int i = 0; i < numThreads; ++i) {
+		//	t[i] z= std::thread(Calc, parts * i, parts * (i+1));
+		//}
+		//for (int i = 0; i < numThreads; ++i) {
+		//	t[i].join();
+		//}
 
-			// Our thread container
-			vec<std::thread> t(numThreads);
+		//for (size_t k = 0; k < cont.size(); ++k)
+		//{
+		//	for (size_t i = 0; i < cont[k].size(); ++i)
+		//	{
+		//		for (size_t j = i+1; j < cont[k].size(); ++j)
+		//		{
+		//			if (object_vec[cont[k][i]]->collision_detection(*object_vec[cont[k][j]]))
+		//			{
+		//				object_vec[cont[k][i]]->collision_resolve(*object_vec[cont[k][j]]);
+		//			}
+		//		}
+		//	}
+		//}
 
-			Calc(parts*numThreads, object_vec.size());
-			for (int i = 0; i < numThreads; ++i) {
-				t[i] = std::thread(Calc, parts * i, parts * (i+1));
-			}
-			for (int i = 0; i < numThreads; ++i) {
-				t[i].join();
-			}
-			return;
+		#pragma omp parallel for
+		for (size_t i = 0; i < object_vec.size(); ++i)
+		{
+			object_vec[i]->update();
 		}
-
-		// Use OpenMP if defined in the config
-		#ifdef OPENMP
-			#pragma omp parallel for
-			for (size_t i = 0; i < object_vec.size(); ++i) {
-				if (ballCol)
-				for (size_t j = i+1; j < object_vec.size(); ++j) {
-					// collision check
-					if (object_vec[i]->collision_detection(*object_vec[j])) {
-						// resolve collision
-						object_vec[i]->collision_resolve(*object_vec[j]);
-					}
-				}
-				// updates its pos and vel.
-				object_vec[i]->update();
-			}
-		#endif
 	}
 }
