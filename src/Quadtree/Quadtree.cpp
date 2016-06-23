@@ -58,7 +58,7 @@ void Quadtree::get(vec<vec<int>>& cont) const
 void Quadtree::split()
 {
 	//-----------------------------------------------------------------------------------
-	// Creates subnodes and gives each its own quadrant.
+	// Create subnodes and gives each its own quadrant.
 	//-----------------------------------------------------------------------------------
 
 	Vec2 min 	= m_bounds.get_min();
@@ -66,21 +66,21 @@ void Quadtree::split()
 
 	int x		= min.x;
 	int y 		= min.y;
-	int w 		= max.x-min.x;
-	int h 		= max.y-min.y;
+	int width 	= max.x - min.x;
+	int height 	= max.y - min.y;
 
-	int h_w 	= w * 0.5;
-	int h_h 	= h * 0.5;
+	int w 	= width  * 0.5;
+	int h 	= height * 0.5;
 
-	Rect SW 	(Vec2(x,y), 		Vec2(x+h_w,y+h_h));
-	Rect SE 	(Vec2(x+h_w,y), 	Vec2(x+w,y+h_h));
-	Rect NW 	(Vec2(x,y+h_h), 	Vec2(x+h_w,y+h));
-	Rect NE 	(Vec2(x+h_w,y+h_h), Vec2(x+w,y+h));
+	Rect SW 	(Vec2(x,	y),		Vec2(x+w,	y+h));
+	Rect SE 	(Vec2(x+w,	y),		Vec2(x+w,	y+h));
+	Rect NW 	(Vec2(x,	y+h),	Vec2(x+w,	y+h));
+	Rect NE 	(Vec2(x+w,	y+h),	Vec2(x+w,	y+h));
 
-	m_subnode[0] = std::make_unique<Quadtree>(m_level+1,SW);
-	m_subnode[1] = std::make_unique<Quadtree>(m_level+1,SE);
-	m_subnode[2] = std::make_unique<Quadtree>(m_level+1,NW);
-	m_subnode[3] = std::make_unique<Quadtree>(m_level+1,NE);
+	m_subnode[0] = std::make_unique<Quadtree>(m_level+1, SW);
+	m_subnode[1] = std::make_unique<Quadtree>(m_level+1, SE);
+	m_subnode[2] = std::make_unique<Quadtree>(m_level+1, NW);
+	m_subnode[3] = std::make_unique<Quadtree>(m_level+1, NE);
 }
 
 
@@ -97,7 +97,7 @@ void Quadtree::insert(const Circle& object)
 		bool inNodes = false;
 		for (int i = 0; i < 4; ++i)
 		{
-			if (m_subnode[i]->contains(object)) 					// [1]
+			if (m_subnode[i]->contain(object)) 					// [1]
 			{
 				m_subnode[i]->insert(object);
 				inNodes = true;
@@ -116,7 +116,7 @@ void Quadtree::insert(const Circle& object)
 			{
 				for (const auto& subnode: m_subnode)
 				{
-					if (subnode->contains(*object_vec[index]))
+					if (subnode->contain(*object_vec[index]))
 					{
 						subnode->insert(*object_vec[index]);
 					}
@@ -172,8 +172,8 @@ void Quadtree::draw() const
 }
 
 
-bool Quadtree::contains(const Circle& object) const
+bool Quadtree::contain(const Circle& object) const
 {
-	if (m_bounds.contains(object)) return true;
+	if (m_bounds.contain(object)) return true;
 	return false;
 }

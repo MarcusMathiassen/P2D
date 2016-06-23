@@ -30,7 +30,7 @@ public:
 
 	void draw() const;
 
-	bool contains(const Circle& a) const;
+	bool contain(const Circle& a) const;
 	bool containsPos(const Circle& a) const;
 
 	Vec2 get_min() const;

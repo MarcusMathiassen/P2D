@@ -8,10 +8,10 @@
 
 Node::Node(const Rect& r) : m_rect{r} {}
 
-bool Node::contains(const Circle& object) const
+bool Node::contain(const Circle& object) const
 {
 	// Check if rect contains the Object
-	if (m_rect.contains(object)) return true;
+	if (m_rect.contain(object)) return true;
 	return false;
 }
 

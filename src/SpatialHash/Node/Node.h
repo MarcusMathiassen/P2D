@@ -27,7 +27,7 @@ public:
 	void get(vec<vec<int>>& cont);
 	void draw() const;
 
-	bool contains(const Circle& object) const;
+	bool contain(const Circle& object) const;
 };
 
 

@@ -42,7 +42,7 @@ void SpatialHash::update()
 	{
 		for (const auto& node: m_node_vec)
 		{
-			if (node->contains(*object))
+			if (node->contain(*object))
 			{
 				node->insert(*object);
 			}

@@ -24,7 +24,7 @@ void Rect::draw() const
 	glEnd();
 }
 
-bool Rect::contains(const Circle& a) const
+bool Rect::contain(const Circle& a) const
 {
 	Vec2 b = a.get_pos();
 	float ar = a.get_radi();

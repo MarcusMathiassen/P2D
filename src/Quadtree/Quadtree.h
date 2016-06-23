@@ -23,16 +23,16 @@ private:
 
 	void split();
 	void insert(const Circle& object);
-	bool contains(const Circle& object) const;
+	bool contain(const Circle& object) const;
 
 public:
 
 	Quadtree(int level, const Rect& bounds);
 
 	void update();
-	void reset();
-	void draw() const;
 	void get(vec<vec<int>>& cont) const;
+	void draw() const;
+	void reset();
 };
 
 extern Quadtree quadtree;

@@ -8,7 +8,6 @@
 
 vec<vec<int>> cont;
 vec<int>	  temp;
-std::mutex lockit;
 
 void copy_vec(vec<Circle>& a,const vec<uptr<Circle>>& b)
 {
