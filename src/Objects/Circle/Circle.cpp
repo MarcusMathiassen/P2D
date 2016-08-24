@@ -241,15 +241,14 @@ void Circle::gravitationforce(const Circle& b)
 
     }
 }
-void 	Circle::set(const Circle& c){set_pos(c.get_pos()),set_vel(c.get_vel());}
+
 int 	Circle::get_index() const 				{return m_index;}
 Vec2 	Circle::get_pos() const 				{return m_pos;}
-void 	Circle::set_pos(const Vec2& v) 			{m_pos.x = v.x,m_pos.y = v.y;}
 void 	Circle::add_pos_x(float f)				{m_pos.x += f;}
 void 	Circle::add_pos_y(float f)				{m_pos.y += f;}
 Vec2 	Circle::get_vel() const					{return m_vel;}
 void	Circle::set_vel(float x, float y)		{m_vel.x = x,m_vel.y = y;}
-void	Circle::set_vel(const Vec2& v)			{m_vel.x = v.x,m_vel.y = v.y;}
+void	Circle::set_vel(const Vec2& v)		{m_vel.x = v.x,m_vel.y = v.y;}
 void 	Circle::add_vel(float x, float y)		{m_vel.x += x,m_vel.y += y;}
 void 	Circle::add_vel_x(float f)				{m_vel.x += f;}
 void 	Circle::add_vel_y(float f)				{m_vel.y += f;}

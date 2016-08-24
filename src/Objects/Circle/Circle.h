@@ -47,10 +47,8 @@ public:
 	void collision_resolve(Circle& b);
 
 	// ------- GET/SET ---------
-	void 	set(const Circle& c);
 	int 	get_index() const;
 	Vec2 	get_pos() const;
-	void 	set_pos(const Vec2& v);
 	Vec2 	get_vel() const;
 	void 	add_pos_x(float f);
 	void 	add_pos_y(float f);
