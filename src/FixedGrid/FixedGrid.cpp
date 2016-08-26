@@ -46,12 +46,10 @@ void FixedGrid::update()
 			{
 				node->insert(*object);
 			}
-		}
-	}
 
-	for (const auto& node: m_nodes)
-	{
-		node->color_objects();
+			// Color the objects with the color of the node.
+			node->color_objects();
+		}
 	}
 }
 
