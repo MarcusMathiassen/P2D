@@ -72,15 +72,20 @@ void Quadtree::split()
 	int w 	= width  * 0.5;
 	int h 	= height * 0.5;
 
-	Rect SW 	(Vec2(x,	y),		Vec2(x+w,	y+h));
-	Rect SE 	(Vec2(x+w,	y),		Vec2(x+w,	y+h));
-	Rect NW 	(Vec2(x,	y+h),	Vec2(x+w,	y+h));
-	Rect NE 	(Vec2(x+w,	y+h),	Vec2(x+w,	y+h));
+	Rect SW 	(Vec2(x,	y),		Vec2(x+w 		,y+h));
+	Rect SE 	(Vec2(x+w,	y),		Vec2(x+width 	,y+h));
+	Rect NW 	(Vec2(x,	y+h),	Vec2(x+w 		,y+height));
+	Rect NE 	(Vec2(x+w,	y+h),	Vec2(x+width 	,y+height));
 
 	m_subnode[0] = std::make_unique<Quadtree>(m_level+1, SW);
 	m_subnode[1] = std::make_unique<Quadtree>(m_level+1, SE);
 	m_subnode[2] = std::make_unique<Quadtree>(m_level+1, NW);
 	m_subnode[3] = std::make_unique<Quadtree>(m_level+1, NE);
+
+	m_subnode[0]->set_color(pastel_red);
+	m_subnode[1]->set_color(pastel_gray);
+	m_subnode[2]->set_color(pastel_orange);
+	m_subnode[3]->set_color(pastel_pink);
 }
 
 
@@ -159,6 +164,11 @@ void Quadtree::draw() const
 	// [1] Draw this nodes boundaries.
 	// [2] Draw subnodes boundaries.
 	//-----------------------------------------------------------------------------------
+	// Color the balls in the same color as the boundaries
+	for (const auto& id: m_index)
+	{
+		object_vec[id]->set_temp_color(m_bounds.get_color());
+	}
 
 	m_bounds.draw();												// [1]
 
@@ -176,4 +186,9 @@ bool Quadtree::contain(const Circle& object) const
 {
 	if (m_bounds.contain(object)) return true;
 	return false;
+}
+
+void Quadtree::set_color(const Color& c)
+{
+	m_bounds.set_color(c);
 }

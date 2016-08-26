@@ -8,9 +8,9 @@
 #define RENDER_H
 
 #include "../Objects/Circle/Circle.h"
-#include "../Quadtree/Quadtree.h"				// Quadtree class
+#include "../Quadtree/Quadtree.h"
 #include "../Config/Config.h"					// Global vars, screen size
-#include "../SpatialHash/SpatialHash.h"			// SpatialHash class
+#include "../FixedGrid/FixedGrid.h"
 
 void draw();
 void debug();

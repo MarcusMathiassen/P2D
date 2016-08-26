@@ -65,7 +65,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 	{
 		object_vec.clear();
 		object_vec.shrink_to_fit();
-		spatialHash.init();
+		fixedgrid.init();
 		quadtree.reset();
 		std::cout << "Deleted all objects" << std::endl;
 	}
@@ -128,67 +128,52 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		}
 	}
 
+	/* Debug mode */
+	if (key == GLFW_KEY_Z && action == GLFW_PRESS && (use_quadtree || use_fixedgrid))
+	{
+		if (debug_mode == false)
+		{
+			debug_mode = true;
+			std::cout << "debug_mode ON" << std::endl;
+		} 
+		else
+		{
+			debug_mode = false;
+			std::cout << "debug_mode OFF" << std::endl;
+		}
+	}
+
 	/* useQuadtree */
 	if (key == GLFW_KEY_Q && action == GLFW_PRESS)
 	{
-		if (use_Quadtree == false)
+		if (use_quadtree == false)
 		{
-			use_Quadtree = true;
+			use_quadtree = true;
 			quadtree.reset();
-			use_DynamicGrid = false;
+			use_fixedgrid = false;
 			std::cout << "Quadtree ON" << std::endl;
 		} 
 		else
 		{
-			use_Quadtree = false;
+			use_quadtree = false;
 			std::cout << "Quadtree OFF" << std::endl;
 		}
 	}
 
-	/* showQuadtrees */
-	if (key == GLFW_KEY_Z && action == GLFW_PRESS && use_Quadtree)
-	{
-		if (show_Quadtree == false)
-		{
-			show_Quadtree = true;
-			std::cout << "showQuadtree ON" << std::endl;
-		} 
-		else
-		{
-			show_Quadtree = false;
-			std::cout << "showQuadtree OFF" << std::endl;
-		}
-	}
-
-	/* use_DynamicGrid */
+	/* use_fixedgrid */
 	if (key == GLFW_KEY_W && action == GLFW_PRESS)
 	{
-		if (use_DynamicGrid == false)
+		if (use_fixedgrid == false)
 		{
-			use_DynamicGrid = true;
-			spatialHash.init();
-			use_Quadtree = false;
-			std::cout << "DynamicGrids ON" << std::endl;
+			use_fixedgrid = true;
+			fixedgrid.init();
+			use_quadtree = false;
+			std::cout << "Fixed Grid ON" << std::endl;
 		}
 		else
 		{
-			use_DynamicGrid = false;
-			std::cout << "DynamicGrids OFF" << std::endl;
-		}
-	}
-
-	/* show_DynamicGrid */
-	if (key == GLFW_KEY_X && action == GLFW_PRESS  && use_DynamicGrid)
-	{
-		if (show_DynamicGrid == false)
-		{
-			show_DynamicGrid = true;
-			std::cout << "show_DynamicGrid ON" << std::endl;
-		}
-		else
-		{
-			show_DynamicGrid = false;
-			std::cout << "show_DynamicGrid OFF" << std::endl;
+			use_fixedgrid = false;
+			std::cout << "Fixed Grid OFF" << std::endl;
 		}
 	}
 
@@ -258,16 +243,16 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 	{
 		griduni--;
 		assignGrid();
-		spatialHash.init();
-		std::cout << "Dynamic Grids: " << uniGrid << std::endl;
+		fixedgrid.init();
+		std::cout << "Nodes: " << uniGrid << std::endl;
 	}
 
 	if (key == GLFW_KEY_7 && action == GLFW_PRESS && griduni < 4)
 	{
 		griduni++;
 		assignGrid();
-		spatialHash.init();
-		std::cout << "Dynamic Grids: " << uniGrid << std::endl;
+		fixedgrid.init();
+		std::cout << "Nodes: " << uniGrid << std::endl;
 	}
 
 	/* numThreads */

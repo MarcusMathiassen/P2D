@@ -26,6 +26,7 @@ private:
 	float					m_radi;
 	float					m_mass;
 	Color					m_color;
+	Color 					m_temp_color;
 	int						m_vertices;
 
 	vec<float> 				m_cosineTable;
@@ -61,6 +62,7 @@ public:
 	float 	get_radi() const;
 	int 	get_vertices() const;
 	Color 	get_color() const;
+	void	set_temp_color(const Color& c);
 };
 
 extern vec<uptr<Circle>> object_vec;

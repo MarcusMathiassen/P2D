@@ -16,7 +16,9 @@ vec<uptr<Circle>> object_vec;
 Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(v) {
 	m_vel = Vec2(0,0);
 	m_mass = m_radi;
+
 	assignColor(m_color);
+	m_temp_color = m_color;
 	m_index = object_vec.size();		// Object index is it´s number in the vector.
 
 
@@ -34,8 +36,11 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 
 void Circle::draw() const
 {
-	// Draw the circle.
-	glColor3ub(m_color.r,m_color.g,m_color.b);
+	if ((use_quadtree || use_fixedgrid) && debug_mode)
+	{
+		glColor3ub(m_temp_color.r,m_temp_color.g,m_temp_color.b);
+	}	
+	else glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(m_pos.x, m_pos.y);
 	for(int i = 0; i <= m_vertices; ++i)
@@ -57,7 +62,11 @@ void Circle::debug() const
 	float ny 		= m_pos.y + m_radi*2 * sin(angle);
 	float nx 		= m_pos.x + m_radi*2 * cos(angle);
 
-	glColor3ub(m_color.r,m_color.g,m_color.b);
+	if ((use_quadtree || use_fixedgrid) && debug_mode)
+	{
+		glColor3ub(m_temp_color.r,m_temp_color.g,m_temp_color.b);
+	}	
+	else glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_LINES);
 		glVertex2d(m_pos.x,m_pos.y);
 		glVertex2d(nx,ny);
@@ -89,10 +98,11 @@ void Circle::update()
 		}
 	}
 
-	float slow = 1;
+	float slow = 1.0;
 	if(slowmotion) slow = 0.1;
 
 	m_mass = m_radi;
+
 	if(gravity) m_vel.y -= ACCEL * m_mass * slow * dt;
 
 	if (gravForce) {
@@ -248,7 +258,7 @@ void 	Circle::add_pos_x(float f)				{m_pos.x += f;}
 void 	Circle::add_pos_y(float f)				{m_pos.y += f;}
 Vec2 	Circle::get_vel() const					{return m_vel;}
 void	Circle::set_vel(float x, float y)		{m_vel.x = x,m_vel.y = y;}
-void	Circle::set_vel(const Vec2& v)		{m_vel.x = v.x,m_vel.y = v.y;}
+void	Circle::set_vel(const Vec2& v)			{m_vel.x = v.x,m_vel.y = v.y;}
 void 	Circle::add_vel(float x, float y)		{m_vel.x += x,m_vel.y += y;}
 void 	Circle::add_vel_x(float f)				{m_vel.x += f;}
 void 	Circle::add_vel_y(float f)				{m_vel.y += f;}
@@ -256,3 +266,5 @@ float 	Circle::get_mass() const 				{return m_mass;}
 float 	Circle::get_radi() const				{return m_radi;}
 int 	Circle::get_vertices() const			{return m_vertices;}
 Color 	Circle::get_color() const				{return m_color;}
+void	Circle::set_temp_color(const Color& c) 	{m_temp_color = c;}
+

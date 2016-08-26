@@ -4,8 +4,8 @@
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
 
-#ifndef SPATIALHASH_H
-#define SPATIALHASH_H
+#ifndef FIXEDGRID_H
+#define FIXEDGRID_H
 
 // --------------------------- INCLUDES ---------------------------------
 
@@ -21,12 +21,12 @@
 
 // ----------------------------------------------------------------------
 
-class SpatialHash
+class FixedGrid
 {
 
 private:
 
-	vec<uptr<Node>>		m_node_vec;
+	vec<uptr<Node>>		m_nodes;
 
 public:
 
@@ -37,6 +37,6 @@ public:
 
 };
 
-extern SpatialHash spatialHash;
+extern FixedGrid fixedgrid;
 
 #endif

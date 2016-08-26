@@ -1,0 +1,12 @@
+
+
+Add number of nodes to the title bar		-		
+Make an universal debug button 				-			
+
+
+	
+
+	BUGS:
+
+		Objects are colored black at origin when using quadtree+ debug. UPDATE: objects now take the color of the current unicol.
+		Debugmode cannot be turned off when in fixedgrid mode.

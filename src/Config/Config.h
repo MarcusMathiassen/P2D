@@ -29,6 +29,9 @@ extern int numNodes;						// Number of nodes
 
 #define ACCEL 9.81							// Acceleration(gravity).
 
+extern bool debug_mode;						// Debug mode
+
+
 extern bool use_pThread;					// Use pThreads.
 
 extern bool show_FPS;						// Show current FPS.
@@ -37,11 +40,8 @@ extern bool lock_FPS;						// Unlock FPS.
 extern bool borderCol;						// Border collisions.
 extern bool ballCol;						// Circle collisions.
 
-extern bool use_Quadtree;					// Quadtrees.
-extern bool show_Quadtree;					// Show quadtrees.
-
-extern bool use_DynamicGrid;				// Dynamic grid.
-extern bool show_DynamicGrid;				// Show dynamic grid.
+extern bool use_quadtree;					// Quadtrees.
+extern bool use_fixedgrid;					// Fixed grid.
 
 extern bool slowmotion;						// Slows everything down.
 extern bool gravity;						// Turn on/off gravity.

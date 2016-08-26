@@ -16,8 +16,8 @@ class Node
 
 private:
 
-	Rect 					m_rect;
-	vec<int> 				m_index_vec;
+	Rect 					m_bounds;
+	vec<int> 				m_index;
 
 public:
 
@@ -26,6 +26,7 @@ public:
 	void insert(const Circle& object);
 	void get(vec<vec<int>>& cont);
 	void draw() const;
+	void color_objects();
 
 	bool contain(const Circle& object) const;
 };

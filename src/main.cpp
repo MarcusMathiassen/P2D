@@ -14,7 +14,7 @@
 #include "./Render/Render.h"					// Renders all objects
 #include "./Utility/Color.h"					// Color
 #include "./Utility/Inputs.h"					// User input
-#include "./SpatialHash/SpatialHash.h"			// SpatialHash
+#include "./FixedGrid/FixedGrid.h"				// FixedGrid
 #include "./Quadtree/Quadtree.h"				// Quadtree
 #include "./Objects/Circle/Circle.h"				// Circle class
 
@@ -37,8 +37,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 	windowResized = true;
 
-	if (use_DynamicGrid) 	spatialHash.init();
-	if (use_Quadtree) 		quadtree.reset();
+	if (use_fixedgrid) 		fixedgrid.init();
+	if (use_quadtree) 		quadtree.reset();
 }
 
 int main()
@@ -92,8 +92,8 @@ int main()
    	int nbFrames = 0;
 
 
-   	if (use_DynamicGrid) 	spatialHash.init();
-	if (use_Quadtree) 		quadtree.reset();
+   	if (use_fixedgrid) 	fixedgrid.init();
+	if (use_quadtree) 		quadtree.reset();
 
 // --------------------------------- LOOP -------------------------------------
 

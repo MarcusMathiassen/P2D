@@ -24,6 +24,7 @@ private:
 	void split();
 	void insert(const Circle& object);
 	bool contain(const Circle& object) const;
+	void set_color(const Color& c);
 
 public:
 

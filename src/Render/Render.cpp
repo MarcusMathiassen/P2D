@@ -1,5 +1,4 @@
 #include "Render.h"
-#include <iostream>
 
 void draw()
 {
@@ -8,18 +7,11 @@ void draw()
 		object_vec[i]->draw();
 	}
 
-	debug();
+	if (debug_mode) debug();
 }
 
 void debug()
 {
-	if (use_DynamicGrid && show_DynamicGrid)
-	{
-		spatialHash.draw();
-	}
-
-	if (use_Quadtree && show_Quadtree)
-	{
-		quadtree.draw();
-	}
+	if (use_fixedgrid) 	fixedgrid.draw();
+	if (use_quadtree) 	quadtree.draw(); 
 }

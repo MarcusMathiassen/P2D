@@ -3,18 +3,18 @@
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
 
-#include "SpatialHash.h"			// Declaration
+#include "FixedGrid.h"			// Declaration
 
-SpatialHash spatialHash;
+FixedGrid fixedgrid;
 
-void SpatialHash::init()
+void FixedGrid::init()
 {
 	//-----------------------------------------------------------------------------------
 	// The nodes are cleared and given an element in the grid.
 	//-----------------------------------------------------------------------------------
 
-	m_node_vec.clear();
-	m_node_vec.shrink_to_fit();
+	m_nodes.clear();
+	m_nodes.shrink_to_fit();
 
 	float sqrtGrid 	= sqrt(uniGrid);
 	int col 		= screen_width/sqrtGrid;
@@ -25,12 +25,12 @@ void SpatialHash::init()
 		for (int x = 0; x < screen_width; x+=col)
 		{
 			Rect bounds(Vec2(x,y),Vec2(x+col,y+row));
-			m_node_vec.emplace_back(std::make_unique<Node>(bounds));
+			m_nodes.emplace_back(std::make_unique<Node>(bounds));
 		}
 	}
 }
 
-void SpatialHash::update()
+void FixedGrid::update()
 {
 	//-----------------------------------------------------------------------------------
 	// Goes through every node and fills it with objects from the
@@ -40,7 +40,7 @@ void SpatialHash::update()
 
 	for (const auto& object: object_vec)
 	{
-		for (const auto& node: m_node_vec)
+		for (const auto& node: m_nodes)
 		{
 			if (node->contain(*object))
 			{
@@ -48,24 +48,29 @@ void SpatialHash::update()
 			}
 		}
 	}
+
+	for (const auto& node: m_nodes)
+	{
+		node->color_objects();
+	}
 }
 
-void SpatialHash::get(vec<vec<int>>& cont) const
+void FixedGrid::get(vec<vec<int>>& cont) const
 {
-	for (const auto& node: m_node_vec)
+	for (const auto& node: m_nodes)
 	{
 		node->get(cont);
 	}
 }
 
-void SpatialHash::draw() const
+void FixedGrid::draw() const
 {
 	//-----------------------------------------------------------------------------------
 	// Draws the nodes boundaries to screen and colors the objects within
 	// each node with the nodes color.
 	//-----------------------------------------------------------------------------------
 
-	for (const auto& node: m_node_vec)
+	for (const auto& node: m_nodes)
 	{
 		node->draw();
 	}

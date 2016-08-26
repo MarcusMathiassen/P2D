@@ -6,8 +6,7 @@
 
 #include "Process.h"
 
-vec<vec<int>> cont;
-vec<int>	  temp;
+vec<vec<int>> 	cont;
 
 void copy_vec(vec<Circle>& a,const vec<uptr<Circle>>& b)
 {
@@ -41,48 +40,24 @@ void update()
 	{
 		if (ballCol)
 		{
-			if (use_Quadtree)
+			cont.clear();
+			cont.shrink_to_fit();
+
+			if (use_quadtree)
 			{
-				cont.clear();
 				quadtree.update();
 				quadtree.get(cont);
 			}
-
-			if (use_DynamicGrid)
+			else if (use_fixedgrid)
 			{
-				cont.clear();
-				spatialHash.update();
-				spatialHash.get(cont);
+				fixedgrid.update();
+				fixedgrid.get(cont);
 			}
+
+			Calc(0, cont.size());
 		}
 
-		//int parts = cont.size() / numThreads;
-		//vec<std::thread> t(numThreads);
-		//Calc(parts*numThreads, cont.size());
-		//for (int i = 0; i < numThreads; ++i)
-		//{
-		//	t[i] = std::thread(Calc, parts * i, parts * (i+1));
-		//}
-		//for (int i = 0; i < numThreads; ++i)
-		//{
-		//	t[i].join();
-		//}
-
-		for (size_t k = 0; k < cont.size(); ++k)
-		{
-			for (size_t i = 0; i < cont[k].size(); ++i)
-			{
-				for (size_t j = i+1; j < cont[k].size(); ++j)
-				{
-					if (object_vec[cont[k][i]]->collision_detection(*object_vec[cont[k][j]]))
-					{
-						object_vec[cont[k][i]]->collision_resolve(*object_vec[cont[k][j]]);
-					}
-				}
-			}
-		}
-
-		#pragma omp parallel for
+		#pragma omp parallell for
 		for (size_t i = 0; i < object_vec.size(); ++i)
 		{
 			object_vec[i]->update();

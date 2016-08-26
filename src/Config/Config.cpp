@@ -17,6 +17,8 @@ int numThreads = 8;						// Number of CPU threads
 int uniGrid = 64;						// Number of grids.
 int griduni = 2;
 
+bool debug_mode 		= true;			// Debug mode
+
 bool use_pThread		= true;			// Use pThreads.
 
 bool show_FPS 			= false;		// Show current FPS.
@@ -25,11 +27,8 @@ bool lock_FPS 			= true;			// lock FPS.
 bool borderCol 			= true;			// Border collisions.
 bool ballCol 			= true;			// Circle collisions.
 
-bool use_Quadtree		= true;			// Quadtrees.
-bool show_Quadtree		= false;			// Show quadtrees.
-
-bool use_DynamicGrid	= false;		// Dynamic grid.
-bool show_DynamicGrid	= false;			// Show dynamic grid.
+bool use_quadtree		= true;			// Quadtrees.
+bool use_fixedgrid		= false;		// Fixed grid.
 
 bool slowmotion 		= false;		// Slows everything down.
 bool gravity 			= false;		// Turn on/off gravity.
