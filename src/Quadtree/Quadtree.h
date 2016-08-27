@@ -1,12 +1,12 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
-#include "../Utility/Templates.h"				// vec, uptr
-#include "../Utility/Color.h"					// Color class
-#include "../Utility/Vec2.h"					// Vec2 class
-#include "../Objects/Rectangle/Rect.h"			// Rectangle class
-#include "../Objects/Circle/Circle.h"			// Circle class
-#include "../Config/Config.h"					// Global vars, screen size
+#include "../Utility/Templates.h"		// vec, uptr
+#include "../Utility/Color.h"			// Color class
+#include "../Utility/Vec2.h"			// Vec2 class
+#include "../Objects/Rectangle/Rect.h"	// Rectangle class
+#include "../Objects/Circle/Circle.h"	// Circle class
+#include "../Config/Config.h"			// Global vars, screen size
 
 #define NODE_CAPACITY   25
 #define NODE_MAX_DEPTH  6
@@ -31,7 +31,7 @@ public:
 	Quadtree(int level, const Rect& bounds);
 
 	void update();
-	void get(vec<vec<int>>& cont) const;
+	void get(vec<vec<int> >& cont) const;
 	void draw() const;
 	void reset();
 };

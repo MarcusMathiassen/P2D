@@ -26,14 +26,14 @@ class FixedGrid
 
 private:
 
-	vec<uptr<Node>>		m_nodes;
+	vec<uptr<Node> >		m_nodes;
 
 public:
 
 	void init();
 	void update();
 	void draw() const;
-	void get(vec<vec<int>>& cont) const;
+	void get(vec<vec<int> >& cont) const;
 
 };
 

@@ -65,6 +65,6 @@ public:
 	void	set_temp_color(const Color& c);
 };
 
-extern vec<uptr<Circle>> object_vec;
+extern vec<uptr<Circle> > object_vec;
 
 #endif

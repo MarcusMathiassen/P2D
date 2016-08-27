@@ -35,7 +35,7 @@ void Node::color_objects()
 	}
 }
 
-void Node::get(vec<vec<int>>& cont)
+void Node::get(vec<vec<int> >& cont)
 {
 	cont.emplace_back(m_index);
 	m_index.clear();

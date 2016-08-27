@@ -46,17 +46,16 @@ void FixedGrid::update()
 			{
 				node->insert(*object);
 			}
-
-			// Color the objects with the color of the node.
-			node->color_objects();
 		}
 	}
 }
 
-void FixedGrid::get(vec<vec<int>>& cont) const
+void FixedGrid::get(vec<vec<int> >& cont) const
 {
 	for (const auto& node: m_nodes)
 	{
+		// Color the objects with the color of the node.
+		node->color_objects();
 		node->get(cont);
 	}
 }

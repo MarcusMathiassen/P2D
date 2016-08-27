@@ -6,9 +6,9 @@
 
 #include "Process.h"
 
-vec<vec<int>> 	cont;
+vec<vec<int> > 	cont;
 
-void copy_vec(vec<Circle>& a,const vec<uptr<Circle>>& b)
+void copy_vec(vec<Circle>& a,const vec<uptr<Circle> >& b)
 {
 	a.reserve(b.size());
 	for (const auto& bb: b)
@@ -47,14 +47,28 @@ void update()
 			{
 				quadtree.update();
 				quadtree.get(cont);
+				Calc(0, cont.size());
 			}
 			else if (use_fixedgrid)
 			{
 				fixedgrid.update();
 				fixedgrid.get(cont);
+				Calc(0, cont.size());
 			}
-
-			Calc(0, cont.size());
+			else 
+			{	
+				#pragma omp parallell for
+				for (size_t i = 0; i < object_vec.size(); ++i)
+				{
+					for (size_t j = i+1; j < object_vec.size(); ++j)
+					{
+						if (object_vec[i]->collision_detection(*object_vec[j]))
+						{
+							object_vec[i]->collision_resolve(*object_vec[j]);
+						}
+					}
+				}
+			}
 		}
 
 		#pragma omp parallell for

@@ -18,6 +18,6 @@
 
 void update();
 void Calc(size_t begin, size_t end);
-void copy_vec(vec<Circle>& a,const vec<uptr<Circle>>& b);
+void copy_vec(vec<Circle>& a,const vec<uptr<Circle> >& b);
 
 #endif

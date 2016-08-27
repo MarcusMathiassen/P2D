@@ -24,7 +24,7 @@ public:
 	Node(const Rect& r);
 
 	void insert(const Circle& object);
-	void get(vec<vec<int>>& cont);
+	void get(vec<vec<int> >& cont);
 	void draw() const;
 	void color_objects();
 
