@@ -10,4 +10,7 @@ Perfect elastic collisions, quadtrees, fixed grid partitioning.
 g++, glew and glfw3.
 
 # How to compile:
-type "make" to compile.
+type "make" in console.
+
+# How to run:
+type "p2d" in console.
