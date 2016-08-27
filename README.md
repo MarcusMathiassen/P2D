@@ -1,13 +1,13 @@
 # P2D
-A 2D physics sandbox.
+A 2D physics sandbox(not really).
 
 # Current version:  0.6
 
 # Features:
-Perfect elastic collisions, quadtrees, spatial partitioning, etc.
+Perfect elastic collisions, quadtrees, fixed grid partitioning.
 
 # Requirements: 
-You need g++-5, glew and glfw to compile.
+g++, glew and glfw3.
 
 # How to compile:
-type "make" in console.
+type "make" to compile.
