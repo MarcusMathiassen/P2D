@@ -16,16 +16,12 @@
 #include "./Utility/Inputs.h"					// User input
 #include "./FixedGrid/FixedGrid.h"				// FixedGrid
 #include "./Quadtree/Quadtree.h"				// Quadtree
-#include "./Objects/Circle/Circle.h"				// Circle class
+#include "./Objects/Circle/Circle.h"			// Circle class
 
 // ----------------------------------------------------------------------------
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	// ---------------------------------------------------------------------
-	// Is called whenever the window is resized.
-	// ---------------------------------------------------------------------
-
    /* Tranform into pixel coordinates */
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
@@ -41,26 +37,45 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	if (use_quadtree) 		quadtree.reset();
 }
 
+static void glfwError(int id, const char* description)
+{
+  std::cout << description << std::endl;
+}
+
 int main()
 {
-	GLFWwindow* window;
+	glfwSetErrorCallback(&glfwError);
 
-	if (!glfwInit()) { std::cout << "GLFW INIT FAILED!\n"; }
+	if (!glfwInit())
+	{ 
+		std::cout << "Failed to initialize GLFW" << std::endl;
+		return -1;
+	}
 
 	#ifdef MULTISAMPLING
 		glfwWindowHint(GLFW_SAMPLES, xMSAA);
 	#endif
 
-	window = glfwCreateWindow(screen_width, screen_height, APP_NAME, NULL, NULL);
+ 	GLFWwindow* window = glfwCreateWindow(screen_width, screen_height, APP_NAME, NULL, NULL);
+ 	if (window == nullptr)
+ 	{
+ 		std::cout << "Failed to create GLFW window." << std::endl;
+ 		glfwTerminate();
+ 		return -1;
+ 	}
 
-	if (!glewInit()) { std::cout << "GLEW INIT FAILED!\n"; }
-
-	glfwSetCursorPosCallback(window, cursorPositionCallback);
+ 	glfwSetCursorPosCallback(window, cursorPositionCallback);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	glfwSetCursorEnterCallback(window, cursorEnterCallback);
 	glfwSetMouseButtonCallback(window, mouseButtonCallback);
 	glfwSetScrollCallback(window, scrollCallback);
 	glfwSetKeyCallback(window, keyCallback);
+
+	if (!glewInit())
+	{ 
+		std::cout << "Failed to initialize GLEW" << std::endl;
+		return -1;
+	}
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -68,9 +83,6 @@ int main()
 	#ifdef MULTISAMPLING
 		glEnable(GL_MULTISAMPLE);
 	#endif
-
-	glEnable(GL_BLEND);
-	glEnable(GL_LINE_SMOOTH);
 
 	/* Make the window´s context current */
 	glfwMakeContextCurrent(window);
@@ -93,16 +105,12 @@ int main()
 
 
    	if (use_fixedgrid) 	fixedgrid.init();
-	if (use_quadtree) 		quadtree.reset();
+	if (use_quadtree) 	quadtree.reset();
 
 // --------------------------------- LOOP -------------------------------------
 
     while (!glfwWindowShouldClose(window))
     {
-    	#ifdef BENCHMARK
-		int bLoop =  GetTimeMs64();
-		#endif
-
 		float currentTime = glfwGetTime();
 		nbFrames++;
 
@@ -127,59 +135,21 @@ int main()
     	/* Keyboard, Mouse, Joystick */
 		Inputs(window);
 
-		/* Background color */
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		#ifdef BENCHMARK
-		int bUpdate =  GetTimeMs64();
-		#endif
 
-		update();		// Updates all objects
+		// "Game" loop START
+		update();
+		draw();
+		// "Game" loop END
 
-		#ifdef BENCHMARK
-		int aUpdate =  GetTimeMs64()-bUpdate;
-		std::cout << "\n\n\n\nupdate():  " << aUpdate << " ms" << std::endl;
-		#endif
-
-
-
-		#ifdef BENCHMARK
-		int bDraw =  GetTimeMs64();
-		#endif
-
-		draw();			// Draws all objects to screen
-
-
-
-
-		#ifdef BENCHMARK
-		int aDraw =  GetTimeMs64()-bDraw;
-		std::cout << "draw():    " << aDraw << " ms" << std::endl;
-		#endif
-
-
-		/* Swap interval */
 		if (lock_FPS) {
 			glfwSwapInterval(1);
 		} else glfwSwapInterval(0);
 
-
-		#ifdef BENCHMARK
-		std::cout << "Circles:   " << object_vec.size() << std::endl;
-		#endif
-
-		#ifdef BENCHMARK
-		int aLoop =  GetTimeMs64()-bLoop;
-		std::cout << "Total:     " << aLoop << " ms" << std::endl;
-		#endif
-
-		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
-
-		/* Poll for and process events */
 		glfwPollEvents();
 
-		/* ESC to quit */
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		{
 			break;

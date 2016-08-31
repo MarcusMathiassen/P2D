@@ -10,10 +10,8 @@ Rect::Rect() : min(Vec2(0,0)), max(Vec2(0,0)) {}
 
 Rect::Rect(const Vec2& a, const Vec2& b) : min(a), max(b)
 {
-	if (use_fixedgrid && debug_mode){
-		assignColor(m_color);
-		uniCol++;
-	} else m_color = white;
+	assignColor(m_color);
+	if (use_fixedgrid) uniCol++;
 }
 
 void Rect::draw() const

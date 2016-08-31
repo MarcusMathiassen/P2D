@@ -36,7 +36,7 @@ void Quadtree::get(vec<vec<int> >& cont) const
 {
 	//----------------------------------------------------------------
 	// [1] Find the deepest level node.
-	// [2] Add the indexes to the container.
+	// [2] If there are indexes, add to container.
 	//----------------------------------------------------------------
 
 	if (m_subnode[0] != nullptr)	// [1]
@@ -71,20 +71,24 @@ void Quadtree::split()
 	int w 	= width  * 0.5;
 	int h 	= height * 0.5;
 
-	Rect SW 	(Vec2(x,	y),		Vec2(x+w 		,y+h));
-	Rect SE 	(Vec2(x+w,	y),		Vec2(x+width 	,y+h));
-	Rect NW 	(Vec2(x,	y+h),	Vec2(x+w 		,y+height));
-	Rect NE 	(Vec2(x+w,	y+h),	Vec2(x+width 	,y+height));
+	Rect SW 	(Vec2(x,	y),		Vec2(x+w, 		y+h));
+	Rect SE 	(Vec2(x+w,	y),		Vec2(x+width, 	y+h));
+	Rect NW 	(Vec2(x,	y+h),	Vec2(x+w, 		y+height));
+	Rect NE 	(Vec2(x+w,	y+h),	Vec2(x+width, 	y+height));
 
 	m_subnode[0] = std::make_unique<Quadtree>(m_level+1, SW);
 	m_subnode[1] = std::make_unique<Quadtree>(m_level+1, SE);
 	m_subnode[2] = std::make_unique<Quadtree>(m_level+1, NW);
 	m_subnode[3] = std::make_unique<Quadtree>(m_level+1, NE);
 
-	m_subnode[0]->set_color(pastel_red);
-	m_subnode[1]->set_color(pastel_gray);
-	m_subnode[2]->set_color(pastel_orange);
-	m_subnode[3]->set_color(pastel_pink);
+
+	if (debug_mode)
+	{
+		m_subnode[0]->set_color(pastel_red);
+		m_subnode[1]->set_color(pastel_gray);
+		m_subnode[2]->set_color(pastel_orange);
+		m_subnode[3]->set_color(pastel_pink);
+	}
 }
 
 
