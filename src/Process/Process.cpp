@@ -57,7 +57,6 @@ void update()
 			}
 			else 
 			{	
-				#pragma omp parallell for
 				for (size_t i = 0; i < object_vec.size(); ++i)
 				{
 					for (size_t j = i+1; j < object_vec.size(); ++j)
@@ -71,7 +70,6 @@ void update()
 			}
 		}
 
-		#pragma omp parallell for
 		for (size_t i = 0; i < object_vec.size(); ++i)
 		{
 			object_vec[i]->update();
