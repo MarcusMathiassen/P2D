@@ -36,7 +36,7 @@ void Calc(size_t begin, size_t end)
 
 void update()
 {
-	if (object_vec.size() > 0)
+	if (!object_vec.empty())
 	{
 		if (ballCol)
 		{
@@ -47,14 +47,13 @@ void update()
 			{
 				quadtree.update();
 				quadtree.get(cont);
-				Calc(0, cont.size());
 			}
 			else if (use_fixedgrid)
 			{
 				fixedgrid.update();
 				fixedgrid.get(cont);
-				Calc(0, cont.size());
 			}
+			if (use_quadtree || use_fixedgrid) Calc(0, cont.size());
 			else 
 			{	
 				for (size_t i = 0; i < object_vec.size(); ++i)
