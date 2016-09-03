@@ -143,6 +143,21 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 		}
 	}
 
+	/* color_random mode */
+	if (key == GLFW_KEY_Y && action == GLFW_PRESS)
+	{
+		if (color_random == false)
+		{
+			color_random = true;
+			std::cout << "color_random ON" << std::endl;
+		} 
+		else
+		{
+			color_random = false;
+			std::cout << "color_random OFF" << std::endl;
+		}
+	}
+
 	/* useQuadtree */
 	if (key == GLFW_KEY_Q && action == GLFW_PRESS)
 	{

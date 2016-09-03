@@ -20,7 +20,6 @@ void Color::clamp()
 		b = (b < 0) ? 0 : (b > 255) ? 255 : b;
 }
 
-
 // COLOR PRESETS
 Color pastel_red		(255,105,97);
 Color pastel_gray		(85,85,85);

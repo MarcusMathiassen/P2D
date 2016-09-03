@@ -156,7 +156,6 @@ void Quadtree::reset()
 	m_subnode[0] = nullptr;
 	m_subnode[1] = nullptr;
 	m_subnode[2] = nullptr;
-
 	m_subnode[3] = nullptr;
 }
 

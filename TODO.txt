@@ -1,7 +1,7 @@
 
 
-Add number of nodes to the title bar		-		
-Make an universal debug button 				-			
+Add number of nodes to the title bar		-	
+Make an universal debug button 				-	DONE (03.09.2016)		
 Use a color filter over each rect instead of changing the color of the objects.
 Make the color of each rect be darker based on it´s depth(m_level).
 
@@ -11,4 +11,5 @@ Make the color of each rect be darker based on it´s depth(m_level).
 	BUGS:
 
 		Objects are colored black at origin when using quadtree+ debug. UPDATE: objects now take the color of the current unicol.
-		Debugmode cannot be turned off when in fixedgrid mode.
+		Debugmode cannot be turned off when in fixedgrid mode.	 FIXED.
+		

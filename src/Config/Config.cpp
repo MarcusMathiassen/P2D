@@ -34,6 +34,7 @@ bool slowmotion 		= false;		// Slows everything down.
 bool gravity 			= false;		// Turn on/off gravity.
 bool direction			= false;		// Turn on/off direciton.
 bool gravForce 			= false;		// Turn on/off gravForce.
+bool color_random 		= false; 		// Random colors each time.
 
 bool windowResized		= false;		// Check if window has been resized.
 bool isInWindow			= true;			//

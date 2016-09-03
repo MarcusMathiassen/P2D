@@ -114,22 +114,21 @@ int main()
 		float currentTime = glfwGetTime();
 		nbFrames++;
 
-		if ( currentTime - lastTime >= 1.0 )
-		{
-			char title [256];
-   			title [255] = '\0';
-   			int numObj = static_cast<int>(object_vec.size());
-    		snprintf ( title, 255,
-       	          "%s %s - [FPS: %d] [OBJ: %d]",
-       	            APP_NAME, APP_VERSION, nbFrames, numObj);
-
-    		glfwSetWindowTitle(window, title);
-
-		 	if (show_FPS) {
-		    	//printf("\n%f ms/frame\n", 1000/float(nbFrames));
-		    }
-		    nbFrames = 0;
-		    lastTime++;
+		if (show_FPS) {
+			if (currentTime - lastTime >= 1.0)
+			{
+				char title [256];
+				title [255] = '\0';
+				int numObj = static_cast<int>(object_vec.size());
+				snprintf ( title, 255,
+				      "%s %s - [FPS: %d] [OBJ: %d]",
+				        APP_NAME, APP_VERSION, nbFrames, numObj);
+				
+	    		glfwSetWindowTitle(window, title);
+	    		printf("%f ms/frame\n", 1000.0/double(nbFrames));
+				nbFrames = 0;
+				++lastTime;
+			}
 		}
 
     	/* Keyboard, Mouse, Joystick */

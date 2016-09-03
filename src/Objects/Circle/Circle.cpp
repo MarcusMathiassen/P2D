@@ -17,6 +17,7 @@ Circle::Circle(const Vec2& p, float r, int v) : m_pos(p), m_radi(r), m_vertices(
 	m_vel = Vec2(0,0);
 	m_mass = m_radi;
 
+	if (color_random) ++uniCol;
 	assignColor(m_color);
 	m_temp_color = m_color;
 	m_index = object_vec.size();		// Object index is it´s number in the vector.
@@ -243,7 +244,7 @@ void Circle::gravitationforce(const Circle& b)
     if (d != 0) {
 
         float angle = atan2(dy, dx);
-        const float G = 6.674e-2;
+        const float G = 6.674e-5;
         float F = G*m1*m2/d*d;
 
         m_vel.x += F*cos(angle);
