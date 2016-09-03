@@ -36,7 +36,7 @@ void Calc(size_t begin, size_t end)
 
 void update()
 {
-	if (!object_vec.empty())
+	if (object_vec.size() > 0)
 	{
 		if (ballCol)
 		{

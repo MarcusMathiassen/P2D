@@ -17,7 +17,7 @@ Rect::Rect(const Vec2& a, const Vec2& b) : min(a), max(b)
 void Rect::draw() const
 {
 	glColor3ub(m_color.r,m_color.g,m_color.b);
-	glLineWidth(2.0);
+	glLineWidth(1.0);
 	glBegin(GL_LINE_LOOP);
 		glVertex2f(min.x+1,min.y+1);
 		glVertex2f(min.x+1,max.y-1);

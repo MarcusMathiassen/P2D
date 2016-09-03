@@ -3,6 +3,7 @@
 Add number of nodes to the title bar		-		
 Make an universal debug button 				-			
 Use a color filter over each rect instead of changing the color of the objects.
+Make the color of each rect be darker based on it´s depth(m_level).
 
 
 	
