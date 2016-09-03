@@ -7,7 +7,7 @@
 #define PI 3.14159
 #define HALF_PI 1.570796
 #define DOUBLE_PI 6.283185
-#define LOSSENERGY 1.0
+#define LOSSENERGY 0.8
 
 #include "Circle.h"
 
