@@ -15,3 +15,7 @@ Make the color of each rect be darker based on it´s depth(m_level).
 
 		QUADTREE: some objects arent checked.
 		
+
+
+Progress:
+	03.09.2016 - 50fps with 42k objects.
