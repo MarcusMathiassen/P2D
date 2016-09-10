@@ -44,19 +44,20 @@ static void glfwError(int id, const char* description)
 
 int main()
 {
+	// Gather hardware info, create and parse config file
+	setup_config();
+
 	glfwSetErrorCallback(&glfwError);
 
 	if (!glfwInit())
-	{ 
+	{
 		std::cout << "Failed to initialize GLFW" << std::endl;
 		return -1;
 	}
 
-	#ifdef MULTISAMPLING
-		glfwWindowHint(GLFW_SAMPLES, xMSAA);
-	#endif
+	if (xMSAA > 0) glfwWindowHint(GLFW_SAMPLES, xMSAA);
 
- 	GLFWwindow* window = glfwCreateWindow(screen_width, screen_height, APP_NAME, NULL, NULL);
+ 	GLFWwindow* window = glfwCreateWindow(screen_width, screen_height, WINDOW_NAME.c_str(), NULL, NULL);
  	if (window == nullptr)
  	{
  		std::cout << "Failed to create GLFW window." << std::endl;
@@ -72,7 +73,7 @@ int main()
 	glfwSetKeyCallback(window, keyCallback);
 
 	if (!glewInit())
-	{ 
+	{
 		std::cout << "Failed to initialize GLEW" << std::endl;
 		return -1;
 	}
@@ -80,9 +81,7 @@ int main()
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	/* Enable multisampling */
-	#ifdef MULTISAMPLING
-		glEnable(GL_MULTISAMPLE);
-	#endif
+	if (xMSAA > 0) glEnable(GL_MULTISAMPLE);
 
 	/* Make the window´s context current */
 	glfwMakeContextCurrent(window);
@@ -122,8 +121,8 @@ int main()
 				int numObj = static_cast<int>(object_vec.size());
 				snprintf ( title, 255,
 				      "%s %s - [FPS: %d] [OBJ: %d]",
-				        APP_NAME, APP_VERSION, nbFrames, numObj);
-				
+				        WINDOW_NAME.c_str(), APP_VERSION.c_str(), nbFrames, numObj);
+
 	    		glfwSetWindowTitle(window, title);
 	    		printf("%f ms/frame\n", 1000.0/double(nbFrames));
 				nbFrames = 0;

@@ -13,7 +13,7 @@
 
 class Quadtree
 {
-	
+
 private:
 
 	int 				m_level;

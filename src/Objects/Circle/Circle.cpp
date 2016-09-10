@@ -40,7 +40,7 @@ void Circle::draw() const
 	if ((use_quadtree || use_fixedgrid) && debug_mode)
 	{
 		glColor3ub(m_temp_color.r,m_temp_color.g,m_temp_color.b);
-	}	
+	}
 	else glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(m_pos.x, m_pos.y);
@@ -66,7 +66,7 @@ void Circle::debug() const
 	if ((use_quadtree || use_fixedgrid) && debug_mode)
 	{
 		glColor3ub(m_temp_color.r,m_temp_color.g,m_temp_color.b);
-	}	
+	}
 	else glColor3ub(m_color.r,m_color.g,m_color.b);
 	glBegin(GL_LINES);
 		glVertex2d(m_pos.x,m_pos.y);
@@ -104,7 +104,7 @@ void Circle::update()
 
 	m_mass = m_radi;
 
-	if(gravity) m_vel.y -= ACCEL * m_mass * slow * dt;
+	if(gravity) m_vel.y -= gravity_accel * m_mass * slow * dt;
 
 	if (gravForce) {
 	    for (size_t i = 0; i < object_vec.size(); ++i) {
