@@ -11,7 +11,7 @@ Node::Node(const Rect& r) : m_bounds{r} {}
 
 bool Node::contain(const int id) const
 {
-	return m_bounds.contain(*object_vec[id]);
+	return m_bounds.contain(id);
 }
 
 void Node::insert(const int id)

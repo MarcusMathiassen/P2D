@@ -207,7 +207,7 @@ void Quadtree::draw() const
 
 bool Quadtree::contain(const int id) const
 {
-	return m_rect.contain(*object_vec[id]);
+	return m_rect.contain(id);
 }
 
 bool Quadtree::contain(const Rect &rect) const

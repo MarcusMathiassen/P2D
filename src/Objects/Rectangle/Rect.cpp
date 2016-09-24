@@ -26,16 +26,16 @@ void Rect::draw() const
 	glEnd();
 }
 
-bool Rect::contain(const Circle& a) const
+bool Rect::contain(const int id) const
 {
-	Vec2 b = a.get_pos();
-	float ar = a.get_radi();
+	Vec2 o = object_vec[id]->get_pos();
+	float r = object_vec[id]->get_radi();
 
 	//  basic square collision check
-	if (b.x - ar < max.x &&
-		b.x + ar > min.x &&
-		b.y - ar < max.y &&
-		b.y + ar > min.y)
+	if (o.x - r < max.x &&
+		o.x + r > min.x &&
+		o.y - r < max.y &&
+		o.y + r > min.y)
 	{
 		return true;
 	}
@@ -60,11 +60,10 @@ bool Rect::contain(const Rect& r) const
 	return false;
 }
 
-bool Rect::containsPos(const Circle &a) const
+bool Rect::contain(const Vec2 &v) const
 {
-	Vec2 b = a.get_pos();
-	if(b.x < min.x || b.x > max.x) return false;
-	if(b.y < min.y || b.y > max.y) return false;
+	if(v.x < min.x || v.x > max.x) return false;
+	if(v.y < min.y || v.y > max.y) return false;
 
 	return true;
 }

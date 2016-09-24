@@ -30,9 +30,9 @@ public:
 
 	void draw() const;
 
-	bool contain(const Circle& a) const;
+	bool contain(const int id) const;
 	bool contain(const Rect &r) const;
-	bool containsPos(const Circle& a) const;
+	bool contain(const Vec2 &v) const;
 
 	Vec2 get_min() const;
 	Vec2 get_max() const;
