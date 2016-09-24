@@ -129,7 +129,7 @@ void Circle::update()
 	// Update ball position
 	m_pos.x += (m_vel.x * slow * dt);
 	m_pos.y += (m_vel.y * slow * dt);
-}
+}	
 
 
 
@@ -162,7 +162,7 @@ bool Circle::collision_detection(const Circle& b) const
 }
 
 void Circle::collision_resolve(Circle& b)
-{
+{	
 	// Setup variables
 	const Vec2 bpos = b.get_pos();
 	const Vec2 bvel = b.get_vel();
@@ -282,5 +282,3 @@ float 	Circle::get_radi() const				{return m_radi;}
 int 	Circle::get_vertices() const			{return m_vertices;}
 Color 	Circle::get_color() const				{return m_color;}
 void	Circle::set_temp_color(const Color& c) 	{m_temp_color = c;}
-Rect 	Circle::get_rect() const 			    {return Rect(Vec2(m_pos.x-m_radi,m_pos.y-m_radi), Vec2(m_pos.x+m_radi,m_pos.y+m_radi));}
-
