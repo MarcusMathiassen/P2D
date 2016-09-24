@@ -4,12 +4,12 @@
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
 
-#ifndef _CIRCLE_H
-#define _CIRCLE_H
+#pragma once
 
 #include <cmath>								// cos, sin, sqrt, atan2
 #include <OpenGL/gl.h>							// for drawing to screen
 
+#include "../../Utility/Vec2.h"
 #include "../../Utility/Templates.h"			// vec
 #include "../../Utility/Vec2.h"					// Vec2 class
 #include "../../Utility/Color.h"				// Color class
@@ -41,6 +41,8 @@ public:
 	void draw() const;
 	void update();
 	void debug() const;
+	void show_collision_box() const;
+
 
     void gravitationforce(const Circle& b);
 
@@ -66,5 +68,3 @@ public:
 };
 
 extern vec<uptr<Circle> > object_vec;
-
-#endif

@@ -4,8 +4,7 @@
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
 
-#ifndef FIXEDGRID_H
-#define FIXEDGRID_H
+#pragma once
 
 // --------------------------- INCLUDES ---------------------------------
 
@@ -38,5 +37,3 @@ public:
 };
 
 extern FixedGrid fixedgrid;
-
-#endif

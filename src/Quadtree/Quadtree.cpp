@@ -2,14 +2,13 @@
 
 Quadtree quadtree(0,Rect(Vec2(0,0),Vec2(screen_width,screen_height)));
 
-Quadtree::Quadtree(int level, const Rect& bounds) :
-m_level(level),
-m_bounds(bounds),
+Quadtree::Quadtree(const int m_level, const Rect& m_rect) :
+m_level(m_level),
+m_rect(m_rect),
 m_subnode{nullptr,nullptr,nullptr,nullptr}
 {
 	m_index.reserve(NODE_CAPACITY);
 }
-
 
 void Quadtree::update()
 {
@@ -27,32 +26,9 @@ void Quadtree::update()
 
 	for (const auto& object: object_vec)
 	{
-		insert(*object);
+		insert(object->get_index());
 	}
 }
-
-
-void Quadtree::get(vec<vec<int> >& cont) const
-{
-	//----------------------------------------------------------------
-	// [1] Find the deepest level node.
-	// [2] If there are indexes, add to container.
-	//----------------------------------------------------------------
-
-	if (m_subnode[0] != nullptr)	// [1]
-	{
-		m_subnode[0]->get(cont);
-		m_subnode[1]->get(cont);
-		m_subnode[2]->get(cont);
-		m_subnode[3]->get(cont);
-	}
-
-	if (m_index.size() > 0)			// [2]
-	{
-		cont.emplace_back(m_index);
-	}
-}
-
 
 void Quadtree::split()
 {
@@ -60,8 +36,8 @@ void Quadtree::split()
 	// Create subnodes and gives each its own quadrant.
 	//----------------------------------------------------------------
 
-	Vec2 min 	= m_bounds.get_min();
-	Vec2 max 	= m_bounds.get_max();
+	Vec2 min 	= m_rect.get_min();
+	Vec2 max 	= m_rect.get_max();
 
 	int x		= min.x;
 	int y 		= min.y;
@@ -76,23 +52,13 @@ void Quadtree::split()
 	Rect NW 	(Vec2(x,	y+h),	Vec2(x+w, 		y+height));
 	Rect NE 	(Vec2(x+w,	y+h),	Vec2(x+width, 	y+height));
 
-	m_subnode[0] = std::make_unique<Quadtree>(m_level+1, SW);
-	m_subnode[1] = std::make_unique<Quadtree>(m_level+1, SE);
-	m_subnode[2] = std::make_unique<Quadtree>(m_level+1, NW);
-	m_subnode[3] = std::make_unique<Quadtree>(m_level+1, NE);
-
-
-	if (debug_mode)
-	{
-		m_subnode[0]->set_color(pastel_red);
-		m_subnode[1]->set_color(pastel_gray);
-		m_subnode[2]->set_color(pastel_orange);
-		m_subnode[3]->set_color(pastel_pink);
-	}
+	m_subnode[0] = std::make_unique <Quadtree> (m_level+1, SW);
+	m_subnode[1] = std::make_unique <Quadtree> (m_level+1, SE);
+	m_subnode[2] = std::make_unique <Quadtree> (m_level+1, NW);
+	m_subnode[3] = std::make_unique <Quadtree> (m_level+1, NE);
 }
 
-
-void Quadtree::insert(const Circle& object)
+void Quadtree::insert(const int id)
 {
 	//----------------------------------------------------------------
 	// [1] Insert object into subnodes.
@@ -100,48 +66,97 @@ void Quadtree::insert(const Circle& object)
 	// [3] Add object to this node.
 	//----------------------------------------------------------------
 
+	// If this subnode has split..
 	if (m_subnode[0] != nullptr)
 	{
-		bool inNodes = false;
-		for (int i = 0; i < 4; ++i)
-		{
-			if (m_subnode[i]->contain(object)) 		// [1]
-			{
-				m_subnode[i]->insert(object);
-				inNodes = true;
-			}
-		}
-		if (inNodes) return;
-	}
-
-	if (m_index.size() > NODE_CAPACITY && m_level < NODE_MAX_DEPTH)
-	{
-		if (m_subnode[0] == nullptr)
-		{
-			split();
-
-			for (const auto& index: m_index) 		// [2]
-			{
-				for (const auto& subnode: m_subnode)
-				{
-					if (subnode->contain(*object_vec[index]))
-					{
-						subnode->insert(*object_vec[index]);
-					}
-				}
-			}
-
-			// Remove all indexes from THIS node
-			m_index.clear();
-			m_index.shrink_to_fit();
-		}
+		// Find the subnodes that contain it and insert it there.
+		if (m_subnode[0]->contain(id)) m_subnode[0]->insert(id);
+		if (m_subnode[1]->contain(id)) m_subnode[1]->insert(id);
+		if (m_subnode[2]->contain(id)) m_subnode[2]->insert(id);
+		if (m_subnode[3]->contain(id)) m_subnode[3]->insert(id);
 
 		return;
 	}
 
-	m_index.emplace_back(object.get_index());		// [3]
+	// If it has NOT split..and NODE_CAPACITY is reached and we are not at MAX LEVEL..
+	if (m_index.size() > NODE_CAPACITY && m_level < NODE_MAX_DEPTH)
+	{
+		// Split into subnodes.
+		split();
+
+		// Go through all this nodes objects..
+		for (const auto& index: m_index) 		// [2]
+		{
+			// Go through all newly created subnodes..
+			for (const auto& subnode: m_subnode)
+			{
+				// If they contain the objects..
+				if (subnode->contain(index))
+				{
+					// Insert the object into the subnode
+					subnode->insert(index);
+				}
+			}
+		}
+
+		// Remove all indexes from THIS node
+		m_index.clear();
+		m_index.shrink_to_fit();
+
+		return;
+	}
+
+	// Add object to this node
+	m_index.emplace_back(id);		// [3]
 }
 
+
+
+void Quadtree::get(vec<vec<int> > &cont) const
+{
+	//----------------------------------------------------------------
+	// [1] Find the deepest level node.
+	// [2] If there are indexes, add to container.
+	//----------------------------------------------------------------
+
+	// If this subnode has split..
+	if (m_subnode[0] != nullptr)	// [1]
+	{
+		// Continue down the tree
+		m_subnode[0]->get(cont);
+		m_subnode[1]->get(cont);
+		m_subnode[2]->get(cont);
+		m_subnode[3]->get(cont);
+
+		return;
+	}
+
+	// Insert indexes into our container
+	if (m_index != 0) cont.emplace_back(m_index); 	// [2]
+}
+
+void Quadtree::retrieve(vec<int> &cont, const Rect &rect) const
+{
+	//----------------------------------------------------------------
+	// [1] Find the deepest level node.
+	// [2] If there are indexes, add to container.
+	//----------------------------------------------------------------
+
+	// If this subnode has split..
+	if (m_subnode[0] != nullptr)	// [1]
+	{
+		// Continue down the tree
+		if(m_subnode[0]->contain(rect)) m_subnode[0]->retrieve(cont, rect);
+		if(m_subnode[1]->contain(rect)) m_subnode[1]->retrieve(cont, rect);
+		if(m_subnode[2]->contain(rect)) m_subnode[2]->retrieve(cont, rect);
+		if(m_subnode[3]->contain(rect)) m_subnode[3]->retrieve(cont, rect);
+
+		return;
+	}
+
+	// Add all indexes to our container
+	for (const auto& index: m_index) cont.emplace_back(index);
+}
 
 void Quadtree::reset()
 {
@@ -149,7 +164,7 @@ void Quadtree::reset()
 	// Sets bounds to the screens bounds and clears the quadtrees.
 	//----------------------------------------------------------------
 
-	m_bounds = Rect(Vec2(0,0),Vec2(screen_width,screen_height));
+	m_rect = Rect(Vec2(0,0),Vec2(screen_width,screen_height));
 	m_index.clear();
 	m_index.shrink_to_fit();
 
@@ -159,7 +174,6 @@ void Quadtree::reset()
 	m_subnode[3] = nullptr;
 }
 
-
 void Quadtree::draw() const
 {
 	//----------------------------------------------------------------
@@ -167,16 +181,22 @@ void Quadtree::draw() const
 	// [2] Draw subnodes boundaries.
 	//----------------------------------------------------------------
 
+	// Set color of each subnode
+	m_subnode[0]->set_color(pastel_red);
+	m_subnode[1]->set_color(pastel_gray);
+	m_subnode[2]->set_color(pastel_orange);
+	m_subnode[3]->set_color(pastel_pink);
+
 	// Color the balls in the same color as the boundaries
 	for (const auto& id: m_index)
 	{
-		object_vec[id]->set_temp_color(m_bounds.get_color());
+		object_vec[id]->set_temp_color(m_rect.get_color());
 	}
 
 	// Only draw the nodes with objects in them.
-	if (!m_index.empty()) m_bounds.draw();			// [1]
+	if (m_index != 0) m_rect.draw();			// [1]
 
-	if (m_subnode[0] != nullptr)					// [2]
+	if (m_subnode[0] != nullptr)				// [2]
 	{
 		m_subnode[0]->draw();
 		m_subnode[1]->draw();
@@ -185,13 +205,17 @@ void Quadtree::draw() const
 	}
 }
 
-
-bool Quadtree::contain(const Circle& object) const
+bool Quadtree::contain(const int id) const
 {
-	return m_bounds.contain(object);
+	return m_rect.contain(*object_vec[id]);
+}
+
+bool Quadtree::contain(const Rect &rect) const
+{
+	return m_rect.contain(rect);
 }
 
 void Quadtree::set_color(const Color& c)
 {
-	m_bounds.set_color(c);
+	m_rect.set_color(c);
 }

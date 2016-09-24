@@ -4,12 +4,12 @@
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
 
+#include "Circle.h"
+
 #define PI 3.14159
 #define HALF_PI 1.570796
 #define DOUBLE_PI 6.283185
 #define LOSSENERGY 0.8
-
-#include "Circle.h"
 
 vec<uptr<Circle>> object_vec;
 
@@ -53,6 +53,7 @@ void Circle::draw() const
 	if (direction)
 	{
 		debug();
+		show_collision_box();
 	}
 }
 
@@ -71,6 +72,19 @@ void Circle::debug() const
 	glBegin(GL_LINES);
 		glVertex2d(m_pos.x,m_pos.y);
 		glVertex2d(nx,ny);
+	glEnd();
+}
+
+void Circle::show_collision_box() const
+{
+	// Draws collision boxes
+	glColor3ub(0,255,0);
+	glLineWidth(1.0);
+	glBegin(GL_LINE_LOOP);
+		glVertex2f(m_pos.x-m_radi,m_pos.y-m_radi);
+		glVertex2f(m_pos.x-m_radi,m_pos.y+m_radi);
+		glVertex2f(m_pos.x+m_radi,m_pos.y+m_radi);
+		glVertex2f(m_pos.x+m_radi,m_pos.y-m_radi);
 	glEnd();
 }
 
@@ -116,6 +130,8 @@ void Circle::update()
 	m_pos.x += (m_vel.x * slow * dt);
 	m_pos.y += (m_vel.y * slow * dt);
 }
+
+
 
 bool Circle::collision_detection(const Circle& b) const
 {

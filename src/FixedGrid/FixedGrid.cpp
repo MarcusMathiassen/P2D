@@ -40,11 +40,13 @@ void FixedGrid::update()
 
 	for (const auto& object: object_vec)
 	{
+		int id = object->get_index();
+
 		for (const auto& node: m_nodes)
 		{
-			if (node->contain(*object))
+			if (node->contain(id))
 			{
-				node->insert(*object);
+				node->insert(id);
 			}
 		}
 	}

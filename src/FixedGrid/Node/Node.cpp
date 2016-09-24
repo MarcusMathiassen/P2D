@@ -9,15 +9,14 @@
 
 Node::Node(const Rect& r) : m_bounds{r} {}
 
-bool Node::contain(const Circle& object) const
+bool Node::contain(const int id) const
 {
-	if (m_bounds.contain(object)) return true;
-	return false;
+	return m_bounds.contain(*object_vec[id]);
 }
 
-void Node::insert(const Circle& object)
+void Node::insert(const int id)
 {
-	m_index.emplace_back(object.get_index());
+	m_index.emplace_back(id);
 }
 
 void Node::draw() const

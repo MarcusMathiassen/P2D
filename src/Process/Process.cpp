@@ -6,18 +6,7 @@
 
 #include "Process.h"
 
-vec<vec<int> > 	cont;
-
-void copy_vec(vec<Circle>& a,const vec<uptr<Circle> >& b)
-{
-	a.reserve(b.size());
-	for (const auto& bb: b)
-	{
-		a.emplace_back(*bb);
-	}
-}
-
-void Calc(size_t begin, size_t end)
+void Calc(const size_t begin, const size_t end)
 {
 	for (size_t k = begin; k < end; ++k)
 	{
@@ -40,22 +29,17 @@ void update()
 	{
 		if (ballCol)
 		{
-			cont.clear();
-			cont.shrink_to_fit();
+			vec<vec<int> > 	cont;
 
-			if (use_quadtree)
-			{
-				quadtree.update();
-				quadtree.get(cont);
-			}
-			else if (use_fixedgrid)
-			{
-				fixedgrid.update();
-				fixedgrid.get(cont);
-			}
+			if (use_quadtree) 		{ quadtree.update(); 	quadtree.get(cont); }
+			else if (use_fixedgrid) { fixedgrid.update(); 	fixedgrid.get(cont); }
+
+			// If we´re using collision optimizations
 			if (use_quadtree || use_fixedgrid) Calc(0, cont.size());
-			else 
-			{	
+
+			// Brute force
+			else
+			{
 				for (size_t i = 0; i < object_vec.size(); ++i)
 				{
 					for (size_t j = i+1; j < object_vec.size(); ++j)
@@ -69,9 +53,7 @@ void update()
 			}
 		}
 
-		for (size_t i = 0; i < object_vec.size(); ++i)
-		{
-			object_vec[i]->update();
-		}
+		// Update each objects position
+		for (auto& object: object_vec) object->update();
 	}
 }

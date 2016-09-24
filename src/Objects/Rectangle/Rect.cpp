@@ -43,6 +43,23 @@ bool Rect::contain(const Circle& a) const
 	return false;
 }
 
+bool Rect::contain(const Rect& r) const
+{
+	Vec2 rmin = r.get_min();
+	Vec2 rmax = r.get_max();
+
+	//  basic square collision check
+	if (rmax.x < max.x &&
+		rmin.x > min.x &&
+		rmax.y < max.y &&
+		rmin.y > min.y)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 bool Rect::containsPos(const Circle &a) const
 {
 	Vec2 b = a.get_pos();

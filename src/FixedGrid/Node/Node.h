@@ -4,8 +4,7 @@
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
 
-#ifndef NODE_H
-#define NODE_H
+#pragma once
 
 #include "../../Utility/Templates.h"
 #include "../../Objects/Rectangle/Rect.h"
@@ -23,13 +22,10 @@ public:
 
 	Node(const Rect& r);
 
-	void insert(const Circle& object);
+	void insert(const int id);
 	void get(vec<vec<int> >& cont);
 	void draw() const;
 	void color_objects();
 
-	bool contain(const Circle& object) const;
+	bool contain(const int id) const;
 };
-
-
-#endif

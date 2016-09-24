@@ -31,6 +31,7 @@ public:
 	void draw() const;
 
 	bool contain(const Circle& a) const;
+	bool contain(const Rect &r) const;
 	bool containsPos(const Circle& a) const;
 
 	Vec2 get_min() const;

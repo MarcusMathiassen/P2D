@@ -1,5 +1,4 @@
-#ifndef QUADTREE_H
-#define QUADTREE_H
+#pragma once
 
 #include "../Utility/Templates.h"		// vec, uptr
 #include "../Utility/Color.h"			// Color class
@@ -8,34 +7,30 @@
 #include "../Objects/Circle/Circle.h"	// Circle class
 #include "../Config/Config.h"			// Global vars, screen size
 
-#define NODE_CAPACITY   25
-#define NODE_MAX_DEPTH  6
+#define NODE_CAPACITY 25
+#define NODE_MAX_DEPTH 5
 
 class Quadtree
 {
-
-private:
-
 	int 				m_level;
-	Rect 				m_bounds;
-	uptr<Quadtree>		m_subnode[4];
-	vec<int>			m_index;
+	Rect 				m_rect;
+	uptr<Quadtree> 		m_subnode[4];
+	vec<int> 			m_index;
 
 	void split();
-	void insert(const Circle& object);
-	bool contain(const Circle& object) const;
-	void set_color(const Color& c);
+	void insert(const int id);
+	bool contain(const int id) const;
+	void set_color(const Color &c);
 
-public:
+	public:
 
-	Quadtree(int level, const Rect& bounds);
+		Quadtree(const int m_level, const Rect &m_rect);
 
-	void update();
-	void get(vec<vec<int> >& cont) const;
-	void draw() const;
-	void reset();
-};
+		void update();
+		void get(vec<vec<int> > &cont) const;
+		void retrieve(vec<int> &cont, const Rect &rect) const;
+		void draw() const;
+		void reset();
+}
 
 extern Quadtree quadtree;
-
-#endif

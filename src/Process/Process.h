@@ -4,20 +4,13 @@
 //	DATE:	03.05.2016	   				   |
 //-----------------------------------------|
 
-#ifndef PROCESS_H
-#define PROCESS_H
+#pragma once
 
-
-#include <thread>
-#include "../Config/Config.h"
-#include "../Utility/Templates.h"
-#include "../Utility/getTime64.h"
-#include "../FixedGrid/FixedGrid.h"
-#include "../Quadtree/Quadtree.h"
-#include "../Objects/Circle/Circle.h"
+#include "../Config/Config.h" 				// Ballcol
+#include "../Utility/Templates.h" 			// vec
+#include "../FixedGrid/FixedGrid.h"			// fixedgrid
+#include "../Quadtree/Quadtree.h"			// quadtree
+#include "../Objects/Circle/Circle.h"		// circle
 
 void update();
-void Calc(size_t begin, size_t end);
-void copy_vec(vec<Circle>& a,const vec<uptr<Circle> >& b);
-
-#endif
+void Calc(const size_t begin, const size_t end);
