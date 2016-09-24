@@ -31,8 +31,8 @@ public:
 	void draw() const;
 
 	bool contain(const int id) const;
-	bool contain(const Rect &r) const;
-	bool contain(const Vec2 &v) const;
+	bool contain_rect(const Rect &r) const;
+	bool contain_pos(const Vec2 &v) const;
 
 	Vec2 get_min() const;
 	Vec2 get_max() const;

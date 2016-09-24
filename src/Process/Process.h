@@ -13,4 +13,4 @@
 #include "../Objects/Circle/Circle.h"		// circle
 
 void update();
-void Calc(const size_t begin, const size_t end);
+void Calc(const vec<vec<int> > &cont, size_t begin, const size_t end);

@@ -1,4 +1,5 @@
 #include "Quadtree.h"
+#include <iostream>
 
 Quadtree quadtree(0,Rect(Vec2(0,0),Vec2(screen_width,screen_height)));
 
@@ -78,6 +79,9 @@ void Quadtree::insert(const int id)
 		return;
 	}
 
+	// Add object to this node
+	m_index.emplace_back(id);		// [3]
+
 	// If it has NOT split..and NODE_CAPACITY is reached and we are not at MAX LEVEL..
 	if (m_index.size() > NODE_CAPACITY && m_level < NODE_MAX_DEPTH)
 	{
@@ -102,12 +106,7 @@ void Quadtree::insert(const int id)
 		// Remove all indexes from THIS node
 		m_index.clear();
 		m_index.shrink_to_fit();
-
-		return;
 	}
-
-	// Add object to this node
-	m_index.emplace_back(id);		// [3]
 }
 
 
@@ -132,7 +131,7 @@ void Quadtree::get(vec<vec<int> > &cont) const
 	}
 
 	// Insert indexes into our container
-	if (m_index != 0) cont.emplace_back(m_index); 	// [2]
+	if (m_index.size() != 0) cont.emplace_back(m_index); 	// [2]
 }
 
 void Quadtree::retrieve(vec<int> &cont, const Rect &rect) const
@@ -146,10 +145,10 @@ void Quadtree::retrieve(vec<int> &cont, const Rect &rect) const
 	if (m_subnode[0] != nullptr)	// [1]
 	{
 		// Continue down the tree
-		if(m_subnode[0]->contain(rect)) m_subnode[0]->retrieve(cont, rect);
-		if(m_subnode[1]->contain(rect)) m_subnode[1]->retrieve(cont, rect);
-		if(m_subnode[2]->contain(rect)) m_subnode[2]->retrieve(cont, rect);
-		if(m_subnode[3]->contain(rect)) m_subnode[3]->retrieve(cont, rect);
+		if(m_subnode[0]->contain_rect(rect)) m_subnode[0]->retrieve(cont, rect);
+		if(m_subnode[1]->contain_rect(rect)) m_subnode[1]->retrieve(cont, rect);
+		if(m_subnode[2]->contain_rect(rect)) m_subnode[2]->retrieve(cont, rect);
+		if(m_subnode[3]->contain_rect(rect)) m_subnode[3]->retrieve(cont, rect);
 
 		return;
 	}
@@ -181,11 +180,22 @@ void Quadtree::draw() const
 	// [2] Draw subnodes boundaries.
 	//----------------------------------------------------------------
 
-	// Set color of each subnode
-	m_subnode[0]->set_color(pastel_red);
-	m_subnode[1]->set_color(pastel_gray);
-	m_subnode[2]->set_color(pastel_orange);
-	m_subnode[3]->set_color(pastel_pink);
+	if (m_subnode[0] != nullptr)				// [2]
+	{
+		// Set color of each subnode
+		m_subnode[0]->set_color(pastel_red);
+		m_subnode[1]->set_color(pastel_gray);
+		m_subnode[2]->set_color(pastel_orange);
+		m_subnode[3]->set_color(pastel_pink);
+
+		// Continue down the tree
+		m_subnode[0]->draw();
+		m_subnode[1]->draw();
+		m_subnode[2]->draw();
+		m_subnode[3]->draw();
+
+		return;
+	}
 
 	// Color the balls in the same color as the boundaries
 	for (const auto& id: m_index)
@@ -194,15 +204,7 @@ void Quadtree::draw() const
 	}
 
 	// Only draw the nodes with objects in them.
-	if (m_index != 0) m_rect.draw();			// [1]
-
-	if (m_subnode[0] != nullptr)				// [2]
-	{
-		m_subnode[0]->draw();
-		m_subnode[1]->draw();
-		m_subnode[2]->draw();
-		m_subnode[3]->draw();
-	}
+	if (m_index.size() != 0) m_rect.draw();			// [1]
 }
 
 bool Quadtree::contain(const int id) const
@@ -210,9 +212,9 @@ bool Quadtree::contain(const int id) const
 	return m_rect.contain(id);
 }
 
-bool Quadtree::contain(const Rect &rect) const
+bool Quadtree::contain_rect(const Rect &rect) const
 {
-	return m_rect.contain(rect);
+	return m_rect.contain_rect(rect);
 }
 
 void Quadtree::set_color(const Color& c)

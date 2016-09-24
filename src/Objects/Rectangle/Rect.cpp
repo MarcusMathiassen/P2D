@@ -43,7 +43,7 @@ bool Rect::contain(const int id) const
 	return false;
 }
 
-bool Rect::contain(const Rect& r) const
+bool Rect::contain_rect(const Rect& r) const
 {
 	Vec2 rmin = r.get_min();
 	Vec2 rmax = r.get_max();
@@ -60,7 +60,7 @@ bool Rect::contain(const Rect& r) const
 	return false;
 }
 
-bool Rect::contain(const Vec2 &v) const
+bool Rect::contain_pos(const Vec2 &v) const
 {
 	if(v.x < min.x || v.x > max.x) return false;
 	if(v.y < min.y || v.y > max.y) return false;

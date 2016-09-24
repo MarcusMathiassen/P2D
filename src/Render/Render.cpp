@@ -2,10 +2,7 @@
 
 void draw()
 {
-	for (size_t i = 0; i < object_vec.size(); ++i)
-	{
-		object_vec[i]->draw();
-	}
+	for (auto& object: object_vec) object->draw();
 
 	if (debug_mode) debug();
 }

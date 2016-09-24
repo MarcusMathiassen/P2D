@@ -58,6 +58,7 @@ void setup_config()
 	CPU_NAME = get_cpu_brand();
 	CPU_CORES = get_cpu_cores();
 	CPU_THREADS = get_cpu_threads();
+	numThreads = CPU_THREADS;
 
 	screen_height = WINDOW_HEIGHT;
 	screen_width = WINDOW_WIDTH;

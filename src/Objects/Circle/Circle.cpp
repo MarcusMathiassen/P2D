@@ -9,7 +9,7 @@
 #define PI 3.14159
 #define HALF_PI 1.570796
 #define DOUBLE_PI 6.283185
-#define LOSSENERGY 0.8
+#define LOSSENERGY 0.999
 
 vec<uptr<Circle>> object_vec;
 
@@ -136,10 +136,10 @@ void Circle::update()
 bool Circle::collision_detection(const Circle& b) const
 {
 	// Setup variables
-	Vec2 bpos = b.get_pos();
-	float bx = bpos.x;
-	float by = bpos.y;
-	float br = b.get_radi();
+	const Vec2 bpos = b.get_pos();
+	const float bx = bpos.x;
+	const float by = bpos.y;
+	const float br = b.get_radi();
 
 	//  basic square collision check
 	if (m_pos.x - m_radi < bx + br &&
@@ -148,16 +148,14 @@ bool Circle::collision_detection(const Circle& b) const
 		m_pos.y + m_radi > by - br) {
 
 		// Circle collision check
-		float dx = bx - m_pos.x;
-    	float dy = by - m_pos.y;
-    	float sumRadius = m_radi + br;
-    	float sqrRadius = sumRadius * sumRadius;
+		const float dx = bx - m_pos.x;
+    	const float dy = by - m_pos.y;
+    	const float sumRadius = m_radi + br;
+    	const float sqrRadius = sumRadius * sumRadius;
 
-    	float distSqr = (dx * dx) + (dy * dy);
+    	const float distSqr = (dx * dx) + (dy * dy);
 
-    	if (distSqr <= sqrRadius) {
-    	    return true;
-    	}
+    	if (distSqr <= sqrRadius) return true;
     }
 
     return false;
@@ -166,31 +164,31 @@ bool Circle::collision_detection(const Circle& b) const
 void Circle::collision_resolve(Circle& b)
 {
 	// Setup variables
-	Vec2 bpos = b.get_pos();
-	Vec2 bvel = b.get_vel();
+	const Vec2 bpos = b.get_pos();
+	const Vec2 bvel = b.get_vel();
 
-	float bx = bpos.x;
-	float by = bpos.y;
-	float br = b.get_radi();
-	float m1 = m_mass;
-	float m2 = b.get_mass();
+	const float bx = bpos.x;
+	const float by = bpos.y;
+	const float br = b.get_radi();
+	const float m1 = m_mass;
+	const float m2 = b.get_mass();
 
-	float dx = bx - m_pos.x;
-	float dy = by - m_pos.y;
+	const float dx = bx - m_pos.x;
+	const float dy = by - m_pos.y;
 
 	// collision depth
-	float colDepth = (m_radi+br) - sqrt(dx*dx+dy*dy);
+	const float colDepth = (m_radi+br) - sqrt(dx*dx+dy*dy);
 
 	// contact angle
-	float colAngle = atan2(dy, dx);
-	float cos_angle = cos(colAngle);
-	float sin_angle = sin(colAngle);
+	const float colAngle = atan2(dy, dx);
+	const float cos_angle = cos(colAngle);
+	const float sin_angle = sin(colAngle);
 
 	// move the balls away from eachother so they dont overlap
-	float a_move_x = -colDepth*0.5*cos_angle;
-	float a_move_y = -colDepth*0.5*sin_angle;
-	float b_move_x = colDepth*0.5*cos_angle;
-	float b_move_y = colDepth*0.5*sin_angle;
+	const float a_move_x = -colDepth*0.5*cos_angle;
+	const float a_move_y = -colDepth*0.5*sin_angle;
+	const float b_move_x = colDepth*0.5*cos_angle;
+	const float b_move_y = colDepth*0.5*sin_angle;
 
 	if (m_pos.x + a_move_x >= m_radi && m_pos.x + a_move_x <= screen_width - m_radi)
 	{
@@ -209,33 +207,33 @@ void Circle::collision_resolve(Circle& b)
 		b.add_pos_y(b_move_y);
 	}
 
-	float vdx = bvel.x - m_vel.x;
-	float vdy = bvel.y - m_vel.y;
-	float d = dx*vdx+dy*vdy;
+	const float vdx = bvel.x - m_vel.x;
+	const float vdy = bvel.y - m_vel.y;
+	const float d = dx*vdx+dy*vdy;
 
 	if (d < 0)
 	{
 		Vec2 norm_vec(dx, dy);
    		norm_vec = norm_vec.normalized();
 
-		Vec2 tang_vec((norm_vec.y * -1), norm_vec.x);
+		const Vec2 tang_vec((norm_vec.y * -1), norm_vec.x);
 
-   		float scal_norm_1 = dot(norm_vec, m_vel);
-   		float scal_norm_2 = dot(norm_vec, bvel);
+   		const float scal_norm_1 = dot(norm_vec, m_vel);
+   		const float scal_norm_2 = dot(norm_vec, bvel);
 
-   		float scal_tang_1 = dot(tang_vec, m_vel);
-   		float scal_tang_2 = dot(tang_vec, bvel);
-   		float scal_norm_1_after = (scal_norm_1 * (m1 - m2) + 2 * m2 * scal_norm_2) / (m1 + m2);
-	 	float scal_norm_2_after = (scal_norm_2 * (m2 - m1) + 2 * m1 * scal_norm_1) / (m1 + m2);
+   		const float scal_tang_1 = dot(tang_vec, m_vel);
+   		const float scal_tang_2 = dot(tang_vec, bvel);
+   		const float scal_norm_1_after = (scal_norm_1 * (m1 - m2) + 2 * m2 * scal_norm_2) / (m1 + m2);
+	 	const float scal_norm_2_after = (scal_norm_2 * (m2 - m1) + 2 * m1 * scal_norm_1) / (m1 + m2);
 
-	 	Vec2 scal_norm_1_after_vec(norm_vec * scal_norm_1_after);
-   		Vec2 scal_norm_2_after_vec(norm_vec * scal_norm_2_after);
+	 	const Vec2 scal_norm_1_after_vec(norm_vec * scal_norm_1_after);
+   		const Vec2 scal_norm_2_after_vec(norm_vec * scal_norm_2_after);
 
-   		Vec2 scal_norm_1_vec(tang_vec * scal_tang_1);
-   		Vec2 scal_norm_2_vec(tang_vec * scal_tang_2);
+   		const Vec2 scal_norm_1_vec(tang_vec * scal_tang_1);
+   		const Vec2 scal_norm_2_vec(tang_vec * scal_tang_2);
 
-   		set_vel(scal_norm_1_vec + scal_norm_1_after_vec);
-   		b.set_vel(scal_norm_2_vec + scal_norm_2_after_vec);
+   		set_vel((scal_norm_1_vec + scal_norm_1_after_vec)*LOSSENERGY);
+   		b.set_vel((scal_norm_2_vec + scal_norm_2_after_vec)*LOSSENERGY);
 	}
 }
 
@@ -284,4 +282,5 @@ float 	Circle::get_radi() const				{return m_radi;}
 int 	Circle::get_vertices() const			{return m_vertices;}
 Color 	Circle::get_color() const				{return m_color;}
 void	Circle::set_temp_color(const Color& c) 	{m_temp_color = c;}
+Rect 	Circle::get_rect() const 			    {return Rect(Vec2(m_pos.x-m_radi,m_pos.y-m_radi), Vec2(m_pos.x+m_radi,m_pos.y+m_radi));}
 

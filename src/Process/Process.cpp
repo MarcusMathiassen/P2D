@@ -6,7 +6,7 @@
 
 #include "Process.h"
 
-void Calc(const size_t begin, const size_t end)
+void Calc(const vec<vec<int> > &cont, size_t begin, const size_t end)
 {
 	for (size_t k = begin; k < end; ++k)
 	{
@@ -35,7 +35,7 @@ void update()
 			else if (use_fixedgrid) { fixedgrid.update(); 	fixedgrid.get(cont); }
 
 			// If we´re using collision optimizations
-			if (use_quadtree || use_fixedgrid) Calc(0, cont.size());
+			if (use_quadtree || use_fixedgrid) Calc(cont, 0, cont.size());
 
 			// Brute force
 			else

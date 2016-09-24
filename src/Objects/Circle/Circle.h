@@ -9,12 +9,14 @@
 #include <cmath>								// cos, sin, sqrt, atan2
 #include <OpenGL/gl.h>							// for drawing to screen
 
-#include "../../Utility/Vec2.h"
 #include "../../Utility/Templates.h"			// vec
 #include "../../Utility/Vec2.h"					// Vec2 class
+#include "../Rectangle/Rect.h"
 #include "../../Utility/Color.h"				// Color class
 #include "../../Utility/Utility.h"				// assignColor()
 #include "../../Config/Config.h"				// Global vars, screen size
+
+class Rect;
 
 class Circle
 {
@@ -65,6 +67,7 @@ public:
 	int 	get_vertices() const;
 	Color 	get_color() const;
 	void	set_temp_color(const Color& c);
+	Rect 	get_rect() const;
 };
 
 extern vec<uptr<Circle> > object_vec;
