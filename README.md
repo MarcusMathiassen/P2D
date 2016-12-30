@@ -4,4 +4,4 @@ Perfect elastic collisions, quadtrees, fixed grid partitioning.
 # Requires: 
 glew and glfw3.
 
-![alt tag](http://imgur.com/tCeglsC)
+![P2D](http://imgur.com/tCeglsC)
