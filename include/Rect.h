@@ -9,35 +9,32 @@
 
 #include <OpenGL/gl.h>
 
-#include "Circle.h"					// Circle class
-#include "Vec2.h"					// Vec2 class
-#include "Color.h"				// Color class
-#include "Utility.h"				// assignColor()
-#include "Config.h"				// Global vars, screen size
+#include "Circle.h"  // Circle class
+#include "Color.h"   // Color class
+#include "Config.h"  // Global vars, screen size
+#include "Utility.h" // assignColor()
+#include "Vec2.h"    // Vec2 class
 
-class Rect
-{
+class Rect {
 
 private:
-
-	Vec2		min,max;
-	Color		m_color;
+  Vec2 min, max;
+  Color m_color;
 
 public:
+  Rect();
+  Rect(const Vec2 &a, const Vec2 &b);
 
-	Rect();
-	Rect(const Vec2& a, const Vec2& b);
+  void draw() const;
 
-	void draw() const;
+  bool contain(const int id) const;
+  bool contain_rect(const Rect &r) const;
+  bool contain_pos(const Vec2 &v) const;
 
-	bool contain(const int id) const;
-	bool contain_rect(const Rect &r) const;
-	bool contain_pos(const Vec2 &v) const;
-
-	Vec2 get_min() const;
-	Vec2 get_max() const;
-	Color get_color() const;
-	void set_color(const Color& c);
+  Vec2 get_min() const;
+  Vec2 get_max() const;
+  Color get_color() const;
+  void set_color(const Color &c);
 };
 
 #endif

@@ -8,9 +8,9 @@
 #define RENDER_H
 
 #include "Circle.h"
-#include "Quadtree.h"
-#include "Config.h"					// Global vars, screen size
+#include "Config.h" // Global vars, screen size
 #include "FixedGrid.h"
+#include "Quadtree.h"
 
 void draw();
 void debug();

@@ -54,10 +54,10 @@ RM = /usr/local/Cellar/cmake/3.6.2/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/marcusmathiassen/P2D
+CMAKE_SOURCE_DIR = /Users/marcusmathiassen/p2d
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/marcusmathiassen/P2D/build
+CMAKE_BINARY_DIR = /Users/marcusmathiassen/p2d/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/P2D.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /Users/marcusmathiassen/P2D/build
 CMakeFiles/P2D.dir/all:
 	$(MAKE) -f CMakeFiles/P2D.dir/build.make CMakeFiles/P2D.dir/depend
 	$(MAKE) -f CMakeFiles/P2D.dir/build.make CMakeFiles/P2D.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 "Built target P2D"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 "Built target P2D"
 .PHONY : CMakeFiles/P2D.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/P2D.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/P2D.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/marcusmathiassen/P2D/build/CMakeFiles 16
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/marcusmathiassen/p2d/build/CMakeFiles 16
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/P2D.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/marcusmathiassen/P2D/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/marcusmathiassen/p2d/build/CMakeFiles 0
 .PHONY : CMakeFiles/P2D.dir/rule
 
 # Convenience name for target.

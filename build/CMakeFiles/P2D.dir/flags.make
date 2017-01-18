@@ -6,5 +6,5 @@ CXX_FLAGS =  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacO
 
 CXX_DEFINES = -DGLFW_DLL
 
-CXX_INCLUDES = -I/Users/marcusmathiassen/P2D/include -isystem /usr/local/include 
+CXX_INCLUDES = -I/Users/marcusmathiassen/p2d/include -isystem /usr/local/include 
 

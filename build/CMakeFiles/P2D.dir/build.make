@@ -43,10 +43,10 @@ RM = /usr/local/Cellar/cmake/3.6.2/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/marcusmathiassen/P2D
+CMAKE_SOURCE_DIR = /Users/marcusmathiassen/p2d
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/marcusmathiassen/P2D/build
+CMAKE_BINARY_DIR = /Users/marcusmathiassen/p2d/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/P2D.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/P2D.dir/flags.make
 
 CMakeFiles/P2D.dir/src/Circle.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Circle.cpp.o: ../src/Circle.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/P2D.dir/src/Circle.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Circle.cpp.o -c /Users/marcusmathiassen/P2D/src/Circle.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/P2D.dir/src/Circle.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Circle.cpp.o -c /Users/marcusmathiassen/p2d/src/Circle.cpp
 
 CMakeFiles/P2D.dir/src/Circle.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Circle.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Circle.cpp > CMakeFiles/P2D.dir/src/Circle.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Circle.cpp > CMakeFiles/P2D.dir/src/Circle.cpp.i
 
 CMakeFiles/P2D.dir/src/Circle.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Circle.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Circle.cpp -o CMakeFiles/P2D.dir/src/Circle.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Circle.cpp -o CMakeFiles/P2D.dir/src/Circle.cpp.s
 
 CMakeFiles/P2D.dir/src/Circle.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/P2D.dir/src/Circle.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Circl
 
 CMakeFiles/P2D.dir/src/Color.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Color.cpp.o: ../src/Color.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/P2D.dir/src/Color.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Color.cpp.o -c /Users/marcusmathiassen/P2D/src/Color.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/P2D.dir/src/Color.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Color.cpp.o -c /Users/marcusmathiassen/p2d/src/Color.cpp
 
 CMakeFiles/P2D.dir/src/Color.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Color.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Color.cpp > CMakeFiles/P2D.dir/src/Color.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Color.cpp > CMakeFiles/P2D.dir/src/Color.cpp.i
 
 CMakeFiles/P2D.dir/src/Color.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Color.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Color.cpp -o CMakeFiles/P2D.dir/src/Color.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Color.cpp -o CMakeFiles/P2D.dir/src/Color.cpp.s
 
 CMakeFiles/P2D.dir/src/Color.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/P2D.dir/src/Color.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Color.
 
 CMakeFiles/P2D.dir/src/Config.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Config.cpp.o: ../src/Config.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/P2D.dir/src/Config.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Config.cpp.o -c /Users/marcusmathiassen/P2D/src/Config.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/P2D.dir/src/Config.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Config.cpp.o -c /Users/marcusmathiassen/p2d/src/Config.cpp
 
 CMakeFiles/P2D.dir/src/Config.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Config.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Config.cpp > CMakeFiles/P2D.dir/src/Config.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Config.cpp > CMakeFiles/P2D.dir/src/Config.cpp.i
 
 CMakeFiles/P2D.dir/src/Config.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Config.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Config.cpp -o CMakeFiles/P2D.dir/src/Config.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Config.cpp -o CMakeFiles/P2D.dir/src/Config.cpp.s
 
 CMakeFiles/P2D.dir/src/Config.cpp.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/P2D.dir/src/Config.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Confi
 
 CMakeFiles/P2D.dir/src/FixedGrid.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/FixedGrid.cpp.o: ../src/FixedGrid.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/P2D.dir/src/FixedGrid.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/FixedGrid.cpp.o -c /Users/marcusmathiassen/P2D/src/FixedGrid.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/P2D.dir/src/FixedGrid.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/FixedGrid.cpp.o -c /Users/marcusmathiassen/p2d/src/FixedGrid.cpp
 
 CMakeFiles/P2D.dir/src/FixedGrid.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/FixedGrid.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/FixedGrid.cpp > CMakeFiles/P2D.dir/src/FixedGrid.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/FixedGrid.cpp > CMakeFiles/P2D.dir/src/FixedGrid.cpp.i
 
 CMakeFiles/P2D.dir/src/FixedGrid.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/FixedGrid.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/FixedGrid.cpp -o CMakeFiles/P2D.dir/src/FixedGrid.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/FixedGrid.cpp -o CMakeFiles/P2D.dir/src/FixedGrid.cpp.s
 
 CMakeFiles/P2D.dir/src/FixedGrid.cpp.o.requires:
 
@@ -155,16 +155,16 @@ CMakeFiles/P2D.dir/src/FixedGrid.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Fi
 
 CMakeFiles/P2D.dir/src/Inputs.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Inputs.cpp.o: ../src/Inputs.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/P2D.dir/src/Inputs.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Inputs.cpp.o -c /Users/marcusmathiassen/P2D/src/Inputs.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/P2D.dir/src/Inputs.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Inputs.cpp.o -c /Users/marcusmathiassen/p2d/src/Inputs.cpp
 
 CMakeFiles/P2D.dir/src/Inputs.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Inputs.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Inputs.cpp > CMakeFiles/P2D.dir/src/Inputs.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Inputs.cpp > CMakeFiles/P2D.dir/src/Inputs.cpp.i
 
 CMakeFiles/P2D.dir/src/Inputs.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Inputs.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Inputs.cpp -o CMakeFiles/P2D.dir/src/Inputs.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Inputs.cpp -o CMakeFiles/P2D.dir/src/Inputs.cpp.s
 
 CMakeFiles/P2D.dir/src/Inputs.cpp.o.requires:
 
@@ -179,16 +179,16 @@ CMakeFiles/P2D.dir/src/Inputs.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Input
 
 CMakeFiles/P2D.dir/src/Node.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Node.cpp.o: ../src/Node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/P2D.dir/src/Node.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Node.cpp.o -c /Users/marcusmathiassen/P2D/src/Node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/P2D.dir/src/Node.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Node.cpp.o -c /Users/marcusmathiassen/p2d/src/Node.cpp
 
 CMakeFiles/P2D.dir/src/Node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Node.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Node.cpp > CMakeFiles/P2D.dir/src/Node.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Node.cpp > CMakeFiles/P2D.dir/src/Node.cpp.i
 
 CMakeFiles/P2D.dir/src/Node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Node.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Node.cpp -o CMakeFiles/P2D.dir/src/Node.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Node.cpp -o CMakeFiles/P2D.dir/src/Node.cpp.s
 
 CMakeFiles/P2D.dir/src/Node.cpp.o.requires:
 
@@ -203,16 +203,16 @@ CMakeFiles/P2D.dir/src/Node.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Node.cp
 
 CMakeFiles/P2D.dir/src/Process.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Process.cpp.o: ../src/Process.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/P2D.dir/src/Process.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Process.cpp.o -c /Users/marcusmathiassen/P2D/src/Process.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/P2D.dir/src/Process.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Process.cpp.o -c /Users/marcusmathiassen/p2d/src/Process.cpp
 
 CMakeFiles/P2D.dir/src/Process.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Process.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Process.cpp > CMakeFiles/P2D.dir/src/Process.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Process.cpp > CMakeFiles/P2D.dir/src/Process.cpp.i
 
 CMakeFiles/P2D.dir/src/Process.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Process.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Process.cpp -o CMakeFiles/P2D.dir/src/Process.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Process.cpp -o CMakeFiles/P2D.dir/src/Process.cpp.s
 
 CMakeFiles/P2D.dir/src/Process.cpp.o.requires:
 
@@ -227,16 +227,16 @@ CMakeFiles/P2D.dir/src/Process.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Proc
 
 CMakeFiles/P2D.dir/src/Quadtree.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Quadtree.cpp.o: ../src/Quadtree.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/P2D.dir/src/Quadtree.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Quadtree.cpp.o -c /Users/marcusmathiassen/P2D/src/Quadtree.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/P2D.dir/src/Quadtree.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Quadtree.cpp.o -c /Users/marcusmathiassen/p2d/src/Quadtree.cpp
 
 CMakeFiles/P2D.dir/src/Quadtree.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Quadtree.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Quadtree.cpp > CMakeFiles/P2D.dir/src/Quadtree.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Quadtree.cpp > CMakeFiles/P2D.dir/src/Quadtree.cpp.i
 
 CMakeFiles/P2D.dir/src/Quadtree.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Quadtree.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Quadtree.cpp -o CMakeFiles/P2D.dir/src/Quadtree.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Quadtree.cpp -o CMakeFiles/P2D.dir/src/Quadtree.cpp.s
 
 CMakeFiles/P2D.dir/src/Quadtree.cpp.o.requires:
 
@@ -251,16 +251,16 @@ CMakeFiles/P2D.dir/src/Quadtree.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Qua
 
 CMakeFiles/P2D.dir/src/Rect.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Rect.cpp.o: ../src/Rect.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/P2D.dir/src/Rect.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Rect.cpp.o -c /Users/marcusmathiassen/P2D/src/Rect.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/P2D.dir/src/Rect.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Rect.cpp.o -c /Users/marcusmathiassen/p2d/src/Rect.cpp
 
 CMakeFiles/P2D.dir/src/Rect.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Rect.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Rect.cpp > CMakeFiles/P2D.dir/src/Rect.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Rect.cpp > CMakeFiles/P2D.dir/src/Rect.cpp.i
 
 CMakeFiles/P2D.dir/src/Rect.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Rect.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Rect.cpp -o CMakeFiles/P2D.dir/src/Rect.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Rect.cpp -o CMakeFiles/P2D.dir/src/Rect.cpp.s
 
 CMakeFiles/P2D.dir/src/Rect.cpp.o.requires:
 
@@ -275,16 +275,16 @@ CMakeFiles/P2D.dir/src/Rect.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Rect.cp
 
 CMakeFiles/P2D.dir/src/Render.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Render.cpp.o: ../src/Render.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/P2D.dir/src/Render.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Render.cpp.o -c /Users/marcusmathiassen/P2D/src/Render.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/P2D.dir/src/Render.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Render.cpp.o -c /Users/marcusmathiassen/p2d/src/Render.cpp
 
 CMakeFiles/P2D.dir/src/Render.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Render.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Render.cpp > CMakeFiles/P2D.dir/src/Render.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Render.cpp > CMakeFiles/P2D.dir/src/Render.cpp.i
 
 CMakeFiles/P2D.dir/src/Render.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Render.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Render.cpp -o CMakeFiles/P2D.dir/src/Render.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Render.cpp -o CMakeFiles/P2D.dir/src/Render.cpp.s
 
 CMakeFiles/P2D.dir/src/Render.cpp.o.requires:
 
@@ -299,16 +299,16 @@ CMakeFiles/P2D.dir/src/Render.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Rende
 
 CMakeFiles/P2D.dir/src/Utility.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Utility.cpp.o: ../src/Utility.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/P2D.dir/src/Utility.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Utility.cpp.o -c /Users/marcusmathiassen/P2D/src/Utility.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/P2D.dir/src/Utility.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Utility.cpp.o -c /Users/marcusmathiassen/p2d/src/Utility.cpp
 
 CMakeFiles/P2D.dir/src/Utility.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Utility.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Utility.cpp > CMakeFiles/P2D.dir/src/Utility.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Utility.cpp > CMakeFiles/P2D.dir/src/Utility.cpp.i
 
 CMakeFiles/P2D.dir/src/Utility.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Utility.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Utility.cpp -o CMakeFiles/P2D.dir/src/Utility.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Utility.cpp -o CMakeFiles/P2D.dir/src/Utility.cpp.s
 
 CMakeFiles/P2D.dir/src/Utility.cpp.o.requires:
 
@@ -323,16 +323,16 @@ CMakeFiles/P2D.dir/src/Utility.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Util
 
 CMakeFiles/P2D.dir/src/Vec2.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/Vec2.cpp.o: ../src/Vec2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/P2D.dir/src/Vec2.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Vec2.cpp.o -c /Users/marcusmathiassen/P2D/src/Vec2.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/P2D.dir/src/Vec2.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/Vec2.cpp.o -c /Users/marcusmathiassen/p2d/src/Vec2.cpp
 
 CMakeFiles/P2D.dir/src/Vec2.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/Vec2.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/Vec2.cpp > CMakeFiles/P2D.dir/src/Vec2.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/Vec2.cpp > CMakeFiles/P2D.dir/src/Vec2.cpp.i
 
 CMakeFiles/P2D.dir/src/Vec2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/Vec2.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/Vec2.cpp -o CMakeFiles/P2D.dir/src/Vec2.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/Vec2.cpp -o CMakeFiles/P2D.dir/src/Vec2.cpp.s
 
 CMakeFiles/P2D.dir/src/Vec2.cpp.o.requires:
 
@@ -347,16 +347,16 @@ CMakeFiles/P2D.dir/src/Vec2.cpp.o.provides.build: CMakeFiles/P2D.dir/src/Vec2.cp
 
 CMakeFiles/P2D.dir/src/getTime64.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/getTime64.cpp.o: ../src/getTime64.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/P2D.dir/src/getTime64.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/getTime64.cpp.o -c /Users/marcusmathiassen/P2D/src/getTime64.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/P2D.dir/src/getTime64.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/getTime64.cpp.o -c /Users/marcusmathiassen/p2d/src/getTime64.cpp
 
 CMakeFiles/P2D.dir/src/getTime64.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/getTime64.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/getTime64.cpp > CMakeFiles/P2D.dir/src/getTime64.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/getTime64.cpp > CMakeFiles/P2D.dir/src/getTime64.cpp.i
 
 CMakeFiles/P2D.dir/src/getTime64.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/getTime64.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/getTime64.cpp -o CMakeFiles/P2D.dir/src/getTime64.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/getTime64.cpp -o CMakeFiles/P2D.dir/src/getTime64.cpp.s
 
 CMakeFiles/P2D.dir/src/getTime64.cpp.o.requires:
 
@@ -371,16 +371,16 @@ CMakeFiles/P2D.dir/src/getTime64.cpp.o.provides.build: CMakeFiles/P2D.dir/src/ge
 
 CMakeFiles/P2D.dir/src/hwinfo.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/hwinfo.cpp.o: ../src/hwinfo.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/P2D.dir/src/hwinfo.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/hwinfo.cpp.o -c /Users/marcusmathiassen/P2D/src/hwinfo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/P2D.dir/src/hwinfo.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/hwinfo.cpp.o -c /Users/marcusmathiassen/p2d/src/hwinfo.cpp
 
 CMakeFiles/P2D.dir/src/hwinfo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/hwinfo.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/hwinfo.cpp > CMakeFiles/P2D.dir/src/hwinfo.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/hwinfo.cpp > CMakeFiles/P2D.dir/src/hwinfo.cpp.i
 
 CMakeFiles/P2D.dir/src/hwinfo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/hwinfo.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/hwinfo.cpp -o CMakeFiles/P2D.dir/src/hwinfo.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/hwinfo.cpp -o CMakeFiles/P2D.dir/src/hwinfo.cpp.s
 
 CMakeFiles/P2D.dir/src/hwinfo.cpp.o.requires:
 
@@ -395,16 +395,16 @@ CMakeFiles/P2D.dir/src/hwinfo.cpp.o.provides.build: CMakeFiles/P2D.dir/src/hwinf
 
 CMakeFiles/P2D.dir/src/main.cpp.o: CMakeFiles/P2D.dir/flags.make
 CMakeFiles/P2D.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/P2D.dir/src/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/main.cpp.o -c /Users/marcusmathiassen/P2D/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/P2D.dir/src/main.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/P2D.dir/src/main.cpp.o -c /Users/marcusmathiassen/p2d/src/main.cpp
 
 CMakeFiles/P2D.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/P2D.dir/src/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/P2D/src/main.cpp > CMakeFiles/P2D.dir/src/main.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/marcusmathiassen/p2d/src/main.cpp > CMakeFiles/P2D.dir/src/main.cpp.i
 
 CMakeFiles/P2D.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/P2D.dir/src/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/P2D/src/main.cpp -o CMakeFiles/P2D.dir/src/main.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/marcusmathiassen/p2d/src/main.cpp -o CMakeFiles/P2D.dir/src/main.cpp.s
 
 CMakeFiles/P2D.dir/src/main.cpp.o.requires:
 
@@ -457,7 +457,7 @@ P2D: CMakeFiles/P2D.dir/build.make
 P2D: /usr/local/lib/libGLEW.dylib
 P2D: /usr/local/lib/libglfw3.3.2.dylib
 P2D: CMakeFiles/P2D.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/marcusmathiassen/P2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable P2D"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/marcusmathiassen/p2d/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable P2D"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/P2D.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -488,6 +488,6 @@ CMakeFiles/P2D.dir/clean:
 .PHONY : CMakeFiles/P2D.dir/clean
 
 CMakeFiles/P2D.dir/depend:
-	cd /Users/marcusmathiassen/P2D/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/marcusmathiassen/P2D /Users/marcusmathiassen/P2D /Users/marcusmathiassen/P2D/build /Users/marcusmathiassen/P2D/build /Users/marcusmathiassen/P2D/build/CMakeFiles/P2D.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/marcusmathiassen/p2d/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/marcusmathiassen/p2d /Users/marcusmathiassen/p2d /Users/marcusmathiassen/p2d/build /Users/marcusmathiassen/p2d/build /Users/marcusmathiassen/p2d/build/CMakeFiles/P2D.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/P2D.dir/depend
 

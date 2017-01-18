@@ -7,58 +7,58 @@
 #IncludeRegexTransform: 
 
 ../include/Circle.h
-cmath
--
 OpenGL/gl.h
 -
-Templates.h
-../include/Templates.h
-Vec2.h
-../include/Vec2.h
+cmath
+-
 Color.h
 ../include/Color.h
-Utility.h
-../include/Utility.h
 Config.h
 ../include/Config.h
+Templates.h
+../include/Templates.h
+Utility.h
+../include/Utility.h
+Vec2.h
+../include/Vec2.h
 
 ../include/Color.h
 
 ../include/Config.h
-iostream
+boost/format.hpp
 -
 fstream
 -
-string
+iostream
 -
 map
 -
 sstream
 -
-boost/format.hpp
+string
 -
 hwinfo.h
 ../include/hwinfo.h
 
 ../include/FixedGrid.h
-iostream
--
-cmath
--
-Node.h
-../include/Node.h
+Circle.h
+../include/Circle.h
+Color.h
+../include/Color.h
 Config.h
 ../include/Config.h
+Node.h
+../include/Node.h
+Rect.h
+../include/Rect.h
 Templates.h
 ../include/Templates.h
 Utility.h
 ../include/Utility.h
-Color.h
-../include/Color.h
-Circle.h
-../include/Circle.h
-Rect.h
-../include/Rect.h
+cmath
+-
+iostream
+-
 
 ../include/Inputs.h
 iostream
@@ -87,44 +87,44 @@ Circle.h
 ../include/Circle.h
 
 ../include/Process.h
+Circle.h
+../include/Circle.h
 Config.h
 ../include/Config.h
-Templates.h
-../include/Templates.h
 FixedGrid.h
 ../include/FixedGrid.h
 Quadtree.h
 ../include/Quadtree.h
-Circle.h
-../include/Circle.h
-
-../include/Quadtree.h
 Templates.h
 ../include/Templates.h
-Color.h
-../include/Color.h
-Vec2.h
-../include/Vec2.h
-Rect.h
-../include/Rect.h
+
+../include/Quadtree.h
 Circle.h
 ../include/Circle.h
+Color.h
+../include/Color.h
 Config.h
 ../include/Config.h
+Rect.h
+../include/Rect.h
+Templates.h
+../include/Templates.h
+Vec2.h
+../include/Vec2.h
 
 ../include/Rect.h
 OpenGL/gl.h
 -
 Circle.h
 ../include/Circle.h
-Vec2.h
-../include/Vec2.h
 Color.h
 ../include/Color.h
-Utility.h
-../include/Utility.h
 Config.h
 ../include/Config.h
+Utility.h
+../include/Utility.h
+Vec2.h
+../include/Vec2.h
 
 ../include/Render.h
 Circle.h
@@ -155,9 +155,9 @@ cmath
 ../include/getTime64.h
 Windows.h
 -
-sys/time.h
--
 ctime
+-
+sys/time.h
 -
 
 ../include/hwinfo.h
@@ -168,89 +168,89 @@ sys/types.h
 sys/sysctl.h
 -
 
-/Users/marcusmathiassen/P2D/src/Circle.cpp
+/Users/marcusmathiassen/p2d/src/Circle.cpp
 Circle.h
-/Users/marcusmathiassen/P2D/src/Circle.h
+/Users/marcusmathiassen/p2d/src/Circle.h
 
-/Users/marcusmathiassen/P2D/src/Color.cpp
+/Users/marcusmathiassen/p2d/src/Color.cpp
 Color.h
-/Users/marcusmathiassen/P2D/src/Color.h
+/Users/marcusmathiassen/p2d/src/Color.h
 
-/Users/marcusmathiassen/P2D/src/Config.cpp
+/Users/marcusmathiassen/p2d/src/Config.cpp
 Config.h
-/Users/marcusmathiassen/P2D/src/Config.h
+/Users/marcusmathiassen/p2d/src/Config.h
 
-/Users/marcusmathiassen/P2D/src/FixedGrid.cpp
+/Users/marcusmathiassen/p2d/src/FixedGrid.cpp
 FixedGrid.h
-/Users/marcusmathiassen/P2D/src/FixedGrid.h
+/Users/marcusmathiassen/p2d/src/FixedGrid.h
 
-/Users/marcusmathiassen/P2D/src/Inputs.cpp
+/Users/marcusmathiassen/p2d/src/Inputs.cpp
 Inputs.h
-/Users/marcusmathiassen/P2D/src/Inputs.h
+/Users/marcusmathiassen/p2d/src/Inputs.h
 
-/Users/marcusmathiassen/P2D/src/Node.cpp
+/Users/marcusmathiassen/p2d/src/Node.cpp
 Node.h
-/Users/marcusmathiassen/P2D/src/Node.h
+/Users/marcusmathiassen/p2d/src/Node.h
 iostream
 -
 
-/Users/marcusmathiassen/P2D/src/Process.cpp
+/Users/marcusmathiassen/p2d/src/Process.cpp
 Process.h
-/Users/marcusmathiassen/P2D/src/Process.h
+/Users/marcusmathiassen/p2d/src/Process.h
 
-/Users/marcusmathiassen/P2D/src/Quadtree.cpp
+/Users/marcusmathiassen/p2d/src/Quadtree.cpp
 Quadtree.h
-/Users/marcusmathiassen/P2D/src/Quadtree.h
+/Users/marcusmathiassen/p2d/src/Quadtree.h
 iostream
 -
 
-/Users/marcusmathiassen/P2D/src/Rect.cpp
+/Users/marcusmathiassen/p2d/src/Rect.cpp
 Rect.h
-/Users/marcusmathiassen/P2D/src/Rect.h
+/Users/marcusmathiassen/p2d/src/Rect.h
 
-/Users/marcusmathiassen/P2D/src/Render.cpp
+/Users/marcusmathiassen/p2d/src/Render.cpp
 Render.h
-/Users/marcusmathiassen/P2D/src/Render.h
+/Users/marcusmathiassen/p2d/src/Render.h
 
-/Users/marcusmathiassen/P2D/src/Utility.cpp
+/Users/marcusmathiassen/p2d/src/Utility.cpp
 Utility.h
-/Users/marcusmathiassen/P2D/src/Utility.h
+/Users/marcusmathiassen/p2d/src/Utility.h
 
-/Users/marcusmathiassen/P2D/src/Vec2.cpp
+/Users/marcusmathiassen/p2d/src/Vec2.cpp
 Vec2.h
-/Users/marcusmathiassen/P2D/src/Vec2.h
+/Users/marcusmathiassen/p2d/src/Vec2.h
 
-/Users/marcusmathiassen/P2D/src/getTime64.cpp
+/Users/marcusmathiassen/p2d/src/getTime64.cpp
 getTime64.h
-/Users/marcusmathiassen/P2D/src/getTime64.h
+/Users/marcusmathiassen/p2d/src/getTime64.h
 
-/Users/marcusmathiassen/P2D/src/hwinfo.cpp
+/Users/marcusmathiassen/p2d/src/hwinfo.cpp
 hwinfo.h
-/Users/marcusmathiassen/P2D/src/hwinfo.h
+/Users/marcusmathiassen/p2d/src/hwinfo.h
 
-/Users/marcusmathiassen/P2D/src/main.cpp
-iostream
--
+/Users/marcusmathiassen/p2d/src/main.cpp
 GL/glew.h
 -
 GLFW/glfw3.h
 -
-Config.h
-/Users/marcusmathiassen/P2D/src/Config.h
-Process.h
-/Users/marcusmathiassen/P2D/src/Process.h
-Render.h
-/Users/marcusmathiassen/P2D/src/Render.h
-Color.h
-/Users/marcusmathiassen/P2D/src/Color.h
-Inputs.h
-/Users/marcusmathiassen/P2D/src/Inputs.h
-FixedGrid.h
-/Users/marcusmathiassen/P2D/src/FixedGrid.h
-Quadtree.h
-/Users/marcusmathiassen/P2D/src/Quadtree.h
+iostream
+-
 Circle.h
-/Users/marcusmathiassen/P2D/src/Circle.h
+/Users/marcusmathiassen/p2d/src/Circle.h
+Color.h
+/Users/marcusmathiassen/p2d/src/Color.h
+Config.h
+/Users/marcusmathiassen/p2d/src/Config.h
+FixedGrid.h
+/Users/marcusmathiassen/p2d/src/FixedGrid.h
+Inputs.h
+/Users/marcusmathiassen/p2d/src/Inputs.h
+Process.h
+/Users/marcusmathiassen/p2d/src/Process.h
+Quadtree.h
+/Users/marcusmathiassen/p2d/src/Quadtree.h
+Render.h
+/Users/marcusmathiassen/p2d/src/Render.h
 
 /usr/local/include/GL/glew.h
 stddef.h
