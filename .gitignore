@@ -1,8 +1,8 @@
 
-P2Dv06
+P2D
 *.DS_Store
 src/.swp
-
+*.o
 config.txt
 CMakeCache.txt
 CMakeFiles

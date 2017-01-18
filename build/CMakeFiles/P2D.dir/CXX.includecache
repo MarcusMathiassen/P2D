@@ -61,30 +61,30 @@ iostream
 -
 
 ../include/Inputs.h
-iostream
--
 GLFW/glfw3.h
+-
+iostream
 -
 Circle.h
 ../include/Circle.h
-Quadtree.h
-../include/Quadtree.h
-FixedGrid.h
-../include/FixedGrid.h
-Config.h
-../include/Config.h
 Color.h
 ../include/Color.h
+Config.h
+../include/Config.h
+FixedGrid.h
+../include/FixedGrid.h
+Quadtree.h
+../include/Quadtree.h
 Templates.h
 ../include/Templates.h
 
 ../include/Node.h
-Templates.h
-../include/Templates.h
-Rect.h
-../include/Rect.h
 Circle.h
 ../include/Circle.h
+Rect.h
+../include/Rect.h
+Templates.h
+../include/Templates.h
 
 ../include/Process.h
 Circle.h
@@ -129,12 +129,12 @@ Vec2.h
 ../include/Render.h
 Circle.h
 ../include/Circle.h
-Quadtree.h
-../include/Quadtree.h
 Config.h
 ../include/Config.h
 FixedGrid.h
 ../include/FixedGrid.h
+Quadtree.h
+../include/Quadtree.h
 
 ../include/Templates.h
 vector
@@ -163,9 +163,9 @@ sys/time.h
 ../include/hwinfo.h
 string
 -
-sys/types.h
--
 sys/sysctl.h
+-
+sys/types.h
 -
 
 /Users/marcusmathiassen/p2d/src/Circle.cpp

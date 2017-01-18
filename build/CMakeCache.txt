@@ -209,12 +209,6 @@ P2D_SOURCE_DIR:STATIC=/Users/marcusmathiassen/p2d
 //The directory containing a CMake configuration file for glfw3.
 glfw3_DIR:PATH=/usr/local/lib/cmake/glfw3
 
-//Value Computed by CMake
-opengl_BINARY_DIR:STATIC=/Users/marcusmathiassen/P2D/build
-
-//Value Computed by CMake
-opengl_SOURCE_DIR:STATIC=/Users/marcusmathiassen/P2D
-
 
 ########################
 # INTERNAL cache entries
@@ -292,7 +286,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/Users/marcusmathiassen/P2D
+CMAKE_HOME_DIRECTORY:INTERNAL=/Users/marcusmathiassen/p2d
 //ADVANCED property for variable: CMAKE_INSTALL_NAME_TOOL
 CMAKE_INSTALL_NAME_TOOL-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
