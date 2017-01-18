@@ -9,14 +9,14 @@
 #include <GL/glew.h>							// GLEW setup.
 #include <GLFW/glfw3.h>							// GLFW setup.
 
-#include "Config.h"					// Global settings
-#include "Process.h"					// Updates all objects
-#include "Render.h"					// Renders all objects
-#include "Color.h"					// Color
-#include "Inputs.h"					// User input
-#include "FixedGrid.h"				// FixedGrid
-#include "Quadtree.h"				// Quadtree
-#include "Circle.h"			// Circle class
+#include "./Config/Config.h"					// Global settings
+#include "./Process/Process.h"					// Updates all objects
+#include "./Render/Render.h"					// Renders all objects
+#include "./Utility/Color.h"					// Color
+#include "./Utility/Inputs.h"					// User input
+#include "./FixedGrid/FixedGrid.h"				// FixedGrid
+#include "./Quadtree/Quadtree.h"				// Quadtree
+#include "./Objects/Circle/Circle.h"			// Circle class
 
 // ----------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ static void glfwError(int id, const char* description)
   std::cout << description << std::endl;
 }
 
-int main()
+void maint()
 {
 	// Gather hardware info, create and parse config file
 	setup_config();
