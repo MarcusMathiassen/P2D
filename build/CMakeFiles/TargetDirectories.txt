@@ -1,3 +1,0 @@
-/Users/marcusmathiassen/p2d/build/CMakeFiles/edit_cache.dir
-/Users/marcusmathiassen/p2d/build/CMakeFiles/rebuild_cache.dir
-/Users/marcusmathiassen/p2d/build/CMakeFiles/P2D.dir
