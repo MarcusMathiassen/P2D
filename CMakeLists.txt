@@ -1,8 +1,17 @@
 cmake_minimum_required(VERSION 3.6.2)
 project(P2D)
 
-# -std=c++14
+# Compiler flags
 set(CMAKE_CXX_STANDARD 14)
+
+
+# SET(CMAKE_BUILD_TYPE DEBUG)
+SET(CMAKE_BUILD_TYPE DEBUG)
+
+SET(CMAKE_CXX_FLAGS_DEBUG)
+SET(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+SET(CMAKE_CXX_FLAGS "-Wall")
 
 # Load headers
 include_directories("include")
@@ -20,7 +29,7 @@ endif()
 # GLFW3
 find_package(glfw3 3.2 REQUIRED)
 if (GLFW3_FOUND)
-  include_directories(${GLFW3_INCLUDE_DIRS})
+  include_directories(${GLFW3_INCLUDES})
   link_libraries(${GLFW3_LIBRARIES})
 endif()
 

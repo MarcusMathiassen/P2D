@@ -15,6 +15,7 @@
 #include "Utility.h"   // assignColor()
 #include "Vec2.h"      // Vec2 class
 
+// Each object is on its own cache line
 class Circle {
 
 private:

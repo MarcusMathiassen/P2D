@@ -4,7 +4,7 @@
 //-----------------------------------------|
 
 // --------------------------------- INCLUDES ---------------------------------
-
+#define GLEW_STATIC
 #include <GL/glew.h>    // GLEW setup.
 #include <GLFW/glfw3.h> // GLFW setup.
 #include <iostream>     // cout
@@ -118,8 +118,8 @@ int main() {
         char title[256];
         title[255] = '\0';
         int numObj = static_cast<int>(object_vec.size());
-        snprintf(title, 255, "%s %s - [FPS: %d] [OBJ: %d]", WINDOW_NAME.c_str(),
-                 APP_VERSION.c_str(), nbFrames, numObj);
+        snprintf(title, 255, "%s %s - [FPS: %d] [OBJ: %d] [THR: %d]", WINDOW_NAME.c_str(),
+                 APP_VERSION.c_str(), nbFrames, numObj, numThreads);
 
         glfwSetWindowTitle(window, title);
         printf("%f ms/frame\n", 1000.0 / double(nbFrames));

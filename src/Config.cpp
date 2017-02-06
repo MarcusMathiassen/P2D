@@ -29,7 +29,7 @@ int screen_width = WINDOW_WIDTH;   // Window width.
 int screen_height = WINDOW_HEIGHT; // Window height.
 double xpos, ypos;                 // Current mouse position.
 double dt = 0.016667;              // Delta time
-int numThreads = CPU_THREADS;      // Number of CPU threads
+int numThreads = 0;      // Number of CPU threads
 int uniGrid = 64;                  // Number of grids.
 int griduni = 2;
 bool use_pThread = true;    // Use pThreads.

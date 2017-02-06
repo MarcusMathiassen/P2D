@@ -49,9 +49,6 @@ void Circle::draw() const {
 
   if (direction) {
     debug();
-  }
-
-  if (debug_mode) {
     show_collision_box();
   }
 }

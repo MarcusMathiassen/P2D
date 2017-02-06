@@ -6,6 +6,10 @@
 
 #include "Process.h"
 
+#include <vector>
+#include <thread>
+
+
 // Each node contains a list indexes of ints corresponding
 //  to each objects index in the object_vec vector.
 void Calc(const vec<vec<int> > &cont, size_t begin, const size_t end)
@@ -25,6 +29,20 @@ void Calc(const vec<vec<int> > &cont, size_t begin, const size_t end)
 	}
 }
 
+void process_segment(int begin, int end)
+{
+	for (size_t i = begin; i < end; ++i)
+	{
+		for (size_t j = i+1; j < object_vec.size(); ++j)
+		{
+			if (object_vec[i]->collision_detection(*object_vec[j]))
+			{
+				object_vec[i]->collision_resolve(*object_vec[j]);
+			}
+		}
+	}
+}
+
 void update()
 {
 	if (object_vec.size() > 0)
@@ -38,21 +56,22 @@ void update()
 
 			// If we´re using collision optimizations
 			if (use_quadtree || use_fixedgrid) Calc(cont, 0, cont.size());
-
-			// Brute force
-			else
+			else if (numThreads > 0)
 			{
-				for (size_t i = 0; i < object_vec.size(); ++i)
+				// Multithreading. DOESNT WORK.
+				int total = object_vec.size();
+				int parts = total/numThreads;
+
+				std::vector<std::thread> thread_pool(numThreads);
+
+				process_segment(parts*numThreads, total);
+
+				for (int i = 0; i < numThreads; ++i)
 				{
-					for (size_t j = i+1; j < object_vec.size(); ++j)
-					{
-						if (object_vec[i]->collision_detection(*object_vec[j]))
-						{
-							object_vec[i]->collision_resolve(*object_vec[j]);
-						}
-					}
+					thread_pool[i] = std::thread(process_segment, parts * i, parts * (i+1));
 				}
-			}
+				for (auto &thread: thread_pool) thread.join();
+			} else process_segment(0, object_vec.size());
 		}
 
 		// Update each objects position

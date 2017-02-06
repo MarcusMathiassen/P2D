@@ -13,4 +13,5 @@
 #include "Templates.h" // vec
 
 void update();
+void process_segment(int begin, int end);
 void Calc(const vec<vec<int>> &cont, size_t begin, const size_t end);
