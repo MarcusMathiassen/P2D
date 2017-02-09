@@ -1,7 +1,7 @@
 
 //-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	   		   |
-//	DATE:	03.05.2016	   				   |
+//  AUTHOR: MARCUS MATHIASSEN          |
+//  DATE: 03.05.2016               |
 //-----------------------------------------|
 
 #pragma once
@@ -11,12 +11,11 @@
 #include "Templates.h"
 
 class Node {
-
-private:
+ private:
   Rect m_bounds;
   vec<int> m_index;
 
-public:
+ public:
   Node(const Rect &r);
 
   void insert(const int id);

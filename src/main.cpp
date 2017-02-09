@@ -1,22 +1,22 @@
 //-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	   		   |
-//	DATE:	03.05.2016	   				   |
+//  AUTHOR: MARCUS MATHIASSEN          |
+//  DATE: 03.05.2016               |
 //-----------------------------------------|
 
 // --------------------------------- INCLUDES ---------------------------------
 #define GLEW_STATIC
-#include <GL/glew.h>    // GLEW setup.
-#include <GLFW/glfw3.h> // GLFW setup.
-#include <iostream>     // cout
+#include <GL/glew.h>     // GLEW setup.
+#include <GLFW/glfw3.h>  // GLFW setup.
+#include <iostream>      // cout
 
-#include "Circle.h"    // Circle class
-#include "Color.h"     // Color
-#include "Config.h"    // Global settings
-#include "FixedGrid.h" // FixedGrid
-#include "Inputs.h"    // User input
-#include "Process.h"   // Updates all objects
-#include "Quadtree.h"  // Quadtree
-#include "Render.h"    // Renders all objects
+#include "Circle.h"     // Circle class
+#include "Color.h"      // Color
+#include "Config.h"     // Global settings
+#include "FixedGrid.h"  // FixedGrid
+#include "Inputs.h"     // User input
+#include "Process.h"    // Updates all objects
+#include "Quadtree.h"   // Quadtree
+#include "Render.h"     // Renders all objects
 
 // ----------------------------------------------------------------------------
 
@@ -32,10 +32,8 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
 
   windowResized = true;
 
-  if (use_fixedgrid)
-    fixedgrid.init();
-  if (use_quadtree)
-    quadtree.reset();
+  if (use_fixedgrid) fixedgrid.init();
+  if (use_quadtree) quadtree.reset();
 }
 
 static void glfwError(int id, const char *description) {
@@ -53,8 +51,7 @@ int main() {
     return -1;
   }
 
-  if (xMSAA > 0)
-    glfwWindowHint(GLFW_SAMPLES, xMSAA);
+  if (xMSAA > 0) glfwWindowHint(GLFW_SAMPLES, xMSAA);
 
   GLFWwindow *window = glfwCreateWindow(screen_width, screen_height,
                                         WINDOW_NAME.c_str(), NULL, NULL);
@@ -79,8 +76,7 @@ int main() {
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
   /* Enable multisampling */
-  if (xMSAA > 0)
-    glEnable(GL_MULTISAMPLE);
+  if (xMSAA > 0) glEnable(GL_MULTISAMPLE);
 
   /* Make the window´s context current */
   glfwMakeContextCurrent(window);
@@ -101,10 +97,8 @@ int main() {
   float lastTime = glfwGetTime();
   int nbFrames = 0;
 
-  if (use_fixedgrid)
-    fixedgrid.init();
-  if (use_quadtree)
-    quadtree.reset();
+  if (use_fixedgrid) fixedgrid.init();
+  if (use_quadtree) quadtree.reset();
 
   // --------------------------------- LOOP
   // -------------------------------------
@@ -118,8 +112,9 @@ int main() {
         char title[256];
         title[255] = '\0';
         int numObj = static_cast<int>(object_vec.size());
-        snprintf(title, 255, "%s %s - [FPS: %d] [OBJ: %d] [THR: %d]", WINDOW_NAME.c_str(),
-                 APP_VERSION.c_str(), nbFrames, numObj, numThreads);
+        snprintf(title, 255, "%s %s - [FPS: %d] [OBJ: %d] [THR: %d]",
+                 WINDOW_NAME.c_str(), APP_VERSION.c_str(), nbFrames, numObj,
+                 numThreads);
 
         glfwSetWindowTitle(window, title);
         printf("%f ms/frame\n", 1000.0 / double(nbFrames));

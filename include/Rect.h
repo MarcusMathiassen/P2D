@@ -1,7 +1,7 @@
 
 //-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	   		   |
-//	DATE:	03.05.2016	   				   |
+//  AUTHOR: MARCUS MATHIASSEN          |
+//  DATE: 03.05.2016               |
 //-----------------------------------------|
 
 #ifndef RECT_H
@@ -9,19 +9,18 @@
 
 #include <OpenGL/gl.h>
 
-#include "Circle.h"  // Circle class
-#include "Color.h"   // Color class
-#include "Config.h"  // Global vars, screen size
-#include "Utility.h" // assignColor()
-#include "Vec2.h"    // Vec2 class
+#include "Circle.h"   // Circle class
+#include "Color.h"    // Color class
+#include "Config.h"   // Global vars, screen size
+#include "Utility.h"  // assignColor()
+#include "Vec2.h"     // Vec2 class
 
 class Rect {
-
-private:
+ private:
   Vec2 min, max;
   Color m_color;
 
-public:
+ public:
   Rect();
   Rect(const Vec2 &a, const Vec2 &b);
 

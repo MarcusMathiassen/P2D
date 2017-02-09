@@ -31,4 +31,4 @@ Color green(0, 255, 0);
 Color blue(0, 0, 255);
 Color BCKGRND(0, 0, 0);
 
-int uniCol = 0; // Our magic color wheel number
+int uniCol = 0;  // Our magic color wheel number

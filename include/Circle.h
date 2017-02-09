@@ -1,24 +1,23 @@
 
 //-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	   		   |
-//	DATE:	03.05.2016	   				   |
+//  AUTHOR: MARCUS MATHIASSEN          |
+//  DATE: 03.05.2016               |
 //-----------------------------------------|
 
 #pragma once
 
-#include <OpenGL/gl.h> // for drawing to screen
-#include <cmath>       // cos, sin, sqrt, atan2
+#include <OpenGL/gl.h>  // for drawing to screen
+#include <cmath>        // cos, sin, sqrt, atan2
 
-#include "Color.h"     // Color class
-#include "Config.h"    // Global vars, screen size
-#include "Templates.h" // vec
-#include "Utility.h"   // assignColor()
-#include "Vec2.h"      // Vec2 class
+#include "Color.h"      // Color class
+#include "Config.h"     // Global vars, screen size
+#include "Templates.h"  // vec
+#include "Utility.h"    // assignColor()
+#include "Vec2.h"       // Vec2 class
 
 // Each object is on its own cache line
 class Circle {
-
-private:
+ private:
   Vec2 m_pos;
   Vec2 m_vel;
   float m_radi;
@@ -32,7 +31,7 @@ private:
 
   int m_index;
 
-public:
+ public:
   Circle(const Vec2 &p, float r, int v);
 
   void draw() const;

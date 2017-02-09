@@ -7,5 +7,5 @@ void draw() {
 
 void debug() {
   if (use_fixedgrid) fixedgrid.draw();
-  if (use_quadtree)  quadtree.draw();
+  if (use_quadtree) quadtree.draw();
 }

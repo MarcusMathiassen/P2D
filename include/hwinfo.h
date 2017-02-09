@@ -1,9 +1,9 @@
 #ifndef HWINFO_H
 #define HWINFO_H
 
-#include <string>
 #include <sys/sysctl.h>
 #include <sys/types.h>
+#include <string>
 
 uint64_t get_cpu_freq();
 uint64_t get_cpu_cores();

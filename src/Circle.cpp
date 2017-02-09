@@ -1,7 +1,7 @@
 
 //-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	   		   |
-//	DATE:	03.05.2016	   				   |
+//  AUTHOR: MARCUS MATHIASSEN          |
+//  DATE: 03.05.2016               |
 //-----------------------------------------|
 
 #include "Circle.h"
@@ -11,6 +11,9 @@
 #define DOUBLE_PI 6.283185
 #define LOSSENERGY 0.99
 
+#include <glm/glm.hpp>
+#include <glm/gtx/vector_angle.hpp>
+
 vec<uptr<Circle>> object_vec;
 
 Circle::Circle(const Vec2 &p, float r, int v)
@@ -18,11 +21,10 @@ Circle::Circle(const Vec2 &p, float r, int v)
   m_vel = Vec2(0, 0);
   m_mass = 1.33333 * PI * m_radi * m_radi * m_radi;
 
-  if (color_random)
-    ++uniCol;
+  if (color_random) ++uniCol;
   assignColor(m_color);
   m_temp_color = m_color;
-  m_index = object_vec.size(); // Object index is it´s number in the vector.
+  m_index = object_vec.size();  // Object index is it´s number in the vector.
 
   /* We setup a cos/sin table for the circles draw function for use later.*/
   m_cosineTable.reserve(m_vertices + 1);
@@ -106,13 +108,11 @@ void Circle::update() {
   }
 
   float slow = 1.0;
-  if (slowmotion)
-    slow = 0.1;
+  if (slowmotion) slow = 0.1;
 
   m_mass = m_radi;
 
-  if (gravity)
-    m_vel.y -= gravity_accel * m_mass * slow * dt;
+  if (gravity) m_vel.y -= gravity_accel * m_mass * slow * dt;
 
   if (gravForce) {
     for (size_t i = 0; i < object_vec.size(); ++i) {
@@ -135,7 +135,6 @@ bool Circle::collision_detection(const Circle &b) const {
   //  basic square collision check
   if (m_pos.x - m_radi < bx + br && m_pos.x + m_radi > bx - br &&
       m_pos.y - m_radi < by + br && m_pos.y + m_radi > by - br) {
-
     // Circle collision check
     const float dx = bx - m_pos.x;
     const float dy = by - m_pos.y;
@@ -144,8 +143,7 @@ bool Circle::collision_detection(const Circle &b) const {
 
     const float distSqr = (dx * dx) + (dy * dy);
 
-    if (distSqr <= sqrRadius)
-      return true;
+    if (distSqr <= sqrRadius) return true;
   }
 
   return false;
@@ -166,7 +164,10 @@ void Circle::collision_resolve(Circle &b) {
   const float dy = by - m_pos.y;
 
   // collision depth
-  const float colDepth = (m_radi + br) - sqrt(dx * dx + dy * dy);
+  const float colDepth =
+      (m_radi + br) -
+      glm::distance(glm::vec2(bx, by), glm::vec2(m_pos.x, m_pos.y));
+  // sqrt(dx * dx + dy * dy);
 
   // contact angle
   const float colAngle = atan2(dy, dx);
@@ -194,9 +195,11 @@ void Circle::collision_resolve(Circle &b) {
     b.add_pos_y(b_move_y);
   }
 
+  const float dx2 = bx - m_pos.x;
+  const float dy2 = by - m_pos.y;
   const float vdx = bvel.x - m_vel.x;
   const float vdy = bvel.y - m_vel.y;
-  const float d = dx * vdx + dy * vdy;
+  const float d = dx2 * vdx + dy2 * vdy;
 
   if (d < 0) {
     Vec2 norm_vec(dx, dy);
@@ -243,7 +246,6 @@ void Circle::gravitationforce(const Circle &b) {
   float d = sqrt(dx * dx + dy * dy);
 
   if (d != 0) {
-
     float angle = atan2(dy, dx);
     const float G = 6.674e-5;
     float F = G * m1 * m2 / d * d;

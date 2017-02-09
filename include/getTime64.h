@@ -4,8 +4,8 @@
 #ifdef _WIN32
 #include <Windows.h>
 #else
-#include <ctime>
 #include <sys/time.h>
+#include <ctime>
 #endif
 
 /* Returns the amount of milliseconds elapsed since the UNIX epoch. Works on

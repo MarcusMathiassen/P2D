@@ -1,7 +1,7 @@
 
 //-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	   		   |
-//	DATE:	03.05.2016	   				   |
+//  AUTHOR: MARCUS MATHIASSEN          |
+//  DATE: 03.05.2016               |
 //-----------------------------------------|
 
 #include "Config.h"
@@ -22,28 +22,28 @@ float gravity_accel = 9.81;
 
 bool MULTITHREADED = false;
 bool debug_mode = false;
-bool show_FPS = false; // Show current FPS.
-bool lock_FPS = true;  // lock FPS.
+bool show_FPS = false;  // Show current FPS.
+bool lock_FPS = true;   // lock FPS.
 std::map<std::string, std::string> list;
-int screen_width = WINDOW_WIDTH;   // Window width.
-int screen_height = WINDOW_HEIGHT; // Window height.
-double xpos, ypos;                 // Current mouse position.
-double dt = 0.016667;              // Delta time
-int numThreads = 0;      // Number of CPU threads
-int uniGrid = 64;                  // Number of grids.
+int screen_width = WINDOW_WIDTH;    // Window width.
+int screen_height = WINDOW_HEIGHT;  // Window height.
+double xpos, ypos;                  // Current mouse position.
+double dt = 0.016667;               // Delta time
+int numThreads = 0;                 // Number of CPU threads
+int uniGrid = 64;                   // Number of grids.
 int griduni = 2;
-bool use_pThread = true;    // Use pThreads.
-bool borderCol = true;      // Border collisions.
-bool ballCol = true;        // Circle collisions.
-bool use_quadtree = true;   // Quadtrees.
-bool use_fixedgrid = false; // Fixed grid.
-bool slowmotion = false;    // Slows everything down.
-bool gravity = false;       // Turn on/off gravity.
-bool direction = false;     // Turn on/off direciton.
-bool gravForce = false;     // Turn on/off gravForce.
-bool color_random = true;   // Random colors each time.
-bool windowResized = false; // Check if window has been resized.
-bool isInWindow = true;     //
+bool use_pThread = true;     // Use pThreads.
+bool borderCol = true;       // Border collisions.
+bool ballCol = true;         // Circle collisions.
+bool use_quadtree = true;    // Quadtrees.
+bool use_fixedgrid = false;  // Fixed grid.
+bool slowmotion = false;     // Slows everything down.
+bool gravity = false;        // Turn on/off gravity.
+bool direction = false;      // Turn on/off direciton.
+bool gravForce = false;      // Turn on/off gravForce.
+bool color_random = true;    // Random colors each time.
+bool windowResized = false;  // Check if window has been resized.
+bool isInWindow = true;      //
 
 void print_config() {
   for (const auto &item : list) {
@@ -61,8 +61,7 @@ void setup_config() {
   screen_width = WINDOW_WIDTH;
 
   // If file can´t be found.
-  if (!parse_file("config.txt"))
-    create_file("config.txt");
+  if (!parse_file("config.txt")) create_file("config.txt");
   parse_file("config.txt");
   print_config();
 }
@@ -102,30 +101,29 @@ void create_file(const std::string &file_name) {
 }
 
 bool parse_file(const std::string &file_name) {
-  if (!std::ifstream(file_name))
-    return false;
+  if (!std::ifstream(file_name)) return false;
 
   std::ifstream file(file_name);
 
-  if (file.is_open()) // Make sure our file can be opened
+  if (file.is_open())  // Make sure our file can be opened
   {
     std::string line = "";
 
     while (std::getline(file, line)) {
-      if (line.length() == 0) // Skip blank lines
+      if (line.length() == 0)  // Skip blank lines
         continue;
-      else if (line[0] == '#') // Skip comment lines
+      else if (line[0] == '#')  // Skip comment lines
         continue;
 
       std::istringstream ss(line);
-      std::string key;   // Holds the key
-      std::string value; // Holds the value
+      std::string key;    // Holds the key
+      std::string value;  // Holds the value
 
-      ss >> std::ws;                // Remove any whitespace
-      std::getline(ss, key, ':');   // Get the key until ":"
-      ss.get();                     // Jump over the ":"
-      ss >> std::ws;                // Remove any whitespace
-      std::getline(ss, value, ';'); // Get value until ";"
+      ss >> std::ws;                 // Remove any whitespace
+      std::getline(ss, key, ':');    // Get the key until ":"
+      ss.get();                      // Jump over the ":"
+      ss >> std::ws;                 // Remove any whitespace
+      std::getline(ss, value, ';');  // Get value until ";"
 
       // Add to our map and clear the line.
       list.insert(std::pair<std::string, std::string>(key, value));

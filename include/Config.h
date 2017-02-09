@@ -1,7 +1,7 @@
 
 //-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	   		   |
-//	DATE:	03.05.2016	   				   |
+//  AUTHOR: MARCUS MATHIASSEN          |
+//  DATE: 03.05.2016               |
 //-----------------------------------------|
 
 #ifndef CONFIG_H
@@ -30,30 +30,30 @@ extern float gravity_accel;
 
 extern bool MULTITHREADED;
 extern std::map<std::string, std::string> list;
-extern int screen_width;  // Window width.
-extern int screen_height; // Window height.
-extern double xpos, ypos; // Current mouse position.
+extern int screen_width;   // Window width.
+extern int screen_height;  // Window height.
+extern double xpos, ypos;  // Current mouse position.
 extern double dt;
-extern int numThreads; // Number of CPU threads
-extern int uniGrid;    // Number of grids.
+extern int numThreads;  // Number of CPU threads
+extern int uniGrid;     // Number of grids.
 extern int griduni;
-extern int numNodes;            // Number of nodes
-extern bool MULTISAMPLING;      // Comment out to turn off.
-extern bool debug_mode;         // Debug mode
-extern bool use_pThread;        // Use pThreads.
-extern bool show_FPS;           // Show current FPS.
-extern bool lock_FPS;           // Unlock FPS.
-extern bool borderCol;          // Border collisions.
-extern bool ballCol;            // Circle collisions.
-extern bool use_quadtree;       // Quadtrees.
-extern bool use_fixedgrid;      // Fixed grid.
-extern bool slowmotion;         // Slows everything down.
-extern bool gravity;            // Turn on/off gravity.
-extern bool direction;          // Turn on/off direciton.
-extern bool show_collision_box; // Draws each objects collisionbox.
-extern bool gravForce;          // Turn on/off gravForce.
-extern bool color_random;       // Random colors each time.
-extern bool windowResized;      // Check if window has been resized.
+extern int numNodes;             // Number of nodes
+extern bool MULTISAMPLING;       // Comment out to turn off.
+extern bool debug_mode;          // Debug mode
+extern bool use_pThread;         // Use pThreads.
+extern bool show_FPS;            // Show current FPS.
+extern bool lock_FPS;            // Unlock FPS.
+extern bool borderCol;           // Border collisions.
+extern bool ballCol;             // Circle collisions.
+extern bool use_quadtree;        // Quadtrees.
+extern bool use_fixedgrid;       // Fixed grid.
+extern bool slowmotion;          // Slows everything down.
+extern bool gravity;             // Turn on/off gravity.
+extern bool direction;           // Turn on/off direciton.
+extern bool show_collision_box;  // Draws each objects collisionbox.
+extern bool gravForce;           // Turn on/off gravForce.
+extern bool color_random;        // Random colors each time.
+extern bool windowResized;       // Check if window has been resized.
 extern bool isInWindow;
 
 void print_config();

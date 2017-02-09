@@ -1,9 +1,9 @@
 //-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	        |
-//	DATE:	03.05.2016	          |
+//  AUTHOR: MARCUS MATHIASSEN         |
+//  DATE: 03.05.2016            |
 //-----------------------------------------|
 
-#include "FixedGrid.h" // Declaration
+#include "FixedGrid.h"  // Declaration
 
 FixedGrid fixedgrid;
 

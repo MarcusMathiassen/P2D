@@ -1,7 +1,6 @@
 #include "Inputs.h"
 
 void Inputs(GLFWwindow *window) {
-
   // Update cursor position
   glfwGetCursorPos(window, &xpos, &ypos);
   xpos *= 2, ypos *= 2;
@@ -253,12 +252,12 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action,
     }
   }
 
-  /* 40k */
-  if (key == GLFW_KEY_B && action == GLFW_PRESS) {
-    for (int y = 0; y < screen_height; y += screen_height / 200) {
-      for (int x = 0; x < screen_width; x += screen_width / 200) {
-        object_vec.emplace_back(std::make_unique<Circle>(Vec2(x, y), 1, 6));
-      }
+// Spawn 1000 circles
+#define NUM_CIRCLES 10000
+  if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS) {
+    for (int i = 0; i < NUM_CIRCLES; ++i) {
+      object_vec.emplace_back(std::make_unique<Circle>(
+          Vec2(screen_width * 0.5, screen_height * 0.5), 3, 6));
     }
   }
 }

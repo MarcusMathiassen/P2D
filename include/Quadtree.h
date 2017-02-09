@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Circle.h"    // Circle class
-#include "Color.h"     // Color class
-#include "Config.h"    // Global vars, screen size
-#include "Rect.h"      // Rectangle class
-#include "Templates.h" // vec, uptr
-#include "Vec2.h"      // Vec2 class
+#include "Circle.h"     // Circle class
+#include "Color.h"      // Color class
+#include "Config.h"     // Global vars, screen size
+#include "Rect.h"       // Rectangle class
+#include "Templates.h"  // vec, uptr
+#include "Vec2.h"       // Vec2 class
 
 #define NODE_CAPACITY 25
 #define NODE_MAX_DEPTH 6
@@ -22,7 +22,7 @@ class Quadtree {
   bool contain_rect(const Rect &rect) const;
   void set_color(const Color &c);
 
-public:
+ public:
   Quadtree(const int m_level, const Rect &m_rect);
 
   void update();

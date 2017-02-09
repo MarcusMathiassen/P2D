@@ -4,7 +4,8 @@
 Quadtree quadtree(0, Rect(Vec2(0, 0), Vec2(screen_width, screen_height)));
 
 Quadtree::Quadtree(const int m_level, const Rect &m_rect)
-    : m_level(m_level), m_rect(m_rect),
+    : m_level(m_level),
+      m_rect(m_rect),
       m_subnode{nullptr, nullptr, nullptr, nullptr} {
   m_index.reserve(NODE_CAPACITY);
 }
@@ -64,20 +65,16 @@ void Quadtree::insert(const int id) {
   // If this subnode has split..
   if (m_subnode[0] != nullptr) {
     // Find the subnodes that contain it and insert it there.
-    if (m_subnode[0]->contain(id))
-      m_subnode[0]->insert(id);
-    if (m_subnode[1]->contain(id))
-      m_subnode[1]->insert(id);
-    if (m_subnode[2]->contain(id))
-      m_subnode[2]->insert(id);
-    if (m_subnode[3]->contain(id))
-      m_subnode[3]->insert(id);
+    if (m_subnode[0]->contain(id)) m_subnode[0]->insert(id);
+    if (m_subnode[1]->contain(id)) m_subnode[1]->insert(id);
+    if (m_subnode[2]->contain(id)) m_subnode[2]->insert(id);
+    if (m_subnode[3]->contain(id)) m_subnode[3]->insert(id);
 
     return;
   }
 
   // Add object to this node
-  m_index.emplace_back(id); // [3]
+  m_index.emplace_back(id);  // [3]
 
   // If it has NOT split..and NODE_CAPACITY is reached and we are not at MAX
   // LEVEL..
@@ -86,7 +83,7 @@ void Quadtree::insert(const int id) {
     split();
 
     // Go through all this nodes objects..
-    for (const auto &index : m_index) // [2]
+    for (const auto &index : m_index)  // [2]
     {
       // Go through all newly created subnodes..
       for (const auto &subnode : m_subnode) {
@@ -111,7 +108,7 @@ void Quadtree::get(vec<vec<int>> &cont) const {
   //----------------------------------------------------------------
 
   // If this subnode has split..
-  if (m_subnode[0] != nullptr) // [1]
+  if (m_subnode[0] != nullptr)  // [1]
   {
     // Continue down the tree
     m_subnode[0]->get(cont);
@@ -123,8 +120,7 @@ void Quadtree::get(vec<vec<int>> &cont) const {
   }
 
   // Insert indexes into our container
-  if (m_index.size() != 0)
-    cont.emplace_back(m_index); // [2]
+  if (m_index.size() != 0) cont.emplace_back(m_index);  // [2]
 }
 
 void Quadtree::retrieve(vec<int> &cont, const Rect &rect) const {
@@ -134,24 +130,19 @@ void Quadtree::retrieve(vec<int> &cont, const Rect &rect) const {
   //----------------------------------------------------------------
 
   // If this subnode has split..
-  if (m_subnode[0] != nullptr) // [1]
+  if (m_subnode[0] != nullptr)  // [1]
   {
     // Continue down the tree
-    if (m_subnode[0]->contain_rect(rect))
-      m_subnode[0]->retrieve(cont, rect);
-    if (m_subnode[1]->contain_rect(rect))
-      m_subnode[1]->retrieve(cont, rect);
-    if (m_subnode[2]->contain_rect(rect))
-      m_subnode[2]->retrieve(cont, rect);
-    if (m_subnode[3]->contain_rect(rect))
-      m_subnode[3]->retrieve(cont, rect);
+    if (m_subnode[0]->contain_rect(rect)) m_subnode[0]->retrieve(cont, rect);
+    if (m_subnode[1]->contain_rect(rect)) m_subnode[1]->retrieve(cont, rect);
+    if (m_subnode[2]->contain_rect(rect)) m_subnode[2]->retrieve(cont, rect);
+    if (m_subnode[3]->contain_rect(rect)) m_subnode[3]->retrieve(cont, rect);
 
     return;
   }
 
   // Add all indexes to our container
-  for (const auto &index : m_index)
-    cont.emplace_back(index);
+  for (const auto &index : m_index) cont.emplace_back(index);
 }
 
 void Quadtree::reset() {
@@ -175,7 +166,7 @@ void Quadtree::draw() const {
   // [2] Draw subnodes boundaries.
   //----------------------------------------------------------------
 
-  if (m_subnode[0] != nullptr) // [2]
+  if (m_subnode[0] != nullptr)  // [2]
   {
     // Set color of each subnode
     m_subnode[0]->set_color(pastel_red);
@@ -198,9 +189,8 @@ void Quadtree::draw() const {
   }
 
   // Only draw the nodes with objects in them.
-  if (m_index.size() != 0)
-    m_rect.draw(); // [1]
-                   // m_rect.draw(); // draw them all '
+  if (m_index.size() != 0) m_rect.draw();  // [1]
+                                           // m_rect.draw(); // draw them all '
 }
 
 bool Quadtree::contain(const int id) const { return m_rect.contain(id); }

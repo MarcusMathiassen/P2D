@@ -25,7 +25,7 @@ extern Color red;
 extern Color green;
 extern Color blue;
 
-extern Color BCKGRND; // Background color
+extern Color BCKGRND;  // Background color
 
 extern int uniCol;
 

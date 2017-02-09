@@ -1,7 +1,7 @@
 
 //-----------------------------------------|
-//	AUTHOR: MARCUS MATHIASSEN	   		   |
-//	DATE:	03.05.2016	   				   |
+//  AUTHOR: MARCUS MATHIASSEN          |
+//  DATE: 03.05.2016               |
 //-----------------------------------------|
 
 #include "Rect.h"
@@ -10,8 +10,7 @@ Rect::Rect() : min(Vec2(0, 0)), max(Vec2(0, 0)) {}
 
 Rect::Rect(const Vec2 &a, const Vec2 &b) : min(a), max(b) {
   assignColor(m_color);
-  if (use_fixedgrid)
-    uniCol++;
+  if (use_fixedgrid) uniCol++;
 }
 
 void Rect::draw() const {
@@ -51,10 +50,8 @@ bool Rect::contain_rect(const Rect &r) const {
 }
 
 bool Rect::contain_pos(const Vec2 &v) const {
-  if (v.x < min.x || v.x > max.x)
-    return false;
-  if (v.y < min.y || v.y > max.y)
-    return false;
+  if (v.x < min.x || v.x > max.x) return false;
+  if (v.y < min.y || v.y > max.y) return false;
 
   return true;
 }
