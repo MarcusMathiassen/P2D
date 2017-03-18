@@ -4,6 +4,6 @@ Collisions, quadtrees, uniform grid.
 # Requires: 
 glew and glfw3.
 
-![P2D](/src/Screen Shot 2016-12-30 at 20.58.26.png?raw=true "") 
-![P2D](/src/Screen Shot 2016-12-30 at 21.00.14.png?raw=true "") 
-![P2D](/src/Screen Shot 2016-12-30 at 21.00.17.png?raw=true "")
+![P2D](/src/s1.png?raw=true "") 
+![P2D](/src/s2.png?raw=true "") 
+![P2D](/src/s3.png?raw=true "")
