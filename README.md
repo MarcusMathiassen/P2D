@@ -1,5 +1,5 @@
 # P2D
-Perfect elastic collisions, quadtrees, fixed grid partitioning.
+Collisions, quadtrees, uniform grid.
 
 # Requires: 
 glew and glfw3.
