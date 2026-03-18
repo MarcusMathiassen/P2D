@@ -12,40 +12,50 @@ SET(CMAKE_CXX_FLAGS_DEBUG)
 SET(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 SET(CMAKE_CXX_FLAGS "-Wall")
+add_definitions(-DGLM_ENABLE_EXPERIMENTAL)
+add_definitions(-DGL_SILENCE_DEPRECATION)
 
 # Load headers
 include_directories("include")
+include_directories("/opt/homebrew/include")
 
 # Load sources
 file(GLOB SOURCES "src/*.cpp")
 
 # GLEW
-find_package(glew REQUIRED)
+find_package(GLEW REQUIRED)
 if (GLEW_FOUND)
   include_directories(${GLEW_INCLUDE_DIRS})
-  link_libraries(${GLEW_LIBRARIES})
 endif()
 
 # GLFW3
 find_package(glfw3 3.2 REQUIRED)
 if (GLFW3_FOUND)
   include_directories(${GLFW3_INCLUDES})
-  link_libraries(${GLFW3_LIBRARIES})
 endif()
 
 # BOOST
-find_package(BOOST REQUIRED)
-if (BOOST_FOUND)
-  include_directories(${BOOST_INCLUDE_DIRS})
-  link_libraries(${BOOST_LIBRARIES})
+find_package(Boost REQUIRED)
+if (Boost_FOUND)
+  include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
 # OPENGL
 find_package(OpenGL REQUIRED)
 if (OPENGL_FOUND)
   include_directories(${OPENGL_INCLUDE_DIRS})
-  link_libraries(${OPENGL_LIBRARIES})
 endif()
 
+# GLM
+find_package(glm REQUIRED)
+
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_link_libraries(${PROJECT_NAME} glfw)
+
+# Prefer modern target link libraries
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    GLEW::glew
+    glfw
+    Boost::boost
+    OpenGL::GL
+    glm::glm
+)
